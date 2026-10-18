@@ -1,5 +1,5 @@
 // ─── Global SEO configuration ────────────────────────────────────────────────
-export const SITE_URL = "https://kraviona.com";
+export const SITE_URL = "https://www.kraviona.com";
 export const SITE_NAME = "Kraviona Tech Solutions";
 export const SITE_TWITTER = "@KravionaTech";
 export const DEFAULT_OG_IMAGE = "/opengraph-image";
@@ -25,7 +25,7 @@ export function normalizeSiteUrl(value = "") {
 
   return value
     .replace(/https?:\/\/(?:www\.)?kraviona\.com/gi, SITE_URL)
-    .replace(/\bwww\.kraviona\.com\b/gi, "kraviona.com");
+    .replace(/\bwww\.kraviona\.com\b/gi, "www.kraviona.com");
 }
 
 export function normalizeStructuredData(data) {
@@ -45,11 +45,25 @@ export function normalizeStructuredData(data) {
   return normalizeSiteUrl(data);
 }
 
-// Canonical URL helper — always returns trailing-slash-free absolute URL
-export function canonicalUrl(path = "") {
-  const cleanPath = path.startsWith("/") ? path : `/${path}`;
-  const clean = cleanPath.replace(/\/+$/, "");
-  return clean ? `${SITE_URL}${clean}` : SITE_URL;
+// Canonical URL helper — always returns trailing-slash-free, query-free absolute URL
+export function canonicalUrl(input = "") {
+  if (!input || input === "/") return SITE_URL;
+
+  let pathname = "";
+  try {
+    if (typeof input === "string" && (input.startsWith("http://") || input.startsWith("https://"))) {
+      const parsed = new URL(input);
+      pathname = parsed.pathname;
+    } else {
+      const dummyUrl = new URL(input.startsWith("/") ? input : `/${input}`, SITE_URL);
+      pathname = dummyUrl.pathname;
+    }
+  } catch {
+    pathname = String(input).split(/[?#]/)[0];
+  }
+
+  const cleanPath = pathname.replace(/\/+/g, "/").replace(/\/+$/, "");
+  return cleanPath && cleanPath !== "/" ? `${SITE_URL}${cleanPath}` : SITE_URL;
 }
 
 // Clean excerpt helper — strips HTML and trims to maxLen chars

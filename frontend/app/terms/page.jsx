@@ -233,7 +233,7 @@ const sections = [
     title: "Contact Us for Terms",
     hindiTitle: "Sharten Ke Liye Sampark",
     body: [
-      "For questions, clarifications, or concerns about these Terms and Conditions, contact legal@kraviona.com. General contact is contact@kraviona.com, Privacy Policy is available at https://kraviona.com/privacy-policy, and Contact Us is available at https://kraviona.com/contact.",
+      "For questions, clarifications, or concerns about these Terms and Conditions, contact legal@kraviona.com. General contact is contact@kraviona.com, Privacy Policy is available at https://www.kraviona.com/privacy-policy, and Contact Us is available at https://www.kraviona.com/contact.",
       "By using kraviona.com or engaging Kraviona's services, you acknowledge that you have read, understood, and agree to the Privacy Policy and Terms and Conditions.",
     ],
   },

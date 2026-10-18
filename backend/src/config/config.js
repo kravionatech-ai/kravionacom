@@ -5,6 +5,7 @@ dotenv.config({ quiet: true });
 const defaultCorsOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
+  "https://www.kraviona.com",
   "https://kraviona.com",
   "https://admin.kraviona.com",
   "https://superadmin.kraviona.com",

@@ -77,6 +77,11 @@ const contactLinks = [
   },
 ];
 
+const getPostHref = (post) => {
+  const catSlug = post?.category?.slug || (typeof post?.category === "string" ? post?.category : null);
+  return catSlug ? `/${catSlug}/${post.slug}` : `/blog/${post.slug}`;
+};
+
 export default function NotFoundClient({ suggestedPosts = [] }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [recommendedPosts, setRecommendedPosts] = useState(suggestedPosts);
@@ -99,6 +104,7 @@ export default function NotFoundClient({ suggestedPosts = [] }) {
               slug: post.slug,
               title: post.title,
               excerpt: post.excerpt || "",
+              category: post.category,
             })),
         );
       })
@@ -305,7 +311,7 @@ export default function NotFoundClient({ suggestedPosts = [] }) {
                     {recommendedPosts.map((post) => (
                       <Link
                         key={post.slug}
-                        href={`/blog/${post.slug}`}
+                        href={getPostHref(post)}
                         className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#E8622A]/40 hover:shadow-md"
                       >
                         <span className="block text-base font-black leading-snug text-[#1A2E33] group-hover:text-[#E8622A]">

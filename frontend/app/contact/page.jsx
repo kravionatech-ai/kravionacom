@@ -11,12 +11,12 @@ import { defaultRobots } from "@/app/seoConfig.js";
 const contactPageSchema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "@id": "https://kraviona.com/contact#webpage",
-  url: "https://kraviona.com/contact",
+  "@id": "https://www.kraviona.com/contact#webpage",
+  url: "https://www.kraviona.com/contact",
   name: "Contact Kraviona - Start Your Web Development Project",
   description:
     "Contact Kraviona for MERN stack development, Next.js websites, backend APIs, technical SEO, AI automation, and web performance work.",
-  isPartOf: { "@id": "https://kraviona.com/#website" },
+  isPartOf: { "@id": "https://www.kraviona.com/#website" },
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -24,13 +24,13 @@ const contactPageSchema = {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://kraviona.com",
+        item: "https://www.kraviona.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Contact",
-        item: "https://kraviona.com/contact",
+        item: "https://www.kraviona.com/contact",
       },
     ],
   },
@@ -52,14 +52,14 @@ export const metadata = {
     "Kraviona Contact Details",
     "Hire Next.js Developer",
   ],
-  authors: [{ name: "Kraviona Tech", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
-  alternates: { canonical: "https://kraviona.com/contact" },
+  alternates: { canonical: "https://www.kraviona.com/contact" },
   openGraph: {
     title: "Contact Kraviona - Start Your Web Development Project",
     description:
       "Talk to Kraviona about MERN stack development, Next.js websites, backend APIs, technical SEO, and custom software work.",
-    url: "https://kraviona.com/contact",
+    url: "https://www.kraviona.com/contact",
     siteName: "Kraviona Tech Solutions",
     type: "website",
     locale: "en_IN",
@@ -93,8 +93,8 @@ const Contact = () => {
           contactPageSchema,
           contactFaqSchema,
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
-            { name: "Contact", url: "https://kraviona.com/contact" },
+            { name: "Home", url: "https://www.kraviona.com" },
+            { name: "Contact", url: "https://www.kraviona.com/contact" },
           ]),
         ]}
       />

@@ -6,7 +6,7 @@ import { Share2, Link as LinkIcon, Check } from "lucide-react";
 export default function SocialShareButtons({ url, title, dark = false }) {
   const [copied, setCopied] = useState(false);
 
-  const encodedUrl = encodeURIComponent(url || (typeof window !== "undefined" ? window.location.href : "https://kraviona.com"));
+  const encodedUrl = encodeURIComponent(url || (typeof window !== "undefined" ? window.location.href : "https://www.kraviona.com"));
   const encodedTitle = encodeURIComponent(title || "Check out this article on Kraviona");
 
   const handleCopy = async () => {

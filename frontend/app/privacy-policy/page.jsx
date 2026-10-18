@@ -63,7 +63,7 @@ const sections = [
     ],
     items: [
       { label: "Company Name", text: "Kraviona" },
-      { label: "Website", text: "https://kraviona.com" },
+      { label: "Website", text: "https://www.kraviona.com" },
       { label: "Email", text: "contact@kraviona.com" },
       { label: "Location", text: "India" },
     ],
@@ -209,7 +209,7 @@ const sections = [
     title: "Contact Us for Privacy",
     hindiTitle: "Privacy Ke Liye Sampark",
     body: [
-      "For privacy-related questions, concerns, data access requests, or complaints, contact the Privacy Officer at privacy@kraviona.com. General contact is contact@kraviona.com and the website contact page is https://kraviona.com/contact.",
+      "For privacy-related questions, concerns, data access requests, or complaints, contact the Privacy Officer at privacy@kraviona.com. General contact is contact@kraviona.com and the website contact page is https://www.kraviona.com/contact.",
       "We are committed to resolving privacy concerns promptly and transparently.",
     ],
   },

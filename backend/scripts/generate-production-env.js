@@ -52,7 +52,7 @@ const productionEnvironment = [
   "JWT_REFRESH_EXPIRES_IN=7d",
   "",
   `CORS_ORIGINS=${envValue(
-    "https://kraviona.com,https://admin.kraviona.com",
+    "https://www.kraviona.com,https://kraviona.com,https://admin.kraviona.com",
   )}`,
   "",
   `CLOUDINARY_CLOUD_NAME=${envValue(requiredSecret("CLOUDINARY_CLOUD_NAME"))}`,

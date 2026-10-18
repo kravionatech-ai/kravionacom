@@ -38,17 +38,17 @@ async function getServicePages() {
 const servicesPageSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "@id": "https://kraviona.com/services#webpage",
-  url: "https://kraviona.com/services",
+  "@id": "https://www.kraviona.com/services#webpage",
+  url: "https://www.kraviona.com/services",
   name: "MERN Stack Development & Technical SEO Services | Kraviona",
   description:
     "Explore Kraviona's full suite of web development, technical SEO, AI automation, digital marketing, e-commerce, marketplace seller, and brand services.",
-  isPartOf: { "@id": "https://kraviona.com/#website" },
+  isPartOf: { "@id": "https://www.kraviona.com/#website" },
 };
 
 const servicesBreadcrumbSchema = breadcrumbSchema([
-  { name: "Home", url: "https://kraviona.com" },
-  { name: "Services", url: "https://kraviona.com/services" },
+  { name: "Home", url: "https://www.kraviona.com" },
+  { name: "Services", url: "https://www.kraviona.com/services" },
 ]);
 
 export const metadata = {
@@ -70,16 +70,16 @@ export const metadata = {
     "SEO Company India",
     "Kraviona Services",
   ],
-  authors: [{ name: "Kraviona Tech", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: {
-    canonical: "https://kraviona.com/services",
+    canonical: "https://www.kraviona.com/services",
   },
   openGraph: {
     title: "MERN Stack Development & Technical SEO Services | Kraviona",
     description:
       "Explore Kraviona's web development, AI automation, digital marketing, marketplace seller, and technical SEO services.",
-    url: "https://kraviona.com/services",
+    url: "https://www.kraviona.com/services",
     siteName: "Kraviona Tech Solutions",
     type: "website",
     locale: "en_IN",

@@ -1,8 +1,66 @@
+# ==============================================================================
+# Nginx Configuration for Kraviona.com
+# Enforces Canonical Host: https://www.kraviona.com
+# Permanent (301) Consolidation of HTTP & Apex domain (kraviona.com)
+# ==============================================================================
+
+# 1. HTTP Server - Redirects all HTTP traffic (apex and www) directly to HTTPS www
 server {
     listen 80;
     listen [::]:80;
     server_name kraviona.com www.kraviona.com;
 
+    # Let's Encrypt / Certbot ACME webroot challenge
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+
+    # Permanent 301 redirect to preferred canonical HTTPS domain
+    location / {
+        return 301 https://www.kraviona.com$request_uri;
+    }
+}
+
+# 2. HTTPS Apex Redirect - Consolidate https://kraviona.com -> https://www.kraviona.com
+# Uncomment when SSL certificates are active on this server
+# server {
+#     listen 443 ssl http2;
+#     listen [::]:443 ssl http2;
+#     server_name kraviona.com;
+#
+#     ssl_certificate /etc/letsencrypt/live/kraviona.com/fullchain.pem;
+#     ssl_certificate_key /etc/letsencrypt/live/kraviona.com/privkey.pem;
+#
+#     return 301 https://www.kraviona.com$request_uri;
+# }
+
+# 3. Canonical HTTPS www Server
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name www.kraviona.com;
+
+    # SSL Certificates (managed via Certbot)
+    # ssl_certificate /etc/letsencrypt/live/www.kraviona.com/fullchain.pem;
+    # ssl_certificate_key /etc/letsencrypt/live/www.kraviona.com/privkey.pem;
+    # ssl_protocols TLSv1.2 TLSv1.3;
+    # ssl_ciphers HIGH:!aNULL:!MD5;
+
+    # Edge Reverse-Proxy (e.g., Cloudflare / Load Balancer) Check
+    if ($http_x_forwarded_proto = "http") {
+        return 301 https://www.kraviona.com$request_uri;
+    }
+    if ($host = "kraviona.com") {
+        return 301 https://www.kraviona.com$request_uri;
+    }
+
+    # Security Headers
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options SAMEORIGIN always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+
+    # Next.js Optimized Image Caching
     location /_next/image {
         proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;
@@ -13,6 +71,7 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 
+    # Next.js Static Asset Caching
     location /_next/static {
         proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;
@@ -20,6 +79,7 @@ server {
         add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
+    # Next.js App Router Application
     location / {
         proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;

@@ -9,17 +9,17 @@ export const revalidate = 3600;
 const blogPageSchema = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "@id": "https://kraviona.com/blog#blog",
-  url: "https://kraviona.com/blog",
+  "@id": "https://www.kraviona.com/blog#blog",
+  url: "https://www.kraviona.com/blog",
   name: "Kraviona Blog – Web Development & Digital Insights",
   description:
     "Read our latest insights, trends, and expert advice on web development, UI/UX design, AI solutions, and digital marketing to stay ahead in the tech world.",
   publisher: {
     "@type": "Organization",
     name: "Kraviona Tech Solutions",
-    logo: { "@type": "ImageObject", url: "https://kraviona.com/full-logo.webp" },
+    logo: { "@type": "ImageObject", url: "https://www.kraviona.com/full-logo.webp" },
   },
-  isPartOf: { "@id": "https://kraviona.com/#website" },
+  isPartOf: { "@id": "https://www.kraviona.com/#website" },
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -27,13 +27,13 @@ const blogPageSchema = {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://kraviona.com",
+        item: "https://www.kraviona.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: "https://kraviona.com/blog",
+        item: "https://www.kraviona.com/blog",
       },
     ],
   },
@@ -83,7 +83,7 @@ export const metadata = {
     "Digital Marketing Tips",
     "Tech Industry News",
   ],
-  authors: [{ name: "Kraviona Team", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Team", url: "https://www.kraviona.com" }],
   creator: SITE_NAME,
   alternates: { canonical: canonicalUrl("/blog") },
   openGraph: {
@@ -126,8 +126,8 @@ const Blog = async () => {
         data={[
           blogPageSchema,
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
-            { name: "Blog", url: "https://kraviona.com/blog" },
+            { name: "Home", url: "https://www.kraviona.com" },
+            { name: "Blog", url: "https://www.kraviona.com/blog" },
           ]),
         ]}
       />

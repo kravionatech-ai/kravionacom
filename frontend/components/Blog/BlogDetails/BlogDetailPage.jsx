@@ -28,7 +28,7 @@ const apiAssetOrigin = API_URL.replace(/\/api\/v1$/, "").replace(/\/+$/, "");
 
 const normalizeContentImages = (html = "") =>
   String(html)
-    .replace(/https?:\/\/www\.kraviona\.com/gi, "https://kraviona.com")
+    .replace(/https?:\/\/(?:www\.)?kraviona\.com/gi, "https://www.kraviona.com")
     .replace(/src=(["'])\/api\/v1\/(uploads|images|media|storage)\//gi, `src=$1${apiAssetOrigin}/$2/`)
     .replace(/src=(["'])\/(uploads|images|media|storage)\//gi, `src=$1${apiAssetOrigin}/$2/`)
     .replace(/src=(["'])(?!https?:|data:|blob:|\/)([^"']+)/gi, `src=$1${apiAssetOrigin}/$2`)
@@ -39,7 +39,8 @@ const normalizeContentImages = (html = "") =>
       if (!href || !/^https?:\/\//i.test(href)) return tag;
 
       try {
-        if (new URL(href).hostname === "kraviona.com") return tag;
+        const hostname = new URL(href).hostname.toLowerCase();
+        if (hostname === "kraviona.com" || hostname === "www.kraviona.com") return tag;
       } catch {
         return tag;
       }

@@ -354,9 +354,9 @@ export default async function ServicesDetails({ params }) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://kraviona.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://kraviona.com/services" },
-        { "@type": "ListItem", position: 3, name: hub.categoryLabel, item: `https://kraviona.com/services/${slug}` },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kraviona.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.kraviona.com/services" },
+        { "@type": "ListItem", position: 3, name: hub.categoryLabel, item: `https://www.kraviona.com/services/${slug}` },
       ],
     };
 
@@ -533,7 +533,7 @@ export default async function ServicesDetails({ params }) {
       postalCode: "110092",
       addressCountry: "IN",
     },
-    worksFor: { "@id": "https://kraviona.com/#organization" },
+    worksFor: { "@id": "https://www.kraviona.com/#organization" },
     knowsAbout: expert.knowsAbout,
   };
 

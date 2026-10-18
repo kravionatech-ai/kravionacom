@@ -3,7 +3,7 @@ import { defaultRobots } from "@/app/seoConfig.js";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
-const canonical = "https://kraviona.com/category";
+const canonical = "https://www.kraviona.com/category";
 const title = "Blog Categories and Topic Hubs | Kraviona Insights";
 const description =
   "Browse Kraviona blog categories for practical guides on MERN stack development, technical SEO, AI automation, UI/UX, cloud, and digital growth.";
@@ -22,7 +22,7 @@ export const metadata = {
     "Cloud Computing Guides",
     "Kraviona Blog Topics",
   ],
-  authors: [{ name: "Kraviona Team", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Team", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical },
   openGraph: {
@@ -67,7 +67,7 @@ const Category = () => {
             description,
           }),
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
+            { name: "Home", url: "https://www.kraviona.com" },
             { name: "Categories", url: canonical },
           ]),
         ]}

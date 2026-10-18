@@ -4,16 +4,16 @@ import { CONTACT_FAQS } from "./contactFaqs";
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://kraviona.com/#organization",
+  "@id": "https://www.kraviona.com/#organization",
   name: "Kraviona Tech Solutions",
-  url: "https://kraviona.com",
+  url: "https://www.kraviona.com",
   logo: {
     "@type": "ImageObject",
-    url: "https://kraviona.com/full-logo.webp",
+    url: "https://www.kraviona.com/full-logo.webp",
     width: 659,
     height: 226,
   },
-  image: "https://kraviona.com/opengraph-image",
+  image: "https://www.kraviona.com/opengraph-image",
   description:
     "Kraviona Tech Solutions is a Delhi NCR web development and technical SEO agency building MERN stack products, Next.js websites, and backend APIs for businesses across India.",
   foundingDate: "2022",
@@ -68,14 +68,14 @@ export const organizationSchema = {
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://kraviona.com/#localbusiness",
+  "@id": "https://www.kraviona.com/#localbusiness",
   name: "Kraviona Tech Solutions",
-  image: "https://kraviona.com/opengraph-image",
-  url: "https://kraviona.com",
+  image: "https://www.kraviona.com/opengraph-image",
+  url: "https://www.kraviona.com",
   telephone: "+91-96085-53167",
   email: "kravionatech@gmail.com",
   priceRange: "₹₹",
-  parentOrganization: { "@id": "https://kraviona.com/#organization" },
+  parentOrganization: { "@id": "https://www.kraviona.com/#organization" },
   address: {
     "@type": "PostalAddress",
     streetAddress: "East Delhi",
@@ -110,26 +110,26 @@ export const localBusinessSchema = {
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://kraviona.com/#website",
-  url: "https://kraviona.com",
+  "@id": "https://www.kraviona.com/#website",
+  url: "https://www.kraviona.com",
   name: "Kraviona Tech Solutions",
   description: "MERN Stack, Next.js and Technical SEO Company India",
   inLanguage: "en-IN",
   publisher: {
-    "@id": "https://kraviona.com/#organization",
+    "@id": "https://www.kraviona.com/#organization",
   },
 };
 
 export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "@id": "https://kraviona.com/about#founder",
+  "@id": "https://www.kraviona.com/about#founder",
   name: "Amar Kumar",
   jobTitle: "Founder & Lead Developer",
   worksFor: {
-    "@id": "https://kraviona.com/#organization",
+    "@id": "https://www.kraviona.com/#organization",
   },
-  url: "https://kraviona.com/about",
+  url: "https://www.kraviona.com/about",
   sameAs: [
     "https://www.linkedin.com/in/amarkumar96085/",
   ],
@@ -163,7 +163,7 @@ export function serviceSchema(params: {
     description: params.description,
     url: params.url,
     provider: {
-      "@id": "https://kraviona.com/#organization",
+      "@id": "https://www.kraviona.com/#organization",
     },
     serviceType: params.serviceType || params.name,
     areaServed: {
@@ -222,11 +222,11 @@ export function webPageSchema(params: {
     url: params.url,
     name: params.name,
     description: params.description,
-    isPartOf: { "@id": "https://kraviona.com/#website" },
-    about: { "@id": "https://kraviona.com/#organization" },
+    isPartOf: { "@id": "https://www.kraviona.com/#website" },
+    about: { "@id": "https://www.kraviona.com/#organization" },
     primaryImageOfPage: {
       "@type": "ImageObject",
-      url: "https://kraviona.com/og-image.jpg",
+      url: "https://www.kraviona.com/og-image.jpg",
       width: 1200,
       height: 630,
     },

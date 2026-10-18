@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { API_URL } from "@/utils/api";
+import { canonicalUrl, defaultRobots, SITE_NAME } from "@/app/seoConfig.js";
 
 export const revalidate = 3600;
 
@@ -18,6 +19,53 @@ async function getProject(slug) {
   } catch {
     return null;
   }
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const project = await getProject(slug);
+  if (!project) {
+    return {
+      title: "Case Study Not Found | Kraviona",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const canonical = canonicalUrl(`/case-studies/${slug}`);
+  const title = `${project.title} | Case Study | Kraviona`;
+  const description =
+    project.description ||
+    `Read how Kraviona delivered real-world engineering results for ${project.title}.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "article",
+      siteName: SITE_NAME,
+      images: [
+        {
+          url: project.image || "/images/office/case-study-product.webp",
+          width: 1200,
+          height: 630,
+          alt: project.imageAlt || project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [project.image || "/images/office/case-study-product.webp"],
+    },
+    robots: defaultRobots,
+  };
 }
 
 export default async function ProjectDetailsPage({ params }) {

@@ -19,14 +19,14 @@ export const metadata = {
     "Next.js Development Cost",
     "Website Development Packages India",
   ],
-  authors: [{ name: "Kraviona Tech", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
-  alternates: { canonical: "https://kraviona.com/pricing" },
+  alternates: { canonical: "https://www.kraviona.com/pricing" },
   openGraph: {
     title: "Pricing | Transparent Plans & Packages | Kraviona",
     description:
       "Transparent pricing for MERN Stack development, Technical SEO, and digital marketing services.",
-    url: "https://kraviona.com/pricing",
+    url: "https://www.kraviona.com/pricing",
     siteName: "Kraviona Tech Solutions",
     type: "website",
     locale: "en_IN",
@@ -147,7 +147,7 @@ const seoPricing = [
   },
 ];
 
-const PRICING_URL = "https://kraviona.com/pricing";
+const PRICING_URL = "https://www.kraviona.com/pricing";
 
 const getDisplayedStartingPrice = (priceFrom) => {
   const numericPrice = String(priceFrom).replace(/[^\d]/g, "");
@@ -222,7 +222,7 @@ const pricingOfferSchema = {
   availability: "https://schema.org/InStock",
   description:
     "Published starting prices for Starter and Growth plans. Enterprise pricing is custom.",
-  seller: { "@id": "https://kraviona.com/#organization" },
+  seller: { "@id": "https://www.kraviona.com/#organization" },
   offers: pricedTierOffers,
 };
 
@@ -234,8 +234,8 @@ const Pricing = () => {
           pricingOfferSchema,
           pricingItemListSchema,
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
-            { name: "Pricing", url: "https://kraviona.com/pricing" },
+            { name: "Home", url: "https://www.kraviona.com" },
+            { name: "Pricing", url: "https://www.kraviona.com/pricing" },
           ]),
         ]}
       />

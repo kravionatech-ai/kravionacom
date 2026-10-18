@@ -6,12 +6,12 @@ import { buildMetadata } from "@/app/seoConfig";
 const solutionsPageSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "@id": "https://kraviona.com/solutions#webpage",
-  url: "https://kraviona.com/solutions",
+  "@id": "https://www.kraviona.com/solutions#webpage",
+  url: "https://www.kraviona.com/solutions",
   name: "Industry Technology Solutions | Kraviona",
   description:
     "Explore Kraviona's custom software, automation, and digital transformation solutions for finance, e-commerce, healthcare, real estate, education, and logistics.",
-  isPartOf: { "@id": "https://kraviona.com/#website" },
+  isPartOf: { "@id": "https://www.kraviona.com/#website" },
   about: [
     "Custom software development",
     "Business process automation",
@@ -47,8 +47,8 @@ export default function SolutionsPage() {
         data={[
           solutionsPageSchema,
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
-            { name: "Solutions", url: "https://kraviona.com/solutions" },
+            { name: "Home", url: "https://www.kraviona.com" },
+            { name: "Solutions", url: "https://www.kraviona.com/solutions" },
           ]),
         ]}
       />

@@ -11,7 +11,6 @@ Disallow: /private/
 Disallow: /*?*utm_source=
 Disallow: /*?*utm_medium=
 Disallow: /*?*ref=
-Disallow: /blog/bGF0ZXN0LW
 Disallow: /notify-Notify_1
 Disallow: /notify-Samsung_new
 
@@ -38,4 +37,4 @@ Allow: /_next/image/
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://kraviona.com/sitemap.xml
+Sitemap: https://www.kraviona.com/sitemap.xml

@@ -4,10 +4,11 @@ import { SERVICE_LINKS } from "./services/serviceData.js";
 
 export const revalidate = 3600;
 
-const baseUrl = "https://kraviona.com";
+const baseUrl = "https://www.kraviona.com";
 const EXCLUDED_SLUGS = [
   "bGF0ZXN0LW",
   "ai-news-august-2026",
+  "what-is-mern-stack-the-complete-2026-guide-for-developers",
 ];
 
 const POSTS_FETCH_LIMIT = 100;
@@ -323,5 +324,5 @@ export default async function sitemap() {
     ...buildCategoryRoutes(allPosts, categories),
     ...buildBlogPostRoutes(blogPosts),
     ...buildNewsPostRoutes(newsPosts),
-  ]).filter((entry) => entry.url.startsWith("https://kraviona.com"));
+  ]).filter((entry) => entry.url.startsWith(baseUrl));
 }

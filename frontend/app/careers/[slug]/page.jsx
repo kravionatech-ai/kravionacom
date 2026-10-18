@@ -55,8 +55,8 @@ function buildJobSchema(career) {
     hiringOrganization: {
       "@type": "Organization",
       name: "Kraviona Tech Solutions",
-      sameAs: "https://kraviona.com",
-      logo: "https://kraviona.com/full-logo.webp",
+      sameAs: "https://www.kraviona.com",
+      logo: "https://www.kraviona.com/full-logo.webp",
     },
     url: canonicalUrl(`/careers/${career.slug}`),
   };
@@ -115,8 +115,8 @@ export default async function CareerDetailsPage({ params }) {
       <JsonLd data={[
         buildJobSchema(career),
         breadcrumbSchema([
-          { name: "Home", url: "https://kraviona.com" },
-          { name: "Careers", url: "https://kraviona.com/careers" },
+          { name: "Home", url: "https://www.kraviona.com" },
+          { name: "Careers", url: "https://www.kraviona.com/careers" },
           { name: career.jobTitle, url: canonicalUrl(`/careers/${career.slug}`) },
         ]),
       ]} />

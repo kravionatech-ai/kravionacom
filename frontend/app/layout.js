@@ -124,7 +124,6 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: SITE_URL,
     languages: {
       "en-IN": SITE_URL,
     },

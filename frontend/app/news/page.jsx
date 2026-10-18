@@ -23,7 +23,7 @@ export const metadata = {
     "Breaking Tech Stories",
     "Technology Updates 2026",
   ],
-  authors: [{ name: "Kraviona Tech Solutions", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Tech Solutions", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical },
   openGraph: {
@@ -94,7 +94,7 @@ export default async function NewsPage() {
             description,
           }),
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
+            { name: "Home", url: "https://www.kraviona.com" },
             { name: "News", url: canonical },
           ]),
         ]}

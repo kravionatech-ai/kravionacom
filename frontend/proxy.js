@@ -8,8 +8,8 @@ import {
 // services stay available; known scrapers, scanners, and generic automation do
 // not. Vercel Firewall rate limits remain the correct outer layer for IP-based
 // abuse because serverless instances do not share reliable in-memory counters.
-const CANONICAL_HOST = "kraviona.com";
-const WWW_HOST = "www.kraviona.com";
+const CANONICAL_HOST = "www.kraviona.com";
+const APEX_HOST = "kraviona.com";
 const SESSION_QUERY_PARAMETERS = new Set([
   "sid",
   "session",
@@ -49,7 +49,7 @@ let lastFetchedAt = 0;
 const CACHE_TTL_MS = 60 * 1000;
 
 const API_BASE = (
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"
+  process.env.NEXT_PUBLIC_API_URL || "https://api.kraviona.com/api/v1"
 ).replace(/\/+$/, "");
 
 async function getActiveRedirects() {
@@ -123,14 +123,14 @@ export async function proxy(request) {
     if (hasPathSessionId) url.pathname = cleanedPathname || "/";
   }
 
-  if (host === WWW_HOST || hasSessionId) {
-    if (host === WWW_HOST) {
+  if (host === APEX_HOST || hasSessionId) {
+    if (host === APEX_HOST) {
       url.hostname = CANONICAL_HOST;
       url.protocol = "https:";
       url.port = "";
     }
 
-    return NextResponse.redirect(url, 308);
+    return NextResponse.redirect(url, 301);
   }
 
   // ── Database-driven dynamic 301/302 redirects ──────────────────────────────

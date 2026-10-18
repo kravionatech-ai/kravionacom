@@ -34,12 +34,12 @@ export const metadata = buildMetadata({
 const collectionSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "@id": "https://kraviona.com/careers#webpage",
-  url: "https://kraviona.com/careers",
+  "@id": "https://www.kraviona.com/careers#webpage",
+  url: "https://www.kraviona.com/careers",
   name: "Careers at Kraviona Tech Solutions",
   description:
     "Current career opportunities at Kraviona Tech Solutions.",
-  isPartOf: { "@id": "https://kraviona.com/#website" },
+  isPartOf: { "@id": "https://www.kraviona.com/#website" },
 };
 
 export default async function CareersPage({ searchParams }) {
@@ -60,7 +60,7 @@ export default async function CareersPage({ searchParams }) {
     itemListElement: careers.map((career, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: `https://kraviona.com/careers/${career.slug}`,
+      url: `https://www.kraviona.com/careers/${career.slug}`,
       name: career.jobTitle,
     })),
   };
@@ -72,8 +72,8 @@ export default async function CareersPage({ searchParams }) {
           collectionSchema,
           itemListSchema,
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
-            { name: "Careers", url: "https://kraviona.com/careers" },
+            { name: "Home", url: "https://www.kraviona.com" },
+            { name: "Careers", url: "https://www.kraviona.com/careers" },
           ]),
         ]}
       />

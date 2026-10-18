@@ -189,28 +189,46 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Eliminate redirect chains: point directly to final canonical URL
       {
         source: "/blog/bGF0ZXN0LW",
-        destination: "/blog/latest-ai-news-august-2026",
+        destination: "/ai-news/latest-ai-news-august-2026",
         permanent: true,
       },
       {
         source: "/blog/ai-news-august-2026",
-        destination: "/blog/latest-ai-news-august-2026",
+        destination: "/ai-news/latest-ai-news-august-2026",
         permanent: true,
       },
-      // Duplicate near-identical slug pair under /next-gen-web-development/
-      // The "guide-for-developer" (singular) is the weaker URL; consolidate into "guide-for-developers"
+
+      // Consolidate duplicate MERN Stack posts into the 2,677-word primary guide
+      {
+        source: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developers",
+        destination: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developer",
+        permanent: true,
+      },
+      {
+        source: "/next-gen-web-development/complete-guide-for-developers",
+        destination: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developer",
+        permanent: true,
+      },
       {
         source: "/next-gen-web-development/complete-guide-for-developer",
-        destination: "/next-gen-web-development/complete-guide-for-developers",
+        destination: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developer",
+        permanent: true,
+      },
+      {
+        source: "/next-gen-web-development/a-complete-guide-for-developers",
+        destination: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developer",
         permanent: true,
       },
       {
         source: "/next-gen-web-development/a-complete-guide-for-developer",
-        destination: "/next-gen-web-development/a-complete-guide-for-developers",
+        destination: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developer",
         permanent: true,
       },
+
+      // Service URL consolidations
       {
         source: "/services/react-js-development",
         destination: "/services/react-development",
@@ -222,18 +240,12 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/case-studies",
-        destination: "/blog",
-        permanent: true,
-      },
-      {
         source: "/service/:path*",
         destination: "/services/:path*",
         permanent: true,
       },
-      // NOTE: /services/web-development is now a real category hub page.
-      // The old redirect to /services/web-app-development has been removed.
-      // If you need to add it back, remove the hub page first.
+
+      // Canonical page standardizations
       {
         source: "/contact-us",
         destination: "/contact",
@@ -247,6 +259,58 @@ const nextConfig = {
       {
         source: "/privacy",
         destination: "/privacy-policy",
+        permanent: true,
+      },
+
+      // Bare slug redirects (historical URLs crawled without category prefixes)
+      {
+        source: "/ai-trends-august-2026-what-is-changing",
+        destination: "/ai-news/ai-trends-august-2026-what-is-changing",
+        permanent: true,
+      },
+      {
+        source: "/latest-ai-news-august-2026",
+        destination: "/ai-news/latest-ai-news-august-2026",
+        permanent: true,
+      },
+      {
+        source: "/ai-agents-2026-autonomous-ai-replacing-traditional-automation",
+        destination: "/ai-news/ai-agents-2026-autonomous-ai-replacing-traditional-automation",
+        permanent: true,
+      },
+      {
+        source: "/best-ai-tools-for-freelancers-india-2026",
+        destination: "/ai-and-automation/best-ai-tools-for-freelancers-india-2026",
+        permanent: true,
+      },
+      {
+        source: "/claude-code-vs-cursor-vs-github-copilot-2026-india",
+        destination: "/ai-and-automation/claude-code-vs-cursor-vs-github-copilot-2026-india",
+        permanent: true,
+      },
+      {
+        source: "/model-context-protocol-mcp-the-complete-2026-guide",
+        destination: "/ai-and-automation/model-context-protocol-mcp-the-complete-2026-guide",
+        permanent: true,
+      },
+      {
+        source: "/what-is-mern-stack-the-complete-2026-guide-for-developer",
+        destination: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developer",
+        permanent: true,
+      },
+      {
+        source: "/what-is-mern-stack-the-complete-2026-guide-for-developers",
+        destination: "/next-gen-web-development/what-is-mern-stack-the-complete-2026-guide-for-developer",
+        permanent: true,
+      },
+      {
+        source: "/what-is-mern-stack-2026",
+        destination: "/mern-stack/what-is-mern-stack-2026",
+        permanent: true,
+      },
+      {
+        source: "/what-is-technical-seo-2026",
+        destination: "/technical-seo/what-is-technical-seo-2026",
         permanent: true,
       },
     ];

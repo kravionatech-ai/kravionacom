@@ -18,14 +18,14 @@ export const metadata = {
     "Digital Transformation Cases",
     "Client Success Stories",
   ],
-  authors: [{ name: "Kraviona Tech", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
-  alternates: { canonical: "https://kraviona.com/case-studies" },
+  alternates: { canonical: "https://www.kraviona.com/case-studies" },
   openGraph: {
     title: "Case Studies – Real-World Results | Kraviona",
     description:
       "Discover how Kraviona delivered measurable business results. Read case studies on MERN Stack development, Technical SEO, and digital transformation.",
-    url: "https://kraviona.com/case-studies",
+    url: "https://www.kraviona.com/case-studies",
     siteName: "Kraviona Tech Solutions",
     type: "website",
     locale: "en_IN",
@@ -56,8 +56,8 @@ export default function CaseStudiesPage() {
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Home", url: "https://kraviona.com" },
-          { name: "Case Studies", url: "https://kraviona.com/case-studies" },
+          { name: "Home", url: "https://www.kraviona.com" },
+          { name: "Case Studies", url: "https://www.kraviona.com/case-studies" },
         ])}
       />
       <ComingSoon />

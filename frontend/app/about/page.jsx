@@ -10,12 +10,12 @@ import { defaultRobots } from "@/app/seoConfig.js";
 const aboutPageSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  "@id": "https://kraviona.com/about#webpage",
-  url: "https://kraviona.com/about",
+  "@id": "https://www.kraviona.com/about#webpage",
+  url: "https://www.kraviona.com/about",
   name: "About Kraviona – Engineering Digital Ecosystems",
   description:
     "Learn about Kraviona, the founder-led team building MERN stack products, Next.js websites, backend systems, and technical SEO foundations.",
-  isPartOf: { "@id": "https://kraviona.com/#website" },
+  isPartOf: { "@id": "https://www.kraviona.com/#website" },
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -23,13 +23,13 @@ const aboutPageSchema = {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://kraviona.com",
+        item: "https://www.kraviona.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "About Us",
-        item: "https://kraviona.com/about",
+        item: "https://www.kraviona.com/about",
       },
     ],
   },
@@ -50,14 +50,14 @@ export const metadata = {
     "Kraviona Mission & Vision",
     "Tech Company Delhi",
   ],
-  authors: [{ name: "Kraviona Tech", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
-  alternates: { canonical: "https://kraviona.com/about" },
+  alternates: { canonical: "https://www.kraviona.com/about" },
   openGraph: {
     title: "About Kraviona | Founder-Led Web Development Team",
     description:
       "Meet the team behind Kraviona's MERN stack development, Next.js websites, backend systems, and technical SEO work.",
-    url: "https://kraviona.com/about",
+    url: "https://www.kraviona.com/about",
     siteName: "Kraviona Tech Solutions",
     type: "website",
     locale: "en_IN",
@@ -90,8 +90,8 @@ const AboutPage = () => {
         data={[
           aboutPageSchema,
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
-            { name: "About Us", url: "https://kraviona.com/about" },
+            { name: "Home", url: "https://www.kraviona.com" },
+            { name: "About Us", url: "https://www.kraviona.com/about" },
           ]),
         ]}
       />

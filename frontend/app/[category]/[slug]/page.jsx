@@ -216,7 +216,7 @@ export async function generateMetadata({ params }) {
       type: "article",
       publishedTime: post.publishedAt || post.createdAt,
       modifiedTime: post.updatedAt || post.publishedAt || post.createdAt,
-      authors: ["https://kraviona.com/about"],
+      authors: ["https://www.kraviona.com/about"],
       section: post.category?.name || (post.contentType === "news" ? "News" : "Tech"),
       tags: post.tags || [],
       images: [
@@ -320,14 +320,14 @@ export default async function PostDetailPage({ params }) {
       timeRequired: `PT${post.readingTimeMinutes || calculatedReadingMinutes}M`,
       isAccessibleForFree: post.isAccessibleForFree ?? true,
       inLanguage: "en-IN",
-      isPartOf: { "@id": "https://kraviona.com/#website" },
+      isPartOf: { "@id": "https://www.kraviona.com/#website" },
       publisher: {
         "@type": "Organization",
         name: SITE_NAME,
-        url: "https://kraviona.com",
+        url: "https://www.kraviona.com",
         logo: {
           "@type": "ImageObject",
-          url: "https://kraviona.com/full-logo.webp",
+          url: "https://www.kraviona.com/full-logo.webp",
           width: 659,
           height: 226,
         },
@@ -335,7 +335,7 @@ export default async function PostDetailPage({ params }) {
       author: {
         "@type": "Person",
         name: authorProfile.name,
-        url: authorProfile.linkedin || "https://kraviona.com/about",
+        url: authorProfile.linkedin || "https://www.kraviona.com/about",
         jobTitle: authorProfile.role,
       },
       mainEntityOfPage: {
@@ -348,13 +348,13 @@ export default async function PostDetailPage({ params }) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://kraviona.com" },
-        { "@type": "ListItem", position: 2, name: "News", item: "https://kraviona.com/news" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kraviona.com" },
+        { "@type": "ListItem", position: 2, name: "News", item: "https://www.kraviona.com/news" },
         {
           "@type": "ListItem",
           position: 3,
           name: post.category?.name || "Category",
-          item: `https://kraviona.com/news?category=${canonicalCategory}`,
+          item: `https://www.kraviona.com/news?category=${canonicalCategory}`,
         },
         { "@type": "ListItem", position: 4, name: post.title, item: postCanonical },
       ],
@@ -859,14 +859,14 @@ export default async function PostDetailPage({ params }) {
     timeRequired: `PT${post.readingTimeMinutes || calculatedReadingMinutes}M`,
     isAccessibleForFree: post.isAccessibleForFree ?? true,
     inLanguage: "en-IN",
-    isPartOf: { "@id": "https://kraviona.com/#website" },
+    isPartOf: { "@id": "https://www.kraviona.com/#website" },
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
-      url: "https://kraviona.com",
+      url: "https://www.kraviona.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://kraviona.com/full-logo.webp",
+        url: "https://www.kraviona.com/full-logo.webp",
         width: 659,
         height: 226,
       },
@@ -874,7 +874,7 @@ export default async function PostDetailPage({ params }) {
     author: {
       "@type": "Person",
       name: authorProfile.name,
-      url: authorProfile.linkedin || "https://kraviona.com/about",
+      url: authorProfile.linkedin || "https://www.kraviona.com/about",
       jobTitle: authorProfile.role,
     },
   };
@@ -883,12 +883,12 @@ export default async function PostDetailPage({ params }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://kraviona.com" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.kraviona.com" },
       {
         "@type": "ListItem",
         position: 2,
         name: post.category?.name || "Category",
-        item: `https://kraviona.com/category/${canonicalCategory}`,
+        item: `https://www.kraviona.com/category/${canonicalCategory}`,
       },
       { "@type": "ListItem", position: 3, name: post.title, item: postCanonical },
     ],

@@ -10,7 +10,7 @@ export const SERVICE_EXPERT = {
   linkedin: "https://www.linkedin.com/in/amarkumar96085/",
   companyLinkedin: SOCIAL_LINKS.linkedin,
   facebook: SOCIAL_LINKS.facebook,
-  website: "https://kraviona.com",
+  website: "https://www.kraviona.com",
   address: "East Delhi, Delhi 110092, India",
   availability: "Monday to Saturday, 9:00 AM - 7:00 PM IST",
   responseTime: "Usually replies within 1 business day",

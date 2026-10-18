@@ -1,7 +1,4 @@
-import { canonicalUrl } from "./seoConfig.js";
-import { JsonLd } from "@/components/JsonLd";
 import NotFoundClient from "@/components/NotFound/NotFoundClient";
-import { breadcrumbSchema as buildBreadcrumbSchema } from "@/lib/schema";
 import { API_URL } from "@/utils/api";
 
 export const revalidate = 3600;
@@ -12,10 +9,7 @@ export const metadata = {
     "The page you are looking for does not exist or has been moved. Explore Kraviona's web development, technical SEO, MERN stack, AI automation, and digital marketing services.",
   robots: {
     index: false,
-    follow: true,
-  },
-  alternates: {
-    canonical: canonicalUrl("/404"),
+    follow: false,
   },
 };
 
@@ -35,6 +29,7 @@ async function getSuggestedPosts() {
         slug: post.slug,
         title: post.title,
         excerpt: post.excerpt || "",
+        category: post.category,
       }));
   } catch {
     return [];
@@ -43,15 +38,8 @@ async function getSuggestedPosts() {
 
 export default async function NotFound() {
   const suggestedPosts = await getSuggestedPosts();
-  const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "404 Not Found", url: "/404" },
-  ]);
 
   return (
-    <>
-      <JsonLd data={breadcrumbSchema} />
-      <NotFoundClient suggestedPosts={suggestedPosts} />
-    </>
+    <NotFoundClient suggestedPosts={suggestedPosts} />
   );
 }

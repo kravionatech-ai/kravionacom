@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { API_URL } from "@/utils/api";
 
-const canonical = "https://kraviona.com/gallery";
+const canonical = "https://www.kraviona.com/gallery";
 const title = "Portfolio & Project Gallery | Kraviona Tech Solutions";
 const description =
   "Explore Kraviona projects, portfolio samples, and digital product work covering MERN stack development, performance, UX, security, and scalable web apps.";
@@ -26,7 +26,7 @@ export const metadata = {
     "Kraviona Work Samples",
     "Digital Product Design Examples",
   ],
-  authors: [{ name: "Kraviona Tech", url: "https://kraviona.com" }],
+  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical },
   openGraph: {
@@ -125,7 +125,7 @@ const Gallery = async () => {
           }),
           imageGallerySchema,
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
+            { name: "Home", url: "https://www.kraviona.com" },
             { name: "Gallery", url: canonical },
           ]),
         ].filter(Boolean)}

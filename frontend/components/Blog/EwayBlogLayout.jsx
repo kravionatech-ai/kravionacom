@@ -67,6 +67,12 @@ const getReadingTime = (post) => {
 
 const getCategoryName = (post) => post?.category?.name || "Kraviona Insights";
 
+const getPostHref = (post) => {
+  if (!post?.slug) return "/blog";
+  const catSlug = post.category?.slug || (post.contentType === "news" ? "news" : "blog");
+  return `/${catSlug}/${post.slug}`;
+};
+
 function buildCategories(posts) {
   const map = new Map();
 
@@ -244,7 +250,7 @@ function BlogHero({ latestPost, categories, articleCount }) {
           />
           {latestPost?.slug ? (
             <Link
-              href={`/blog/${latestPost.slug}`}
+              href={getPostHref(latestPost)}
               className="group relative block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-brand-md"
             >
               <PostImage
@@ -322,7 +328,7 @@ function LeadStory({ post }) {
 
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={getPostHref(post)}
       className="group grid overflow-hidden rounded-md border border-[#D6E0E2] bg-white md:grid-cols-[52%_1fr]"
     >
       <PostImage
@@ -365,7 +371,7 @@ function PopularList({ posts }) {
         {posts.map((post, index) => (
           <Link
             key={`${post.slug}-${index}`}
-            href={`/blog/${post.slug}`}
+            href={getPostHref(post)}
             className="group grid grid-cols-[34px_minmax(0,1fr)] gap-4 py-4 first:pt-0 last:pb-0"
           >
             <span className="pt-0.5 text-lg font-black text-[#E8622A]">
@@ -395,7 +401,7 @@ function ArticleCard({ post, compact = false }) {
   if (compact) {
     return (
       <Link
-        href={`/blog/${post.slug}`}
+        href={getPostHref(post)}
         className="group grid grid-cols-[92px_minmax(0,1fr)] gap-4 border-b border-[#D6E0E2] bg-white py-4 transition-colors hover:border-[#E8622A]/50"
       >
         <PostImage post={post} className="h-20 rounded-sm" sizes="92px" />
@@ -416,7 +422,7 @@ function ArticleCard({ post, compact = false }) {
 
   return (
     <article className="group flex h-full flex-col overflow-hidden border border-[#D6E0E2] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#E8622A]/45 hover:shadow-[0_18px_34px_rgba(42,74,82,0.08)]">
-      <Link href={`/blog/${post.slug}`} className="block">
+      <Link href={getPostHref(post)} className="block">
         <PostImage
           post={post}
           className="aspect-[16/10] w-full"
@@ -425,7 +431,7 @@ function ArticleCard({ post, compact = false }) {
       </Link>
       <div className="flex flex-1 flex-col p-5">
         <CategoryBadge>{getCategoryName(post)}</CategoryBadge>
-        <Link href={`/blog/${post.slug}`}>
+        <Link href={getPostHref(post)}>
           <h3 className="mt-4 line-clamp-2 text-lg font-black leading-snug text-[#1A2E33] transition-colors group-hover:text-[#E8622A]">
             {post.title || "Untitled Article"}
           </h3>

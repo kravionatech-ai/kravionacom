@@ -30,7 +30,7 @@ const plainText = (value = "") =>
 const absoluteImageUrl = (value) => {
   if (!value) return undefined;
   if (/^https?:\/\//i.test(value)) return value;
-  return `https://kraviona.com/${String(value).replace(/^\/+/, "")}`;
+  return `https://www.kraviona.com/${String(value).replace(/^\/+/, "")}`;
 };
 
 const buildPayload = (post) => ({

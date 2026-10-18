@@ -89,11 +89,11 @@ const faqSchema = {
 const homePageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": "https://kraviona.com/#webpage",
-  url: "https://kraviona.com",
+  "@id": "https://www.kraviona.com/#webpage",
+  url: "https://www.kraviona.com",
   name: "MERN Stack Development & Technical SEO Company | Kraviona",
-  isPartOf: { "@id": "https://kraviona.com/#website" },
-  about: { "@id": "https://kraviona.com/#organization" },
+  isPartOf: { "@id": "https://www.kraviona.com/#website" },
+  about: { "@id": "https://www.kraviona.com/#organization" },
   description:
     "Kraviona builds MERN stack products, Next.js websites, backend APIs, and technical SEO foundations for businesses that need faster, cleaner digital growth.",
   breadcrumb: {
@@ -103,7 +103,7 @@ const homePageSchema = {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://kraviona.com",
+        item: "https://www.kraviona.com",
       },
     ],
   },
@@ -116,7 +116,7 @@ const serviceListSchema = {
   name: "Kraviona IT & Web Development Services",
   description:
     "Web development, backend engineering, technical SEO, and digital growth services by Kraviona Tech Solutions.",
-  url: "https://kraviona.com/services",
+  url: "https://www.kraviona.com/services",
   itemListElement: [
     {
       "@type": "ListItem",
@@ -126,8 +126,8 @@ const serviceListSchema = {
         name: "MERN Stack Development",
         description:
           "Full-stack web applications built with MongoDB, Express.js, React.js, and Node.js for practical business use cases.",
-        provider: { "@id": "https://kraviona.com/#organization" },
-        url: "https://kraviona.com/services/mern-stack-development",
+        provider: { "@id": "https://www.kraviona.com/#organization" },
+        url: "https://www.kraviona.com/services/mern-stack-development",
         areaServed: "IN",
       },
     },
@@ -139,8 +139,8 @@ const serviceListSchema = {
         name: "Technical SEO Services",
         description:
           "Technical SEO audits, Core Web Vitals improvements, structured data, and crawlability fixes.",
-        provider: { "@id": "https://kraviona.com/#organization" },
-        url: "https://kraviona.com/services/technical-seo",
+        provider: { "@id": "https://www.kraviona.com/#organization" },
+        url: "https://www.kraviona.com/services/technical-seo",
         areaServed: "IN",
       },
     },
@@ -152,8 +152,8 @@ const serviceListSchema = {
         name: "React.js Development",
         description:
           "React.js and Next.js interfaces for websites, dashboards, and product experiences.",
-        provider: { "@id": "https://kraviona.com/#organization" },
-        url: "https://kraviona.com/services/react-development",
+        provider: { "@id": "https://www.kraviona.com/#organization" },
+        url: "https://www.kraviona.com/services/react-development",
         areaServed: "IN",
       },
     },
@@ -165,8 +165,8 @@ const serviceListSchema = {
         name: "Node.js Backend Development",
         description:
           "REST APIs, authentication, integrations, and reliable backend systems built with Node.js.",
-        provider: { "@id": "https://kraviona.com/#organization" },
-        url: "https://kraviona.com/services/nodejs-development",
+        provider: { "@id": "https://www.kraviona.com/#organization" },
+        url: "https://www.kraviona.com/services/nodejs-development",
         areaServed: "IN",
       },
     },
@@ -279,12 +279,15 @@ const Home = async () => {
         "@context": "https://schema.org",
         "@type": "ItemList",
         name: "Latest Kraviona articles",
-        itemListElement: latestPosts.map((post, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          url: `https://kraviona.com/blog/${post.slug}`,
-          name: post.title,
-        })),
+        itemListElement: latestPosts.map((post, index) => {
+          const cat = post.category?.slug || (post.contentType === "news" ? "news" : "blog");
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            url: `https://www.kraviona.com/${cat}/${post.slug}`,
+            name: post.title,
+          };
+        }),
       }
     : null;
 

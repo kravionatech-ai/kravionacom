@@ -127,13 +127,13 @@ const CategoryPage = async ({ params }) => {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://kraviona.com",
+        item: "https://www.kraviona.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Categories",
-        item: "https://kraviona.com/category",
+        item: "https://www.kraviona.com/category",
       },
       {
         "@type": "ListItem",
@@ -154,17 +154,20 @@ const CategoryPage = async ({ params }) => {
       categoryData?.metaDescription ||
       categoryData?.description ||
       `Latest articles about ${formattedTitle} from Kraviona.`,
-    isPartOf: { "@id": "https://kraviona.com/#website" },
+    isPartOf: { "@id": "https://www.kraviona.com/#website" },
     breadcrumb: breadcrumbSchema,
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: posts.length,
-      itemListElement: posts.map((post, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: canonicalUrl(`/blog/${post.slug}`),
-        name: post.title,
-      })),
+      itemListElement: posts.map((post, index) => {
+        const cat = post.category?.slug || (post.contentType === "news" ? "news" : category);
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          url: canonicalUrl(`/${cat}/${post.slug}`),
+          name: post.title,
+        };
+      }),
     },
   };
 

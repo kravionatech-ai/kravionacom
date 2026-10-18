@@ -132,7 +132,7 @@ function teamSchema(members) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "@id": "https://kraviona.com/team#team",
+    "@id": "https://www.kraviona.com/team#team",
     name: "Kraviona Team",
     itemListElement: members.map((member, index) => ({
       "@type": "ListItem",
@@ -142,9 +142,9 @@ function teamSchema(members) {
         name: member.name,
         jobTitle: member.designation,
         image: absoluteImageUrl(getImageSrc(member)),
-        url: "https://kraviona.com/team",
+        url: "https://www.kraviona.com/team",
         worksFor: {
-          "@id": "https://kraviona.com/#organization",
+          "@id": "https://www.kraviona.com/#organization",
         },
         sameAs: (member.socialLinks || [])
           .map((link) => link.url)
@@ -167,8 +167,8 @@ const TeamPage = async () => {
         data={[
           teamSchema(members),
           breadcrumbSchema([
-            { name: "Home", url: "https://kraviona.com" },
-            { name: "Team", url: "https://kraviona.com/team" },
+            { name: "Home", url: "https://www.kraviona.com" },
+            { name: "Team", url: "https://www.kraviona.com/team" },
           ]),
         ]}
       />
