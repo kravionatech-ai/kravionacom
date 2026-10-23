@@ -4,15 +4,16 @@ import React, { useEffect, useState, useRef } from "react";
 
 /**
  * RobotHead3D.jsx
- * 100% Code-Rendered 3D Robot Head Model (ZERO images used).
- * Built with pure CSS 3D transforms, SVG vector optics, and ambient lighting.
+ * Compact, Cute, Premium White AI Robot Head (Zero Image Files).
  * Features:
- * - 3D head pitch & yaw orientation tracking the visitor's cursor
- * - Glossy white ceramic head shell with metallic ear pods and glowing cyan LED rings
- * - Dark curved visor screen with glass glare reflection
- * - Glowing cyan eyes with natural blinking and pupil gaze direction
- * - Dynamic mouth viseme synced to speech
- * - Floating hover physics and soft ground shadow
+ * - Desktop size: ~72px | Mobile size: ~60px
+ * - Smooth, jitter-free cursor tracking using lerp interpolation in requestAnimationFrame
+ * - 3–5 degree subtle 3D rotational head tilt (pitch, yaw, roll)
+ * - Subtle parallax eye gaze tracking inside black rounded-rectangular face screen
+ * - Reacts gracefully to hovered links, buttons, and form inputs across all pages
+ * - Smoothly returns to neutral idle position when cursor is inactive
+ * - Natural blinking, happy, thinking, listening, speaking, curious, and error expressions
+ * - Elegant status indicator dot and greeting tooltip on first visit
  */
 export default function RobotHead3D({
   expression = "idle",
@@ -20,14 +21,37 @@ export default function RobotHead3D({
   viseme = 0,
   speechBubble = null,
   onClick = () => {},
-  size = "md", // "sm" | "md" | "lg"
+  size = "md", // "sm" (60px) | "md" (72px) | "lg" (84px)
   overrideGaze = null,
 }) {
-  const headRef = useRef(null);
-  const [gaze, setGaze] = useState({ x: 0, y: 0 });
-  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, rotateZ: 0 });
+  const containerRef = useRef(null);
+
+  // Smooth interpolated coordinates for zero jitter
+  const targetGazeRef = useRef({ x: 0, y: 0 });
+  const currentGazeRef = useRef({ x: 0, y: 0 });
+  const [renderGaze, setRenderGaze] = useState({ x: 0, y: 0 });
+  const [renderTilt, setRenderTilt] = useState({ rotateX: 0, rotateY: 0, rotateZ: 0 });
+
   const [isBlinking, setIsBlinking] = useState(false);
-  const blinkTimeoutRef = useRef(null);
+  const [isHoveredInteractive, setIsHoveredInteractive] = useState(false);
+  const [showGreeting, setShowGreeting] = useState(false);
+
+  const idleTimerRef = useRef(null);
+  const blinkTimerRef = useRef(null);
+  const animFrameRef = useRef(null);
+
+  // First visit greeting tooltip (auto dismisses after 5s or on interaction)
+  useEffect(() => {
+    try {
+      const greeted = sessionStorage.getItem("kraviona_robot_greeted");
+      if (!greeted) {
+        setShowGreeting(true);
+        sessionStorage.setItem("kraviona_robot_greeted", "true");
+        const timer = setTimeout(() => setShowGreeting(false), 5500);
+        return () => clearTimeout(timer);
+      }
+    } catch {}
+  }, []);
 
   // Natural eyelid blinking loop
   useEffect(() => {
@@ -35,265 +59,383 @@ export default function RobotHead3D({
       setIsBlinking(true);
       setTimeout(() => {
         setIsBlinking(false);
-        const next = 3200 + Math.random() * 2600;
-        blinkTimeoutRef.current = setTimeout(triggerBlink, next);
-      }, 130);
+        const nextInterval = 3200 + Math.random() * 2600;
+        blinkTimerRef.current = setTimeout(triggerBlink, nextInterval);
+      }, 140);
     };
 
-    blinkTimeoutRef.current = setTimeout(triggerBlink, 2500);
+    blinkTimerRef.current = setTimeout(triggerBlink, 2800);
     return () => {
-      if (blinkTimeoutRef.current) clearTimeout(blinkTimeoutRef.current);
+      if (blinkTimerRef.current) clearTimeout(blinkTimerRef.current);
     };
   }, []);
 
-  // Global cursor tracking to rotate head in 3D space
+  // 60fps Smooth Spring / Lerp Animation Loop
   useEffect(() => {
-    if (overrideGaze) {
-      setGaze(overrideGaze);
-      setTilt({
-        rotateY: overrideGaze.x * 16,
-        rotateX: -overrideGaze.y * 12,
-        rotateZ: overrideGaze.x * 3,
-      });
+    // Respect prefers-reduced-motion
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
-    const handlePointerMove = (e) => {
-      if (!headRef.current) return;
-      const rect = headRef.current.getBoundingClientRect();
-      const headCenterX = rect.left + rect.width / 2;
-      const headCenterY = rect.top + rect.height / 2;
+    const lerp = (start, end, factor) => start + (end - start) * factor;
 
-      const deltaX = e.clientX - headCenterX;
-      const deltaY = e.clientY - headCenterY;
+    const animate = () => {
+      const target = overrideGaze || targetGazeRef.current;
+      const cur = currentGazeRef.current;
+
+      // Gentle fluid interpolation factor (0.09) for smooth, non-jittery tracking
+      cur.x = lerp(cur.x, target.x, 0.09);
+      cur.y = lerp(cur.y, target.y, 0.09);
+
+      setRenderGaze({ x: cur.x, y: cur.y });
+
+      // Limited subtle head tilt: strictly 3 to 4.5 degrees maximum
+      setRenderTilt({
+        rotateY: cur.x * 4.5,
+        rotateX: -cur.y * 3.8,
+        rotateZ: cur.x * 1.2,
+      });
+
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, [overrideGaze]);
+
+  // Global Pointer & Interactive Element Hover Tracking Across All Pages
+  useEffect(() => {
+    // Disable heavy tracking on touch-only devices
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
+    const resetToNeutral = () => {
+      targetGazeRef.current = { x: 0, y: 0 };
+      setIsHoveredInteractive(false);
+    };
+
+    const handlePointerMove = (e) => {
+      if (!containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
       const distance = Math.hypot(deltaX, deltaY) || 1;
 
-      const maxDist = 700;
-      const intensity = Math.min(1, distance / maxDist);
+      // Normalize reach across viewport
+      const maxDistance = 750;
+      const intensity = Math.min(1, distance / maxDistance);
       const nx = (deltaX / distance) * intensity;
       const ny = (deltaY / distance) * intensity;
 
-      setGaze({ x: nx, y: ny });
+      targetGazeRef.current = { x: nx, y: ny };
 
-      // 3D head pitch (X), yaw (Y), roll (Z)
-      setTilt({
-        rotateY: nx * 18,
-        rotateX: -ny * 14,
-        rotateZ: nx * 4,
-      });
+      // Idle return: smooth glide back to neutral after 2.8s of no pointer movement
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = setTimeout(resetToNeutral, 2800);
+    };
+
+    // Detect hovered interactive links, buttons, and inputs for gentle focused look
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      if (!target || !(target instanceof HTMLElement)) return;
+
+      const interactive = target.closest("a, button, input, textarea, select, [role='button'], .card");
+      if (interactive && containerRef.current) {
+        setIsHoveredInteractive(true);
+        const iRect = interactive.getBoundingClientRect();
+        const cRect = containerRef.current.getBoundingClientRect();
+
+        const deltaX = (iRect.left + iRect.width / 2) - (cRect.left + cRect.width / 2);
+        const deltaY = (iRect.top + iRect.height / 2) - (cRect.top + cRect.height / 2);
+        const dist = Math.hypot(deltaX, deltaY) || 1;
+
+        targetGazeRef.current = {
+          x: Math.max(-1, Math.min(1, deltaX / Math.min(dist, 700))),
+          y: Math.max(-1, Math.min(1, deltaY / Math.min(dist, 700))),
+        };
+      }
+    };
+
+    const handleMouseOut = (e) => {
+      const target = e.target;
+      if (target && target.closest && target.closest("a, button, input, textarea, select, [role='button'], .card")) {
+        setIsHoveredInteractive(false);
+      }
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [overrideGaze]);
+    document.addEventListener("mouseover", handleMouseOver, { passive: true });
+    document.addEventListener("mouseout", handleMouseOut, { passive: true });
 
-  // Dimensions configuration
-  const scaleClass = {
-    sm: "w-20 h-20 sm:w-24 sm:h-24",
-    md: "w-28 h-28 sm:w-32 sm:h-32",
-    lg: "w-36 h-36 sm:w-44 sm:h-44",
-  }[size] || "w-28 h-28 sm:w-32 sm:h-32";
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    };
+  }, []);
 
-  // Eye gaze offsets in pixels
-  const eyeShiftX = Math.max(-1, Math.min(1, gaze.x)) * 5.5;
-  const eyeShiftY = Math.max(-1, Math.min(1, gaze.y)) * 4;
+  // Desktop: ~72px (64–80px) | Mobile: ~60px (56–64px)
+  const sizeClasses = {
+    sm: "w-14 h-14 sm:w-16 sm:h-16",
+    md: "w-[62px] h-[62px] sm:w-[74px] sm:h-[74px]",
+    lg: "w-20 h-20 sm:w-22 sm:h-22",
+  }[size] || "w-[62px] h-[62px] sm:w-[74px] sm:h-[74px]";
+
+  // Subtle Parallax Eye Shift inside Visor (max 3.2px)
+  const eyeShiftX = renderGaze.x * 3.2;
+  const eyeShiftY = renderGaze.y * 2.6;
   const eyeScaleY = isBlinking ? 0.08 : 1;
 
-  // Mouth rendering inside dark visor
+  // Active expression (combines props and interactive hover state)
+  const activeExpression = isHoveredInteractive && expression === "idle" ? "curious" : expression;
+
+  // Render Mouth inside dark visor
   const renderMouth = () => {
     if (isSpeaking) {
       // Audio viseme mouth opening and waveform dynamics
-      const openAmount = 52 + (viseme || 0.4) * 9;
+      const openAmount = 52 + (viseme || 0.4) * 8;
       const width = 42 - (viseme || 0.4) * 3;
       return (
         <path
           d={`M ${width} 52 Q 50 ${openAmount + 2} ${100 - width} 52 Q 50 ${openAmount - 2} ${width} 52 Z`}
           fill="#00F2FE"
-          filter="url(#robotCyanGlow)"
+          filter="url(#robotHeadCyanGlow)"
           className="transition-all duration-75"
         />
       );
     }
 
-    if (expression === "happy") {
+    if (activeExpression === "happy") {
       return (
         <path
           d="M 40 51 Q 50 63 60 51 Z"
           fill="#00F2FE"
-          filter="url(#robotCyanGlow)"
+          filter="url(#robotHeadCyanGlow)"
         />
       );
     }
 
-    if (expression === "curious") {
+    if (activeExpression === "curious") {
       return (
         <ellipse
           cx="50"
           cy="54"
-          rx="4.5"
-          ry="4"
+          rx="4"
+          ry="3.5"
           fill="none"
           stroke="#00F2FE"
           strokeWidth="2.5"
-          filter="url(#robotCyanGlow)"
+          filter="url(#robotHeadCyanGlow)"
         />
       );
     }
 
-    // Idle relaxed curved smile
+    if (activeExpression === "error") {
+      return (
+        <path
+          d="M 43 55 Q 50 51 57 55"
+          fill="none"
+          stroke="#00F2FE"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          filter="url(#robotHeadCyanGlow)"
+        />
+      );
+    }
+
+    // Idle neutral curved smile
     return (
       <path
-        d="M 42 52 Q 50 58 58 52"
+        d="M 43 52 Q 50 57 57 52"
         fill="none"
         stroke="#00F2FE"
-        strokeWidth="3"
+        strokeWidth="2.8"
         strokeLinecap="round"
-        filter="url(#robotCyanGlow)"
+        filter="url(#robotHeadCyanGlow)"
       />
     );
   };
 
-  // Eyes rendering inside dark visor
+  // Render Eyes inside dark visor
   const renderEyes = () => {
-    if (expression === "happy") {
+    if (activeExpression === "happy") {
       return (
         <g
           transform={`translate(${eyeShiftX}, ${eyeShiftY}) scale(1, ${eyeScaleY})`}
           style={{ transformOrigin: "50px 36px" }}
-          className="transition-transform duration-100 ease-out"
+          className="transition-transform duration-75 ease-out"
         >
           <path
-            d="M 30 38 Q 38 27 46 38"
+            d="M 31 38 Q 38 28 45 38"
             fill="none"
             stroke="#00F2FE"
-            strokeWidth="4"
+            strokeWidth="3.6"
             strokeLinecap="round"
-            filter="url(#robotCyanGlow)"
+            filter="url(#robotHeadCyanGlow)"
           />
           <path
-            d="M 54 38 Q 62 27 70 38"
+            d="M 55 38 Q 62 28 69 38"
             fill="none"
             stroke="#00F2FE"
-            strokeWidth="4"
+            strokeWidth="3.6"
             strokeLinecap="round"
-            filter="url(#robotCyanGlow)"
+            filter="url(#robotHeadCyanGlow)"
           />
         </g>
       );
     }
 
-    if (expression === "thinking") {
+    if (activeExpression === "thinking") {
       return (
         <g
-          transform={`translate(${eyeShiftX - 1}, ${eyeShiftY - 3}) scale(1, ${eyeScaleY})`}
+          transform={`translate(${eyeShiftX - 1}, ${eyeShiftY - 2.5}) scale(1, ${eyeScaleY})`}
           style={{ transformOrigin: "50px 34px" }}
-          className="transition-transform duration-150 ease-out"
+          className="transition-transform duration-100 ease-out"
         >
-          <ellipse cx="38" cy="33" rx="7" ry="9" fill="#00F2FE" filter="url(#robotCyanGlow)" />
-          <ellipse cx="62" cy="33" rx="7" ry="9" fill="#00F2FE" filter="url(#robotCyanGlow)" />
+          <ellipse cx="38" cy="34" rx="6.5" ry="8.5" fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+          <ellipse cx="62" cy="34" rx="6.5" ry="8.5" fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+          {/* Subtle thinking ring indicator */}
           <circle
             cx="50"
-            cy="16"
-            r="4.5"
+            cy="17"
+            r="4"
             fill="none"
             stroke="#00F2FE"
-            strokeWidth="1.8"
+            strokeWidth="1.6"
             strokeDasharray="4 3"
             className="animate-spin"
-            style={{ transformOrigin: "50px 16px", animationDuration: "1.8s" }}
-            filter="url(#robotCyanGlow)"
+            style={{ transformOrigin: "50px 17px", animationDuration: "1.6s" }}
+            filter="url(#robotHeadCyanGlow)"
           />
         </g>
       );
     }
 
-    // Default glowing cyan eyes
+    if (activeExpression === "listening") {
+      return (
+        <g
+          transform={`translate(${eyeShiftX}, ${eyeShiftY}) scale(1, ${eyeScaleY})`}
+          style={{ transformOrigin: "50px 36px" }}
+          className="transition-transform duration-75 ease-out animate-pulse"
+        >
+          <ellipse cx="38" cy="36" rx="7.5" ry="9.5" fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+          <ellipse cx="36" cy="33" rx="2.2" ry="3.2" fill="#FFFFFF" opacity="0.9" />
+          <ellipse cx="62" cy="36" rx="7.5" ry="9.5" fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+          <ellipse cx="60" cy="33" rx="2.2" ry="3.2" fill="#FFFFFF" opacity="0.9" />
+        </g>
+      );
+    }
+
+    // Default & curious: Glowing cyan pill eyes
+    const rx = activeExpression === "curious" ? 7.2 : 6.8;
+    const ry = activeExpression === "curious" ? 9.2 : 8.6;
+
     return (
       <g
         transform={`translate(${eyeShiftX}, ${eyeShiftY}) scale(1, ${eyeScaleY})`}
         style={{ transformOrigin: "50px 36px" }}
-        className="transition-transform duration-100 ease-out"
+        className="transition-transform duration-75 ease-out"
       >
         {/* Left Eye */}
-        <ellipse cx="38" cy="36" rx="7.5" ry="9" fill="#00F2FE" filter="url(#robotCyanGlow)" />
-        <ellipse cx="36" cy="33" rx="2.5" ry="3.5" fill="#FFFFFF" opacity="0.85" />
+        <ellipse cx="38" cy="36" rx={rx} ry={ry} fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+        <ellipse cx="36" cy="33" rx="2.2" ry="3.2" fill="#FFFFFF" opacity="0.85" />
 
         {/* Right Eye */}
-        <ellipse cx="62" cy="36" rx="7.5" ry="9" fill="#00F2FE" filter="url(#robotCyanGlow)" />
-        <ellipse cx="60" cy="33" rx="2.5" ry="3.5" fill="#FFFFFF" opacity="0.85" />
+        <ellipse cx="62" cy="36" rx={rx} ry={ry} fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+        <ellipse cx="60" cy="33" rx="2.2" ry="3.2" fill="#FFFFFF" opacity="0.85" />
       </g>
     );
   };
 
   return (
     <div
-      ref={headRef}
+      ref={containerRef}
       onClick={onClick}
-      className={`relative cursor-pointer select-none ${scaleClass}`}
-      style={{ perspective: "1000px" }}
+      className={`relative cursor-pointer select-none transition-transform duration-200 hover:scale-105 active:scale-95 ${sizeClasses}`}
+      style={{ perspective: "600px" }}
       role="button"
       tabIndex={0}
-      aria-label="Kraviona 3D AI Voice Assistant"
+      aria-label="Kraviona AI Voice Assistant"
     >
-      {/* Dynamic Speech Bubble */}
+      {/* First Visit Greeting Tooltip */}
+      {showGreeting && !speechBubble && (
+        <div
+          className="absolute -top-11 -left-32 sm:-left-36 w-44 p-2 rounded-xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-lg text-[10.5px] font-semibold text-[#0f5960] pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-1 flex items-center justify-between"
+        >
+          <span>Hi! I'm your AI Guide. 👋</span>
+          <div className="absolute -bottom-1 right-5 w-2 h-2 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
+        </div>
+      )}
+
+      {/* Dynamic Contextual Guidance Speech Bubble */}
       {speechBubble && (
         <div
-          className="absolute -top-16 -left-32 sm:-left-44 w-52 sm:w-60 p-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-xl text-[11px] sm:text-xs text-slate-800 pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-2"
-          style={{ transformOrigin: "bottom right" }}
+          className="absolute -top-16 -left-36 sm:-left-44 w-52 sm:w-56 p-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-xl text-[11px] text-slate-800 pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-2"
         >
-          <div className="flex items-center gap-1.5 mb-1 text-[9.5px] font-bold uppercase tracking-wider text-[#0f5960]">
+          <div className="flex items-center gap-1.5 mb-0.5 text-[9px] font-bold uppercase tracking-wider text-[#0f5960]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#00F2FE] animate-pulse" />
             Kraviona Voice
           </div>
-          <p className="line-clamp-3 leading-snug font-medium text-slate-700">
+          <p className="line-clamp-2 leading-snug font-medium text-slate-700">
             {speechBubble}
           </p>
           <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
         </div>
       )}
 
+      {/* Small Elegant Status Indicator Dot */}
+      <span className="absolute -top-0.5 -right-0.5 z-20 flex h-3 w-3">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-75" />
+        <span className="relative inline-flex rounded-full h-3 w-3 bg-[#00F2FE] border-2 border-white shadow-xs" />
+      </span>
+
       {/* 3D Floating Bobbing Head Assembly */}
       <div
-        className="relative w-full h-full transition-transform duration-150 ease-out"
+        className="relative w-full h-full transition-transform duration-100 ease-out"
         style={{
-          transform: `rotateY(${tilt.rotateY}deg) rotateX(${tilt.rotateX}deg) rotateZ(${tilt.rotateZ}deg)`,
+          transform: `rotateY(${renderTilt.rotateY}deg) rotateX(${renderTilt.rotateX}deg) rotateZ(${renderTilt.rotateZ}deg)`,
           transformStyle: "preserve-3d",
         }}
       >
-        {/* Left Ear Audio Sensor Module */}
+        {/* Left Ear Audio Module with Glowing Cyan Ring */}
         <div
-          className="absolute top-1/2 -left-2 sm:-left-2.5 -translate-y-1/2 w-4 h-9 sm:w-5 sm:h-11 rounded-l-full bg-gradient-to-r from-slate-300 via-slate-100 to-white shadow-md flex items-center justify-center border-l border-y border-slate-300/80"
-          style={{ transform: "translateZ(-8px)" }}
+          className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-6 rounded-l-full bg-gradient-to-r from-slate-200 to-white shadow-sm flex items-center justify-center border-l border-y border-slate-300"
+          style={{ transform: "translateZ(-4px)" }}
         >
-          <div className="w-1.5 h-6 sm:w-2 sm:h-7 rounded-full bg-[#00F2FE] shadow-[0_0_8px_#00F2FE] opacity-90 animate-pulse" />
+          <div className="w-1 h-4 rounded-full bg-[#00F2FE] shadow-[0_0_6px_#00F2FE]" />
         </div>
 
-        {/* Right Ear Audio Sensor Module */}
+        {/* Right Ear Audio Module with Glowing Cyan Ring */}
         <div
-          className="absolute top-1/2 -right-2 sm:-right-2.5 -translate-y-1/2 w-4 h-9 sm:w-5 sm:h-11 rounded-r-full bg-gradient-to-l from-slate-300 via-slate-100 to-white shadow-md flex items-center justify-center border-r border-y border-slate-300/80"
-          style={{ transform: "translateZ(-8px)" }}
+          className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-6 rounded-r-full bg-gradient-to-l from-slate-200 to-white shadow-sm flex items-center justify-center border-r border-y border-slate-300"
+          style={{ transform: "translateZ(-4px)" }}
         >
-          <div className="w-1.5 h-6 sm:w-2 sm:h-7 rounded-full bg-[#00F2FE] shadow-[0_0_8px_#00F2FE] opacity-90 animate-pulse" />
+          <div className="w-1 h-4 rounded-full bg-[#00F2FE] shadow-[0_0_6px_#00F2FE]" />
         </div>
 
-        {/* Main Glossy Pearlescent White Ceramic Head Dome */}
+        {/* Main Glossy Pearlescent White Ceramic Head Shell */}
         <div
-          className="relative w-full h-full rounded-[44%_44%_46%_46%] bg-gradient-to-b from-[#FFFFFF] via-[#F1F5F8] to-[#D5DFE6] shadow-[0_12px_28px_rgba(15,89,96,0.22),inset_0_4px_8px_rgba(255,255,255,0.9),inset_0_-6px_12px_rgba(160,180,195,0.4)] border border-white flex items-center justify-center overflow-hidden"
+          className="relative w-full h-full rounded-[44%_44%_46%_46%] bg-gradient-to-b from-white via-[#F4F7F9] to-[#DCE4E9] shadow-[0_8px_20px_rgba(15,89,96,0.22),inset_0_3px_6px_rgba(255,255,255,0.9),inset_0_-4px_8px_rgba(160,180,195,0.35)] border border-white flex items-center justify-center overflow-hidden"
           style={{ transform: "translateZ(0px)" }}
         >
-          {/* Top Ceramic Specular Glare Highlight */}
-          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-3/4 h-8 rounded-full bg-gradient-to-b from-white/95 to-transparent blur-[1px] pointer-events-none" />
+          {/* Top Ceramic Glare Specular Highlight */}
+          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-4/5 h-6 rounded-full bg-gradient-to-b from-white/95 to-transparent blur-[0.5px] pointer-events-none" />
 
-          {/* Ambient Lighting Accent on Head Brow */}
-          <div className="absolute top-3 w-16 h-1 rounded-full bg-slate-300/40" />
-
-          {/* Recessed Dark Visor Face Screen */}
+          {/* Black, Rounded-Rectangular Face Screen */}
           <div
-            className="relative w-[78%] h-[64%] rounded-[38%_38%_44%_44%] bg-gradient-to-b from-[#0A1114] via-[#050B0D] to-[#0D181D] shadow-[inset_0_4px_10px_rgba(0,0,0,0.85),0_2px_4px_rgba(255,255,255,0.7)] border border-slate-700/60 overflow-hidden flex items-center justify-center"
-            style={{ transform: "translateZ(8px)" }}
+            className="relative w-[77%] h-[63%] rounded-[36%_36%_42%_42%] bg-gradient-to-b from-[#0A1114] via-[#050B0D] to-[#0D181D] shadow-[inset_0_3px_8px_rgba(0,0,0,0.85),0_1.5px_3px_rgba(255,255,255,0.7)] border border-slate-700/60 overflow-hidden flex items-center justify-center"
+            style={{ transform: "translateZ(5px)" }}
           >
-            {/* Visor Diagonal Glass Glare Reflection */}
-            <div className="absolute -top-10 -left-10 w-28 h-40 bg-gradient-to-r from-transparent via-white/12 to-transparent transform rotate-35 pointer-events-none" />
+            {/* Glass Glare Diagonal Reflection */}
+            <div className="absolute -top-8 -left-8 w-20 h-28 bg-gradient-to-r from-transparent via-white/14 to-transparent transform rotate-35 pointer-events-none" />
 
             {/* Glowing Cyan Face Optics (Eyes & Mouth SVG) */}
             <svg
@@ -302,8 +444,8 @@ export default function RobotHead3D({
               aria-hidden="true"
             >
               <defs>
-                <filter id="robotCyanGlow" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="2.2" result="blur" />
+                <filter id="robotHeadCyanGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="1.8" result="blur" />
                   <feMerge>
                     <feMergeNode in="blur" />
                     <feMergeNode in="SourceGraphic" />
@@ -318,19 +460,16 @@ export default function RobotHead3D({
               {renderMouth()}
             </svg>
           </div>
-
-          {/* Bottom Chin Subtle Bevel */}
-          <div className="absolute bottom-1.5 w-10 h-1 rounded-full bg-slate-300/60" />
         </div>
 
         {/* Ambient Halo Pulse when Speaking */}
         {isSpeaking && (
-          <div className="absolute inset-0 rounded-[44%] bg-[#00F2FE]/20 filter blur-xl pointer-events-none animate-pulse" />
+          <div className="absolute inset-0 rounded-[44%] bg-[#00F2FE]/25 filter blur-lg pointer-events-none animate-pulse" />
         )}
       </div>
 
-      {/* Soft Ground Shadow Below Floating Head */}
-      <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-3/4 h-3 rounded-full bg-[#0f5960]/20 blur-[3px] pointer-events-none transform scale-95 transition-all duration-300" />
+      {/* Ground Shadow below floating widget */}
+      <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3/4 h-2 rounded-full bg-[#0f5960]/20 blur-[2px] pointer-events-none" />
     </div>
   );
 }

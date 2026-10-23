@@ -19,7 +19,9 @@ import {
   FileText,
   HelpCircle,
   Edit3,
-  Radio,
+  Mic,
+  MicOff,
+  Briefcase,
 } from "lucide-react";
 import AssistantVoiceControls from "./AssistantVoiceControls";
 
@@ -54,8 +56,10 @@ export default function AssistantChatPanel({
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [isListeningMic, setIsListeningMic] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const recognitionRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -67,6 +71,48 @@ export default function AssistantChatPanel({
       setTimeout(() => inputRef.current?.focus(), 200);
     }
   }, [isOpen, messages, isLoading]);
+
+  // Voice Input Speech Recognition
+  const handleMicToggle = () => {
+    if (typeof window === "undefined") return;
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Voice speech recognition is not supported in this browser. Please type your message.");
+      return;
+    }
+
+    if (isListeningMic) {
+      recognitionRef.current?.stop();
+      setIsListeningMic(false);
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-IN";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = () => setIsListeningMic(true);
+      recognition.onresult = (event) => {
+        const transcript = event.results?.[0]?.[0]?.transcript;
+        if (transcript) {
+          setInputValue(transcript);
+          onSendMessage(transcript);
+        }
+      };
+      recognition.onerror = () => setIsListeningMic(false);
+      recognition.onend = () => setIsListeningMic(false);
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch {
+      setIsListeningMic(false);
+    }
+  };
 
   const handleSend = () => {
     const text = inputValue.trim();
@@ -182,27 +228,27 @@ export default function AssistantChatPanel({
       className={`fixed z-50 flex flex-col bg-white shadow-2xl border border-teal-900/15 overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 ${
         isExpanded
           ? "inset-3 sm:inset-auto sm:bottom-24 sm:right-6 sm:w-[500px] sm:max-w-[calc(100vw-2.5rem)] sm:h-[620px] sm:max-h-[calc(100vh-7.5rem)] rounded-2xl"
-          : "inset-x-3 bottom-3 top-20 sm:top-auto sm:bottom-24 sm:right-6 sm:inset-x-auto sm:w-[360px] sm:max-w-[calc(100vw-2.5rem)] sm:h-[500px] sm:max-h-[calc(100vh-7.5rem)] rounded-2xl"
+          : "inset-x-3 bottom-3 top-20 sm:top-auto sm:bottom-24 sm:right-6 sm:inset-x-auto sm:w-[360px] sm:max-w-[calc(100vw-2.5rem)] sm:h-[510px] sm:max-h-[calc(100vh-7.5rem)] rounded-2xl"
       }`}
       role="dialog"
       aria-modal="true"
-      aria-label="Kraviona 3D AI Voice Assistant"
+      aria-label="Kraviona AI Voice Assistant"
     >
       {/* Header */}
       <div className="flex items-center justify-between px-3.5 py-2.5 bg-gradient-to-r from-[#0f5960] via-[#0d4248] to-[#0a454b] text-white select-none">
         <div className="flex items-center gap-2">
-          <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 border border-white/20 text-white shadow-inner">
+          <div className="relative flex h-7 w-7 items-center justify-center rounded-xl bg-white/10 border border-white/20 text-white shadow-inner">
             <Bot className="w-4 h-4 text-[#00F2FE]" />
-            <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-[#0f5960]"></span>
+            <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-1.5 ring-[#0f5960]"></span>
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <h3 className="text-xs font-bold tracking-tight text-white">3D Robot AI Voice</h3>
+              <h3 className="text-xs font-bold tracking-tight text-white">Kraviona AI Assistant</h3>
               <span className="text-[8px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-1 py-0.2 rounded-full">
-                {autoSpeak ? "Auto Speak ON" : "Interactive"}
+                {autoSpeak ? "Auto Speak ON" : "Online"}
               </span>
             </div>
-            <p className="text-[9.5px] text-teal-100/75 leading-none">Founder-Led Engineering Guide</p>
+            <p className="text-[9px] text-teal-100/75 leading-none">Founder-Led Engineering Guide</p>
           </div>
         </div>
 
@@ -225,7 +271,7 @@ export default function AssistantChatPanel({
           </button>
           <button
             onClick={onClose}
-            title="Minimize assistant"
+            title="Close assistant"
             className="p-1.5 rounded-lg text-teal-100 hover:text-white hover:bg-white/10 transition-colors"
             aria-label="Close assistant"
           >
@@ -234,14 +280,14 @@ export default function AssistantChatPanel({
         </div>
       </div>
 
-      {/* Quick Action Toolbar: Read Page, Summarize, Form Guide */}
+      {/* Quick Action Toolbar: Read Page, Summarize, Services, Form Guide */}
       <div className="px-3 py-1.5 bg-[#f0f6f7] border-b border-teal-900/10 flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[10px] font-medium text-slate-700">
         <button
           onClick={onReadPage}
           className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-teal-200/80 hover:bg-[#0f5960]/10 hover:text-[#0f5960] transition-all shadow-2xs whitespace-nowrap"
         >
           <BookOpen className="w-3 h-3 text-[#0f5960]" />
-          <span>Read Page Aloud</span>
+          <span>Read This Page</span>
         </button>
 
         <button
@@ -251,6 +297,22 @@ export default function AssistantChatPanel({
           <FileText className="w-3 h-3 text-[#d85e3d]" />
           <span>Summarize Page</span>
         </button>
+
+        <Link
+          href="/services"
+          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-teal-200/80 hover:bg-[#0f5960]/10 hover:text-[#0f5960] transition-all shadow-2xs whitespace-nowrap"
+        >
+          <Briefcase className="w-3 h-3 text-teal-600" />
+          <span>Our Services</span>
+        </Link>
+
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-teal-200/80 hover:bg-[#0f5960]/10 hover:text-[#0f5960] transition-all shadow-2xs whitespace-nowrap"
+        >
+          <Edit3 className="w-3 h-3 text-amber-600" />
+          <span>Help With Forms</span>
+        </Link>
 
         {activeFormField && (
           <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[10px] whitespace-nowrap animate-pulse">
@@ -377,7 +439,7 @@ export default function AssistantChatPanel({
         onSelectVoice={onSelectVoice}
       />
 
-      {/* User Input Bar */}
+      {/* User Input Bar with Send and Microphone input */}
       <div className="p-2.5 bg-white border-t border-slate-200/90">
         <div className="relative flex items-center">
           <input
@@ -386,11 +448,28 @@ export default function AssistantChatPanel({
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about web dev, SEO, forms, or summarize..."
+            placeholder={isListeningMic ? "Listening... Speak now!" : "Ask about web dev, SEO, forms, or summarize..."}
             maxLength={500}
             disabled={isLoading}
-            className="w-full pl-3 pr-8 py-2 text-xs text-slate-900 placeholder:text-slate-400 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0f5960]/30 focus:border-[#0f5960] transition-all disabled:opacity-60"
+            className="w-full pl-3 pr-16 py-2 text-xs text-slate-900 placeholder:text-slate-400 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0f5960]/30 focus:border-[#0f5960] transition-all disabled:opacity-60"
           />
+
+          {/* Voice Mic Input Button */}
+          <button
+            onClick={handleMicToggle}
+            type="button"
+            title={isListeningMic ? "Stop voice listening" : "Speak with Microphone"}
+            className={`absolute right-8 p-1.5 rounded-lg transition-all ${
+              isListeningMic
+                ? "bg-red-500 text-white animate-pulse"
+                : "text-slate-400 hover:text-[#0f5960] hover:bg-slate-200/60"
+            }`}
+            aria-label="Toggle voice microphone input"
+          >
+            {isListeningMic ? <Mic className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
+          </button>
+
+          {/* Send Button */}
           <button
             onClick={handleSend}
             disabled={!inputValue.trim() || isLoading}
