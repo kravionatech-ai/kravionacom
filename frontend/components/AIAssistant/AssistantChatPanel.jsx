@@ -244,7 +244,7 @@ export default function AssistantChatPanel({
 
   return (
     <div
-      className={`fixed z-50 flex flex-col bg-white shadow-2xl border border-teal-900/15 overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 ${
+      className={`fixed z-[70] flex flex-col bg-white shadow-2xl border border-teal-900/15 overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-5 ${
         isExpanded
           ? "inset-3 sm:inset-auto sm:bottom-20 sm:right-6 sm:w-[520px] sm:max-w-[calc(100vw-2.5rem)] sm:h-[640px] sm:max-h-[calc(100vh-6.5rem)] rounded-2xl"
           : "inset-x-3 bottom-20 top-16 sm:top-auto sm:bottom-20 sm:right-6 sm:inset-x-auto sm:w-[370px] sm:max-w-[calc(100vw-2.5rem)] sm:h-[520px] sm:max-h-[calc(100vh-6.5rem)] rounded-2xl"

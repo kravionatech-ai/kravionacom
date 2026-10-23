@@ -163,6 +163,7 @@ export default function KravionaAIAssistant() {
     <>
       {/* Real-time Hover & Text Selection Explainer Panel (Typing Animation, Auto Viewport Bounds) */}
       <AssistantTextExplainer
+        disabled={isOpen}
         onActiveChange={(active) => {
           setExpression(active ? "curious" : "idle");
         }}

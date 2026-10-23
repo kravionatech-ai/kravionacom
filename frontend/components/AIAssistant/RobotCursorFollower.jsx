@@ -161,7 +161,7 @@ export default function RobotCursorFollower({
   return (
     <div
       ref={followerRef}
-      className="fixed top-0 left-0 z-50 pointer-events-none select-none will-change-transform"
+      className="fixed top-0 left-0 z-[45] pointer-events-none select-none will-change-transform"
       style={{
         transform: "translate3d(calc(100vw - 120px), calc(100vh - 140px), 0px)",
       }}
