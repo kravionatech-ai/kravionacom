@@ -8,18 +8,18 @@ import RobotHead3D from "./RobotHead3D";
  * Smooth Following Cursor AI Robot Companion.
  * 
  * Features:
- * - Removed from corner: smoothly drifts and trails the user's cursor across the entire website.
- * - Fluid physics: spring-based linear interpolation (LERP) with zero jitter and natural lag.
- * - Cool Effects (matching user reference image):
- *    - Concentric glowing cyan orbital halo ring & pulsing energy dot.
- *    - Aerodynamic 3D banking (tilts and leans into movement velocity).
- *    - Zero-G floating bobbing when stationary.
- *    - Interactive element hover reaction (expands aura, curious expression).
- * - Usability & Safety:
- *    - Offset slightly so the user's cursor tip remains 100% unobstructed for clicking links/buttons.
- *    - Container is pointer-events-none; robot head itself is clickable (opens AI Assistant).
+ * - Completely removed from the website corner: smoothly follows the user's cursor across the entire page.
+ * - Instantly visible on page load with zero offscreen lag.
+ * - Fluid physics: spring-based linear interpolation (LERP: 0.13) for silky-smooth trailing.
+ * - Reference Image Effect:
+ *    - Concentric glowing cyan orbital halo ring & pulsing energy orbit dot.
+ *    - Aerodynamic 3D banking (tilts dynamically based on mouse velocity).
+ *    - Zero-G floating bobbing when cursor is stationary.
+ *    - Interactive element hover reaction (expands cyan aura, looks curious).
+ * - Safe UX:
+ *    - Trailing offset (~26px right, ~22px down) leaves the cursor arrow 100% unblocked to click links/buttons.
+ *    - Wrapper has pointer-events-none; robot head itself is clickable to open AI assistant.
  *    - Smoothly fades out when the chat panel is open.
- *    - Mobile/touch fallback: gracefully parks as a floating badge on touch devices.
  */
 export default function RobotCursorFollower({
   expression = "idle",
@@ -31,60 +31,48 @@ export default function RobotCursorFollower({
   isOpen = false,
 }) {
   const followerRef = useRef(null);
-  const ringRef = useRef(null);
 
   // Position & physics references
-  const targetPosRef = useRef({ x: -200, y: -200 });
-  const currentPosRef = useRef({ x: -200, y: -200 });
-  const prevPosRef = useRef({ x: -200, y: -200 });
+  const targetPosRef = useRef({ x: 300, y: 300 });
+  const currentPosRef = useRef({ x: 300, y: 300 });
+  const prevPosRef = useRef({ x: 300, y: 300 });
   const velocityRef = useRef({ vx: 0, vy: 0 });
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [isHoveredInteractive, setIsHoveredInteractive] = useState(false);
   const [bankingTilt, setBankingTilt] = useState({ rotateX: 0, rotateY: 0, rotateZ: 0 });
 
   const animFrameRef = useRef(null);
-  const idleTimerRef = useRef(null);
 
-  // Detect touch-only mobile devices (fallback to bottom-right corner badge)
+  // Mount & initialize starting position inside viewport
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
-      const isTouch =
-        window.matchMedia("(pointer: coarse)").matches &&
-        !window.matchMedia("(hover: hover)").matches;
-      setIsTouchDevice(isTouch);
+      const initialX = Math.max(80, window.innerWidth - 130);
+      const initialY = Math.max(80, window.innerHeight - 150);
+      targetPosRef.current = { x: initialX, y: initialY };
+      currentPosRef.current = { x: initialX, y: initialY };
+      prevPosRef.current = { x: initialX, y: initialY };
+
+      if (followerRef.current) {
+        followerRef.current.style.transform = `translate3d(${initialX}px, ${initialY}px, 0px)`;
+      }
     }
   }, []);
 
-  // Cursor movement tracking on window
+  // Global mouse & pointer tracking across all pages
   useEffect(() => {
-    if (isTouchDevice) return;
+    if (!mounted) return;
 
     const handlePointerMove = (e) => {
-      const clientX = e.clientX;
-      const clientY = e.clientY;
+      const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX);
+      const clientY = e.clientY ?? (e.touches && e.touches[0]?.clientY);
       if (clientX === undefined || clientY === undefined) return;
 
       targetPosRef.current = { x: clientX, y: clientY };
-
-      // Initialize on first move to prevent flying in from offscreen
-      if (!isVisible) {
-        currentPosRef.current = { x: clientX, y: clientY };
-        prevPosRef.current = { x: clientX, y: clientY };
-        setIsVisible(true);
-      }
     };
 
-    const handleMouseLeave = () => {
-      setIsVisible(false);
-    };
-
-    const handleMouseEnter = () => {
-      setIsVisible(true);
-    };
-
-    // Hover detection over clickable elements across the site
+    // Hover detection over interactive links, buttons, inputs
     const handleMouseOver = (e) => {
       const target = e.target;
       if (!target || !(target instanceof HTMLElement)) return;
@@ -101,24 +89,22 @@ export default function RobotCursorFollower({
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("mousemove", handlePointerMove, { passive: true });
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("touchmove", handlePointerMove, { passive: true });
     document.addEventListener("mouseover", handleMouseOver, { passive: true });
     document.addEventListener("mouseout", handleMouseOut, { passive: true });
 
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("mousemove", handlePointerMove);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseenter", handleMouseEnter);
+      window.removeEventListener("touchmove", handlePointerMove);
       document.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("mouseout", handleMouseOut);
     };
-  }, [isVisible, isTouchDevice]);
+  }, [mounted]);
 
-  // High-performance 60fps/120fps physics simulation loop
+  // High-performance 60fps / 120fps physics simulation loop
   useEffect(() => {
-    if (isTouchDevice) return;
+    if (!mounted) return;
 
     const lerp = (start, end, factor) => start + (end - start) * factor;
 
@@ -127,11 +113,11 @@ export default function RobotCursorFollower({
       const target = targetPosRef.current;
       const prev = prevPosRef.current;
 
-      // Spring-like smooth lag interpolation (factor: 0.12)
-      cur.x = lerp(cur.x, target.x, 0.12);
-      cur.y = lerp(cur.y, target.y, 0.12);
+      // Spring LERP lag interpolation factor
+      cur.x = lerp(cur.x, target.x, 0.13);
+      cur.y = lerp(cur.y, target.y, 0.13);
 
-      // Compute velocity for aerodynamic banking
+      // Compute velocity for aerodynamic tilt
       const vx = cur.x - prev.x;
       const vy = cur.y - prev.y;
       prev.x = cur.x;
@@ -151,9 +137,9 @@ export default function RobotCursorFollower({
 
       setBankingTilt({ rotateX: rotX, rotateY: rotY, rotateZ: rotZ });
 
-      // Trailing offset: positions robot ~24px to the right and ~22px below cursor
-      // This leaves the actual cursor arrow 100% visible and unblocked to click anywhere
-      const renderX = cur.x + 24;
+      // Trailing offset: positions robot ~26px to the right and ~22px below cursor
+      // Leaves cursor pointer arrow 100% visible and unblocked
+      const renderX = cur.x + 26;
       const renderY = cur.y + 22 + bobY;
 
       if (followerRef.current) {
@@ -167,45 +153,26 @@ export default function RobotCursorFollower({
     return () => {
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
-  }, [isTouchDevice]);
+  }, [mounted]);
 
-  // Touch device fallback: docked floating widget in bottom corner
-  if (isTouchDevice) {
-    if (isOpen) return null;
-    return (
-      <div className="fixed bottom-6 right-6 z-50 flex items-end select-none">
-        <RobotHead3D
-          expression={isHoveredInteractive ? "curious" : expression}
-          isSpeaking={isSpeaking}
-          viseme={viseme}
-          speechBubble={speechBubble}
-          overrideGaze={overrideGaze}
-          size="md"
-          onClick={onClick}
-        />
-      </div>
-    );
-  }
-
-  // Hide follower when chat panel is open or cursor hasn't entered viewport
-  if (!isVisible || isOpen) return null;
+  // Hide follower when chat panel is open
+  if (!mounted || isOpen) return null;
 
   return (
     <div
       ref={followerRef}
-      className="fixed top-0 left-0 z-50 pointer-events-none select-none will-change-transform transition-opacity duration-300"
+      className="fixed top-0 left-0 z-50 pointer-events-none select-none will-change-transform"
       style={{
-        transform: "translate3d(-200px, -200px, 0px)",
+        transform: "translate3d(calc(100vw - 120px), calc(100vh - 140px), 0px)",
       }}
-      aria-hidden="true"
+      aria-label="Kraviona AI Assistant Cursor Companion"
     >
       <div className="relative flex items-center justify-center pointer-events-auto">
         {/* Reference Image "Smooth Following Cursor" Concentric Orbital Halo & Glowing Dot */}
         <div
-          ref={ringRef}
           className={`absolute -inset-2.5 rounded-full border pointer-events-none transition-all duration-300 ${
             isHoveredInteractive
-              ? "scale-110 border-[#00F2FE] shadow-[0_0_24px_rgba(0,242,254,0.65)] bg-[#00F2FE]/5"
+              ? "scale-110 border-[#00F2FE] shadow-[0_0_24px_rgba(0,242,254,0.65)] bg-[#00F2FE]/8"
               : "border-[#00F2FE]/45 shadow-[0_0_16px_rgba(0,242,254,0.35)]"
           }`}
         >
