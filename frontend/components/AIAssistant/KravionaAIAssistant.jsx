@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import RobotHead3D from "./RobotHead3D";
+import RobotCursorFollower from "./RobotCursorFollower";
 import AssistantChatPanel from "./AssistantChatPanel";
 import { speechController } from "./AssistantSpeechController";
 import {
@@ -390,28 +390,22 @@ export default function KravionaAIAssistant() {
         </div>
       )}
 
-      {/* Floating 3D Robot Head Dock (Bottom-Right, 100% Code-Rendered 3D Head) */}
-      <div className="fixed bottom-6 right-6 z-50 flex items-end select-none">
-        {!isOpen && (
-          <div className="flex flex-col items-end">
-            <RobotHead3D
-              expression={expression}
-              isSpeaking={isSpeaking}
-              viseme={viseme}
-              speechBubble={speechBubble}
-              overrideGaze={overrideGaze}
-              size="md"
-              onClick={() => {
-                setHasInteracted(true);
-                setIsOpen(true);
-                if (autoSpeak && voiceEnabled && !isSpeaking && !isMuted) {
-                  speakText("Hi! I'm your Kraviona AI Voice Guide. How can I assist you today?");
-                }
-              }}
-            />
-          </div>
-        )}
-      </div>
+      {/* Smooth Following Cursor Robot Assistant Companion (Removed from Corner) */}
+      <RobotCursorFollower
+        expression={expression}
+        isSpeaking={isSpeaking}
+        viseme={viseme}
+        speechBubble={speechBubble}
+        overrideGaze={overrideGaze}
+        isOpen={isOpen}
+        onClick={() => {
+          setHasInteracted(true);
+          setIsOpen(true);
+          if (autoSpeak && voiceEnabled && !isSpeaking && !isMuted) {
+            speakText("Hi! I'm your Kraviona AI Voice Guide. How can I assist you today?");
+          }
+        }}
+      />
 
       {/* Expanded Interactive 3D AI Voice Assistant Window */}
       <AssistantChatPanel
