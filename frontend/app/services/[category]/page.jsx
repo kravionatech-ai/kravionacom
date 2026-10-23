@@ -36,6 +36,7 @@ import {
   SERVICE_PAGES,
   SERVICE_CATEGORY_HUBS,
   getRelatedServicesInCategory,
+  getCategoryHubSlug,
 } from "../serviceData.js";
 import { API_URL } from "@/utils/api";
 
@@ -253,7 +254,7 @@ export async function generateMetadata({ params }) {
   if (hub) {
     const pageUrl = canonicalUrl(`/services/${slug}`);
     return {
-      title: hub.metaTitle,
+      title: { absolute: hub.metaTitle },
       description: hub.metaDescription,
       alternates: { canonical: pageUrl },
       openGraph: {
@@ -290,7 +291,7 @@ export async function generateMetadata({ params }) {
     .slice(0, 160);
 
   return {
-    title: service.seo?.metaTitle || `${service.name} Services in Delhi NCR`,
+    title: { absolute: service.seo?.metaTitle || `${service.name} Services in Delhi NCR | Kraviona` },
     description: metaDescription,
     keywords: service.seo?.keywords?.length
       ? service.seo.keywords
@@ -305,8 +306,8 @@ export async function generateMetadata({ params }) {
     creator: service.expert.name,
     alternates: { canonical: pageUrl },
     openGraph: {
-      title: `${service.name} Services | Kraviona`,
-      description: service.description,
+      title: service.seo?.metaTitle || `${service.name} Services | Kraviona`,
+      description: metaDescription,
       url: pageUrl,
       type: "website",
       locale: "en_IN",
@@ -323,8 +324,8 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       site: "@KravionaTech",
       creator: "@KravionaTech",
-      title: `${service.name} Services | Kraviona`,
-      description: service.description,
+      title: service.seo?.metaTitle || `${service.name} Services | Kraviona`,
+      description: metaDescription,
       images: [service.seo?.ogImage || "/og-web-development.jpg"],
     },
     robots: service.seo?.noIndex
@@ -440,7 +441,7 @@ export default async function ServicesDetails({ params }) {
                         key={i}
                         className="inline-block text-[10px] font-semibold bg-primary-tint text-primary rounded-full px-2 py-0.5"
                       >
-                        {outcome}
+                        {typeof outcome === "string" ? outcome : outcome.title}
                       </span>
                     ))}
                   </div>
@@ -537,11 +538,19 @@ export default async function ServicesDetails({ params }) {
     knowsAbout: expert.knowsAbout,
   };
 
-  const breadcrumbJsonLd = buildBreadcrumbSchema([
+  const hubSlug = getCategoryHubSlug(service.category);
+  const breadcrumbItems = [
     { name: "Home", url: SITE_URL },
     { name: "Services", url: canonicalUrl("/services") },
-    { name: service.name, url: pageUrl },
-  ]);
+  ];
+  if (hubSlug) {
+    breadcrumbItems.push({
+      name: service.category,
+      url: canonicalUrl(`/services/${hubSlug}`),
+    });
+  }
+  breadcrumbItems.push({ name: service.name, url: pageUrl });
+  const breadcrumbJsonLd = buildBreadcrumbSchema(breadcrumbItems);
   const faqJsonLd = buildFaqSchema(serviceFaqs);
 
   return (
@@ -556,6 +565,21 @@ export default async function ServicesDetails({ params }) {
         <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#0f5960_1px,transparent_1px)] [background-size:28px_28px]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
+            {/* Breadcrumb Navigation */}
+            <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-2 text-xs font-semibold text-brand-muted">
+              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+              <span>/</span>
+              <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
+              {hubSlug && (
+                <>
+                  <span>/</span>
+                  <Link href={`/services/${hubSlug}`} className="hover:text-primary transition-colors">{service.category}</Link>
+                </>
+              )}
+              <span>/</span>
+              <span className="text-dark font-bold">{service.name}</span>
+            </nav>
+
             <p className="mb-5 text-xs font-black uppercase tracking-[0.22em] text-[#E8622A]">
               {service.hero.eyebrow}
             </p>
@@ -944,6 +968,15 @@ export default async function ServicesDetails({ params }) {
                 </Link>
               ))}
             </div>
+            {hubSlug && (
+              <p className="mt-6 text-sm text-brand-muted">
+                Explore all {service.category} services on our{" "}
+                <Link href={`/services/${hubSlug}`} className="font-bold text-primary hover:underline">
+                  {service.category} Hub
+                </Link>
+                .
+              </p>
+            )}
           </div>
         </section>
       )}

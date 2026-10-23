@@ -4,7 +4,7 @@ import WhyChooseUs from "@/components/Services/WhyChooseUs";
 import ContactFormDetails from "@/components/Contact/ContactFormDetails";
 import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
-import { SERVICE_LINKS } from "./serviceData.js";
+import { SERVICE_LINKS, SERVICE_CATEGORY_HUBS } from "./serviceData.js";
 import { defaultRobots } from "@/app/seoConfig.js";
 import { breadcrumbSchema } from "@/lib/schema";
 import { API_URL } from "@/utils/api";
@@ -52,7 +52,7 @@ const servicesBreadcrumbSchema = breadcrumbSchema([
 ]);
 
 export const metadata = {
-  title: "Web Development & Technical SEO Services | Kraviona",
+  title: { absolute: "Web Development & Technical SEO Services | Kraviona" },
   description:
     "Explore Kraviona services for MERN stack development, Next.js websites, technical SEO, AI automation, UI/UX design, performance, APIs, and SaaS.",
   keywords: [
@@ -111,6 +111,41 @@ const MainServices = async () => {
     <>
       <JsonLd data={[servicesPageSchema, servicesBreadcrumbSchema]} />
       <ServicesBanner />
+
+      {/* Service Category Hubs */}
+      <section className="py-12 bg-[#F5F7F8] border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <p className="text-xs font-black uppercase tracking-widest text-[#E8622A] mb-1">
+              Core Technical Domains
+            </p>
+            <h2 className="text-2xl font-black text-dark">
+              Explore Our Service Hubs
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {Object.values(SERVICE_CATEGORY_HUBS).map((hub) => (
+              <Link
+                key={hub.slug}
+                href={`/services/${hub.slug}`}
+                className="group flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:border-[#E8622A]/40 hover:shadow-brand-sm"
+              >
+                <div>
+                  <h3 className="font-extrabold text-[#1A2E33] group-hover:text-[#E8622A] transition-colors text-base mb-2">
+                    {hub.categoryLabel}
+                  </h3>
+                  <p className="text-xs text-brand-muted line-clamp-3 leading-relaxed">
+                    {hub.metaDescription}
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-primary group-hover:text-[#E8622A]">
+                  View Hub &rarr;
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Service Sub-Pages Navigation */}
       <section className="py-10 bg-white border-b border-gray-100">
