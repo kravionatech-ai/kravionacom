@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getFallbackChatResponse } from "@/components/Chatbot/fallbackKnowledge";
 
-export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const KRAVIONA_SYSTEM_PROMPT = `You are the official AI Assistant for Kraviona Tech Solutions (https://www.kraviona.com), a premier digital engineering and technical SEO agency based in Noida, Delhi NCR, India.
 
@@ -21,6 +21,14 @@ CRITICAL INSTRUCTIONS:
    - Contact Form: /contact
 5. Accuracy: Never invent pricing packages, fake guarantees, or imaginary team members. If you do not know an answer, politely recommend reaching the team at +91 96085 53167 or /contact.
 6. Brevity: Keep conversational answers concise (2 to 4 sentences or bullet points) suitable for both reading and voice playback.`;
+
+export async function GET() {
+  return NextResponse.json({
+    success: true,
+    status: "ok",
+    service: "kraviona-ai-assistant",
+  });
+}
 
 export async function POST(request) {
   try {
