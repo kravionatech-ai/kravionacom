@@ -23,7 +23,7 @@ import GAPageTracker from "@/components/GAPageTracker";
 import { JsonLd } from "@/components/JsonLd";
 import ThirdPartyScripts from "@/components/ThirdPartyScripts";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import Chatbot from "@/components/Chatbot/Chatbot";
+import KravionaAIAssistant from "@/components/AIAssistant/KravionaAIAssistant";
 import {
   localBusinessSchema,
   organizationSchema,
@@ -227,7 +227,7 @@ export default function RootLayout({ children }) {
         <Footer />
 
         <WhatsAppFloat />
-        <Chatbot />
+        <KravionaAIAssistant />
         <ThirdPartyScripts />
 
       </body>
