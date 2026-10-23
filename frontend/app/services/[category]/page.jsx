@@ -482,6 +482,8 @@ export default async function ServicesDetails({ params }) {
           </div>
         </section>
 
+        <DeliveryLocationsSection categoryName={hub.categoryLabel} />
+
         {/* CTA Strip */}
         <section className="py-14 px-4 sm:px-6 lg:px-8 bg-primary">
           <div className="mx-auto max-w-4xl text-center">
@@ -930,6 +932,8 @@ export default async function ServicesDetails({ params }) {
         </div>
       </section>
 
+      <DeliveryLocationsSection serviceName={service.name} categoryName={service.category} />
+
       <section className="bg-white px-4 py-16 sm:px-6 lg:px-8">
         <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#1A2E33] to-[#2A4A52] px-6 py-14 text-center text-white shadow-xl sm:px-10">
           <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#F28C5E_1px,transparent_1px)] [background-size:24px_24px]" />
@@ -1013,6 +1017,157 @@ export default async function ServicesDetails({ params }) {
     </>
   );
 }
+
+
+const DeliveryLocationsSection = ({ serviceName, categoryName }) => {
+  const displayName = serviceName || categoryName || "Engineering";
+  return (
+    <section className="py-16 bg-white border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 max-w-3xl">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#E8622A] mb-3">
+            Geographic Reach &amp; Collaboration
+          </p>
+          <h2 className="text-3xl font-extrabold text-[#1A2E33] leading-tight">
+            Delivering {displayName} Across Delhi NCR, Pan-India &amp; Global Tech Hubs
+          </h2>
+          <p className="mt-4 text-brand-muted text-base leading-relaxed">
+            Whether you require on-site architecture workshops in Delhi NCR or dedicated remote engineering sprints for teams in Bengaluru, Mumbai, or international markets, Kraviona delivers with founder-led transparency and measurable velocity.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* 1. Local Presence: Delhi NCR */}
+          <div className="rounded-2xl border border-gray-200 bg-[#F5F7F8] p-7 transition-all duration-200 hover:border-[#E8622A]/40 hover:bg-white hover:shadow-brand-sm">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8622A]/10 text-[#E8622A]">
+              <MapPin className="h-6 w-6" />
+            </div>
+            <div className="mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E8622A]">
+              <span>Physical Core</span> • <span>On-Site Available</span>
+            </div>
+            <h3 className="text-xl font-extrabold text-[#1A2E33] mb-3">
+              Delhi NCR &amp; Northern India
+            </h3>
+            <p className="text-sm leading-relaxed text-gray-600 mb-5">
+              Headquartered in East Delhi and operating across Noida, Gurugram, Greater Noida, and Ghaziabad. We offer on-site sprint kickoffs, stakeholder workshops, and in-person architecture consultations.
+            </p>
+            <ul className="space-y-2.5 text-xs font-semibold text-[#1A2E33]">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#E8622A] flex-shrink-0" />
+                <span>In-person technical discovery &amp; scope mapping</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#E8622A] flex-shrink-0" />
+                <span>Hybrid weekly coordination &amp; sprint demos</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#E8622A] flex-shrink-0" />
+                <span>Direct access to founder-led engineering lead</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* 2. National Reach: Major Indian Metros */}
+          <div className="rounded-2xl border border-gray-200 bg-[#F5F7F8] p-7 transition-all duration-200 hover:border-[#E8622A]/40 hover:bg-white hover:shadow-brand-sm">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#2A4A52]/10 text-[#2A4A52]">
+              <Globe className="h-6 w-6" />
+            </div>
+            <div className="mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2A4A52]">
+              <span>Pan-India</span> • <span>Remote Agile Sprints</span>
+            </div>
+            <h3 className="text-xl font-extrabold text-[#1A2E33] mb-3">
+              Bengaluru, Mumbai, Pune &amp; Metros
+            </h3>
+            <p className="text-sm leading-relaxed text-gray-600 mb-5">
+              Partnering with funded startups and enterprise teams in Bengaluru, Mumbai, Hyderabad, Pune, Chennai, and Kolkata via high-velocity async agile workflows.
+            </p>
+            <ul className="space-y-2.5 text-xs font-semibold text-[#1A2E33]">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#2A4A52] flex-shrink-0" />
+                <span>Daily Slack, GitHub &amp; Loom milestone updates</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#2A4A52] flex-shrink-0" />
+                <span>Bi-weekly sprint demos on live staging servers</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#2A4A52] flex-shrink-0" />
+                <span>Predictable sprint velocity with no surprise delays</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* 3. Global Reach: International Markets */}
+          <div className="rounded-2xl border border-gray-200 bg-[#F5F7F8] p-7 transition-all duration-200 hover:border-[#E8622A]/40 hover:bg-white hover:shadow-brand-sm">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#1A2E33]/10 text-[#1A2E33]">
+              <Rocket className="h-6 w-6" />
+            </div>
+            <div className="mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1A2E33]">
+              <span>International</span> • <span>Timezone Aligned</span>
+            </div>
+            <h3 className="text-xl font-extrabold text-[#1A2E33] mb-3">
+              USA, UK, UAE &amp; Global Markets
+            </h3>
+            <p className="text-sm leading-relaxed text-gray-600 mb-5">
+              Engineering reliable digital software for clients across North America, Europe, the Middle East, and Australia with tailored timezone overlap and enterprise agreements.
+            </p>
+            <ul className="space-y-2.5 text-xs font-semibold text-[#1A2E33]">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#1A2E33] flex-shrink-0" />
+                <span>Guaranteed overlap hours for live standups</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#1A2E33] flex-shrink-0" />
+                <span>Comprehensive OpenAPI specs &amp; test coverage</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#1A2E33] flex-shrink-0" />
+                <span>Clean NDA compliance &amp; full IP code transfer</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Cross-Link Badges Strip */}
+        <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-6 shadow-brand-sm flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8622A]/10 text-[#E8622A] flex-shrink-0">
+              <BadgeCheck className="h-5 w-5" />
+            </span>
+            <div>
+              <h4 className="text-sm font-extrabold text-[#1A2E33]">
+                Explore Kraviona Proof &amp; Pricing
+              </h4>
+              <p className="text-xs text-gray-500">
+                Review real engineering case studies and transparent investment models.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/case-studies"
+              className="rounded-xl border border-gray-200 bg-[#F5F7F8] px-4 py-2.5 text-xs font-bold text-[#1A2E33] hover:border-[#E8622A] hover:text-[#E8622A] transition-all"
+            >
+              Case Studies &rarr;
+            </Link>
+            <Link
+              href="/pricing"
+              className="rounded-xl border border-gray-200 bg-[#F5F7F8] px-4 py-2.5 text-xs font-bold text-[#1A2E33] hover:border-[#E8622A] hover:text-[#E8622A] transition-all"
+            >
+              View Pricing &rarr;
+            </Link>
+            <Link
+              href="/contact"
+              className="rounded-xl bg-[#E8622A] px-4 py-2.5 text-xs font-bold text-white shadow-brand-sm hover:brightness-95 transition-all"
+            >
+              Book Discovery Call &rarr;
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const ContactLine = ({ icon, label, value }) => (
   <div className="flex items-start gap-3">

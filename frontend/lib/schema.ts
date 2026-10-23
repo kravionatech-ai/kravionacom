@@ -104,6 +104,14 @@ export const localBusinessSchema = {
       closes: "19:00",
     },
   ],
+  areaServed: [
+    "Delhi NCR",
+    "Delhi",
+    "Noida",
+    "Gurugram",
+    "Greater Noida",
+    "India",
+  ],
   hasMap: "https://maps.google.com/?q=East+Delhi+110092",
 };
 
@@ -166,15 +174,53 @@ export function serviceSchema(params: {
       "@id": "https://www.kraviona.com/#organization",
     },
     serviceType: params.serviceType || params.name,
-    areaServed: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        latitude: 28.6139,
-        longitude: 77.209,
+    areaServed: [
+      {
+        "@type": "AdministrativeArea",
+        name: "Delhi NCR",
+        description: "Delhi, Noida, Gurugram, Greater Noida, and Ghaziabad",
       },
-      geoRadius: 100000,
-    },
+      {
+        "@type": "Country",
+        name: "India",
+      },
+      {
+        "@type": "City",
+        name: "Bengaluru",
+      },
+      {
+        "@type": "City",
+        name: "Mumbai",
+      },
+      {
+        "@type": "City",
+        name: "Hyderabad",
+      },
+      {
+        "@type": "City",
+        name: "Pune",
+      },
+      {
+        "@type": "City",
+        name: "Chennai",
+      },
+      {
+        "@type": "Country",
+        name: "United States",
+      },
+      {
+        "@type": "Country",
+        name: "United Kingdom",
+      },
+      {
+        "@type": "Country",
+        name: "United Arab Emirates",
+      },
+      {
+        "@type": "Country",
+        name: "Australia",
+      },
+    ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: params.name,

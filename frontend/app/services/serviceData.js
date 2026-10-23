@@ -343,7 +343,7 @@ export const SERVICE_PAGES = {
     seo: {
       metaTitle: "Full Stack Development Services in Delhi NCR | Kraviona",
       metaDescription:
-        "End-to-end full stack development for startups and enterprises. We deliver robust frontend UI, secure backend logic, database architecture, and cloud deployment.",
+        "Full stack development services for startups and modern businesses. We build responsive frontends, secure backends, database architecture, and cloud systems.",
       keywords: [
         "Full Stack Development Services",
         "Full Stack Developers Delhi NCR",
@@ -469,7 +469,7 @@ export const SERVICE_PAGES = {
     seo: {
       metaTitle: "React.js Development Services in Delhi NCR | Kraviona",
       metaDescription:
-        "Build fast, component-driven web interfaces with our expert React.js and Next.js development services. Interactive SPAs, dynamic dashboards, and clean state flows.",
+        "Build fast, component-driven interfaces with expert React.js and Next.js development services. Interactive SPAs, dynamic dashboards, and clean state flows.",
       keywords: [
         "React.js Development Services",
         "React JS Developers Delhi NCR",
@@ -1099,7 +1099,7 @@ export const SERVICE_PAGES = {
     seo: {
       metaTitle: "SaaS Application Development Services | Kraviona",
       metaDescription:
-        "Build scalable, cloud-native SaaS platforms with multi-tenant architecture, Stripe billing, role-based dashboards, and automated onboarding. Launch your MVP fast.",
+        "Scalable cloud-native SaaS development with multi-tenant architecture, Stripe billing, role dashboards, and automated onboarding. Launch your MVP fast.",
       keywords: [
         "SaaS Development Services",
         "SaaS Development Company Delhi",
@@ -1849,7 +1849,7 @@ export const SERVICE_PAGES = {
     seo: {
       metaTitle: "Social Media Marketing Services in Delhi | Kraviona",
       metaDescription:
-        "Build brand authority and capture qualified leads across LinkedIn, Instagram, and Facebook with creative content strategies, community growth, and paid campaigns.",
+        "Capture qualified leads and build brand authority across LinkedIn, Instagram, and Facebook with creative content strategies, community growth, and paid ads.",
       keywords: [
         "Social Media Marketing Services",
         "SMM Agency Delhi NCR",
@@ -1973,7 +1973,7 @@ export const SERVICE_PAGES = {
     seo: {
       metaTitle: "Email Marketing & Automation Services | Kraviona",
       metaDescription:
-        "Increase customer lifetime value and retention with targeted email nurture sequences, automated onboarding drips, promotional broadcasts, and clean list hygiene.",
+        "Increase customer retention and lifetime value with targeted email nurture sequences, automated onboarding drips, promotional broadcasts, and list hygiene.",
       keywords: [
         "Email Marketing Services",
         "Email Automation Agency Delhi",
@@ -2346,7 +2346,7 @@ export const SERVICE_PAGES = {
     seo: {
       metaTitle: "Marketplace Account Management Services | Kraviona",
       metaDescription:
-        "Hands-on account management for Amazon, Flipkart, and Meesho sellers. Maintain account health, resolve listing suspensions, optimize orders, and grow daily sales.",
+        "Hands-on account management for Amazon, Flipkart, and Meesho sellers. Maintain account health, resolve listing suspensions, and scale daily marketplace sales.",
       keywords: [
         "Marketplace Account Management",
         "Amazon Account Management Delhi",
@@ -2961,7 +2961,7 @@ export const SERVICE_PAGES = {
     seo: {
       metaTitle: "UI/UX Design Services in Delhi NCR | Kraviona",
       metaDescription:
-        "User-centric UI/UX design services that convert visitors into customers. Intuitive wireframes, interactive Figma prototypes, design systems, and responsive layouts.",
+        "User-centric UI/UX design services that convert visitors into customers. Intuitive wireframes, interactive Figma prototypes, design systems, and clean UI.",
       keywords: [
         "UI UX Design Services",
         "UI UX Agency Delhi NCR",
@@ -3302,7 +3302,7 @@ export const SERVICE_CATEGORY_HUBS = {
     h1: "Marketplace & Seller Services — Account Management, Cataloging & Seller Growth",
     metaTitle: "Marketplace Seller Services & Growth | Kraviona",
     metaDescription:
-      "End-to-end marketplace support for online sellers: account management, cataloging, advertising, accounting, and practical seller training for sustainable growth.",
+      "End-to-end marketplace support for sellers: account management, cataloging, advertising, accounting, and practical seller training for sustainable growth.",
     intro: [
       "Selling on a marketplace platform — Amazon, Flipkart, Meesho, or any other — involves a level of operational complexity that most sellers underestimate until they're inside it. Catalog errors surface months after listing. Account health metrics shift without warning. Advertising spend goes up while return on ad spend quietly drops. Kraviona's marketplace services are built to catch and fix these problems before they compound.",
       "Our work spans the full seller operation: initial account setup and health checks, product catalog creation and optimisation (titles, bullet points, images, A+ content, variations), advertising campaign structure and bid management, order and inventory process reviews, and the bookkeeping and reconciliation that gives sellers a clear picture of actual profitability after fees and returns.",
