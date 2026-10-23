@@ -371,47 +371,21 @@ export default function RobotHead3D({
     <div
       ref={containerRef}
       onClick={onClick}
-      className={`relative cursor-pointer select-none transition-transform duration-200 hover:scale-105 active:scale-95 ${sizeClasses}`}
+      className={`relative cursor-pointer select-none transition-transform duration-200 hover:scale-105 active:scale-95 bg-transparent border-0 shadow-none ${sizeClasses}`}
       style={{ perspective: "600px" }}
       role="button"
       tabIndex={0}
-      aria-label="Kraviona AI Voice Assistant"
+      aria-label="Kraviona AI Assistant"
     >
-      {/* First Visit Greeting Tooltip */}
-      {showGreeting && !speechBubble && (
-        <div
-          className="absolute -top-10 -left-28 sm:-left-32 w-36 sm:w-40 p-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-md text-[10px] font-semibold text-[#0f5960] pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-1 flex items-center justify-between"
-        >
-          <span>Hi! I'm your AI Guide. 👋</span>
-          <div className="absolute -bottom-1 right-4 w-2 h-2 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
-        </div>
-      )}
-
-      {/* Dynamic Contextual Guidance Speech Bubble */}
-      {speechBubble && (
-        <div
-          className="absolute -top-14 -left-32 sm:-left-40 w-44 sm:w-48 p-2 rounded-xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-lg text-[10px] text-slate-800 pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-2"
-        >
-          <div className="flex items-center gap-1 mb-0.5 text-[8.5px] font-bold uppercase tracking-wider text-[#0f5960]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#00F2FE] animate-pulse" />
-            Kraviona Voice
-          </div>
-          <p className="line-clamp-2 leading-snug font-medium text-slate-700 text-[10px]">
-            {speechBubble}
-          </p>
-          <div className="absolute -bottom-1.5 right-5 w-2.5 h-2.5 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
-        </div>
-      )}
-
-      {/* Small Elegant Status Indicator Dot */}
-      <span className="absolute -top-0.5 -right-0.5 z-20 flex h-2.5 w-2.5">
+      {/* Small Subtle Cyan Accent Status Indicator Dot */}
+      <span className="absolute -top-0.5 -right-0.5 z-20 flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-75" />
-        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00F2FE] border-1.5 border-white shadow-xs" />
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00F2FE] shadow-[0_0_6px_#00F2FE]" />
       </span>
 
       {/* 3D Floating Bobbing Head Assembly */}
       <div
-        className="relative w-full h-full will-change-transform"
+        className="relative w-full h-full will-change-transform bg-transparent"
         style={{
           transform: `translate3d(${renderOffset.x}px, ${renderOffset.y}px, 0px) rotateY(${renderTilt.rotateY}deg) rotateX(${renderTilt.rotateX}deg) rotateZ(${renderTilt.rotateZ}deg)`,
           transformStyle: "preserve-3d",

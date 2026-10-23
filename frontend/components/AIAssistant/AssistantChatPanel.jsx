@@ -14,16 +14,12 @@ import {
   Maximize2,
   Minimize2,
   CheckCircle2,
-  Volume2,
   BookOpen,
   FileText,
   HelpCircle,
   Edit3,
-  Mic,
-  MicOff,
   Briefcase,
 } from "lucide-react";
-import AssistantVoiceControls from "./AssistantVoiceControls";
 
 export default function AssistantChatPanel({
   isOpen = false,
@@ -34,32 +30,13 @@ export default function AssistantChatPanel({
   onClearChat = () => {},
   onReadPage = () => {},
   onSummarizePage = () => {},
-  onSpeakMessage = () => {},
-  // Voice & Auto Speak controller props
-  voiceEnabled = true,
-  onToggleVoice = () => {},
-  autoSpeak = true,
-  onToggleAutoSpeak = () => {},
-  isSpeaking = false,
-  isPaused = false,
-  isMuted = false,
-  onStop = () => {},
-  onPause = () => {},
-  onResume = () => {},
-  onToggleMute = () => {},
-  speed = 1.0,
-  onChangeSpeed = () => {},
-  voices = [],
-  selectedVoiceURI = null,
-  onSelectVoice = () => {},
   activeFormField = null,
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [isListeningMic, setIsListeningMic] = useState(false);
+
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
-  const recognitionRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -71,48 +48,6 @@ export default function AssistantChatPanel({
       setTimeout(() => inputRef.current?.focus(), 200);
     }
   }, [isOpen, messages, isLoading]);
-
-  // Voice Input Speech Recognition
-  const handleMicToggle = () => {
-    if (typeof window === "undefined") return;
-
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      alert("Voice speech recognition is not supported in this browser. Please type your message.");
-      return;
-    }
-
-    if (isListeningMic) {
-      recognitionRef.current?.stop();
-      setIsListeningMic(false);
-      return;
-    }
-
-    try {
-      const recognition = new SpeechRecognition();
-      recognition.lang = "en-IN";
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.onstart = () => setIsListeningMic(true);
-      recognition.onresult = (event) => {
-        const transcript = event.results?.[0]?.[0]?.transcript;
-        if (transcript) {
-          setInputValue(transcript);
-          onSendMessage(transcript);
-        }
-      };
-      recognition.onerror = () => setIsListeningMic(false);
-      recognition.onend = () => setIsListeningMic(false);
-
-      recognitionRef.current = recognition;
-      recognition.start();
-    } catch {
-      setIsListeningMic(false);
-    }
-  };
 
   const handleSend = () => {
     const text = inputValue.trim();
@@ -244,8 +179,8 @@ export default function AssistantChatPanel({
           <div>
             <div className="flex items-center gap-1.5">
               <h3 className="text-xs font-bold tracking-tight text-white">Kraviona AI Assistant</h3>
-              <span className="text-[8px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-1 py-0.2 rounded-full">
-                {autoSpeak ? "Auto Read Aloud ON" : "Online"}
+              <span className="text-[8px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-1.5 py-0.5 rounded-full">
+                Online
               </span>
             </div>
             <p className="text-[9px] text-teal-100/75 leading-none">Founder-Led Engineering Guide</p>
@@ -287,7 +222,7 @@ export default function AssistantChatPanel({
           className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-teal-200/80 hover:bg-[#0f5960]/10 hover:text-[#0f5960] transition-all shadow-2xs whitespace-nowrap"
         >
           <BookOpen className="w-3 h-3 text-[#0f5960]" />
-          <span>Read This Page</span>
+          <span>Explain This Page</span>
         </button>
 
         <button
@@ -367,20 +302,8 @@ export default function AssistantChatPanel({
                 </div>
               )}
 
-              {/* Timestamp & Re-Listen Audio Button */}
-              <div className="mt-1.5 flex items-center justify-between text-[8.5px] text-slate-400 font-medium">
-                {msg.sender === "bot" ? (
-                  <button
-                    onClick={() => onSpeakMessage(msg.text)}
-                    className="inline-flex items-center gap-1 text-[#0f5960] hover:text-[#d85e3d] transition-colors"
-                    title="Read this response aloud"
-                  >
-                    <Volume2 className="w-3 h-3" />
-                    <span>Listen</span>
-                  </button>
-                ) : (
-                  <span />
-                )}
+              {/* Timestamp */}
+              <div className="mt-1 flex items-center justify-end text-[8.5px] text-slate-400 font-medium">
                 <span>{msg.timestamp}</span>
               </div>
             </div>
@@ -419,27 +342,7 @@ export default function AssistantChatPanel({
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Embedded 3D Robot Female Voice & Auto Speak Controls Bar */}
-      <AssistantVoiceControls
-        voiceEnabled={voiceEnabled}
-        onToggleVoice={onToggleVoice}
-        autoSpeak={autoSpeak}
-        onToggleAutoSpeak={onToggleAutoSpeak}
-        isSpeaking={isSpeaking}
-        isPaused={isPaused}
-        isMuted={isMuted}
-        onStop={onStop}
-        onPause={onPause}
-        onResume={onResume}
-        onToggleMute={onToggleMute}
-        speed={speed}
-        onChangeSpeed={onChangeSpeed}
-        voices={voices}
-        selectedVoiceURI={selectedVoiceURI}
-        onSelectVoice={onSelectVoice}
-      />
-
-      {/* User Input Bar with Send and Microphone input */}
+      {/* Text-Based User Input Bar */}
       <div className="p-2.5 bg-white border-t border-slate-200/90">
         <div className="relative flex items-center">
           <input
@@ -448,26 +351,11 @@ export default function AssistantChatPanel({
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={isListeningMic ? "Listening... Speak now!" : "Ask about web dev, SEO, forms, or summarize..."}
+            placeholder="Ask about web dev, technical SEO, services, or pricing..."
             maxLength={500}
             disabled={isLoading}
-            className="w-full pl-3 pr-16 py-2 text-xs text-slate-900 placeholder:text-slate-400 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0f5960]/30 focus:border-[#0f5960] transition-all disabled:opacity-60"
+            className="w-full pl-3 pr-10 py-2 text-xs text-slate-900 placeholder:text-slate-400 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0f5960]/30 focus:border-[#0f5960] transition-all disabled:opacity-60"
           />
-
-          {/* Voice Mic Input Button */}
-          <button
-            onClick={handleMicToggle}
-            type="button"
-            title={isListeningMic ? "Stop voice listening" : "Speak with Microphone"}
-            className={`absolute right-8 p-1.5 rounded-lg transition-all ${
-              isListeningMic
-                ? "bg-red-500 text-white animate-pulse"
-                : "text-slate-400 hover:text-[#0f5960] hover:bg-slate-200/60"
-            }`}
-            aria-label="Toggle voice microphone input"
-          >
-            {isListeningMic ? <Mic className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
-          </button>
 
           {/* Send Button */}
           <button

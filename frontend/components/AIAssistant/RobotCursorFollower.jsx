@@ -167,25 +167,10 @@ export default function RobotCursorFollower({
       }}
       aria-label="Kraviona AI Assistant Cursor Companion"
     >
-      <div className="relative flex items-center justify-center pointer-events-auto">
-        {/* Reference Image "Smooth Following Cursor" Concentric Orbital Halo & Glowing Dot */}
+      <div className="relative flex items-center justify-center pointer-events-auto bg-transparent border-0 shadow-none">
+        {/* 3D Aerodynamic Tilting Robot Head (Transparent, zero background/backdrop glow) */}
         <div
-          className={`absolute -inset-2.5 rounded-full border pointer-events-none transition-all duration-300 ${
-            isHoveredInteractive
-              ? "scale-110 border-[#00F2FE] shadow-[0_0_24px_rgba(0,242,254,0.65)] bg-[#00F2FE]/8"
-              : "border-[#00F2FE]/45 shadow-[0_0_16px_rgba(0,242,254,0.35)]"
-          }`}
-        >
-          {/* Glowing Energy Orbit Dot (matches reference screenshot circle with dot) */}
-          <span className="absolute -top-1 left-1/2 -translate-x-1/2 flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00F2FE] shadow-[0_0_8px_#00F2FE]" />
-          </span>
-        </div>
-
-        {/* 3D Aerodynamic Tilting Robot Head */}
-        <div
-          className="transition-transform duration-75 ease-out"
+          className="transition-transform duration-75 ease-out bg-transparent"
           style={{
             transform: `rotateY(${bankingTilt.rotateY}deg) rotateX(${bankingTilt.rotateX}deg) rotateZ(${bankingTilt.rotateZ}deg)`,
             transformStyle: "preserve-3d",

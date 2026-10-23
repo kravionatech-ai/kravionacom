@@ -161,58 +161,10 @@ class AssistantSpeechController {
   }
 
   async speak(text, { onStart, onEnd, onViseme } = {}) {
+    // Audio completely disabled per specification - text-only assistant
     this.stop();
-
-    const clean = String(text || "")
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Clean markdown links
-      .replace(/[*_#`]/g, "") // Clean markdown formatting
-      .trim();
-
-    if (!clean || this.isMuted) return;
-
-    // Check if we should try server neural TTS first
-    try {
-      const res = await fetch("/api/assistant/tts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: clean, speed: this.speed }),
-      });
-
-      if (res.ok && res.headers.get("content-type")?.includes("audio/")) {
-        const blob = await res.blob();
-        const audioUrl = URL.createObjectURL(blob);
-        const audio = new Audio(audioUrl);
-        audio.volume = 1.0;
-        this.currentAudio = audio;
-        audio.playbackRate = this.speed;
-
-        this.isSpeaking = true;
-        this.isPaused = false;
-        this.notify();
-        this.startVisemeLoop(onViseme);
-        if (onStart) onStart();
-
-        audio.onended = () => {
-          this.isSpeaking = false;
-          this.isPaused = false;
-          this.stopVisemeLoop(onViseme);
-          this.notify();
-          if (onEnd) onEnd();
-          URL.revokeObjectURL(audioUrl);
-        };
-
-        audio.onerror = () => {
-          this.fallbackToBrowserSpeech(clean, { onStart, onEnd, onViseme });
-        };
-
-        await audio.play();
-        return;
-      }
-    } catch {
-      // Server neural failed or not configured, proceed to client synthesis
-    }
-
-    this.fallbackToBrowserSpeech(clean, { onStart, onEnd, onViseme });
+    if (onEnd) onEnd();
+    return;
   }
 
   fallbackToBrowserSpeech(text, { onStart, onEnd, onViseme } = {}) {

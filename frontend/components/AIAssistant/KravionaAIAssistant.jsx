@@ -4,22 +4,20 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import RobotCursorFollower from "./RobotCursorFollower";
 import AssistantChatPanel from "./AssistantChatPanel";
-import { speechController } from "./AssistantSpeechController";
+import AssistantTextExplainer from "./AssistantTextExplainer";
 import {
   extractPageContext,
   getRouteAnnouncement,
-  getSelectedText,
 } from "./AssistantPageContext";
 import { attachFormObserver } from "./AssistantFormGuide";
 import { getFallbackChatResponse } from "@/components/Chatbot/fallbackKnowledge";
-import { Volume2, Sparkles, X, BookOpen, MessageSquare, Radio } from "lucide-react";
 
 const INITIAL_WELCOME = {
   id: "welcome-msg",
   sender: "bot",
-  text: `Hello! 👋 I'm Kraviona's 3D AI Voice Assistant.
+  text: `Hello! 👋 I'm Kraviona's AI Assistant.
 
-I can guide you through our **Web Development** and **Technical SEO** services, read pages aloud, summarize articles, or help you complete our inquiry forms. How can I assist you today?`,
+I can guide you through our **Web Development** and **Technical SEO** services, explain technical concepts on hover or text selection, summarize pages, or answer questions about your digital project. How can I assist you today?`,
   sources: [],
   timestamp: "Just now",
 };
@@ -33,27 +31,14 @@ export default function KravionaAIAssistant() {
   const [overrideGaze, setOverrideGaze] = useState(null);
   const [viseme, setViseme] = useState(0);
 
-  // Voice playback state
-  const [voiceEnabled, setVoiceEnabled] = useState(true);
-  const [autoSpeak, setAutoSpeak] = useState(true);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [speed, setSpeed] = useState(1.0);
-  const [voices, setVoices] = useState([]);
-  const [selectedVoiceURI, setSelectedVoiceURI] = useState(null);
-
   // Chat conversation state
   const [messages, setMessages] = useState([INITIAL_WELCOME]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Form & Selection guidance state
+  // Form guidance state
   const [activeFormField, setActiveFormField] = useState(null);
-  const [selectedText, setSelectedText] = useState("");
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   const bubbleTimeoutRef = useRef(null);
-  const lastAnnouncedPathRef = useRef("");
 
   const showTemporaryBubble = useCallback((text, durationMs = 4500) => {
     setSpeechBubble(text);
@@ -63,106 +48,16 @@ export default function KravionaAIAssistant() {
     }, durationMs);
   }, []);
 
-  // Mount, local preference retrieval & speechController subscription
   useEffect(() => {
     setMounted(true);
-
-    try {
-      const savedAutoSpeak = localStorage.getItem("kraviona_auto_speak");
-      if (savedAutoSpeak !== null) {
-        setAutoSpeak(savedAutoSpeak === "true");
-      } else {
-        setAutoSpeak(true);
-        localStorage.setItem("kraviona_auto_speak", "true");
-      }
-    } catch {}
-
-    const unsubscribe = speechController.subscribe((state) => {
-      setIsSpeaking(state.isSpeaking);
-      setIsPaused(state.isPaused);
-      setIsMuted(state.isMuted);
-      setSpeed(state.speed);
-      setSelectedVoiceURI(state.selectedVoiceURI);
-      setVoices(state.availableVoices);
-
-      if (state.isSpeaking && !state.isPaused) {
-        setExpression("speaking");
-      } else if (!state.isSpeaking) {
-        setExpression("idle");
-        setViseme(0);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-      speechController.stop();
-    };
   }, []);
 
-  // Modern browser autoplay unblocker: Prime audio & auto-read on first user interaction
-  useEffect(() => {
-    if (!mounted) return;
-
-    let unlocked = false;
-    const unlockAudioAndAnnounce = () => {
-      if (unlocked) return;
-      unlocked = true;
-      setHasInteracted(true);
-      speechController.prime();
-
-      // If Auto Read & Voice are active, speak the current route announcement aloud!
-      if (autoSpeak && voiceEnabled && !isMuted) {
-        const currentPath = pathname || "/";
-        if (lastAnnouncedPathRef.current !== currentPath) {
-          lastAnnouncedPathRef.current = currentPath;
-          const announcement = getRouteAnnouncement(currentPath);
-          showTemporaryBubble(announcement, 5000);
-          speechController.speak(announcement, {
-            onStart: () => setExpression("speaking"),
-            onEnd: () => setExpression("idle"),
-            onViseme: (val) => setViseme(val),
-          });
-        }
-      }
-    };
-
-    window.addEventListener("pointerdown", unlockAudioAndAnnounce, { once: true, passive: true });
-    window.addEventListener("click", unlockAudioAndAnnounce, { once: true, passive: true });
-    window.addEventListener("touchstart", unlockAudioAndAnnounce, { once: true, passive: true });
-    window.addEventListener("keydown", unlockAudioAndAnnounce, { once: true, passive: true });
-    window.addEventListener("scroll", unlockAudioAndAnnounce, { once: true, passive: true });
-
-    return () => {
-      window.removeEventListener("pointerdown", unlockAudioAndAnnounce);
-      window.removeEventListener("click", unlockAudioAndAnnounce);
-      window.removeEventListener("touchstart", unlockAudioAndAnnounce);
-      window.removeEventListener("keydown", unlockAudioAndAnnounce);
-      window.removeEventListener("scroll", unlockAudioAndAnnounce);
-    };
-  }, [mounted, pathname, autoSpeak, voiceEnabled, isMuted, showTemporaryBubble]);
-
-  const handleToggleAutoSpeak = () => {
-    setHasInteracted(true);
-    const nextState = !autoSpeak;
-    setAutoSpeak(nextState);
-    try {
-      localStorage.setItem("kraviona_auto_speak", String(nextState));
-    } catch {}
-
-    if (nextState) {
-      speakText("Auto Read and Loud Speak enabled. I will guide you automatically.");
-    } else {
-      speechController.stop();
-      showTemporaryBubble("Auto Speak disabled. Click Listen to hear speech.", 3000);
-    }
-  };
-
-  // Form field observer integration
+  // Form field observer integration (Visual guidance only, zero audio)
   useEffect(() => {
     if (!mounted) return;
 
     const cleanup = attachFormObserver({
-      onFieldFocus: (meta, isNewField) => {
+      onFieldFocus: (meta) => {
         setActiveFormField(meta);
         setExpression("curious");
 
@@ -173,16 +68,7 @@ export default function KravionaAIAssistant() {
           setOverrideGaze({ x: rx, y: ry });
         }
 
-        showTemporaryBubble(meta.guidance, 5000);
-
-        // Speak guidance ONLY if Auto Speak & Voice are enabled
-        if (autoSpeak && voiceEnabled && !isMuted && hasInteracted && isNewField) {
-          speechController.speak(meta.guidance, {
-            onStart: () => setExpression("speaking"),
-            onEnd: () => setExpression("idle"),
-            onViseme: (val) => setViseme(val),
-          });
-        }
+        showTemporaryBubble(meta.guidance, 4500);
       },
       onFieldBlur: () => {
         setActiveFormField(null);
@@ -195,75 +81,12 @@ export default function KravionaAIAssistant() {
     });
 
     return () => cleanup();
-  }, [mounted, voiceEnabled, autoSpeak, isMuted, hasInteracted, showTemporaryBubble]);
+  }, [mounted, showTemporaryBubble]);
 
-  // Text selection listener
-  useEffect(() => {
-    if (!mounted) return;
-
-    const handleSelection = () => {
-      const text = getSelectedText();
-      if (text.length > 5 && text.length < 1000) {
-        setSelectedText(text);
-      } else {
-        setSelectedText("");
-      }
-    };
-
-    document.addEventListener("mouseup", handleSelection);
-    document.addEventListener("selectionchange", handleSelection);
-
-    return () => {
-      document.removeEventListener("mouseup", handleSelection);
-      document.removeEventListener("selectionchange", handleSelection);
-    };
-  }, [mounted]);
-
-  // Route announcements on navigation
-  useEffect(() => {
-    if (!mounted || !pathname) return;
-
-    // Do not announce on admin or auth routes
-    if (pathname.startsWith("/admin") || pathname.startsWith("/login")) return;
-
-    if (lastAnnouncedPathRef.current !== pathname) {
-      lastAnnouncedPathRef.current = pathname;
-
-      // Only announce if Auto Speak & Voice are active and user has interacted
-      if (hasInteracted && autoSpeak && voiceEnabled && !isMuted) {
-        const announcement = getRouteAnnouncement(pathname);
-        showTemporaryBubble(announcement, 5000);
-        speechController.speak(announcement, {
-          onStart: () => setExpression("speaking"),
-          onEnd: () => setExpression("idle"),
-          onViseme: (val) => setViseme(val),
-        });
-      }
-    }
-  }, [pathname, mounted, hasInteracted, autoSpeak, voiceEnabled, isMuted, showTemporaryBubble]);
-
-  // Explicit speech invoker
-  const speakText = useCallback(
-    (text) => {
-      setHasInteracted(true);
-      if (!voiceEnabled || isMuted) return;
-
-      showTemporaryBubble(text.slice(0, 120) + (text.length > 120 ? "..." : ""), 4000);
-      speechController.speak(text, {
-        onStart: () => setExpression("speaking"),
-        onEnd: () => setExpression("idle"),
-        onViseme: (val) => setViseme(val),
-      });
-    },
-    [voiceEnabled, isMuted, showTemporaryBubble]
-  );
-
-  // Send message to AI endpoint (with instant fallback)
+  // Send message to AI endpoint (with instant verified knowledge fallback)
   const handleSendMessage = async (textToSend) => {
     const query = String(textToSend).trim();
     if (!query || isLoading) return;
-
-    setHasInteracted(true);
 
     const userMsg = {
       id: `user-${Date.now()}`,
@@ -289,7 +112,7 @@ export default function KravionaAIAssistant() {
           replySources = json.data.sources || [];
         }
       }
-    } catch (e) {
+    } catch {
       // Proceed to fallback
     }
 
@@ -310,104 +133,54 @@ export default function KravionaAIAssistant() {
 
     setMessages((prev) => [...prev, botMsg]);
     setIsLoading(false);
-
-    // If Auto Speak is enabled, automatically speak the AI reply aloud!
-    if (autoSpeak) {
-      speakText(replyText);
-    }
+    setExpression("happy");
+    setTimeout(() => setExpression("idle"), 2500);
   };
 
-  // Action: Read Page
+  // Action: Explain Page
   const handleReadPage = () => {
-    setHasInteracted(true);
+    setIsOpen(true);
     const context = extractPageContext();
-    const contentToRead =
-      context.h1 +
-      ". " +
-      (context.contentSnippet ? context.contentSnippet.slice(0, 600) : "This page details Kraviona's services and technical offerings.");
-
-    speakText(contentToRead);
+    handleSendMessage(`Please explain the technical offerings and services presented on this page: "${context.title} — ${context.h1}".`);
   };
 
   // Action: Summarize Page
-  const handleSummarizePage = async () => {
-    setHasInteracted(true);
+  const handleSummarizePage = () => {
+    setIsOpen(true);
     const context = extractPageContext();
-    const summaryPrompt = `Please summarize the key offerings of this page: "${context.title} — ${context.h1}".`;
-    handleSendMessage(summaryPrompt);
-  };
-
-  // Action: Read Selected Text
-  const handleReadSelectedText = () => {
-    if (!selectedText) return;
-    setHasInteracted(true);
-    speakText(selectedText);
-    setSelectedText("");
-  };
-
-  // Voice toggle
-  const handleToggleVoice = () => {
-    setHasInteracted(true);
-    const nextState = !voiceEnabled;
-    setVoiceEnabled(nextState);
-    if (!nextState) {
-      speechController.stop();
-    } else {
-      speakText("Voice enabled. How can I help you?");
-    }
+    handleSendMessage(`Please summarize the key offerings and business advantages of this page: "${context.title} — ${context.h1}".`);
   };
 
   if (!mounted) return null;
 
-  // Prevent assistant from appearing on admin pages
+  // Prevent assistant from appearing on admin or login pages
   if (pathname && (pathname.startsWith("/admin") || pathname.startsWith("/login"))) {
     return null;
   }
 
   return (
     <>
-      {/* Floating Action Pill for Selected Text */}
-      {selectedText && (
-        <div
-          className="fixed bottom-36 right-6 z-50 flex items-center gap-1.5 p-2 rounded-2xl bg-[#0f5960] text-white shadow-2xl border border-teal-400/30 animate-in fade-in slide-in-from-bottom-3"
-          role="region"
-          aria-label="Read Selection Action"
-        >
-          <button
-            onClick={handleReadSelectedText}
-            className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
-          >
-            <Volume2 className="w-3.5 h-3.5 text-[#00F2FE]" />
-            <span>Read Selection Aloud</span>
-          </button>
-          <button
-            onClick={() => setSelectedText("")}
-            className="p-1 rounded-lg hover:bg-white/10 text-white/70 hover:text-white"
-            aria-label="Dismiss selection action"
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      )}
+      {/* Real-time Hover & Text Selection Explainer Panel (Typing Animation, Auto Viewport Bounds) */}
+      <AssistantTextExplainer
+        onActiveChange={(active) => {
+          setExpression(active ? "curious" : "idle");
+        }}
+      />
 
-      {/* Smooth Following Cursor Robot Assistant Companion (Removed from Corner) */}
+      {/* Smooth Following Cursor Robot Companion (Transparent, Zero Background/Backdrop Glow) */}
       <RobotCursorFollower
         expression={expression}
-        isSpeaking={isSpeaking}
+        isSpeaking={false}
         viseme={viseme}
         speechBubble={speechBubble}
         overrideGaze={overrideGaze}
         isOpen={isOpen}
         onClick={() => {
-          setHasInteracted(true);
           setIsOpen(true);
-          if (autoSpeak && voiceEnabled && !isSpeaking && !isMuted) {
-            speakText("Hi! I'm your Kraviona AI Voice Guide. How can I assist you today?");
-          }
         }}
       />
 
-      {/* Expanded Interactive 3D AI Voice Assistant Window */}
+      {/* 100% Text-Based AI Assistant Chat Window (All Audio Controls & TTS Removed) */}
       <AssistantChatPanel
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -417,24 +190,6 @@ export default function KravionaAIAssistant() {
         onClearChat={() => setMessages([INITIAL_WELCOME])}
         onReadPage={handleReadPage}
         onSummarizePage={handleSummarizePage}
-        onSpeakMessage={speakText}
-        // Voice & Auto Speak controller props
-        voiceEnabled={voiceEnabled}
-        onToggleVoice={handleToggleVoice}
-        autoSpeak={autoSpeak}
-        onToggleAutoSpeak={handleToggleAutoSpeak}
-        isSpeaking={isSpeaking}
-        isPaused={isPaused}
-        isMuted={isMuted}
-        onStop={() => speechController.stop()}
-        onPause={() => speechController.pause()}
-        onResume={() => speechController.resume()}
-        onToggleMute={() => speechController.setMuted(!isMuted)}
-        speed={speed}
-        onChangeSpeed={(val) => speechController.setSpeed(val)}
-        voices={voices}
-        selectedVoiceURI={selectedVoiceURI}
-        onSelectVoice={(val) => speechController.setVoice(val)}
         activeFormField={activeFormField}
       />
     </>
