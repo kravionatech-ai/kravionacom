@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import RobotCursorFollower from "./RobotCursorFollower";
 import AssistantChatPanel from "./AssistantChatPanel";
+import AssistantLauncher from "./AssistantLauncher";
 import AssistantTextExplainer from "./AssistantTextExplainer";
 import {
   extractPageContext,
@@ -176,8 +177,14 @@ export default function KravionaAIAssistant() {
         overrideGaze={overrideGaze}
         isOpen={isOpen}
         onClick={() => {
-          setIsOpen(true);
+          setIsOpen((prev) => !prev);
         }}
+      />
+
+      {/* Interactive Floating AI Chatbot Launcher in Bottom-Right Corner */}
+      <AssistantLauncher
+        isOpen={isOpen}
+        onToggle={() => setIsOpen((prev) => !prev)}
       />
 
       {/* 100% Text-Based AI Assistant Chat Window (All Audio Controls & TTS Removed) */}
@@ -187,6 +194,7 @@ export default function KravionaAIAssistant() {
         messages={messages}
         onSendMessage={handleSendMessage}
         isLoading={isLoading}
+        onNewChat={() => setMessages([INITIAL_WELCOME])}
         onClearChat={() => setMessages([INITIAL_WELCOME])}
         onReadPage={handleReadPage}
         onSummarizePage={handleSummarizePage}
