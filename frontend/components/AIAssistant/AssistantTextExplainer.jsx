@@ -291,11 +291,15 @@ function calculateSmartPosition({
   return { x, y, width: actualWidth };
 }
 
-export default function AssistantTextExplainer({ disabled = false, onActiveChange = () => {} }) {
+export default function AssistantTextExplainer({
+  disabled = false,
+  onActiveChange = () => {},
+  onBoundsChange = () => {},
+}) {
   const [explanationData, setExplanationData] = useState(null);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [coords, setCoords] = useState({ x: 0, y: 0, width: 320, isSelection: false });
+  const [coords, setCoords] = useState({ x: 0, y: 0, width: 340, isSelection: false });
 
   const hoverTimerRef = useRef(null);
   const typingTimerRef = useRef(null);
@@ -331,7 +335,42 @@ export default function AssistantTextExplainer({ disabled = false, onActiveChang
     setExplanationData(null);
     setDisplayedText("");
     onActiveChange(false);
-  }, [clearTyping, onActiveChange]);
+    onBoundsChange(null);
+  }, [clearTyping, onActiveChange, onBoundsChange]);
+
+  // Synchronize precise physical bounds with robot collision avoidance engine
+  useEffect(() => {
+    if (!explanationData) {
+      onBoundsChange(null);
+      return;
+    }
+
+    if (popupRef.current) {
+      const rect = popupRef.current.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        onBoundsChange({
+          left: rect.left,
+          top: rect.top,
+          right: rect.right,
+          bottom: rect.bottom,
+          width: rect.width,
+          height: rect.height,
+        });
+        return;
+      }
+    }
+
+    if (coords.x > 0) {
+      onBoundsChange({
+        left: coords.x,
+        top: coords.y,
+        right: coords.x + coords.width,
+        bottom: coords.y + 175,
+        width: coords.width,
+        height: 175,
+      });
+    }
+  }, [explanationData, coords, displayedText, onBoundsChange]);
 
   // Automatically dismiss if disabled changes to true
   useEffect(() => {
@@ -603,40 +642,40 @@ export default function AssistantTextExplainer({ disabled = false, onActiveChang
       onMouseEnter={handleTooltipMouseEnter}
       onMouseLeave={handleTooltipMouseLeave}
     >
-      <div className="relative rounded-2xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-teal-500/20 shadow-[0_16px_40px_rgba(15,89,96,0.18),0_2px_10px_rgba(0,0,0,0.08)] p-4 text-slate-800 dark:text-slate-100">
-        {/* Header Row: Glowing Cyan Dot, Title, Badge, and Close Button */}
-        <div className="flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-2.5 mb-2.5">
-          <div className="flex items-center gap-2 min-w-0">
+      <div className="relative w-full rounded-2xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border border-teal-500/25 shadow-[0_16px_40px_rgba(15,89,96,0.22),0_2px_10px_rgba(0,0,0,0.08)] overflow-hidden">
+        {/* Header Row: Guaranteed left padding, unblocked heading title, and top-right close button */}
+        <div className="relative flex items-center justify-between gap-3 px-4 pt-3.5 pb-2.5 border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/60 dark:bg-slate-900/50">
+          <div className="flex items-center gap-2.5 min-w-0 pr-8">
             {/* Glowing Cyan Status Dot */}
             <span className="relative flex h-2.5 w-2.5 shrink-0 items-center justify-center">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00F2FE] shadow-[0_0_8px_#00F2FE]" />
             </span>
 
-            {/* Canonical Title */}
-            <h4 className="text-xs sm:text-[13px] font-bold text-[#0f5960] dark:text-teal-300 truncate tracking-tight">
+            {/* Canonical Title: Starts after left padding and remains completely visible */}
+            <h4 className="text-[13px] font-bold text-[#0f5960] dark:text-teal-300 tracking-tight leading-snug whitespace-normal break-words">
               {explanationData.title}
             </h4>
 
             {/* Context Badge */}
-            <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-semibold bg-teal-50 dark:bg-teal-950/60 text-[#0f5960] dark:text-teal-300 border border-teal-200/50 dark:border-teal-800/50 shrink-0">
+            <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-teal-50 dark:bg-teal-950/60 text-[#0f5960] dark:text-teal-300 border border-teal-200/50 dark:border-teal-800/50 shrink-0">
               {explanationData.isSelection ? "Selection" : "Definition"}
             </span>
           </div>
 
-          {/* Accessible Close Button with comfortable hit area */}
+          {/* Accessible Close Button strictly anchored at the top-right with clear hit area */}
           <button
             type="button"
             onClick={dismiss}
-            className="flex items-center justify-center w-6 h-6 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 focus:outline-none focus:ring-1 focus:ring-[#00F2FE]"
+            className="absolute top-2.5 right-3 flex items-center justify-center w-7 h-7 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 dark:hover:bg-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-[#00F2FE]"
             aria-label="Close explanation popup"
           >
-            <X className="w-3.5 h-3.5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Body Text with Smooth Typewriter Effect */}
-        <div className="text-xs sm:text-[12.5px] text-slate-700 dark:text-slate-300 leading-relaxed font-normal min-h-[44px]">
+        <div className="px-4 py-3 text-xs sm:text-[12.5px] text-slate-700 dark:text-slate-300 leading-relaxed font-normal min-h-[46px]">
           {displayedText}
           {isTyping && (
             <span
@@ -647,7 +686,7 @@ export default function AssistantTextExplainer({ disabled = false, onActiveChang
         </div>
 
         {/* Footer Meta Row */}
-        <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+        <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/40 dark:bg-slate-900/30 flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500 font-medium">
           <div className="flex items-center gap-1.5 text-teal-800 dark:text-teal-400 font-semibold">
             <Sparkles className="w-3 h-3 text-[#00F2FE]" />
             <span>Kraviona AI Assistant</span>

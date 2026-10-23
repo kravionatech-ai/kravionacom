@@ -27,10 +27,16 @@ export default function RobotCursorFollower({
   viseme = 0,
   speechBubble = null,
   overrideGaze = null,
+  activeTooltipBounds = null,
   onClick = () => {},
   isOpen = false,
 }) {
   const followerRef = useRef(null);
+  const activeTooltipBoundsRef = useRef(activeTooltipBounds);
+
+  useEffect(() => {
+    activeTooltipBoundsRef.current = activeTooltipBounds;
+  }, [activeTooltipBounds]);
 
   // Position & physics references
   const targetPosRef = useRef({ x: 300, y: 300 });
@@ -139,8 +145,58 @@ export default function RobotCursorFollower({
 
       // Trailing offset: positions robot ~26px to the right and ~22px below cursor
       // Leaves cursor pointer arrow 100% visible and unblocked
-      const renderX = cur.x + 26;
-      const renderY = cur.y + 22 + bobY;
+      let renderX = cur.x + 26;
+      let renderY = cur.y + 22 + bobY;
+
+      // Smart Collision Avoidance: Never overlap the active explanation popup!
+      const tb = activeTooltipBoundsRef.current;
+      if (tb && typeof window !== "undefined") {
+        const ROBOT_SIZE = 76;
+        const CLEARANCE = 24; // Guaranteed 24px safety perimeter around popup card
+
+        const boxLeft = tb.left - CLEARANCE;
+        const boxRight = tb.right + CLEARANCE;
+        const boxTop = tb.top - CLEARANCE;
+        const boxBottom = tb.bottom + CLEARANCE;
+
+        // Check if robot envelope overlaps the popup's clearance zone
+        const isRobotInside =
+          renderX < boxRight &&
+          renderX + ROBOT_SIZE > boxLeft &&
+          renderY < boxBottom &&
+          renderY + ROBOT_SIZE > boxTop;
+
+        // Or if cursor is hovering inside or near the popup
+        const isCursorInside =
+          cur.x >= boxLeft &&
+          cur.x <= boxRight &&
+          cur.y >= boxTop &&
+          cur.y <= boxBottom;
+
+        if (isRobotInside || isCursorInside) {
+          // Park the robot outside the popup with clean clearance:
+          // Priority 1: To the RIGHT of the popup
+          if (boxRight + ROBOT_SIZE <= window.innerWidth - 16) {
+            renderX = boxRight + 4;
+            renderY = Math.max(16, Math.min(tb.top, window.innerHeight - ROBOT_SIZE - 16)) + bobY;
+          }
+          // Priority 2: To the LEFT of the popup
+          else if (boxLeft - ROBOT_SIZE >= 16) {
+            renderX = boxLeft - ROBOT_SIZE - 4;
+            renderY = Math.max(16, Math.min(tb.top, window.innerHeight - ROBOT_SIZE - 16)) + bobY;
+          }
+          // Priority 3: BELOW the popup
+          else if (boxBottom + ROBOT_SIZE <= window.innerHeight - 16) {
+            renderX = Math.max(16, Math.min(tb.left, window.innerWidth - ROBOT_SIZE - 16));
+            renderY = boxBottom + 8 + bobY;
+          }
+          // Priority 4: ABOVE the popup
+          else {
+            renderX = Math.max(16, Math.min(tb.left, window.innerWidth - ROBOT_SIZE - 16));
+            renderY = Math.max(16, boxTop - ROBOT_SIZE - 8) + bobY;
+          }
+        }
+      }
 
       if (followerRef.current) {
         followerRef.current.style.transform = `translate3d(${renderX}px, ${renderY}px, 0px)`;
@@ -154,6 +210,12 @@ export default function RobotCursorFollower({
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
   }, [mounted]);
+
+  // Dynamic gaze: points toward the active tooltip or external gaze target
+  const effectiveGaze = overrideGaze || (activeTooltipBounds ? {
+    x: Math.max(-0.85, Math.min(0.85, (activeTooltipBounds.left + activeTooltipBounds.width / 2 - targetPosRef.current.x) / 350)),
+    y: Math.max(-0.85, Math.min(0.85, (activeTooltipBounds.top + activeTooltipBounds.height / 2 - targetPosRef.current.y) / 350)),
+  } : null);
 
   // Hide follower when chat panel is open
   if (!mounted || isOpen) return null;
@@ -177,11 +239,11 @@ export default function RobotCursorFollower({
           }}
         >
           <RobotHead3D
-            expression={isHoveredInteractive && expression === "idle" ? "curious" : expression}
+            expression={isHoveredInteractive && expression === "idle" ? "curious" : (activeTooltipBounds ? "curious" : expression)}
             isSpeaking={isSpeaking}
             viseme={viseme}
             speechBubble={speechBubble}
-            overrideGaze={overrideGaze}
+            overrideGaze={effectiveGaze}
             size="md"
             onClick={onClick}
           />

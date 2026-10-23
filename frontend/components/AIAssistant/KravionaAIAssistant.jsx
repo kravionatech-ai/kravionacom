@@ -31,6 +31,7 @@ export default function KravionaAIAssistant() {
   const [speechBubble, setSpeechBubble] = useState(null);
   const [overrideGaze, setOverrideGaze] = useState(null);
   const [viseme, setViseme] = useState(0);
+  const [tooltipBounds, setTooltipBounds] = useState(null);
 
   // Chat conversation state
   const [messages, setMessages] = useState([INITIAL_WELCOME]);
@@ -164,6 +165,7 @@ export default function KravionaAIAssistant() {
       {/* Real-time Hover & Text Selection Explainer Panel (Typing Animation, Auto Viewport Bounds) */}
       <AssistantTextExplainer
         disabled={isOpen}
+        onBoundsChange={setTooltipBounds}
         onActiveChange={(active) => {
           setExpression(active ? "curious" : "idle");
         }}
@@ -176,6 +178,7 @@ export default function KravionaAIAssistant() {
         viseme={viseme}
         speechBubble={speechBubble}
         overrideGaze={overrideGaze}
+        activeTooltipBounds={tooltipBounds}
         isOpen={isOpen}
         onClick={() => {
           setIsOpen((prev) => !prev);
