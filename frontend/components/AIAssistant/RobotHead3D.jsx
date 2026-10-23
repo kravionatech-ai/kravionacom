@@ -31,6 +31,7 @@ export default function RobotHead3D({
   const currentGazeRef = useRef({ x: 0, y: 0 });
   const [renderGaze, setRenderGaze] = useState({ x: 0, y: 0 });
   const [renderTilt, setRenderTilt] = useState({ rotateX: 0, rotateY: 0, rotateZ: 0 });
+  const [renderOffset, setRenderOffset] = useState({ x: 0, y: 0 });
 
   const [isBlinking, setIsBlinking] = useState(false);
   const [isHoveredInteractive, setIsHoveredInteractive] = useState(false);
@@ -70,7 +71,7 @@ export default function RobotHead3D({
     };
   }, []);
 
-  // 60fps Smooth Spring / Lerp Animation Loop
+  // 60fps / 120fps Smooth Spring / Lerp Animation Loop with Zero-G Floating Bob
   useEffect(() => {
     // Respect prefers-reduced-motion
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -83,17 +84,28 @@ export default function RobotHead3D({
       const target = overrideGaze || targetGazeRef.current;
       const cur = currentGazeRef.current;
 
-      // Gentle fluid interpolation factor (0.09) for smooth, non-jittery tracking
-      cur.x = lerp(cur.x, target.x, 0.09);
-      cur.y = lerp(cur.y, target.y, 0.09);
+      // Gentle fluid spring interpolation factor (0.085) for smooth, non-jittery tracking
+      cur.x = lerp(cur.x, target.x, 0.085);
+      cur.y = lerp(cur.y, target.y, 0.085);
 
       setRenderGaze({ x: cur.x, y: cur.y });
 
-      // Limited subtle head tilt: strictly 3 to 4.5 degrees maximum
+      // Natural zero-gravity floating bobbing
+      const time = performance.now() * 0.0024;
+      const idleBobY = Math.sin(time) * 3.2;
+      const idleBobTilt = Math.sin(time * 0.8) * 1.2;
+
+      // Physical floating displacement towards cursor + floating bob
+      setRenderOffset({
+        x: cur.x * 12,
+        y: cur.y * 10 + idleBobY,
+      });
+
+      // Responsive 3D head tilt: turns face up to 16 degrees toward cursor!
       setRenderTilt({
-        rotateY: cur.x * 4.5,
-        rotateX: -cur.y * 3.8,
-        rotateZ: cur.x * 1.2,
+        rotateY: cur.x * 16,
+        rotateX: -cur.y * 14,
+        rotateZ: cur.x * 3.5 + idleBobTilt,
       });
 
       animFrameRef.current = requestAnimationFrame(animate);
@@ -107,11 +119,6 @@ export default function RobotHead3D({
 
   // Global Pointer & Interactive Element Hover Tracking Across All Pages
   useEffect(() => {
-    // Disable heavy tracking on touch-only devices
-    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-      return;
-    }
-
     const resetToNeutral = () => {
       targetGazeRef.current = { x: 0, y: 0 };
       setIsHoveredInteractive(false);
@@ -120,25 +127,29 @@ export default function RobotHead3D({
     const handlePointerMove = (e) => {
       if (!containerRef.current) return;
 
+      const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX);
+      const clientY = e.clientY ?? (e.touches && e.touches[0]?.clientY);
+      if (clientX === undefined || clientY === undefined) return;
+
       const rect = containerRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
+      const deltaX = clientX - centerX;
+      const deltaY = clientY - centerY;
       const distance = Math.hypot(deltaX, deltaY) || 1;
 
-      // Normalize reach across viewport
-      const maxDistance = 750;
-      const intensity = Math.min(1, distance / maxDistance);
+      // Viewport reach calculation
+      const maxDistance = Math.max(window.innerWidth, window.innerHeight) * 0.85;
+      const intensity = Math.min(1, Math.max(0.12, distance / maxDistance));
       const nx = (deltaX / distance) * intensity;
       const ny = (deltaY / distance) * intensity;
 
       targetGazeRef.current = { x: nx, y: ny };
 
-      // Idle return: smooth glide back to neutral after 2.8s of no pointer movement
+      // Idle return: smooth glide back to neutral after 3.2s of no pointer movement
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-      idleTimerRef.current = setTimeout(resetToNeutral, 2800);
+      idleTimerRef.current = setTimeout(resetToNeutral, 3200);
     };
 
     // Detect hovered interactive links, buttons, and inputs for gentle focused look
@@ -171,11 +182,15 @@ export default function RobotHead3D({
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("mousemove", handlePointerMove, { passive: true });
+    window.addEventListener("touchmove", handlePointerMove, { passive: true });
     document.addEventListener("mouseover", handleMouseOver, { passive: true });
     document.addEventListener("mouseout", handleMouseOut, { passive: true });
 
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("mousemove", handlePointerMove);
+      window.removeEventListener("touchmove", handlePointerMove);
       document.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("mouseout", handleMouseOut);
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
@@ -189,9 +204,9 @@ export default function RobotHead3D({
     lg: "w-14 h-14 sm:w-16 sm:h-16",
   }[size] || "w-[46px] h-[46px] sm:w-[54px] sm:h-[54px]";
 
-  // Subtle Parallax Eye Shift inside Visor (max 3.2px)
-  const eyeShiftX = renderGaze.x * 3.2;
-  const eyeShiftY = renderGaze.y * 2.6;
+  // Fluid Parallax Eye Shift inside Visor
+  const eyeShiftX = renderGaze.x * 5.2;
+  const eyeShiftY = renderGaze.y * 3.8;
   const eyeScaleY = isBlinking ? 0.08 : 1;
 
   // Active expression (combines props and interactive hover state)
@@ -271,7 +286,6 @@ export default function RobotHead3D({
         <g
           transform={`translate(${eyeShiftX}, ${eyeShiftY}) scale(1, ${eyeScaleY})`}
           style={{ transformOrigin: "50px 36px" }}
-          className="transition-transform duration-75 ease-out"
         >
           <path
             d="M 31 38 Q 38 28 45 38"
@@ -298,7 +312,6 @@ export default function RobotHead3D({
         <g
           transform={`translate(${eyeShiftX - 1}, ${eyeShiftY - 2.5}) scale(1, ${eyeScaleY})`}
           style={{ transformOrigin: "50px 34px" }}
-          className="transition-transform duration-100 ease-out"
         >
           <ellipse cx="38" cy="34" rx="6.5" ry="8.5" fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
           <ellipse cx="62" cy="34" rx="6.5" ry="8.5" fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
@@ -324,7 +337,7 @@ export default function RobotHead3D({
         <g
           transform={`translate(${eyeShiftX}, ${eyeShiftY}) scale(1, ${eyeScaleY})`}
           style={{ transformOrigin: "50px 36px" }}
-          className="transition-transform duration-75 ease-out animate-pulse"
+          className="animate-pulse"
         >
           <ellipse cx="38" cy="36" rx="7.5" ry="9.5" fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
           <ellipse cx="36" cy="33" rx="2.2" ry="3.2" fill="#FFFFFF" opacity="0.9" />
@@ -342,7 +355,6 @@ export default function RobotHead3D({
       <g
         transform={`translate(${eyeShiftX}, ${eyeShiftY}) scale(1, ${eyeScaleY})`}
         style={{ transformOrigin: "50px 36px" }}
-        className="transition-transform duration-75 ease-out"
       >
         {/* Left Eye */}
         <ellipse cx="38" cy="36" rx={rx} ry={ry} fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
@@ -399,9 +411,9 @@ export default function RobotHead3D({
 
       {/* 3D Floating Bobbing Head Assembly */}
       <div
-        className="relative w-full h-full transition-transform duration-100 ease-out"
+        className="relative w-full h-full will-change-transform"
         style={{
-          transform: `rotateY(${renderTilt.rotateY}deg) rotateX(${renderTilt.rotateX}deg) rotateZ(${renderTilt.rotateZ}deg)`,
+          transform: `translate3d(${renderOffset.x}px, ${renderOffset.y}px, 0px) rotateY(${renderTilt.rotateY}deg) rotateX(${renderTilt.rotateX}deg) rotateZ(${renderTilt.rotateZ}deg)`,
           transformStyle: "preserve-3d",
         }}
       >
@@ -434,8 +446,13 @@ export default function RobotHead3D({
             className="relative w-[77%] h-[63%] rounded-[36%_36%_42%_42%] bg-gradient-to-b from-[#0A1114] via-[#050B0D] to-[#0D181D] shadow-[inset_0_3px_8px_rgba(0,0,0,0.85),0_1.5px_3px_rgba(255,255,255,0.7)] border border-slate-700/60 overflow-hidden flex items-center justify-center"
             style={{ transform: "translateZ(5px)" }}
           >
-            {/* Glass Glare Diagonal Reflection */}
-            <div className="absolute -top-8 -left-8 w-20 h-28 bg-gradient-to-r from-transparent via-white/14 to-transparent transform rotate-35 pointer-events-none" />
+            {/* Glass Glare Diagonal Reflection with Subtle Opposite Parallax */}
+            <div
+              className="absolute -top-8 -left-8 w-20 h-28 bg-gradient-to-r from-transparent via-white/14 to-transparent pointer-events-none will-change-transform"
+              style={{
+                transform: `translate3d(${-renderOffset.x * 0.35}px, ${-renderOffset.y * 0.25}px, 0px) rotate(35deg)`,
+              }}
+            />
 
             {/* Glowing Cyan Face Optics (Eyes & Mouth SVG) */}
             <svg
