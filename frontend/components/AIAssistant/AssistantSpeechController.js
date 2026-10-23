@@ -86,6 +86,20 @@ class AssistantSpeechController {
     return this.availableVoices;
   }
 
+  prime() {
+    if (typeof window === "undefined") return;
+    try {
+      if (this.synth) {
+        if (this.synth.paused) {
+          this.synth.resume();
+        }
+        if (this.availableVoices.length === 0) {
+          this.loadVoices();
+        }
+      }
+    } catch {}
+  }
+
   setVoice(voiceURI) {
     this.selectedVoiceURI = voiceURI;
     this.notify();
@@ -168,6 +182,7 @@ class AssistantSpeechController {
         const blob = await res.blob();
         const audioUrl = URL.createObjectURL(blob);
         const audio = new Audio(audioUrl);
+        audio.volume = 1.0;
         this.currentAudio = audio;
         audio.playbackRate = this.speed;
 
@@ -204,8 +219,14 @@ class AssistantSpeechController {
     if (!this.synth) return;
 
     this.synth.cancel();
+    if (this.synth.paused) {
+      try {
+        this.synth.resume();
+      } catch {}
+    }
 
     const utterance = new SpeechSynthesisUtterance(text);
+    utterance.volume = 1.0; // Clear & loud maximum volume
     this.currentUtterance = utterance;
 
     const voices = this.getVoiceList();

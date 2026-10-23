@@ -182,12 +182,12 @@ export default function RobotHead3D({
     };
   }, []);
 
-  // Desktop: ~72px (64–80px) | Mobile: ~60px (56–64px)
+  // Desktop: ~54px (compact, non-intrusive) | Mobile: ~46px
   const sizeClasses = {
-    sm: "w-14 h-14 sm:w-16 sm:h-16",
-    md: "w-[62px] h-[62px] sm:w-[74px] sm:h-[74px]",
-    lg: "w-20 h-20 sm:w-22 sm:h-22",
-  }[size] || "w-[62px] h-[62px] sm:w-[74px] sm:h-[74px]";
+    sm: "w-9 h-9 sm:w-10 sm:h-10",
+    md: "w-[46px] h-[46px] sm:w-[54px] sm:h-[54px]",
+    lg: "w-14 h-14 sm:w-16 sm:h-16",
+  }[size] || "w-[46px] h-[46px] sm:w-[54px] sm:h-[54px]";
 
   // Subtle Parallax Eye Shift inside Visor (max 3.2px)
   const eyeShiftX = renderGaze.x * 3.2;
@@ -368,33 +368,33 @@ export default function RobotHead3D({
       {/* First Visit Greeting Tooltip */}
       {showGreeting && !speechBubble && (
         <div
-          className="absolute -top-11 -left-32 sm:-left-36 w-44 p-2 rounded-xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-lg text-[10.5px] font-semibold text-[#0f5960] pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-1 flex items-center justify-between"
+          className="absolute -top-10 -left-28 sm:-left-32 w-36 sm:w-40 p-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-md text-[10px] font-semibold text-[#0f5960] pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-1 flex items-center justify-between"
         >
           <span>Hi! I'm your AI Guide. 👋</span>
-          <div className="absolute -bottom-1 right-5 w-2 h-2 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
+          <div className="absolute -bottom-1 right-4 w-2 h-2 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
         </div>
       )}
 
       {/* Dynamic Contextual Guidance Speech Bubble */}
       {speechBubble && (
         <div
-          className="absolute -top-16 -left-36 sm:-left-44 w-52 sm:w-56 p-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-xl text-[11px] text-slate-800 pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-2"
+          className="absolute -top-14 -left-32 sm:-left-40 w-44 sm:w-48 p-2 rounded-xl bg-white/95 backdrop-blur-md border border-teal-900/15 shadow-lg text-[10px] text-slate-800 pointer-events-none z-30 animate-in fade-in slide-in-from-bottom-2"
         >
-          <div className="flex items-center gap-1.5 mb-0.5 text-[9px] font-bold uppercase tracking-wider text-[#0f5960]">
+          <div className="flex items-center gap-1 mb-0.5 text-[8.5px] font-bold uppercase tracking-wider text-[#0f5960]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#00F2FE] animate-pulse" />
             Kraviona Voice
           </div>
-          <p className="line-clamp-2 leading-snug font-medium text-slate-700">
+          <p className="line-clamp-2 leading-snug font-medium text-slate-700 text-[10px]">
             {speechBubble}
           </p>
-          <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
+          <div className="absolute -bottom-1.5 right-5 w-2.5 h-2.5 bg-white border-b border-r border-teal-900/15 transform rotate-45" />
         </div>
       )}
 
       {/* Small Elegant Status Indicator Dot */}
-      <span className="absolute -top-0.5 -right-0.5 z-20 flex h-3 w-3">
+      <span className="absolute -top-0.5 -right-0.5 z-20 flex h-2.5 w-2.5">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-75" />
-        <span className="relative inline-flex rounded-full h-3 w-3 bg-[#00F2FE] border-2 border-white shadow-xs" />
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00F2FE] border-1.5 border-white shadow-xs" />
       </span>
 
       {/* 3D Floating Bobbing Head Assembly */}
@@ -407,27 +407,27 @@ export default function RobotHead3D({
       >
         {/* Left Ear Audio Module with Glowing Cyan Ring */}
         <div
-          className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-6 rounded-l-full bg-gradient-to-r from-slate-200 to-white shadow-sm flex items-center justify-center border-l border-y border-slate-300"
-          style={{ transform: "translateZ(-4px)" }}
+          className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-2.5 h-4.5 sm:w-3 sm:h-5 rounded-l-full bg-gradient-to-r from-slate-200 to-white shadow-sm flex items-center justify-center border-l border-y border-slate-300"
+          style={{ transform: "translateZ(-3px)" }}
         >
-          <div className="w-1 h-4 rounded-full bg-[#00F2FE] shadow-[0_0_6px_#00F2FE]" />
+          <div className="w-0.5 sm:w-1 h-3 rounded-full bg-[#00F2FE] shadow-[0_0_5px_#00F2FE]" />
         </div>
 
         {/* Right Ear Audio Module with Glowing Cyan Ring */}
         <div
-          className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-6 rounded-r-full bg-gradient-to-l from-slate-200 to-white shadow-sm flex items-center justify-center border-r border-y border-slate-300"
-          style={{ transform: "translateZ(-4px)" }}
+          className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-2.5 h-4.5 sm:w-3 sm:h-5 rounded-r-full bg-gradient-to-l from-slate-200 to-white shadow-sm flex items-center justify-center border-r border-y border-slate-300"
+          style={{ transform: "translateZ(-3px)" }}
         >
-          <div className="w-1 h-4 rounded-full bg-[#00F2FE] shadow-[0_0_6px_#00F2FE]" />
+          <div className="w-0.5 sm:w-1 h-3 rounded-full bg-[#00F2FE] shadow-[0_0_5px_#00F2FE]" />
         </div>
 
         {/* Main Glossy Pearlescent White Ceramic Head Shell */}
         <div
-          className="relative w-full h-full rounded-[44%_44%_46%_46%] bg-gradient-to-b from-white via-[#F4F7F9] to-[#DCE4E9] shadow-[0_8px_20px_rgba(15,89,96,0.22),inset_0_3px_6px_rgba(255,255,255,0.9),inset_0_-4px_8px_rgba(160,180,195,0.35)] border border-white flex items-center justify-center overflow-hidden"
+          className="relative w-full h-full rounded-[44%_44%_46%_46%] bg-gradient-to-b from-white via-[#F4F7F9] to-[#DCE4E9] shadow-[0_6px_16px_rgba(15,89,96,0.2),inset_0_2px_5px_rgba(255,255,255,0.9),inset_0_-3px_6px_rgba(160,180,195,0.3)] border border-white flex items-center justify-center overflow-hidden"
           style={{ transform: "translateZ(0px)" }}
         >
           {/* Top Ceramic Glare Specular Highlight */}
-          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-4/5 h-6 rounded-full bg-gradient-to-b from-white/95 to-transparent blur-[0.5px] pointer-events-none" />
+          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-4/5 h-4 sm:h-5 rounded-full bg-gradient-to-b from-white/95 to-transparent blur-[0.5px] pointer-events-none" />
 
           {/* Black, Rounded-Rectangular Face Screen */}
           <div

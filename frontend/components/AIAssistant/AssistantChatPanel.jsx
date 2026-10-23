@@ -245,7 +245,7 @@ export default function AssistantChatPanel({
             <div className="flex items-center gap-1.5">
               <h3 className="text-xs font-bold tracking-tight text-white">Kraviona AI Assistant</h3>
               <span className="text-[8px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-1 py-0.2 rounded-full">
-                {autoSpeak ? "Auto Speak ON" : "Online"}
+                {autoSpeak ? "Auto Read Aloud ON" : "Online"}
               </span>
             </div>
             <p className="text-[9px] text-teal-100/75 leading-none">Founder-Led Engineering Guide</p>

@@ -71,6 +71,9 @@ export default function KravionaAIAssistant() {
       const savedAutoSpeak = localStorage.getItem("kraviona_auto_speak");
       if (savedAutoSpeak !== null) {
         setAutoSpeak(savedAutoSpeak === "true");
+      } else {
+        setAutoSpeak(true);
+        localStorage.setItem("kraviona_auto_speak", "true");
       }
     } catch {}
 
@@ -96,6 +99,48 @@ export default function KravionaAIAssistant() {
     };
   }, []);
 
+  // Modern browser autoplay unblocker: Prime audio & auto-read on first user interaction
+  useEffect(() => {
+    if (!mounted) return;
+
+    let unlocked = false;
+    const unlockAudioAndAnnounce = () => {
+      if (unlocked) return;
+      unlocked = true;
+      setHasInteracted(true);
+      speechController.prime();
+
+      // If Auto Read & Voice are active, speak the current route announcement aloud!
+      if (autoSpeak && voiceEnabled && !isMuted) {
+        const currentPath = pathname || "/";
+        if (lastAnnouncedPathRef.current !== currentPath) {
+          lastAnnouncedPathRef.current = currentPath;
+          const announcement = getRouteAnnouncement(currentPath);
+          showTemporaryBubble(announcement, 5000);
+          speechController.speak(announcement, {
+            onStart: () => setExpression("speaking"),
+            onEnd: () => setExpression("idle"),
+            onViseme: (val) => setViseme(val),
+          });
+        }
+      }
+    };
+
+    window.addEventListener("pointerdown", unlockAudioAndAnnounce, { once: true, passive: true });
+    window.addEventListener("click", unlockAudioAndAnnounce, { once: true, passive: true });
+    window.addEventListener("touchstart", unlockAudioAndAnnounce, { once: true, passive: true });
+    window.addEventListener("keydown", unlockAudioAndAnnounce, { once: true, passive: true });
+    window.addEventListener("scroll", unlockAudioAndAnnounce, { once: true, passive: true });
+
+    return () => {
+      window.removeEventListener("pointerdown", unlockAudioAndAnnounce);
+      window.removeEventListener("click", unlockAudioAndAnnounce);
+      window.removeEventListener("touchstart", unlockAudioAndAnnounce);
+      window.removeEventListener("keydown", unlockAudioAndAnnounce);
+      window.removeEventListener("scroll", unlockAudioAndAnnounce);
+    };
+  }, [mounted, pathname, autoSpeak, voiceEnabled, isMuted, showTemporaryBubble]);
+
   const handleToggleAutoSpeak = () => {
     setHasInteracted(true);
     const nextState = !autoSpeak;
@@ -105,7 +150,7 @@ export default function KravionaAIAssistant() {
     } catch {}
 
     if (nextState) {
-      speakText("Auto Speak enabled. I will guide you automatically.");
+      speakText("Auto Read and Loud Speak enabled. I will guide you automatically.");
     } else {
       speechController.stop();
       showTemporaryBubble("Auto Speak disabled. Click Listen to hear speech.", 3000);
@@ -359,6 +404,9 @@ export default function KravionaAIAssistant() {
               onClick={() => {
                 setHasInteracted(true);
                 setIsOpen(true);
+                if (autoSpeak && voiceEnabled && !isSpeaking && !isMuted) {
+                  speakText("Hi! I'm your Kraviona AI Voice Guide. How can I assist you today?");
+                }
               }}
             />
           </div>

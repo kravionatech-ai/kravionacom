@@ -79,19 +79,19 @@ export default function AssistantVoiceControls({
             )}
           </button>
 
-          {/* AUTO SPEAK OPTION TOGGLE */}
+          {/* AUTO SPEAK / AUTO READ ALOUD OPTION TOGGLE */}
           <button
             onClick={onToggleAutoSpeak}
-            title={autoSpeak ? "Auto Speak is ON (speaks chat & forms automatically)" : "Auto Speak is OFF (click to enable)"}
+            title={autoSpeak ? "Auto Read Aloud is ON (speaks chat, pages & forms automatically)" : "Auto Read Aloud is OFF (click to enable)"}
             className={`px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 transition-all border ${
               autoSpeak
                 ? "bg-[#0f5960] text-white border-[#0f5960] shadow-xs"
                 : "bg-white text-slate-600 border-slate-300 hover:bg-slate-100"
             }`}
-            aria-label="Toggle Auto Speak option"
+            aria-label="Toggle Auto Read Aloud option"
           >
             <Radio className={`w-3 h-3 ${autoSpeak ? "text-[#00F2FE] animate-pulse" : "text-slate-400"}`} />
-            <span>Auto Speak: {autoSpeak ? "ON" : "OFF"}</span>
+            <span>Auto Read: {autoSpeak ? "ON" : "OFF"}</span>
           </button>
 
           {/* Stop Button */}
