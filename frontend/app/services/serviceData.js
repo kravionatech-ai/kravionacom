@@ -3202,6 +3202,129 @@ export const SERVICE_PAGES = {
       },
     ],
   },
+
+  // ── 22. Next.js Development ───────────────────────────────────────────────
+  "nextjs-development": {
+    name: "Next.js Development",
+    shortName: "Next.js",
+    category: "Web Development",
+    description:
+      "Production-grade Next.js web applications built with React Server Components, App Router, SSR, and Core Web Vitals optimization.",
+    seo: {
+      metaTitle: "Next.js Development Company in India | Kraviona",
+      metaDescription:
+        "Custom Next.js development services for startups and enterprises in India. High-velocity App Router architecture, SSR, and Core Web Vitals optimization.",
+      keywords: [
+        "Next.js Development Company India",
+        "Next.js Development Services",
+        "Next.js Developers Delhi NCR",
+        "Hire Next.js Developer India",
+        "Next.js App Router Agency",
+        "React Server Components India",
+      ],
+    },
+    hero: {
+      eyebrow: "Next.js Development Company India",
+      title: "Next.js Development",
+      highlight: "Services",
+      description:
+        "High-velocity Next.js applications engineered for sub-second speeds, App Router architecture, SSR, and top Google search rankings.",
+    },
+    intro:
+      "At Kraviona, our Next.js development services combine React Server Components, hybrid SSR/SSG rendering, and edge computing to engineer websites and web applications that achieve 90+ PageSpeed scores and top search engine visibility. We build production systems for fast-growing startups and enterprises across India and global tech markets.",
+    outcomes: [
+      {
+        title: "Sub-second PageSpeed & Core Web Vitals",
+        description:
+          "We leverage streaming SSR, automatic image optimization, and bundle trimming to ensure your website passes Google Core Web Vitals on mobile and desktop.",
+      },
+      {
+        title: "App Router & React Server Components",
+        description:
+          "Modern Next.js 14/15 architecture with server-first data fetching, nested layouts, and minimal client-side JavaScript payloads.",
+      },
+      {
+        title: "SEO-native architectural foundations",
+        description:
+          "Dynamic metadata, auto-generated sitemaps, Open Graph social cards, and structured JSON-LD schemas baked directly into every route.",
+      },
+      {
+        title: "Cloud & edge deployment pipelines",
+        description:
+          "Automated CI/CD with Docker containerization, AWS EC2/Amplify or Vercel edge deployment, and zero-downtime release workflows.",
+      },
+    ],
+    deliverables: [
+      "Production Next.js application codebase with clean component hierarchy",
+      "Dynamic App Router architecture with server components and edge middleware",
+      "API route handlers and backend integrations with MongoDB or PostgreSQL",
+      "Automated sitemap.xml, robots.txt, and Schema.org structured data",
+      "Lighthouse 90+ performance optimization and Core Web Vitals compliance",
+      "Full cloud deployment configuration with SSL, PM2/Docker, and reverse proxy",
+    ],
+    idealFor: [
+      "Startups and SaaS companies requiring search visibility from day one",
+      "E-commerce brands seeking lightning-fast custom storefronts",
+      "Content platforms, directories, and portals needing rapid indexing",
+      "Companies upgrading from Create React App, WordPress, or legacy PHP stacks",
+    ],
+    process: [
+      {
+        title: "Discovery & Rendering Strategy",
+        description:
+          "We evaluate whether SSR, SSG, ISR, or edge rendering best serves your application's data velocity and SEO goals.",
+      },
+      {
+        title: "Component & App Router Architecture",
+        description:
+          "We scaffold clean domain boundaries, reusable UI components, and server-side data fetching layers.",
+      },
+      {
+        title: "State, API & Database Integration",
+        description:
+          "We integrate RESTful or GraphQL APIs, authentication flows, and database connections with strict validation.",
+      },
+      {
+        title: "Performance Tuning & Cloud Launch",
+        description:
+          "We run Core Web Vitals audits, configure caching headers, and deploy the application to your cloud infrastructure.",
+      },
+    ],
+    techStack: [
+      "Next.js 14/15",
+      "React 18/19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Prisma ORM",
+      "MongoDB",
+      "PostgreSQL",
+      "Docker",
+      "AWS",
+    ],
+    faqs: [
+      {
+        question: "Why choose Next.js over plain React?",
+        answer:
+          "Next.js renders pages on the server before sending HTML to the browser, enabling instant search engine indexability, superior Core Web Vitals, and much faster initial page loads compared to client-only React SPAs.",
+      },
+      {
+        question: "Can Kraviona migrate our existing React app to Next.js?",
+        answer:
+          "Yes. We specialize in zero-downtime migrations from Create React App, Vite, or legacy stacks to modern Next.js App Router architectures.",
+      },
+      {
+        question: "How does Next.js improve Google search rankings?",
+        answer:
+          "Because Next.js pre-renders HTML on the server, Googlebot immediately discovers and indexes your complete text, headings, and schema markup without waiting for client-side JavaScript execution.",
+      },
+      {
+        question: "Do you build with the Next.js App Router?",
+        answer:
+          "Yes. We build all modern projects on the Next.js App Router with React Server Components, server actions, and granular Suspense boundaries.",
+      },
+    ],
+  },
 };
 
 export const SERVICE_LINKS = Object.entries(SERVICE_PAGES).map(

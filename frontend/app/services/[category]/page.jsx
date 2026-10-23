@@ -251,6 +251,7 @@ const STATIC_SERVICE_SLUGS = new Set([
   "database-architecture",
   "full-stack-development",
   "mern-stack-development",
+  "nextjs-development",
   "nodejs-development",
   "react-development",
   "saas-development",

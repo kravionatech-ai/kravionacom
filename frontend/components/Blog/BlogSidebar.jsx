@@ -20,6 +20,16 @@ import { getImageUrl, formatDate } from "@/utils/dataHelpers";
 
 const SERVICES_CATALOG = [
   {
+    slug: "nextjs-development",
+    title: "Next.js Development",
+    category: "Web Frameworks",
+    badge: "Fastest Speed",
+    icon: Code2,
+    description: "Server-side rendered, SEO-engineered Next.js web applications with sub-second performance.",
+    tags: ["Next.js 15 and App Router", "Server Components", "Headless CMS"],
+    matchKeys: ["nextjs", "next.js", "ssr", "ssg", "server components", "turbopack"],
+  },
+  {
     slug: "mern-stack-development",
     title: "MERN Stack Development",
     category: "Web Development",

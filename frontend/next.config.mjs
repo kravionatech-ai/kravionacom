@@ -230,6 +230,11 @@ const nextConfig = {
 
       // Service URL consolidations
       {
+        source: "/services/ecommerce-development",
+        destination: "/services/ecommerce-development-marketing",
+        permanent: true,
+      },
+      {
         source: "/services/react-js-development",
         destination: "/services/react-development",
         permanent: true,

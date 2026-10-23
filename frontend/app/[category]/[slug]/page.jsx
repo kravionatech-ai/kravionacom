@@ -245,6 +245,177 @@ export async function generateMetadata({ params }) {
 
 // ─── Main Page Component ──────────────────────────────────────────────────────
 
+
+function getServiceBridgeData(post) {
+  const text = `${post?.category?.slug || ""} ${post?.category?.name || ""} ${post?.title || ""} ${post?.slug || ""}`.toLowerCase();
+
+  if (text.includes("seo") || text.includes("crawl") || text.includes("traffic") || text.includes("keyword") || text.includes("google")) {
+    return {
+      badge: "Organic Search & Technical SEO",
+      title: "Need to fix crawl errors, optimize speed, or scale organic rankings?",
+      description: "Kraviona's Technical SEO team conducts deep server log audits, resolves indexation roadblocks, passes Core Web Vitals, and builds search-native Next.js architectures that turn organic search into qualified inbound leads.",
+      primaryService: {
+        name: "Technical SEO Services",
+        href: "/services/technical-seo",
+        tagline: "Fix crawl lag, indexation errors & Core Web Vitals",
+      },
+      secondaryService: {
+        name: "Web Performance Optimization",
+        href: "/services/web-performance-optimization",
+        tagline: "Sub-second load times & 90+ PageSpeed",
+      },
+      ctaText: "Book a Technical SEO Discovery Call",
+      ctaHref: "/contact",
+    };
+  }
+
+  if (text.includes("next") || text.includes("react") || text.includes("mern") || text.includes("node") || text.includes("javascript") || text.includes("typescript") || text.includes("tech stack") || text.includes("vibe coding")) {
+    return {
+      badge: "Full-Stack Web Engineering",
+      title: "Building a high-velocity web application or custom software product?",
+      description: "From Next.js App Router architecture to scalable Node.js and MERN stack systems, Kraviona delivers production-grade web applications engineered for speed, clean domain separation, and top search engine visibility.",
+      primaryService: {
+        name: "MERN Stack Development Services",
+        href: "/services/mern-stack-development",
+        tagline: "Enterprise MongoDB, Node, Express & React architecture",
+      },
+      secondaryService: {
+        name: "Next.js Development Company",
+        href: "/services/nextjs-development",
+        tagline: "Server components, SSR & SEO-first foundations",
+      },
+      ctaText: "Discuss Your Web Project",
+      ctaHref: "/contact",
+    };
+  }
+
+  if (text.includes("ai") || text.includes("agent") || text.includes("automation") || text.includes("chatgpt") || text.includes("claude") || text.includes("llm") || text.includes("copilot")) {
+    return {
+      badge: "AI Automation & Agents",
+      title: "Want to automate manual workflows or deploy intelligent AI chatbots?",
+      description: "Kraviona builds custom LLM integrations, autonomous AI agent pipelines, and 24/7 intelligent customer engagement chatbots trained on your company's proprietary knowledge base.",
+      primaryService: {
+        name: "AI Workflow Automation Services",
+        href: "/services/ai-automation",
+        tagline: "Custom LLMs, n8n pipelines & automated workflows",
+      },
+      secondaryService: {
+        name: "Custom AI Chatbot Development",
+        href: "/services/ai-chatbot-development",
+        tagline: "24/7 lead qualification & knowledge base bots",
+      },
+      ctaText: "Schedule an AI Discovery Consultation",
+      ctaHref: "/contact",
+    };
+  }
+
+  if (text.includes("deploy") || text.includes("aws") || text.includes("cloud") || text.includes("docker") || text.includes("security") || text.includes("zero trust")) {
+    return {
+      badge: "Cloud Infrastructure & Backend",
+      title: "Need scalable cloud backend architecture and resilient APIs?",
+      description: "We architect low-latency Node.js microservices, Docker containerized AWS EC2 environments, and secure RESTful/GraphQL APIs built for high concurrency and zero downtime.",
+      primaryService: {
+        name: "Backend Development Services",
+        href: "/services/backend-development",
+        tagline: "Resilient server logic & cloud microservices",
+      },
+      secondaryService: {
+        name: "API Development & Integration",
+        href: "/services/api-development",
+        tagline: "Secure REST/GraphQL APIs & webhooks",
+      },
+      ctaText: "Consult with Backend Architects",
+      ctaHref: "/contact",
+    };
+  }
+
+  return {
+    badge: "Web Engineering & Growth",
+    title: "Partner with a founder-led engineering team to build your next digital product",
+    description: "Kraviona combines modern full-stack web engineering with data-driven technical SEO to help ambitious businesses across Delhi NCR, India, and global markets build faster and convert more visitors.",
+    primaryService: {
+      name: "MERN Stack Development Services",
+      href: "/services/mern-stack-development",
+      tagline: "Scalable full-stack JavaScript systems",
+    },
+    secondaryService: {
+      name: "Technical SEO Services",
+      href: "/services/technical-seo",
+      tagline: "Turn technical quality into Google rankings",
+    },
+    ctaText: "Book a Free Technical Discovery Call",
+    ctaHref: "/contact",
+  };
+}
+
+const ArticleServiceBridge = ({ post }) => {
+  const data = getServiceBridgeData(post);
+  return (
+    <div className="my-12 rounded-3xl border border-[#2A4A52]/20 bg-gradient-to-br from-[#1A2E33] via-[#243F45] to-[#0A2024] p-8 text-white shadow-xl relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[#E8622A]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative z-10">
+        <div className="inline-flex items-center gap-2 rounded-full bg-[#E8622A]/20 border border-[#E8622A]/40 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-[#FF8E5C] mb-4">
+          <Sparkles className="h-3.5 w-3.5" />
+          <span>{data.badge}</span>
+        </div>
+        <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-3">
+          {data.title}
+        </h3>
+        <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-8 max-w-3xl">
+          {data.description}
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <Link
+            href={data.primaryService.href}
+            className="group rounded-2xl border border-white/15 bg-white/5 p-5 backdrop-blur-sm hover:border-[#E8622A]/60 hover:bg-white/10 transition-all"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-extrabold text-white group-hover:text-[#FF8E5C] transition-colors text-base">
+                {data.primaryService.name}
+              </span>
+              <ArrowRight className="h-4 w-4 text-[#FF8E5C] transform group-hover:translate-x-1 transition-transform" />
+            </div>
+            <p className="text-xs text-white/70 leading-relaxed">
+              {data.primaryService.tagline}
+            </p>
+          </Link>
+
+          <Link
+            href={data.secondaryService.href}
+            className="group rounded-2xl border border-white/15 bg-white/5 p-5 backdrop-blur-sm hover:border-[#E8622A]/60 hover:bg-white/10 transition-all"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-extrabold text-white group-hover:text-[#FF8E5C] transition-colors text-base">
+                {data.secondaryService.name}
+              </span>
+              <ArrowRight className="h-4 w-4 text-[#FF8E5C] transform group-hover:translate-x-1 transition-transform" />
+            </div>
+            <p className="text-xs text-white/70 leading-relaxed">
+              {data.secondaryService.tagline}
+            </p>
+          </Link>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/15">
+          <div className="flex items-center gap-3">
+            <ShieldCheck className="h-5 w-5 text-emerald-400 flex-shrink-0" />
+            <span className="text-xs font-semibold text-white/90">
+              Founder-led architecture • Free 30-min discovery call • No sales pressure
+            </span>
+          </div>
+          <Link
+            href={data.ctaHref}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#E8622A] px-6 py-3 text-xs font-bold text-white shadow-brand-md hover:bg-[#B84A1A] transition-all flex-shrink-0 w-full sm:w-auto"
+          >
+            {data.ctaText} <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default async function PostDetailPage({ params }) {
   const { category, slug } = await params;
   const post = await getPost(slug);
@@ -1052,6 +1223,8 @@ export default async function PostDetailPage({ params }) {
               )}
 
               <BlogDetailPage blog={post} />
+
+              <ArticleServiceBridge post={post} />
 
               <div className="mt-12 pt-8 border-t border-gray-200">
                 <BlogEngagement blog={post} />
