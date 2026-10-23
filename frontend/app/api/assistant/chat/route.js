@@ -22,79 +22,89 @@ CRITICAL INSTRUCTIONS:
 5. Accuracy: Never invent pricing packages, fake guarantees, or imaginary team members. If you do not know an answer, politely recommend reaching the team at +91 96085 53167 or /contact.
 6. Brevity: Keep conversational answers concise (2 to 4 sentences or bullet points) suitable for both reading and voice playback.`;
 
-export async function GET() {
-  return NextResponse.json({
-    success: true,
-    status: "ok",
-    service: "kraviona-ai-assistant",
-  });
+async function processAssistantQuery(query, pageContext = {}) {
+  const openaiKey = process.env.OPENAI_API_KEY;
+  if (openaiKey) {
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${openaiKey}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          messages: [
+            { role: "system", content: `${KRAVIONA_SYSTEM_PROMPT}\n\nContext: ${JSON.stringify(pageContext)}` },
+            { role: "user", content: query },
+          ],
+          max_tokens: 450,
+          temperature: 0.7,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const reply = data.choices?.[0]?.message?.content?.trim();
+        if (reply) {
+          return {
+            reply,
+            sources: [{ title: "Kraviona.com", url: pageContext?.url || "/services" }],
+            engine: "openai",
+          };
+        }
+      }
+    } catch (err) {
+      console.warn("OpenAI API call failed, falling back to local verified knowledge:", err.message);
+    }
+  }
+
+  // Fallback to Kraviona verified knowledge engine
+  const fallback = getFallbackChatResponse(query);
+  return {
+    reply: fallback.reply,
+    sources: fallback.sources || [],
+    engine: "verified_knowledge_engine",
+  };
+}
+
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const query = String(searchParams.get("message") || "").trim();
+
+    if (!query) {
+      return NextResponse.json({
+        success: true,
+        status: "ok",
+        service: "kraviona-ai-assistant",
+      });
+    }
+
+    const result = await processAssistantQuery(query);
+    return NextResponse.json({
+      success: true,
+      data: result,
+    });
+  } catch (err) {
+    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+  }
 }
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { message, pageContext, history = [] } = body;
-
+    const { message, pageContext } = body;
     const query = String(message || "").trim();
+
     if (!query) {
       return NextResponse.json({ success: false, error: "Query is required" }, { status: 400 });
     }
 
-    // Check if an OpenAI or Gemini API key is configured
-    const openaiKey = process.env.OPENAI_API_KEY;
-    if (openaiKey) {
-      try {
-        const messages = [
-          { role: "system", content: `${KRAVIONA_SYSTEM_PROMPT}\n\nCurrent Page Context: ${JSON.stringify(pageContext || {})}` },
-          ...history.slice(-6).map((m) => ({
-            role: m.sender === "user" ? "user" : "assistant",
-            content: m.text,
-          })),
-          { role: "user", content: query },
-        ];
-
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${openaiKey}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-4o-mini",
-            messages,
-            max_tokens: 450,
-            temperature: 0.7,
-          }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const reply = data.choices?.[0]?.message?.content?.trim();
-          if (reply) {
-            return NextResponse.json({
-              success: true,
-              data: {
-                reply,
-                sources: [{ title: "Kraviona.com", url: pageContext?.url || "/services" }],
-                engine: "openai",
-              },
-            });
-          }
-        }
-      } catch (err) {
-        console.warn("OpenAI API call failed, falling back to local verified knowledge:", err.message);
-      }
-    }
-
-    // High-fidelity fallback to Kraviona verified knowledge engine
-    const fallback = getFallbackChatResponse(query);
+    const result = await processAssistantQuery(query, pageContext);
     return NextResponse.json({
       success: true,
-      data: {
-        reply: fallback.reply,
-        sources: fallback.sources || [],
-        engine: "verified_knowledge_engine",
-      },
+      data: result,
     });
   } catch (err) {
     return NextResponse.json(

@@ -11,6 +11,7 @@ import {
   getSelectedText,
 } from "./AssistantPageContext";
 import { attachFormObserver } from "./AssistantFormGuide";
+import { getFallbackChatResponse } from "@/components/Chatbot/fallbackKnowledge";
 import { Volume2, Sparkles, X, BookOpen, MessageSquare } from "lucide-react";
 
 const INITIAL_WELCOME = {
@@ -188,7 +189,7 @@ export default function KravionaAIAssistant() {
     [voiceEnabled, isMuted, showTemporaryBubble]
   );
 
-  // Send message to AI endpoint
+  // Send message to AI endpoint (with instant fallback)
   const handleSendMessage = async (textToSend) => {
     const query = String(textToSend).trim();
     if (!query || isLoading) return;
@@ -206,47 +207,41 @@ export default function KravionaAIAssistant() {
     setIsLoading(true);
     setExpression("thinking");
 
-    try {
-      const pageContext = extractPageContext();
-      const res = await fetch("/api/assistant/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: query,
-          pageContext,
-          history: messages.slice(-5),
-        }),
-      });
+    let replyText = null;
+    let replySources = [];
 
-      const json = await res.json();
-      if (json.success && json.data?.reply) {
-        const botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: json.data.reply,
-          sources: json.data.sources || [],
-          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        };
-        setMessages((prev) => [...prev, botMsg]);
-        speakText(json.data.reply);
-      } else {
-        throw new Error(json.error || "Failed response");
+    // 1. Try GET API route handler
+    try {
+      const res = await fetch(`/api/assistant/chat?message=${encodeURIComponent(query)}`);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data?.reply) {
+          replyText = json.data.reply;
+          replySources = json.data.sources || [];
+        }
       }
-    } catch {
-      const fallbackReply =
-        "Kraviona engineers high-speed Next.js websites, scalable MERN stack apps, and technical SEO. You can reach our team at +91 96085 53167 or visit /contact!";
-      const botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: fallbackReply,
-        sources: [{ title: "Contact Us", url: "/contact" }],
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      };
-      setMessages((prev) => [...prev, botMsg]);
-      speakText(fallbackReply);
-    } finally {
-      setIsLoading(false);
+    } catch (e) {
+      // Proceed to fallback
     }
+
+    // 2. Client-side verified knowledge fallback
+    if (!replyText) {
+      const fallback = getFallbackChatResponse(query);
+      replyText = fallback.reply;
+      replySources = fallback.sources || [];
+    }
+
+    const botMsg = {
+      id: `bot-${Date.now()}`,
+      sender: "bot",
+      text: replyText,
+      sources: replySources,
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    };
+
+    setMessages((prev) => [...prev, botMsg]);
+    setIsLoading(false);
+    speakText(replyText);
   };
 
   // Action: Read Page
@@ -265,7 +260,7 @@ export default function KravionaAIAssistant() {
   const handleSummarizePage = async () => {
     setHasInteracted(true);
     const context = extractPageContext();
-    const summaryPrompt = `Please summarize the key offerings and value proposition of this page: "${context.title} — ${context.h1}". Content snippet: ${context.contentSnippet.slice(0, 800)}`;
+    const summaryPrompt = `Please summarize the key offerings of this page: "${context.title} — ${context.h1}".`;
     handleSendMessage(summaryPrompt);
   };
 
@@ -322,7 +317,7 @@ export default function KravionaAIAssistant() {
         </div>
       )}
 
-      {/* Floating Robot Character Dock (Bottom-Right, stacked neatly above WhatsApp button) */}
+      {/* Floating Robot Character Dock (Bottom-Right) */}
       <div className="fixed bottom-6 right-6 z-50 flex items-end select-none">
         {!isOpen && (
           <div className="flex flex-col items-end">
