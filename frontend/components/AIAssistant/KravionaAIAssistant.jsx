@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import RobotCharacter from "./RobotCharacter";
+import RobotHead3D from "./RobotHead3D";
 import AssistantChatPanel from "./AssistantChatPanel";
 import { speechController } from "./AssistantSpeechController";
 import {
@@ -12,12 +12,12 @@ import {
 } from "./AssistantPageContext";
 import { attachFormObserver } from "./AssistantFormGuide";
 import { getFallbackChatResponse } from "@/components/Chatbot/fallbackKnowledge";
-import { Volume2, Sparkles, X, BookOpen, MessageSquare } from "lucide-react";
+import { Volume2, Sparkles, X, BookOpen, MessageSquare, Radio } from "lucide-react";
 
 const INITIAL_WELCOME = {
   id: "welcome-msg",
   sender: "bot",
-  text: `Hello! 👋 I'm Kraviona's AI Voice Assistant.
+  text: `Hello! 👋 I'm Kraviona's 3D AI Voice Assistant.
 
 I can guide you through our **Web Development** and **Technical SEO** services, read pages aloud, summarize articles, or help you complete our inquiry forms. How can I assist you today?`,
   sources: [],
@@ -35,6 +35,7 @@ export default function KravionaAIAssistant() {
 
   // Voice playback state
   const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [autoSpeak, setAutoSpeak] = useState(true);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -62,9 +63,16 @@ export default function KravionaAIAssistant() {
     }, durationMs);
   }, []);
 
-  // Mount & speechController subscription
+  // Mount, local preference retrieval & speechController subscription
   useEffect(() => {
     setMounted(true);
+
+    try {
+      const savedAutoSpeak = localStorage.getItem("kraviona_auto_speak");
+      if (savedAutoSpeak !== null) {
+        setAutoSpeak(savedAutoSpeak === "true");
+      }
+    } catch {}
 
     const unsubscribe = speechController.subscribe((state) => {
       setIsSpeaking(state.isSpeaking);
@@ -88,6 +96,22 @@ export default function KravionaAIAssistant() {
     };
   }, []);
 
+  const handleToggleAutoSpeak = () => {
+    setHasInteracted(true);
+    const nextState = !autoSpeak;
+    setAutoSpeak(nextState);
+    try {
+      localStorage.setItem("kraviona_auto_speak", String(nextState));
+    } catch {}
+
+    if (nextState) {
+      speakText("Auto Speak enabled. I will guide you automatically.");
+    } else {
+      speechController.stop();
+      showTemporaryBubble("Auto Speak disabled. Click Listen to hear speech.", 3000);
+    }
+  };
+
   // Form field observer integration
   useEffect(() => {
     if (!mounted) return;
@@ -106,8 +130,8 @@ export default function KravionaAIAssistant() {
 
         showTemporaryBubble(meta.guidance, 5000);
 
-        // Speak guidance if voice is enabled and user has interacted
-        if (voiceEnabled && !isMuted && hasInteracted && isNewField) {
+        // Speak guidance ONLY if Auto Speak & Voice are enabled
+        if (autoSpeak && voiceEnabled && !isMuted && hasInteracted && isNewField) {
           speechController.speak(meta.guidance, {
             onStart: () => setExpression("speaking"),
             onEnd: () => setExpression("idle"),
@@ -126,7 +150,7 @@ export default function KravionaAIAssistant() {
     });
 
     return () => cleanup();
-  }, [mounted, voiceEnabled, isMuted, hasInteracted, showTemporaryBubble]);
+  }, [mounted, voiceEnabled, autoSpeak, isMuted, hasInteracted, showTemporaryBubble]);
 
   // Text selection listener
   useEffect(() => {
@@ -160,8 +184,8 @@ export default function KravionaAIAssistant() {
     if (lastAnnouncedPathRef.current !== pathname) {
       lastAnnouncedPathRef.current = pathname;
 
-      // Only announce after user has enabled voice / interacted
-      if (hasInteracted && voiceEnabled && !isMuted) {
+      // Only announce if Auto Speak & Voice are active and user has interacted
+      if (hasInteracted && autoSpeak && voiceEnabled && !isMuted) {
         const announcement = getRouteAnnouncement(pathname);
         showTemporaryBubble(announcement, 5000);
         speechController.speak(announcement, {
@@ -171,9 +195,9 @@ export default function KravionaAIAssistant() {
         });
       }
     }
-  }, [pathname, mounted, hasInteracted, voiceEnabled, isMuted, showTemporaryBubble]);
+  }, [pathname, mounted, hasInteracted, autoSpeak, voiceEnabled, isMuted, showTemporaryBubble]);
 
-  // Interactive message speaker
+  // Explicit speech invoker
   const speakText = useCallback(
     (text) => {
       setHasInteracted(true);
@@ -241,7 +265,11 @@ export default function KravionaAIAssistant() {
 
     setMessages((prev) => [...prev, botMsg]);
     setIsLoading(false);
-    speakText(replyText);
+
+    // If Auto Speak is enabled, automatically speak the AI reply aloud!
+    if (autoSpeak) {
+      speakText(replyText);
+    }
   };
 
   // Action: Read Page
@@ -317,11 +345,11 @@ export default function KravionaAIAssistant() {
         </div>
       )}
 
-      {/* Floating Robot Character Dock (Bottom-Right) */}
+      {/* Floating 3D Robot Head Dock (Bottom-Right, 100% Code-Rendered 3D Head) */}
       <div className="fixed bottom-6 right-6 z-50 flex items-end select-none">
         {!isOpen && (
           <div className="flex flex-col items-end">
-            <RobotCharacter
+            <RobotHead3D
               expression={expression}
               isSpeaking={isSpeaking}
               viseme={viseme}
@@ -337,7 +365,7 @@ export default function KravionaAIAssistant() {
         )}
       </div>
 
-      {/* Expanded Interactive AI Voice Assistant Canvas Window */}
+      {/* Expanded Interactive 3D AI Voice Assistant Window */}
       <AssistantChatPanel
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -348,9 +376,11 @@ export default function KravionaAIAssistant() {
         onReadPage={handleReadPage}
         onSummarizePage={handleSummarizePage}
         onSpeakMessage={speakText}
-        // Voice controller props
+        // Voice & Auto Speak controller props
         voiceEnabled={voiceEnabled}
         onToggleVoice={handleToggleVoice}
+        autoSpeak={autoSpeak}
+        onToggleAutoSpeak={handleToggleAutoSpeak}
         isSpeaking={isSpeaking}
         isPaused={isPaused}
         isMuted={isMuted}

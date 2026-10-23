@@ -19,6 +19,7 @@ import {
   FileText,
   HelpCircle,
   Edit3,
+  Radio,
 } from "lucide-react";
 import AssistantVoiceControls from "./AssistantVoiceControls";
 
@@ -32,9 +33,11 @@ export default function AssistantChatPanel({
   onReadPage = () => {},
   onSummarizePage = () => {},
   onSpeakMessage = () => {},
-  // Voice controller props
+  // Voice & Auto Speak controller props
   voiceEnabled = true,
   onToggleVoice = () => {},
+  autoSpeak = true,
+  onToggleAutoSpeak = () => {},
   isSpeaking = false,
   isPaused = false,
   isMuted = false,
@@ -183,7 +186,7 @@ export default function AssistantChatPanel({
       }`}
       role="dialog"
       aria-modal="true"
-      aria-label="Kraviona AI Voice Assistant"
+      aria-label="Kraviona 3D AI Voice Assistant"
     >
       {/* Header */}
       <div className="flex items-center justify-between px-3.5 py-2.5 bg-gradient-to-r from-[#0f5960] via-[#0d4248] to-[#0a454b] text-white select-none">
@@ -194,12 +197,12 @@ export default function AssistantChatPanel({
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <h3 className="text-xs font-bold tracking-tight text-white">Kraviona Voice AI</h3>
+              <h3 className="text-xs font-bold tracking-tight text-white">3D Robot AI Voice</h3>
               <span className="text-[8px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-1 py-0.2 rounded-full">
-                Interactive
+                {autoSpeak ? "Auto Speak ON" : "Interactive"}
               </span>
             </div>
-            <p className="text-[9.5px] text-teal-100/75 leading-none">Voice & Website Guide</p>
+            <p className="text-[9.5px] text-teal-100/75 leading-none">Founder-Led Engineering Guide</p>
           </div>
         </div>
 
@@ -354,10 +357,12 @@ export default function AssistantChatPanel({
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Embedded Female Voice Controls Bar */}
+      {/* Embedded 3D Robot Female Voice & Auto Speak Controls Bar */}
       <AssistantVoiceControls
         voiceEnabled={voiceEnabled}
         onToggleVoice={onToggleVoice}
+        autoSpeak={autoSpeak}
+        onToggleAutoSpeak={onToggleAutoSpeak}
         isSpeaking={isSpeaking}
         isPaused={isPaused}
         isMuted={isMuted}

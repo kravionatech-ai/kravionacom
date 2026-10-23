@@ -11,19 +11,23 @@ import {
   ChevronDown,
   Gauge,
   Sparkles,
+  Radio,
 } from "lucide-react";
 
 /**
  * AssistantVoiceControls.jsx
  * Comprehensive voice control toolbar providing:
- * - Voice Enable / Disable toggle
- * - Stop Speaking, Pause, Resume, and Mute
+ * - Main Voice Mute/Unmute
+ * - AUTO SPEAK Option Toggle (automatically speaks chat, routes, and forms)
+ * - Stop Speaking, Pause, Resume
  * - Speech Speed selector (0.8x, 1.0x, 1.2x, 1.5x)
- * - Voice selector for natural female voices
+ * - Preferred female voice model selector
  */
 export default function AssistantVoiceControls({
   voiceEnabled = true,
   onToggleVoice = () => {},
+  autoSpeak = true,
+  onToggleAutoSpeak = () => {},
   isSpeaking = false,
   isPaused = false,
   isMuted = false,
@@ -39,7 +43,6 @@ export default function AssistantVoiceControls({
 }) {
   const [showSettings, setShowSettings] = useState(false);
 
-  // Filter female / english / natural voices for a clean dropdown
   const femaleFriendlyVoices = voices.filter(
     (v) =>
       /natural|online|female|samantha|ava|jenny|swara|karen|victoria|google/i.test(v.name) ||
@@ -49,7 +52,7 @@ export default function AssistantVoiceControls({
 
   return (
     <div className="bg-slate-50 border-t border-slate-200/90 px-3 py-2 text-slate-700">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center justify-between gap-1.5 flex-wrap">
         {/* Playback Action Buttons */}
         <div className="flex items-center gap-1">
           {/* Main Voice Toggle */}
@@ -66,7 +69,7 @@ export default function AssistantVoiceControls({
             {voiceEnabled ? (
               <>
                 <Volume2 className="w-3.5 h-3.5 text-[#0f5960]" />
-                <span className="text-[10px] hidden sm:inline">Voice On</span>
+                <span className="text-[10px] hidden sm:inline">Voice</span>
               </>
             ) : (
               <>
@@ -74,6 +77,21 @@ export default function AssistantVoiceControls({
                 <span className="text-[10px] hidden sm:inline">Muted</span>
               </>
             )}
+          </button>
+
+          {/* AUTO SPEAK OPTION TOGGLE */}
+          <button
+            onClick={onToggleAutoSpeak}
+            title={autoSpeak ? "Auto Speak is ON (speaks chat & forms automatically)" : "Auto Speak is OFF (click to enable)"}
+            className={`px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 transition-all border ${
+              autoSpeak
+                ? "bg-[#0f5960] text-white border-[#0f5960] shadow-xs"
+                : "bg-white text-slate-600 border-slate-300 hover:bg-slate-100"
+            }`}
+            aria-label="Toggle Auto Speak option"
+          >
+            <Radio className={`w-3 h-3 ${autoSpeak ? "text-[#00F2FE] animate-pulse" : "text-slate-400"}`} />
+            <span>Auto Speak: {autoSpeak ? "ON" : "OFF"}</span>
           </button>
 
           {/* Stop Button */}
@@ -102,7 +120,7 @@ export default function AssistantVoiceControls({
         </div>
 
         {/* Live Audio Status Waveform */}
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex items-center gap-1">
           {isSpeaking ? (
             <div className="flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-[#0f5960] text-[9.5px] font-semibold animate-pulse">
               <span className="w-1 h-2 bg-[#0f5960] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -111,15 +129,13 @@ export default function AssistantVoiceControls({
               <span className="ml-1 text-[9px] font-bold">Speaking</span>
             </div>
           ) : (
-            <span className="text-[9.5px] text-slate-400 font-medium">Female AI Voice</span>
+            <span className="text-[9.5px] text-slate-400 font-medium hidden sm:inline">3D Voice AI</span>
           )}
-        </div>
 
-        {/* Settings Dropdown Button */}
-        <div className="flex items-center gap-1">
+          {/* Speed & Settings Button */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            title="Voice Speed & Settings"
+            title="Voice Speed & Model Settings"
             className={`p-1.5 rounded-lg transition-colors flex items-center gap-0.5 text-slate-600 ${
               showSettings ? "bg-slate-200 text-[#0f5960]" : "hover:bg-slate-200/80"
             }`}
