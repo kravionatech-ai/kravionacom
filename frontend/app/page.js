@@ -202,10 +202,12 @@ const testimonials = [
 
 // ─── Homepage Metadata ────────────────────────────────────────────────────────
 export const metadata = {
-  // title.default inherited from layout; override only the page-specific title
-  title: "Web Development & Technical SEO Agency Delhi NCR",
+  title: {
+    absolute:
+      "Web Development & Technical SEO Agency Delhi NCR | Kraviona",
+  },
   description:
-    "Next.js and MERN web development plus technical SEO services for ambitious Delhi NCR businesses. Build faster, rank better, and convert more visitors.",
+    "Next.js and MERN stack web development plus technical SEO services for ambitious businesses in Delhi NCR. Built for sub-second speeds and top Google rankings.",
   keywords: [
     "Kraviona",
     "Kraviona Tech Solutions",

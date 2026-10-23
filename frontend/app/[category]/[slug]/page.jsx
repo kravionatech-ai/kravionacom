@@ -204,7 +204,7 @@ export async function generateMetadata({ params }) {
   const featuredImageUrl = getImageUrl(post);
 
   return {
-    title: seoTitle,
+    title: { absolute: seoTitle },
     description,
     alternates: {
       canonical: postCanonical,

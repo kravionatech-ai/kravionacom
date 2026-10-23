@@ -9,12 +9,12 @@ import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { API_URL } from "@/utils/api";
 
 const canonical = "https://www.kraviona.com/gallery";
-const title = "Portfolio & Project Gallery | Kraviona Tech Solutions";
+const title = "Project Portfolio & Work Gallery | Kraviona";
 const description =
   "Explore Kraviona projects, portfolio samples, and digital product work covering MERN stack development, performance, UX, security, and scalable web apps.";
 
 export const metadata = {
-  title,
+  title: { absolute: title },
   description,
   keywords: [
     "Kraviona Portfolio",

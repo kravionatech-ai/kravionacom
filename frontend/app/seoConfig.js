@@ -99,8 +99,11 @@ export function buildMetadata({
   const url = canonicalUrl(path);
   const imageUrl = absoluteImageUrl(image);
 
+  const resolvedTitle = typeof title === "string" ? { absolute: title } : title;
+  const rawTitle = typeof title === "string" ? title : (title?.absolute || title?.default || "");
+
   return {
-    title,
+    title: resolvedTitle,
     description,
     keywords,
     authors,
@@ -110,7 +113,7 @@ export function buildMetadata({
       canonical: url,
     },
     openGraph: {
-      title,
+      title: rawTitle,
       description,
       url,
       siteName: SITE_NAME,
@@ -130,7 +133,7 @@ export function buildMetadata({
       card: "summary_large_image",
       site: SITE_TWITTER,
       creator: SITE_TWITTER,
-      title,
+      title: rawTitle,
       description,
       images: [imageUrl],
       ...twitter,

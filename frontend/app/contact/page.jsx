@@ -39,9 +39,11 @@ const contactPageSchema = {
 export const dynamic = "force-static";
 
 export const metadata = {
-  title: "Contact Kraviona | Web Development & Technical SEO",
+  title: {
+    absolute: "Contact Kraviona | Free Web & SEO Consultation",
+  },
   description:
-    "Book a free consultation with Kraviona for MERN stack development, Next.js websites, technical SEO, AI automation, and custom software projects.",
+    "Book a free technical consultation with Kraviona for MERN stack development, Next.js websites, technical SEO, AI automation, and custom software projects.",
   keywords: [
     "Contact Kraviona",
     "Hire Web Developers India",

@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
     `Read how Kraviona delivered real-world engineering results for ${project.title}.`;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical,

@@ -5,7 +5,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { defaultRobots } from "@/app/seoConfig.js";
 
 export const metadata = {
-  title: "Case Studies – Real-World Results | Kraviona Tech Solutions",
+  title: {
+    absolute: "Case Studies & Client Results | Kraviona",
+  },
   description:
     "Explore Kraviona case studies showing how MERN stack development, technical SEO, performance, and automation improve websites, rankings, and leads.",
   keywords: [

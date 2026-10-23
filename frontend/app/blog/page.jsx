@@ -67,9 +67,11 @@ async function getInitialPosts() {
 }
 
 export const metadata = {
-  title: "Tech Blog | MERN Stack, SEO & Web Development",
+  title: {
+    absolute: "Web Engineering & Technical SEO Blog | Kraviona",
+  },
   description:
-    "Explore Kraviona\'s blog for expert insights on MERN Stack development, Technical SEO, Core Web Vitals, Node.js, React.js, and modern web performance. Written by our engineers.",
+    "Explore Kraviona's blog for expert insights on MERN Stack development, Technical SEO, Core Web Vitals, Node.js, React.js, and modern web performance.",
   keywords: [
     "Kraviona Blog",
     "MERN Stack Blog",

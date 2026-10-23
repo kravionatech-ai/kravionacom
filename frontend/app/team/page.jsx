@@ -74,7 +74,7 @@ const allowedImageHosts = [
 ];
 
 export const metadata = buildMetadata({
-  title: "Kraviona Team | MERN Stack, Next.js & Technical SEO Experts",
+  title: "Kraviona Team | MERN Stack & Technical SEO Experts",
   description:
     "Meet the Kraviona team building fast MERN stack applications, Next.js websites, backend APIs, and technical SEO systems for growing businesses.",
   path: "/team",

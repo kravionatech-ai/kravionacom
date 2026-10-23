@@ -22,9 +22,9 @@ const solutionsPageSchema = {
 export const dynamic = "force-static";
 
 export const metadata = buildMetadata({
-  title: "Industry Technology Solutions & Digital Transformation",
+  title: "Industry Technology Solutions & Software | Kraviona",
   description:
-    "Kraviona builds tailored software, automation, and digital transformation solutions for finance, e-commerce, healthcare, real estate, education, and logistics businesses.",
+    "Custom software and digital transformation solutions for fintech, e-commerce, healthcare, real estate, education, and logistics businesses across India.",
   path: "/solutions",
   image: "/og-solutions.jpg",
   imageAlt: "Kraviona industry technology solutions",

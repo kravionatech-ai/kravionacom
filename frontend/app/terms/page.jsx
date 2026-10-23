@@ -11,12 +11,12 @@ import {
 const canonical = canonicalUrl("/terms");
 const title = "Terms and Conditions";
 const description =
-  "Read Kraviona's bilingual Terms and Conditions for website use, IT services, payments, intellectual property, delivery, confidentiality, liability, and dispute resolution.";
+  "Read Kraviona's Terms and Conditions for website use, IT services, payments, intellectual property, delivery, confidentiality, and dispute resolution.";
 
 export const dynamic = "force-static";
 
 export const metadata = {
-  title: "Terms and Conditions | Kraviona",
+  title: { absolute: "Terms and Conditions | Kraviona Tech Solutions" },
   description,
   keywords: [
     "Kraviona terms and conditions",

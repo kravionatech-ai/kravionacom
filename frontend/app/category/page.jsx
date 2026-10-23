@@ -4,14 +4,14 @@ import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 const canonical = "https://www.kraviona.com/category";
-const title = "Blog Categories and Topic Hubs | Kraviona Insights";
+const title = "Blog Categories & Topic Hubs | Kraviona";
 const description =
   "Browse Kraviona blog categories for practical guides on MERN stack development, technical SEO, AI automation, UI/UX, cloud, and digital growth.";
 
 export const dynamic = "force-static";
 
 export const metadata = {
-  title,
+  title: { absolute: title },
   description,
   keywords: [
     "Blog Categories",

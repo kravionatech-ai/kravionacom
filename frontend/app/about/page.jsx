@@ -38,9 +38,11 @@ const aboutPageSchema = {
 export const dynamic = "force-static";
 
 export const metadata = {
-  title: "About Kraviona | Founder-Led Web Development Team",
+  title: {
+    absolute: "About Kraviona | Founder-Led Web Engineering Team",
+  },
   description:
-    "Meet Kraviona Tech Solutions, a Delhi-based team building fast websites, scalable apps, backend APIs, and technical SEO systems for growing businesses.",
+    "Meet Kraviona Tech Solutions, a Delhi NCR team building fast websites, scalable MERN web apps, backend APIs, and technical SEO systems for growing brands.",
   keywords: [
     "About Kraviona",
     "Kraviona Team",

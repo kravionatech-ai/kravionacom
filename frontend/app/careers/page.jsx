@@ -18,7 +18,7 @@ import {
 } from "./careerData.js";
 
 export const metadata = buildMetadata({
-  title: "Careers at Kraviona | Build Technology That Creates Impact",
+  title: "Careers at Kraviona | Engineering & SEO Jobs",
   description:
     "Explore open roles at Kraviona Tech Solutions across engineering, design, SEO, marketing, and operations. Join a practical, ambitious technology team.",
   path: "/careers",

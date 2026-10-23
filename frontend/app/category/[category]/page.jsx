@@ -57,7 +57,7 @@ export async function generateMetadata({ params }) {
     .replace(/\b\w/g, (l) => l.toUpperCase());
 
   const title =
-    categoryData?.metaTitle || `${formattedTitle} Articles and Guides`;
+    categoryData?.metaTitle || `${formattedTitle} Articles & Guides | Kraviona`;
   const description =
     categoryData?.metaDescription ||
     categoryData?.description ||

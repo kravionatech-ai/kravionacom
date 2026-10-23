@@ -12,7 +12,7 @@ const description =
   "Latest breaking tech news, AI updates, web development stories, and digital industry insights from Kraviona — your source for what matters in tech.";
 
 export const metadata = {
-  title,
+  title: { absolute: title },
   description,
   keywords: [
     "Tech News",

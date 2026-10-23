@@ -16,7 +16,7 @@ const description =
 export const dynamic = "force-static";
 
 export const metadata = {
-  title: "Privacy Policy",
+  title: { absolute: "Privacy Policy | Kraviona Tech Solutions" },
   description,
   keywords: [
     "Kraviona privacy policy",

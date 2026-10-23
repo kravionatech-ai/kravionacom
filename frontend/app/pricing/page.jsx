@@ -6,7 +6,9 @@ import { defaultRobots } from "@/app/seoConfig.js";
 export const dynamic = "force-static";
 
 export const metadata = {
-  title: "Pricing for Web Development & SEO Plans | Kraviona",
+  title: {
+    absolute: "Pricing for Web Development & SEO Plans | Kraviona",
+  },
   description:
     "Compare transparent Kraviona pricing for MERN stack development, technical SEO, AI automation, and digital growth packages from starter to enterprise.",
   keywords: [
