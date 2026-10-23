@@ -177,13 +177,41 @@ const getService = async (slug) => {
       const json = await response.json();
       if (json?.data) {
         const legacy = SERVICE_PAGES[cleanSlug] || {};
+        const apiData = json.data;
         return normalizeService(
           {
             ...legacy,
-            ...json.data,
-            outcomes: json.data.outcomes?.length
-              ? json.data.outcomes
-              : legacy.outcomes,
+            ...apiData,
+            name: legacy.name || apiData.title || apiData.name,
+            category: legacy.category || apiData.category,
+            description: legacy.description || apiData.description || apiData.shortDesc,
+            intro: legacy.intro || apiData.intro || apiData.longDesc,
+            hero: {
+              ...legacy.hero,
+              ...(apiData.hero?.title ? apiData.hero : {}),
+            },
+            seo: {
+              ...legacy.seo,
+              ...(apiData.seo?.metaDescription ? apiData.seo : {}),
+            },
+            outcomes: legacy.outcomes?.length
+              ? legacy.outcomes
+              : (apiData.outcomes?.length ? apiData.outcomes : legacy.outcomes),
+            deliverables: legacy.deliverables?.length
+              ? legacy.deliverables
+              : apiData.deliverables,
+            idealFor: legacy.idealFor?.length
+              ? legacy.idealFor
+              : apiData.idealFor,
+            process: legacy.process?.length
+              ? legacy.process
+              : apiData.process,
+            techStack: legacy.techStack?.length
+              ? legacy.techStack
+              : apiData.techStack,
+            faqs: legacy.faqs?.length
+              ? legacy.faqs
+              : apiData.faqs,
           },
           cleanSlug,
         );
