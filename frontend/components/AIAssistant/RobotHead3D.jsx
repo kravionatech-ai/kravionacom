@@ -197,12 +197,12 @@ export default function RobotHead3D({
     };
   }, []);
 
-  // Desktop: ~54px (compact, non-intrusive) | Mobile: ~46px
+  // Dimensions matching the exact original reference image (wider rounded pebble aspect ratio)
   const sizeClasses = {
-    sm: "w-9 h-9 sm:w-10 sm:h-10",
-    md: "w-[46px] h-[46px] sm:w-[54px] sm:h-[54px]",
-    lg: "w-14 h-14 sm:w-16 sm:h-16",
-  }[size] || "w-[46px] h-[46px] sm:w-[54px] sm:h-[54px]";
+    sm: "w-[50px] h-[42px] sm:w-[56px] sm:h-[48px]",
+    md: "w-[58px] h-[48px] sm:w-[68px] sm:h-[56px]",
+    lg: "w-[72px] h-[60px] sm:w-[82px] sm:h-[68px]",
+  }[size] || "w-[58px] h-[48px] sm:w-[68px] sm:h-[56px]";
 
   // Fluid Parallax Eye Shift inside Visor
   const eyeShiftX = renderGaze.x * 5.2;
@@ -266,14 +266,13 @@ export default function RobotHead3D({
       );
     }
 
-    // Idle neutral curved smile
+    // Idle neutral: signature glowing circular cyan mouth (exact 1:1 match to approved reference design)
     return (
-      <path
-        d="M 43 52 Q 50 57 57 52"
-        fill="none"
-        stroke="#00F2FE"
-        strokeWidth="2.8"
-        strokeLinecap="round"
+      <circle
+        cx="50"
+        cy="53"
+        r="3.8"
+        fill="#00F2FE"
         filter="url(#robotHeadCyanGlow)"
       />
     );
@@ -347,9 +346,9 @@ export default function RobotHead3D({
       );
     }
 
-    // Default & curious: Glowing cyan pill eyes
+    // Default & curious: Glowing cyan pill eyes matching original reference
     const rx = activeExpression === "curious" ? 7.2 : 6.8;
-    const ry = activeExpression === "curious" ? 9.2 : 8.6;
+    const ry = activeExpression === "curious" ? 9.2 : 8.8;
 
     return (
       <g
@@ -357,12 +356,12 @@ export default function RobotHead3D({
         style={{ transformOrigin: "50px 36px" }}
       >
         {/* Left Eye */}
-        <ellipse cx="38" cy="36" rx={rx} ry={ry} fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
-        <ellipse cx="36" cy="33" rx="2.2" ry="3.2" fill="#FFFFFF" opacity="0.85" />
+        <ellipse cx="39.5" cy="36" rx={rx} ry={ry} fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+        <ellipse cx="38" cy="33.5" rx="2" ry="3" fill="#FFFFFF" opacity="0.9" />
 
         {/* Right Eye */}
-        <ellipse cx="62" cy="36" rx={rx} ry={ry} fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
-        <ellipse cx="60" cy="33" rx="2.2" ry="3.2" fill="#FFFFFF" opacity="0.85" />
+        <ellipse cx="60.5" cy="36" rx={rx} ry={ry} fill="#00F2FE" filter="url(#robotHeadCyanGlow)" />
+        <ellipse cx="59" cy="33.5" rx="2" ry="3" fill="#FFFFFF" opacity="0.9" />
       </g>
     );
   };
@@ -377,10 +376,10 @@ export default function RobotHead3D({
       tabIndex={0}
       aria-label="Kraviona AI Assistant"
     >
-      {/* Small Subtle Cyan Accent Status Indicator Dot */}
-      <span className="absolute -top-0.5 -right-0.5 z-20 flex h-2 w-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-75" />
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00F2FE] shadow-[0_0_6px_#00F2FE]" />
+      {/* Floating Glowing Cyan Satellite Orb (matching the exact reference image) */}
+      <span className="absolute -top-1.5 -right-1.5 z-20 pointer-events-none flex h-3 w-3 sm:h-3.5 sm:w-3.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-40 duration-1000" />
+        <span className="relative inline-flex rounded-full h-full w-full bg-[#00F2FE] shadow-[0_0_8px_#00F2FE,0_0_16px_rgba(0,242,254,0.7)] border border-white/60" />
       </span>
 
       {/* 3D Floating Bobbing Head Assembly */}
@@ -391,25 +390,25 @@ export default function RobotHead3D({
           transformStyle: "preserve-3d",
         }}
       >
-        {/* Left Ear Audio Module with Glowing Cyan Ring */}
+        {/* Left Glowing Cyan Ear Pod (matching reference image) */}
         <div
-          className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-2.5 h-4.5 sm:w-3 sm:h-5 rounded-l-full bg-gradient-to-r from-slate-200 to-white shadow-sm flex items-center justify-center border-l border-y border-slate-300"
-          style={{ transform: "translateZ(-3px)" }}
+          className="absolute top-1/2 -left-2 sm:-left-2.5 -translate-y-1/2 w-3 h-5 sm:w-3.5 sm:h-6 rounded-l-full bg-gradient-to-r from-[#00F2FE] to-[#38bdf8] shadow-[0_0_10px_#00F2FE,0_0_18px_rgba(0,242,254,0.45)] flex items-center justify-center border-l border-y border-[#7dd3fc]/80"
+          style={{ transform: "translateZ(-2px)" }}
         >
-          <div className="w-0.5 sm:w-1 h-3 rounded-full bg-[#00F2FE] shadow-[0_0_5px_#00F2FE]" />
+          <div className="w-1 h-3 rounded-full bg-white/75 blur-[0.5px]" />
         </div>
 
-        {/* Right Ear Audio Module with Glowing Cyan Ring */}
+        {/* Right Glowing Cyan Ear Pod (matching reference image) */}
         <div
-          className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-2.5 h-4.5 sm:w-3 sm:h-5 rounded-r-full bg-gradient-to-l from-slate-200 to-white shadow-sm flex items-center justify-center border-r border-y border-slate-300"
-          style={{ transform: "translateZ(-3px)" }}
+          className="absolute top-1/2 -right-2 sm:-right-2.5 -translate-y-1/2 w-3 h-5 sm:w-3.5 sm:h-6 rounded-r-full bg-gradient-to-l from-[#00F2FE] to-[#38bdf8] shadow-[0_0_10px_#00F2FE,0_0_18px_rgba(0,242,254,0.45)] flex items-center justify-center border-r border-y border-[#7dd3fc]/80"
+          style={{ transform: "translateZ(-2px)" }}
         >
-          <div className="w-0.5 sm:w-1 h-3 rounded-full bg-[#00F2FE] shadow-[0_0_5px_#00F2FE]" />
+          <div className="w-1 h-3 rounded-full bg-white/75 blur-[0.5px]" />
         </div>
 
         {/* Main Glossy Pearlescent White Ceramic Head Shell */}
         <div
-          className="relative w-full h-full rounded-[44%_44%_46%_46%] bg-gradient-to-b from-white via-[#F4F7F9] to-[#DCE4E9] shadow-[0_6px_16px_rgba(15,89,96,0.2),inset_0_2px_5px_rgba(255,255,255,0.9),inset_0_-3px_6px_rgba(160,180,195,0.3)] border border-white flex items-center justify-center overflow-hidden"
+          className="relative w-full h-full rounded-[45%_45%_48%_48%] bg-gradient-to-b from-white via-[#F8FAFC] to-[#DBE4EB] shadow-[0_8px_20px_rgba(15,89,96,0.18),inset_0_2px_4px_rgba(255,255,255,0.95),inset_0_-3px_6px_rgba(160,180,195,0.35)] border border-white/90 flex items-center justify-center overflow-hidden"
           style={{ transform: "translateZ(0px)" }}
         >
           {/* Top Ceramic Glare Specular Highlight */}
@@ -417,7 +416,7 @@ export default function RobotHead3D({
 
           {/* Black, Rounded-Rectangular Face Screen */}
           <div
-            className="relative w-[77%] h-[63%] rounded-[36%_36%_42%_42%] bg-gradient-to-b from-[#0A1114] via-[#050B0D] to-[#0D181D] shadow-[inset_0_3px_8px_rgba(0,0,0,0.85),0_1.5px_3px_rgba(255,255,255,0.7)] border border-slate-700/60 overflow-hidden flex items-center justify-center"
+            className="relative w-[78%] h-[65%] rounded-[36%_36%_42%_42%] bg-gradient-to-b from-[#090F13] via-[#050A0D] to-[#0B1418] shadow-[inset_0_3px_8px_rgba(0,0,0,0.9),0_1.5px_3px_rgba(255,255,255,0.7)] border border-slate-700/60 overflow-hidden flex items-center justify-center"
             style={{ transform: "translateZ(5px)" }}
           >
             {/* Glass Glare Diagonal Reflection with Subtle Opposite Parallax */}
