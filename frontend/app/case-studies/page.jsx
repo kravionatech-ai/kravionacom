@@ -1,15 +1,18 @@
 import React from "react";
-import ComingSoon from "@/components/ComingSoon/ComingSoon";
+import GalleryPage from "@/components/Gallery/GalleryPage";
 import { JsonLd } from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
-import { defaultRobots } from "@/app/seoConfig.js";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { defaultRobots, DEFAULT_OG_IMAGE } from "@/app/seoConfig.js";
+import { API_URL } from "@/utils/api";
+
+export const revalidate = 300;
 
 export const metadata = {
   title: {
-    absolute: "Case Studies & Client Results | Kraviona",
+    absolute: "Case Studies & Client Engineering Results | Kraviona",
   },
   description:
-    "Explore Kraviona case studies showing how MERN stack development, technical SEO, performance, and automation improve websites, rankings, and leads.",
+    "Explore Kraviona case studies showing how MERN stack development, Next.js architecture, technical SEO, and automation deliver measurable business results.",
   keywords: [
     "Case Studies",
     "Web Development Case Studies",
@@ -33,7 +36,7 @@ export const metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "/og-image.jpg",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Kraviona Case Studies",
@@ -48,12 +51,33 @@ export const metadata = {
     title: "Case Studies – Real-World Results | Kraviona",
     description:
       "Real case studies showcasing measurable results from Kraviona projects.",
-    images: ["/og-image.jpg"],
+    images: [DEFAULT_OG_IMAGE],
   },
   robots: defaultRobots,
 };
 
-export default function CaseStudiesPage() {
+async function getPublicProjects() {
+  try {
+    const response = await fetch(`${API_URL}/projects`, {
+      next: { revalidate },
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) return [];
+
+    const payload = await response.json();
+    return Array.isArray(payload?.data)
+      ? payload.data
+      : Array.isArray(payload)
+        ? payload
+        : [];
+  } catch {
+    return [];
+  }
+}
+
+export default async function CaseStudiesPage() {
+  const projects = await getPublicProjects();
+
   return (
     <>
       <JsonLd
@@ -62,7 +86,15 @@ export default function CaseStudiesPage() {
           { name: "Case Studies", url: "https://www.kraviona.com/case-studies" },
         ])}
       />
-      <ComingSoon />
+      <JsonLd
+        data={webPageSchema({
+          name: "Case Studies & Client Results | Kraviona",
+          url: "https://www.kraviona.com/case-studies",
+          description:
+            "Explore Kraviona case studies showing how MERN stack development, technical SEO, and automation deliver measurable business results.",
+        })}
+      />
+      <GalleryPage initialProjects={projects} />
     </>
   );
 }
