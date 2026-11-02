@@ -208,7 +208,7 @@ export const deleteMedia = async (req, res) => {
         if (media.fileName) {
             try {
                 const folder = media.mediaType === "image" ? "images" : "media";
-                const localFilePath = path.resolve(__dirname, "../../public/uploads", folder, media.fileName);
+                const localFilePath = path.resolve(__dirname, "../../../public/uploads", folder, media.fileName);
                 if (fs.existsSync(localFilePath)) {
                     fs.unlinkSync(localFilePath);
                 }
