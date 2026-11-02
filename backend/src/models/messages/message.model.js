@@ -2,18 +2,25 @@ import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema(
   {
+    messageId: {
+      type: String,
+      unique: true,
+      sparse: true,
+      index: true,
+      trim: true,
+    },
     firstName: {
       type: String,
       required: [true, "First name is required"],
       trim: true,
-      minlength: [2, "First name should be at least 2 characters"],
+      minlength: [1, "First name should be at least 1 character"],
       maxlength: [50, "First name should be maximum 50 characters"],
     },
     lastName: {
       type: String,
-      required: [true, "Last name is required"],
+      required: false,
       trim: true,
-      minlength: [2, "Last name should be at least 2 characters"],
+      default: "",
       maxlength: [50, "Last name should be maximum 50 characters"],
     },
     email: {
@@ -27,35 +34,68 @@ const messageSchema = new mongoose.Schema(
       ],
       minlength: [3, "Email should be at least 3 characters"],
       maxlength: [100, "Email should be maximum 100 characters"],
+      index: true,
     },
     phone: {
       type: String,
-      required: [true, "Phone number is required"],
+      required: false,
       trim: true,
-      minlength: [7, "Phone number should be at least 7 characters"],
-      maxlength: [20, "Phone number should be maximum 20 characters"],
+      default: "",
+      maxlength: [30, "Phone number should be maximum 30 characters"],
     },
     subject: {
       type: String,
       required: [true, "Subject is required"],
       trim: true,
-      minlength: [3, "Subject should be at least 3 characters"],
-      maxlength: [150, "Subject should be maximum 150 characters"],
+      minlength: [2, "Subject should be at least 2 characters"],
+      maxlength: [200, "Subject should be maximum 200 characters"],
     },
     message: {
       type: String,
       required: [true, "Message is required"],
       trim: true,
-      minlength: [10, "Message should be at least 10 characters"],
-      maxlength: [3000, "Message should be maximum 3000 characters"],
+      minlength: [5, "Message should be at least 5 characters"],
+      maxlength: [5000, "Message should be maximum 5000 characters"],
     },
     status: {
       type: String,
       default: "unread",
       enum: ["unread", "read", "replied", "archived"],
+      index: true,
+    },
+    source: {
+      type: String,
+      default: "contact_page",
+      trim: true,
+    },
+    conversationId: {
+      type: String,
+      index: true,
+      default: "",
+    },
+    resendEmailId: {
+      type: String,
+      sparse: true,
+      index: true,
+      default: null,
+    },
+    notificationStatus: {
+      type: String,
+      enum: ["pending", "sent", "failed", "skipped"],
+      default: "pending",
     },
   },
   { timestamps: true }
 );
 
-export const MessageModel = mongoose.model("message", messageSchema);
+messageSchema.pre("validate", function (next) {
+  if (!this.messageId) {
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).slice(2, 6).toUpperCase();
+    this.messageId = `MSG-${timestamp}-${random}`;
+  }
+  next();
+});
+
+export const MessageModel =
+  mongoose.models.message || mongoose.model("message", messageSchema);

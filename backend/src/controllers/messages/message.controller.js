@@ -1,4 +1,5 @@
 import { MessageModel } from "../../models/messages/message.model.js";
+import { handleContactFormSubmission } from "../../services/email/emailService.js";
 
 const canManageMessages = (user) =>
   user && user.role === "super_admin";
@@ -16,42 +17,79 @@ const handleMessageError = (error, res) => {
   return res.status(500).json({ message: error.message, success: false });
 };
 
-const cleanText = (value) => String(value).trim();
+const cleanText = (value) => String(value || "").trim();
+
+const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 export const createMessage = async (req, res) => {
   try {
-    const { firstName, lastName, email, phone, subject, message } = req.body;
+    const { firstName, lastName, name, email, phone, subject, message, source } = req.body;
 
-    const requiredFields = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      subject,
-      message,
-    };
+    let cleanFirst = cleanText(firstName);
+    let cleanLast = cleanText(lastName);
 
-    for (const [field, value] of Object.entries(requiredFields)) {
-      if (!value || String(value).trim() === "") {
-        return res.status(400).json({
-          message: `${field} is required`,
-          success: false,
-        });
-      }
+    if (!cleanFirst && name) {
+      const parts = cleanText(name).split(/\s+/);
+      cleanFirst = parts[0] || "";
+      cleanLast = parts.slice(1).join(" ");
     }
 
-    await MessageModel.create({
-      firstName: cleanText(firstName),
-      lastName: cleanText(lastName),
-      email: cleanText(email).toLowerCase(),
-      phone: cleanText(phone),
-      subject: cleanText(subject),
-      message: cleanText(message),
+    const cleanEmail = cleanText(email).toLowerCase();
+    const cleanPhone = cleanText(phone);
+    const cleanSubject = cleanText(subject) || "Website Service Inquiry";
+    const cleanMsg = cleanText(message);
+
+    // Validation
+    if (!cleanFirst) {
+      return res.status(400).json({
+        message: "First name is required",
+        success: false,
+      });
+    }
+
+    if (!cleanEmail) {
+      return res.status(400).json({
+        message: "Email address is required",
+        success: false,
+      });
+    }
+
+    if (!EMAIL_REGEX.test(cleanEmail)) {
+      return res.status(400).json({
+        message: "Enter a valid email address",
+        success: false,
+      });
+    }
+
+    if (!cleanMsg) {
+      return res.status(400).json({
+        message: "Message is required",
+        success: false,
+      });
+    }
+
+    if (cleanMsg.length < 5) {
+      return res.status(400).json({
+        message: "Message should be at least 5 characters",
+        success: false,
+      });
+    }
+
+    const submissionResult = await handleContactFormSubmission({
+      firstName: cleanFirst,
+      lastName: cleanLast,
+      email: cleanEmail,
+      phone: cleanPhone,
+      subject: cleanSubject,
+      message: cleanMsg,
+      source: source ? cleanText(source) : "Website Contact Form",
     });
 
     return res.status(201).json({
-      message: "Message created successfully",
+      message: "Message sent successfully! We will contact you soon.",
       success: true,
+      messageId: submissionResult.messageId,
+      conversationId: submissionResult.conversationId,
     });
   } catch (error) {
     return handleMessageError(error, res);
@@ -66,10 +104,10 @@ export const getAllMessages = async (req, res) => {
       return res.status(403).json({ message: "Forbidden", success: false });
     }
 
-    const { status, page = 1, limit = 10, search } = req.query;
+    const { status, page = 1, limit = 20, search } = req.query;
     const query = {};
 
-    if (status) query.status = status;
+    if (status && status !== "All") query.status = status.toLowerCase();
     if (search) {
       query.$or = [
         { firstName: { $regex: search, $options: "i" } },
@@ -77,11 +115,12 @@ export const getAllMessages = async (req, res) => {
         { email: { $regex: search, $options: "i" } },
         { phone: { $regex: search, $options: "i" } },
         { subject: { $regex: search, $options: "i" } },
+        { messageId: { $regex: search, $options: "i" } },
       ];
     }
 
     const currentPage = Math.max(Number.parseInt(page, 10) || 1, 1);
-    const perPage = Math.min(Math.max(Number.parseInt(limit, 10) || 10, 1), 50);
+    const perPage = Math.min(Math.max(Number.parseInt(limit, 10) || 20, 1), 100);
 
     const messages = await MessageModel.find(query)
       .select("-__v")

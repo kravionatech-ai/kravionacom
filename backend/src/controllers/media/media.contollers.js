@@ -1,17 +1,23 @@
+import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { cloudinary } from "../../config/cloudinary.js";
+import { isCloudinaryConfigured } from "../../middleware/upload.middleware.js";
 
 import { mediaModel } from "../../models/media/media.model.js";
 import { Auth } from "../../models/auth/auth.models.js";
 import { recordActivity } from "../../utils/activityLogger.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const uploadMedia = async (req, res) => {
     try {
         const user = req.user;
         const files = req.files;
         if (user.role === "user") return res.status(403).json({
-            message:"User not authorized"
-        })
+            message: "User not authorized"
+        });
 
         if (!files || files.length === 0) {
             return res.status(400).json({
@@ -33,19 +39,25 @@ export const uploadMedia = async (req, res) => {
 
         for (const file of files) {
             const isImage = file.mimetype.startsWith("image/");
-            // multer-storage-cloudinary uploads directly, exposing the secure
-            // delivery URL on `path` and the Cloudinary public id on `filename`.
+            
+            // Determine public URL
+            let publicUrl = file.fileUrl || file.path;
+            if (!publicUrl || !publicUrl.startsWith("http")) {
+                const proto = req.headers["x-forwarded-proto"] || req.protocol || "https";
+                const host = req.get("host") || "api.kraviona.com";
+                const folder = isImage ? "images" : "media";
+                publicUrl = `${proto}://${host}/uploads/${folder}/${file.filename}`;
+            }
+
             const media = await mediaModel.create({
                 fileName: file.filename,
                 originalName: file.originalname,
 
-                fileUrl: file.path,
-                publicId: file.filename,
+                fileUrl: publicUrl,
+                publicId: isCloudinaryConfigured() ? file.filename : null,
 
-                // Images are normalized to WebP in the Cloudinary upload middleware.
-                // Keep the original filename separately so editors can still identify it.
-                mimeType: isImage ? "image/webp" : file.mimetype,
-                extension: isImage ? ".webp" : path.extname(file.originalname),
+                mimeType: isImage && file.path?.includes("cloudinary") ? "image/webp" : file.mimetype,
+                extension: isImage && file.path?.includes("cloudinary") ? ".webp" : (path.extname(file.originalname) || ""),
                 fileSize: file.size,
 
                 mediaType: isImage
@@ -92,7 +104,7 @@ export const uploadMedia = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("uploadMedia error:", error);
 
         return res.status(500).json({
             success: false,
@@ -101,8 +113,6 @@ export const uploadMedia = async (req, res) => {
         });
     }
 };
-
-
 
 export const getMyMedias = async (req, res) => {
     try {
@@ -183,13 +193,27 @@ export const deleteMedia = async (req, res) => {
             });
         }
 
-        if (media.publicId) {
+        // Try destroying in Cloudinary if it has a Cloudinary publicId
+        if (media.publicId && !media.publicId.startsWith("local:")) {
             try {
                 await cloudinary.uploader.destroy(media.publicId, {
                     resource_type: media.mediaType === "video" ? "video" : "image",
                 });
             } catch (cloudinaryError) {
                 console.error("Cloudinary delete failed:", cloudinaryError.message);
+            }
+        }
+
+        // Try deleting from local disk if it exists
+        if (media.fileName) {
+            try {
+                const folder = media.mediaType === "image" ? "images" : "media";
+                const localFilePath = path.resolve(__dirname, "../../public/uploads", folder, media.fileName);
+                if (fs.existsSync(localFilePath)) {
+                    fs.unlinkSync(localFilePath);
+                }
+            } catch (localDeleteError) {
+                console.error("Local file delete failed:", localDeleteError.message);
             }
         }
 

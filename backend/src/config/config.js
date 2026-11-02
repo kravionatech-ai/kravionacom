@@ -34,15 +34,25 @@ const config = {
 
   CORS_ORIGINS: corsOrigins,
 
-  CLOUDINARY_CLOUD_NAME:process.env.CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
   CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
-  CLOUDINARY_API_SECRET : process.env.CLOUDINARY_API_SECRET,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
 
   WEB_PUSH_VAPID_SUBJECT:
     process.env.WEB_PUSH_VAPID_SUBJECT || "mailto:kravionatech@gmail.com",
   WEB_PUSH_VAPID_PUBLIC_KEY: process.env.WEB_PUSH_VAPID_PUBLIC_KEY,
   WEB_PUSH_VAPID_PRIVATE_KEY: process.env.WEB_PUSH_VAPID_PRIVATE_KEY,
 
+  // Resend Email Settings
+  RESEND_API_KEY: process.env.RESEND_API_KEY || "",
+  RESEND_WEBHOOK_SECRET: process.env.RESEND_WEBHOOK_SECRET || "",
+  RESEND_FROM_EMAIL:
+    process.env.RESEND_FROM_EMAIL || "Kraviona Support <support@kraviona.com>",
+  ADMIN_NOTIFICATION_EMAIL:
+    process.env.ADMIN_NOTIFICATION_EMAIL || "kravionatech@gmail.com",
+  APP_BASE_URL: process.env.APP_BASE_URL || "https://www.kraviona.com",
+  ADMIN_BASE_URL: process.env.ADMIN_BASE_URL || "https://admin.kraviona.com",
+  INBOUND_EMAIL_DOMAIN: process.env.INBOUND_EMAIL_DOMAIN || "kraviona.com",
 };
 
 export default config;

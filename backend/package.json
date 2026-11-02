@@ -26,7 +26,10 @@
     "multer": "^2.2.0",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.14",
+    "resend": "^6.34.1",
+    "sanitize-html": "^2.18.1",
     "slugify": "^1.6.9",
+    "svix": "^2.9.0",
     "web-push": "^3.6.7"
   }
 }

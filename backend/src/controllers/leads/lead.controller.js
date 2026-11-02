@@ -1,4 +1,5 @@
 import Lead from "../../models/leads/lead.model.js";
+import { handleLeadNotification } from "../../services/email/emailService.js";
 
 const canManageLeads = (user) =>
   user && user.role === "super_admin";
@@ -51,7 +52,7 @@ export const createLead = async (req, res) => {
       }
     }
 
-    await Lead.create({
+    const createdLead = await Lead.create({
       name: cleanText(name),
       email: cleanText(email).toLowerCase(),
       phone: cleanText(phone),
@@ -67,9 +68,19 @@ export const createLead = async (req, res) => {
       tags: [service, leadType, budget].filter(Boolean).map((tag) => cleanText(tag).toLowerCase()),
     });
 
+    // Notify admin via Resend and create linked conversation in background
+    handleLeadNotification(createdLead).catch((err) =>
+      console.error("Lead email notification background error:", err.message)
+    );
+
     return res.status(201).json({
       message: "Lead created successfully",
       success: true,
+      data: {
+        id: createdLead._id,
+        name: createdLead.name,
+        email: createdLead.email,
+      },
     });
   } catch (error) {
     return handleLeadError(error, res);

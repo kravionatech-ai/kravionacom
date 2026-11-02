@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import healthRouter from '../routes/health.routes.js';
 import Router from '../routes/router.routes.js';
@@ -23,8 +24,42 @@ app.use(
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Parse JSON once and let malformed payloads reach the structured error handler.
-app.use(express.json());
+// Ensure local uploads directories exist
+const uploadsPath = path.resolve(__dirname, "../../public/uploads");
+try {
+  fs.mkdirSync(path.join(uploadsPath, "images"), { recursive: true });
+  fs.mkdirSync(path.join(uploadsPath, "media"), { recursive: true });
+} catch (dirErr) {
+  console.error("Failed to initialize uploads directory:", dirErr.message);
+}
+
+const staticUploadsMiddleware = express.static(uploadsPath, {
+  maxAge: "30d",
+  immutable: true,
+});
+
+app.use(["/uploads", "/api/v1/uploads"], (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
+app.use("/uploads", staticUploadsMiddleware);
+app.use("/api/v1/uploads", staticUploadsMiddleware);
+
+// Parse JSON once and retain the raw request buffer on req.rawBody for cryptographic
+// signature verification (e.g., Svix / Resend webhooks).
+app.use(
+  express.json({
+    verify: (req, _res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 // Requests without a parsed payload should behave like an empty object rather
