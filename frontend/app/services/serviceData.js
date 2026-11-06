@@ -36,7 +36,7 @@ export const SERVICE_EXPERT = {
 export const CATEGORY_DETAILS = {
   "Web Development": {
     intro:
-      "AI-ready web and custom software applications engineered with modern JavaScript, Next.js, React, Node.js, and Python. We architect modular, high-performance digital systems designed to scale gracefully and seamlessly integrate artificial intelligence.",
+      "AI-ready web and custom software applications engineered with modern JavaScript, Next.js, React, Node.js, and Python. We architect modular, high-performance digital systems designed to scale gracefully and easily integrate artificial intelligence.",
     deliverables: [
       "AI-ready responsive web UI & component design systems",
       "Full-stack frontend and backend implementation (Next.js, React, Node.js)",
@@ -59,7 +59,7 @@ export const CATEGORY_DETAILS = {
       {
         question: "Are Kraviona's web applications ready for AI integrations?",
         answer:
-          "Yes. Every web application is built with modular API architecture, clean data schemas, and modern state management, making it seamless to integrate LLMs, autonomous agents, and AI workflows.",
+          "Yes. Every web application is built with modular API architecture, clean data schemas, and modern state management, making it straightforward to integrate LLMs, autonomous agents, and AI workflows.",
       },
       {
         question: "Can Kraviona handle full-stack development from frontend to cloud DevOps?",
@@ -469,7 +469,7 @@ export const SERVICE_PAGES = {
       },
       {
         "title": "Responsive, accessible UI delivery",
-        "description": "Strict adherence to WCAG accessibility guidelines, keyboard navigation, and seamless rendering across all mobile screens."
+        "description": "Strict adherence to WCAG accessibility guidelines, keyboard navigation, and consistent, fast rendering across all mobile screens."
       }
     ],
     "deliverables": [
@@ -557,7 +557,7 @@ export const SERVICE_PAGES = {
       "eyebrow": "High-Concurrency Server Architecture",
       "title": "Node.js Backend",
       "highlight": "Engineering",
-      "description": "Asynchronous, event-driven Node.js microservices and AI agent backends built for high throughput, sub-millisecond data processing, and seamless cloud scale."
+      "description": "Asynchronous, event-driven Node.js microservices and AI agent backends built for high throughput, sub-millisecond data processing, and reliable cloud scale."
     },
     "intro": "Modern digital platforms demand backends that handle thousands of simultaneous connections without choking. Kraviona architects scalable Node.js server environments, real-time event loops, and AI agent backends that process data streams, orchestrate LLM calls, and power robust business workflows with rock-solid stability.",
     "outcomes": [
@@ -791,7 +791,7 @@ export const SERVICE_PAGES = {
       },
       {
         "title": "Payment, CRM & third-party integrations",
-        "description": "Reliable webhook handlers, idempotency keys, and retry queues for seamless external service integration."
+        "description": "Reliable webhook handlers, idempotency keys, and retry queues for reliable external service integration."
       }
     ],
     "deliverables": [
@@ -997,7 +997,7 @@ export const SERVICE_PAGES = {
       },
       {
         "title": "Subscription & recurring billing workflows",
-        "description": "Seamless Stripe and Razorpay integrations handling plans, upgrades, downgrades, trials, and invoices."
+        "description": "Stripe and Razorpay billing integrations handling plans, upgrades, downgrades, trials, and invoices."
       },
       {
         "title": "Multi-tenant data isolation & security",
@@ -1450,7 +1450,7 @@ export const SERVICE_PAGES = {
         "description": "Ingests company docs, product manuals, and pricing sheets to deliver grounded, factual answers."
       },
       {
-        "title": "Seamless human agent handoff & analytics",
+        "title": "Intelligent human agent handoff & analytics",
         "description": "Instantly alerts human reps via email, Slack, or WhatsApp when a customer requests real-time personal support."
       }
     ],
@@ -1466,7 +1466,7 @@ export const SERVICE_PAGES = {
       "Companies losing late-night website leads due to unavailable support staff",
       "Support teams overwhelmed by repetitive, basic customer questions",
       "SaaS and e-commerce brands wanting interactive pre-sales guidance",
-      "Businesses wanting a modern, cutting-edge conversational customer experience"
+      "Businesses wanting a modern, responsive conversational customer experience"
     ],
     "process": [
       {
@@ -1507,7 +1507,7 @@ export const SERVICE_PAGES = {
       },
       {
         "question": "Can the chatbot operate on WhatsApp as well as our website?",
-        "answer": "Yes. We can deploy the same intelligent backend to your official WhatsApp Business API, allowing customers to chat on both your website and WhatsApp seamlessly."
+        "answer": "Yes. We can deploy the same intelligent backend to your official WhatsApp Business API, allowing customers to chat on both your website and WhatsApp with synchronized chat history."
       },
       {
         "question": "How do we update the chatbot when our prices or policies change?",
@@ -1946,7 +1946,7 @@ export const SERVICE_PAGES = {
     "description": "High-converting e-commerce web storefronts, AI product recommendation engines, automated checkout funnels, payment gateways, and multi-channel synchronization.",
     "seo": {
       "metaTitle": "AI-Powered E-Commerce Development & Growth | Kraviona",
-      "metaDescription": "Build and scale high-converting online stores with AI recommendation engines, headless Next.js storefronts, seamless checkouts, and multi-channel sync.",
+      "metaDescription": "Build and scale high-converting online stores with AI recommendation engines, headless Next.js storefronts, frictionless, fast checkouts, and multi-channel sync.",
       "keywords": [
         "AI E-Commerce Development",
         "Custom Online Store India",
@@ -2033,7 +2033,7 @@ export const SERVICE_PAGES = {
       },
       {
         "question": "Can you integrate Indian payment gateways like Razorpay and Cashfree?",
-        "answer": "Yes. We configure seamless checkouts supporting all Indian payment methods: UPI (Google Pay, PhonePe, Paytm), credit/debit cards, net banking, and Cash on Delivery (COD) with OTP verification."
+        "answer": "Yes. We configure frictionless, fast checkouts supporting all Indian payment methods: UPI (Google Pay, PhonePe, Paytm), credit/debit cards, net banking, and Cash on Delivery (COD) with OTP verification."
       },
       {
         "question": "How do you optimize an e-commerce website for Google SEO?",
@@ -2192,7 +2192,7 @@ export const SERVICE_PAGES = {
     ],
     "deliverables": [
       "Optimized product listings with high-ranking titles, bullets, and backend search terms",
-      "Parent-child variation mapping templates ensuring seamless shopper selection",
+      "Parent-child variation mapping templates ensuring intuitive shopper selection",
       "Amazon A+ Content (Enhanced Brand Content) copy and layout blueprints",
       "Category flat file creation and error-free bulk upload execution",
       "High-resolution image guidelines and infographic text overlays",
@@ -2587,7 +2587,7 @@ export const SERVICE_PAGES = {
       "highlight": "Interfaces",
       "description": "Conversion-driven UI/UX design, modern design systems, and conversational AI interfaces engineered for clarity, effortless usability, and enterprise aesthetic standards."
     },
-    "intro": "Software with friction fails to retain users. Kraviona conducts in-depth user journey mapping, wireframing, and high-fidelity interface design in Figma, creating intuitive digital experiences that simplify complex workflows and present AI capabilities with seamless clarity.",
+    "intro": "Software with friction fails to retain users. Kraviona conducts in-depth user journey mapping, wireframing, and high-fidelity interface design in Figma, creating intuitive digital experiences that simplify complex workflows and present AI capabilities with clear, intuitive design.",
     "outcomes": [
       {
         "title": "Interactive wireframes & user journeys",
@@ -2690,7 +2690,7 @@ export const SERVICE_PAGES = {
       "eyebrow": "Custom Enterprise Software Engineering",
       "title": "Web Application",
       "highlight": "Development",
-      "description": "Custom web applications and business portals engineered for high security, seamless team collaboration, and automated workflow execution."
+      "description": "Custom web applications and business portals engineered for high security, productive team collaboration, and automated workflow execution."
     },
     "intro": "Off-the-shelf software often forces businesses into rigid, inefficient processes. Kraviona develops custom, enterprise-grade web applications and internal portals that mirror your exact operational logic, automate manual handoffs, and give your team complete control over your digital infrastructure.",
     "outcomes": [
@@ -2722,7 +2722,7 @@ export const SERVICE_PAGES = {
     "idealFor": [
       "Businesses outgrowing spreadsheets that need a centralized internal software portal",
       "Startups building custom digital products to disrupt their industry",
-      "Companies wanting a branded client portal for seamless customer communication",
+      "Companies wanting a branded client portal for direct, real-time customer communication",
       "Enterprises replacing expensive, bloated third-party software with owned technology"
     ],
     "process": [
@@ -2908,7 +2908,7 @@ export const SERVICE_CATEGORY_HUBS = {
       "Kraviona engineers AI-ready web applications, custom software, mobile apps, enterprise systems, and scalable APIs for ambitious businesses.",
     intro: [
       "Every Kraviona engineering project starts with one core objective: what does the business need the technology to achieve? Whether that is scaling a customer portal, developing custom enterprise software, building an AI-ready web application, or replacing a legacy monolith, the technical decisions follow from business value.",
-      "Our core technology stack spans Next.js, React, Node.js, Python, and scalable databases. We build production-grade web systems, RESTful microservices, and modular software architectures planned for high performance, maintainability, and seamless future AI integrations.",
+      "Our core technology stack spans Next.js, React, Node.js, Python, and scalable databases. We build production-grade web systems, RESTful microservices, and modular software architectures planned for high performance, maintainability, and modular, future-ready AI integrations.",
       "Every project ships with responsive layouts, Core Web Vitals–compliant performance, structured semantic schema for search, and clear handover documentation so your internal team can operate with full confidence.",
     ],
     serviceKeys: [

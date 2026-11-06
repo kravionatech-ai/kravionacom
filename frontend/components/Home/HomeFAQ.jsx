@@ -8,7 +8,7 @@ const faqs = [
   {
     question: "What does it mean that Kraviona is an AI-first technology company?",
     answer:
-      "Kraviona is an AI-first technology company that combines artificial intelligence, intelligent automation, and custom software engineering. We help businesses build intelligent software, deploy autonomous AI agents, automate manual workflows, and scale modern web applications.",
+      "It means artificial intelligence isn't an afterthought or a marketing gimmick for us. From day one, we design our software architectures, web platforms, and operational tools with AI integration in mind—whether that is embedding autonomous agents, automating multi-step data pipelines, or connecting private company knowledge to LLMs.",
   },
   {
     question: "What AI and automation solutions does Kraviona develop?",

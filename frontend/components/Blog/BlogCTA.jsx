@@ -39,9 +39,9 @@ const BlogCTA = () => {
             </h2>
 
             <p className="text-lg text-brand-muted leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Our expert team at Kraviona applies these cutting-edge strategies
-              every day. Let&apos;s collaborate to build scalable applications
-              and high-converting campaigns for your business.
+              Our engineering team at Kraviona applies these practical strategies
+              every day. Let&apos;s collaborate to build intelligent software,
+              automate your workflows, and accelerate business growth.
             </p>
           </motion.div>
 

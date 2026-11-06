@@ -87,7 +87,7 @@ const FALLBACK_SERVICES = [
     _id: "6",
     title: "Enterprise API & System Integration",
     description:
-      "Secure RESTful & GraphQL APIs, cognitive AI model endpoints, webhook architectures, and seamless third-party ERP integrations.",
+      "Secure RESTful & GraphQL APIs, cognitive AI model endpoints, webhook architectures, and reliable enterprise ERP integrations.",
     features: [
       "REST & GraphQL",
       "AI Endpoints",

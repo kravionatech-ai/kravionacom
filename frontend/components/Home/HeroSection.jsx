@@ -63,7 +63,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="mb-9 max-w-2xl border-l-2 border-[#2D6E7A]/40 pl-4 text-base leading-relaxed text-[#5A7A82] md:mb-11 md:text-lg lg:text-xl">
-            Kraviona is an AI-first technology company helping businesses build intelligent software, develop AI-powered solutions and automate complex workflows through advanced technology and innovation.
+            We help founders and engineering leaders build intelligent software, deploy autonomous AI agents, and automate operational bottlenecks. Real engineering, measurable outcomes, and zero fluff.
           </p>
 
           <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">

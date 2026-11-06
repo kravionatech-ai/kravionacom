@@ -82,19 +82,19 @@ const challenges = [
     icon: <RefreshCw />,
     title: "Legacy System Modernization",
     description:
-      "Stuck with old, slow software? We seamlessly migrate your legacy systems to modern, fast MERN stack architectures without losing your data.",
+      "Stuck with slow, outdated software? We migrate your legacy databases and monolithic systems to modern Next.js and Node.js architectures with zero data loss and minimal downtime.",
   },
   {
     icon: <Workflow />,
-    title: "Workflow Automation",
+    title: "Intelligent Workflow Automation",
     description:
-      "Stop wasting time on manual tasks. We build custom internal tools that automate your business processes, saving you hundreds of hours.",
+      "Tired of manual data entry and spreadsheet copy-pasting? We build custom automation pipelines and cognitive AI agents that handle repetitive tasks reliably.",
   },
   {
     icon: <Bot />,
-    title: "AI Integration & Scaling",
+    title: "Enterprise AI & Knowledge Retrieval",
     description:
-      "Ready for the future? We integrate smart AI chatbots and predictive algorithms into your existing platforms to scale your operations.",
+      "Want real AI utility rather than gimmicks? We integrate context-aware assistants and RAG systems trained on your private company documentation.",
   },
   {
     icon: <ShieldAlert />,
@@ -349,11 +349,11 @@ export default function Solutions() {
       <section className="py-24 relative overflow-hidden bg-gradient-to-tr from-[#1A2E33] via-[#2A4A52] to-[#1A2E33] text-center border-t border-[#F28C5E]/20">
         <div className="max-w-3xl mx-auto px-4 relative z-10">
           <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
-            Ready to Disrupt <br className="hidden md:block" /> Your Industry?
+            Ready to Build Smarter <br className="hidden md:block" /> Systems?
           </h2>
           <p className="text-xl text-gray-300 mb-10 font-light">
-            Stop letting outdated technology hold your business back. Partner
-            with Kraviona to build the digital infrastructure of tomorrow.
+            Stop letting manual bottlenecks and legacy software slow down your growth. Partner
+            with Kraviona to engineer intelligent software and automated business systems.
           </p>
           <Link
             href="/contact"
