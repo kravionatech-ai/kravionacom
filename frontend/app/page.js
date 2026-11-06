@@ -13,73 +13,73 @@ import {
 
 export const revalidate = 3600;
 
-// JSON-LD: FAQ Schema (GEO Optimisation)
+// JSON-LD: FAQ Schema (AEO/GEO Optimisation)
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is MERN Stack development and why should I choose it?",
+      name: "What does it mean that Kraviona is an AI-first technology company?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "MERN Stack development uses MongoDB, Express.js, React.js, and Node.js to build modern web applications with one JavaScript-based stack. Kraviona uses MERN when clients need fast delivery, clean APIs, scalable databases, and maintainable product foundations.",
+        text: "Kraviona is an AI-first technology company that combines artificial intelligence, intelligent automation, and custom software engineering. We help businesses build intelligent software, deploy autonomous AI agents, automate manual workflows, and scale modern web applications.",
       },
     },
     {
       "@type": "Question",
-      name: "How does Kraviona approach Technical SEO for websites?",
+      name: "What AI and automation solutions does Kraviona develop?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kraviona's Technical SEO process covers Core Web Vitals, structured data, XML sitemaps, robots.txt, canonical tags, Open Graph metadata, mobile performance, crawlability, indexation, and page-speed improvements.",
+        text: "We develop custom AI agents, enterprise chatbots, workflow automation pipelines (using LangChain, LlamaIndex, n8n), RAG-based knowledge retrieval systems, intelligent document processing, and predictive business intelligence tools.",
       },
     },
     {
       "@type": "Question",
-      name: "How long does it take to build a custom web application?",
+      name: "Can Kraviona integrate AI into our existing web applications or CRM?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Most custom web applications take 4 to 12 weeks depending on scope. Landing pages can move faster, while MERN products with admin panels, APIs, authentication, and integrations need more planning. Kraviona works in practical milestones so clients see progress early.",
+        text: "Yes. We specialize in enterprise AI integration. We embed LLM capabilities, vector search, automated data pipelines, and intelligent assistant interfaces directly into existing codebases and cloud infrastructure.",
       },
     },
     {
       "@type": "Question",
-      name: "Do you provide SEO services along with web development?",
+      name: "What is Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO)?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Kraviona combines web development with Technical SEO. Websites are planned with semantic structure, clean heading hierarchy, performance optimisation, structured data, metadata, and crawl-friendly architecture from the start.",
+        text: "AEO and GEO optimize your digital brand to appear as cited answers and authoritative recommendations inside AI search engines such as Perplexity, ChatGPT, Google Gemini, and Claude, backed by technical SEO and structured Schema graphs.",
       },
     },
     {
       "@type": "Question",
-      name: "What makes Kraviona different from other web development agencies?",
+      name: "Can you build AI-powered SaaS MVPs for startups?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kraviona is founder-led and focused on practical execution: clean MERN and Next.js development, technical SEO, transparent communication, realistic timelines, and post-launch support that helps the product keep improving.",
+        text: "Yes. We build full-lifecycle SaaS MVPs in 4 to 8 weeks, complete with secure authentication, multi-tenancy, Stripe billing, LLM model integration, and scalable database architecture.",
       },
     },
     {
       "@type": "Question",
-      name: "Can you help improve my existing website's performance and SEO?",
+      name: "How do you protect business data privacy when implementing AI solutions?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Kraviona audits page speed, Core Web Vitals, crawlability, technical SEO, mobile UX, conversion blockers, and basic security issues, then turns the findings into a prioritised implementation plan.",
+        text: "We implement private enterprise AI models and secure vector databases with strict access boundaries, ensuring your proprietary customer data is never leaked or used to train public foundation models.",
       },
     },
     {
       "@type": "Question",
-      name: "Do you offer React.js and Node.js development services separately?",
+      name: "How does Kraviona's founder-led engineering approach benefit clients?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Kraviona handles React.js frontend work, Next.js websites, and standalone Node.js or Express.js backend development, including REST APIs, authentication, dashboards, integrations, and real-time features.",
+        text: "Clients work directly with lead engineers without junior layers or account manager telephone games. You get transparent communication, production-grade code, weekly milestone demos, and reliable post-launch support.",
       },
     },
     {
       "@type": "Question",
-      name: "What is your pricing model for web development projects?",
+      name: "What technologies and frameworks do you use?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Pricing depends on scope, complexity, timeline, integrations, and support needs. Kraviona can work with fixed project pricing for clear scopes or retainers for ongoing development, SEO, and maintenance.",
+        text: "Our stack spans Next.js, React, Node.js, Python, PyTorch, MongoDB, PostgreSQL, AWS, Docker, LangChain, OpenAI, and Anthropic APIs.",
       },
     },
   ],
@@ -91,11 +91,11 @@ const homePageSchema = {
   "@type": "WebPage",
   "@id": "https://www.kraviona.com/#webpage",
   url: "https://www.kraviona.com",
-  name: "MERN Stack Development & Technical SEO Company | Kraviona",
+  name: "Kraviona — AI-First Technology & Digital Solutions Company",
   isPartOf: { "@id": "https://www.kraviona.com/#website" },
   about: { "@id": "https://www.kraviona.com/#organization" },
   description:
-    "Kraviona builds MERN stack products, Next.js websites, backend APIs, and technical SEO foundations for businesses that need faster, cleaner digital growth.",
+    "Kraviona builds intelligent software, custom AI agents, SaaS products, and automated digital systems that help businesses innovate and scale.",
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -113,9 +113,9 @@ const homePageSchema = {
 const serviceListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Kraviona IT & Web Development Services",
+  name: "Kraviona AI-First Technology & Software Services",
   description:
-    "Web development, backend engineering, technical SEO, and digital growth services by Kraviona Tech Solutions.",
+    "AI agents, workflow automation, custom software, SaaS development, and technical SEO by Kraviona.",
   url: "https://www.kraviona.com/services",
   itemListElement: [
     {
@@ -123,11 +123,11 @@ const serviceListSchema = {
       position: 1,
       item: {
         "@type": "Service",
-        name: "MERN Stack Development",
+        name: "AI & Automation Solutions",
         description:
-          "Full-stack web applications built with MongoDB, Express.js, React.js, and Node.js for practical business use cases.",
+          "Autonomous cognitive AI agents, multi-step LLM workflows, process automation, and intelligent RAG knowledge assistants.",
         provider: { "@id": "https://www.kraviona.com/#organization" },
-        url: "https://www.kraviona.com/services/mern-stack-development",
+        url: "https://www.kraviona.com/services/ai-automation",
         areaServed: "IN",
       },
     },
@@ -136,11 +136,11 @@ const serviceListSchema = {
       position: 2,
       item: {
         "@type": "Service",
-        name: "Technical SEO Services",
+        name: "AI-Ready Web & Custom Software Development",
         description:
-          "Technical SEO audits, Core Web Vitals improvements, structured data, and crawlability fixes.",
+          "Full-stack web applications and custom software built with Next.js, React, Node.js, and Python with AI readiness from day one.",
         provider: { "@id": "https://www.kraviona.com/#organization" },
-        url: "https://www.kraviona.com/services/technical-seo",
+        url: "https://www.kraviona.com/services/mern-stack-development",
         areaServed: "IN",
       },
     },
@@ -149,11 +149,11 @@ const serviceListSchema = {
       position: 3,
       item: {
         "@type": "Service",
-        name: "React.js Development",
+        name: "SaaS & Intelligent Software Products",
         description:
-          "React.js and Next.js interfaces for websites, dashboards, and product experiences.",
+          "Cloud-native SaaS products, AI SaaS MVPs, multi-tenant architectures, and scalable subscription systems.",
         provider: { "@id": "https://www.kraviona.com/#organization" },
-        url: "https://www.kraviona.com/services/react-development",
+        url: "https://www.kraviona.com/services/saas-development",
         areaServed: "IN",
       },
     },
@@ -162,11 +162,11 @@ const serviceListSchema = {
       position: 4,
       item: {
         "@type": "Service",
-        name: "Node.js Backend Development",
+        name: "Technical SEO, AEO & Generative Engine Optimization",
         description:
-          "REST APIs, authentication, integrations, and reliable backend systems built with Node.js.",
+          "Advanced optimization for Google, Perplexity, and ChatGPT search with structured data, Core Web Vitals, and AI crawlability.",
         provider: { "@id": "https://www.kraviona.com/#organization" },
-        url: "https://www.kraviona.com/services/nodejs-development",
+        url: "https://www.kraviona.com/services/technical-seo",
         areaServed: "IN",
       },
     },
@@ -204,28 +204,28 @@ const testimonials = [
 export const metadata = {
   title: {
     absolute:
-      "Web Development & Technical SEO Agency Delhi NCR | Kraviona",
+      "Kraviona — AI-First Technology & Digital Solutions Company",
   },
   description:
-    "Next.js and MERN stack web development plus technical SEO services for ambitious businesses in Delhi NCR. Built for sub-second speeds and top Google rankings.",
-  authors: [{ name: "Kraviona Tech", url: SITE_URL }],
-  creator: SITE_NAME,
-  publisher: SITE_NAME,
+    "Building Intelligent Businesses Through AI, Technology & Automation. Kraviona develops custom AI agents, intelligent software, SaaS products, and enterprise automation.",
+  authors: [{ name: "Kraviona", url: SITE_URL }],
+  creator: "Kraviona",
+  publisher: "Kraviona",
   alternates: { canonical: SITE_URL },
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: SITE_URL,
-    title: "Web Development & Technical SEO Agency Delhi NCR",
+    title: "Kraviona — AI-First Technology & Digital Solutions Company",
     description:
-      "Next.js and MERN web development plus technical SEO services for ambitious Delhi NCR businesses.",
-    siteName: SITE_NAME,
+      "Building Intelligent Businesses Through AI, Technology & Automation. Custom AI agents, intelligent software development, SaaS products, and enterprise automation.",
+    siteName: "Kraviona",
     images: [
       {
         url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Kraviona Tech Solutions — Web Development and Technical SEO Agency",
+        alt: "Kraviona — AI-First Technology & Digital Solutions Company",
         type: "image/png",
       },
     ],
@@ -234,9 +234,9 @@ export const metadata = {
     card: "summary_large_image",
     site: SITE_TWITTER,
     creator: SITE_TWITTER,
-    title: "Web Development & Technical SEO Agency Delhi NCR",
+    title: "Kraviona — AI-First Technology & Digital Solutions Company",
     description:
-      "Next.js and MERN web development plus technical SEO services for ambitious Delhi NCR businesses.",
+      "Building Intelligent Businesses Through AI, Technology & Automation. Custom AI agents, intelligent software, and enterprise automation.",
     images: [DEFAULT_OG_IMAGE],
   },
   robots: defaultRobots,
@@ -298,33 +298,23 @@ const Home = async () => {
                 </span>
               </div>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-[#1A3840] leading-tight mb-5">
-                A Practical{" "}
+                Engineering Intelligent Businesses Through{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2D6E7A] to-[#C85A3C]">
-                  Build and Growth Partner
+                  AI, Software &amp; Automation
                 </span>
               </h2>
               <p className="text-[#5A7A82] leading-relaxed mb-5 text-base md:text-lg">
-                Kraviona Tech Solutions is a Delhi-based{" "}
-                <strong className="text-[#1A3840]">MERN Stack development company</strong> and{" "}
-                <strong className="text-[#1A3840]">Technical SEO company</strong> serving businesses across
-                India and beyond. We build fast websites, reliable web
-                applications, clean backend systems, and SEO-ready foundations
-                that help your business earn attention and convert it.
+                Kraviona is an <strong className="text-[#1A3840]">AI-first technology company</strong> helping ambitious businesses build intelligent software, develop AI-powered solutions, and automate complex workflows. We combine modern artificial intelligence with full-stack software engineering and data-driven growth.
               </p>
               <p className="text-[#5A7A82] leading-relaxed mb-6 text-base md:text-lg">
-                From <strong className="text-[#1A3840]">React.js frontends</strong> and{" "}
-                <strong className="text-[#1A3840]">Node.js APIs</strong> to{" "}
-                <strong className="text-[#1A3840]">Core Web Vitals optimisation</strong>, structured data,
-                admin panels, and search-friendly architecture, we handle the
-                technical layers that make a digital product useful after
-                launch.
+                From <strong className="text-[#1A3840]">autonomous AI agents and conversational assistants</strong> to <strong className="text-[#1A3840]">AI-ready web applications, cloud SaaS engineering, and Generative Engine Optimization (GEO)</strong>, we build digital solutions that work smarter, rank higher, and drive measurable ROI.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
-                  { value: "20+", label: "Projects Delivered" },
-                  { value: "5+", label: "Years of Experience" },
-                  { value: "30d", label: "Launch Support Window" },
-                  { value: "SEO", label: "Built Into Delivery" },
+                  { value: "AI-First", label: "Engineering Focus" },
+                  { value: "50+", label: "Systems Delivered" },
+                  { value: "AEO & SEO", label: "Built Into Delivery" },
+                  { value: "100%", label: "Founder-Led Delivery" },
                 ].map((stat) => (
                   <div
                     key={stat.label}
@@ -402,39 +392,39 @@ const Home = async () => {
               <div className="flex items-center gap-3 mb-5">
                 <span className="w-10 h-[2px] bg-[#2D6E7A]" />
                 <span className="text-[#2D6E7A] font-bold uppercase tracking-[0.18em] text-xs">
-                  Core Services
+                  Core Business Pillars
                 </span>
               </div>
               {[
                 {
-                  title: "MERN Stack Development",
-                  desc: "Full-stack products built with MongoDB, Express.js, React.js, and Node.js, planned for speed, maintainability, and real business workflows.",
-                  href: "/services/mern-stack-development",
+                  title: "01. IT & Technology Services",
+                  desc: "AI-ready web development, custom software engineering, mobile apps, enterprise applications, and cloud backend systems.",
+                  href: "/services/web-development",
                 },
                 {
-                  title: "Technical SEO Services",
-                  desc: "Technical audits and implementation for Core Web Vitals, structured data, crawlability, indexing, schema markup, and AI-search readiness.",
+                  title: "02. AI & Automation Solutions",
+                  desc: "Autonomous AI agents, conversational chatbots, generative AI integrations, workflow automation, and RAG knowledge assistants.",
+                  href: "/services/ai-automation",
+                },
+                {
+                  title: "03. SaaS & Software Products",
+                  desc: "Full-lifecycle SaaS development, AI SaaS MVPs, cloud-based software architectures, multi-tenant systems, and subscription platforms.",
+                  href: "/services/saas-development",
+                },
+                {
+                  title: "04. E-commerce Solutions",
+                  desc: "AI-powered e-commerce development, intelligent product recommendations, store automation, payment integrations, and marketplace growth.",
+                  href: "/services/ecommerce-development-marketing",
+                },
+                {
+                  title: "05. Digital Marketing Services",
+                  desc: "Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), technical SEO, schema graphs, and data-driven performance growth.",
                   href: "/services/technical-seo",
                 },
                 {
-                  title: "Next.js Development",
-                  desc: "Server-side rendering, App Router architecture, sub-second page loads, and SEO-first web foundations.",
-                  href: "/services/nextjs-development",
-                },
-                {
-                  title: "React.js Development",
-                  desc: "Component-driven frontend web applications, interactive portals, responsive dashboards, and fast SPAs.",
-                  href: "/services/react-development",
-                },
-                {
-                  title: "Node.js Backend Development",
-                  desc: "REST APIs, authentication, integrations, admin workflows, database design, and deployment support for reliable backend systems.",
-                  href: "/services/nodejs-development",
-                },
-                {
-                  title: "UI/UX Design & Web Design",
-                  desc: "Mobile-first interfaces with clear content, strong navigation, and conversion-focused pages that make the next step obvious.",
-                  href: "/services/ui-ux-design",
+                  title: "Enterprise API & System Integration",
+                  desc: "RESTful and GraphQL APIs, cognitive AI model endpoints, secure cloud infrastructure, and microservices connecting enterprise workflows.",
+                  href: "/services/api-development",
                 },
               ].map((service, i) => (
                 <Link

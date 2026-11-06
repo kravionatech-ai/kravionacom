@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const trustBadges = [
-  { icon: "01", label: "SEO-Ready Builds" },
-  { icon: "02", label: "MERN & Next.js" },
+  { icon: "01", label: "AI-Ready Engineering" },
+  { icon: "02", label: "Intelligent Automation" },
   { icon: "03", label: "Founder-Led Delivery" },
 ];
 
@@ -16,7 +16,7 @@ const HeroSection = () => {
       <div className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-hidden">
         <Image
           src="/images/office/home-hero.webp"
-          alt="Next.js web development team at Kraviona Tech Solutions Delhi NCR"
+          alt="AI-first technology and custom software engineering at Kraviona"
           fill
           priority
           fetchPriority="high"
@@ -33,7 +33,7 @@ const HeroSection = () => {
           <div className="mb-5 flex items-center gap-3 md:mb-7 md:gap-4">
             <div className="h-[2px] w-8 bg-[#2D6E7A] md:w-12" />
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2D6E7A] md:text-sm">
-              Kraviona Tech Solutions
+              Kraviona — AI-First Technology &amp; Digital Solutions
             </span>
           </div>
 
@@ -53,19 +53,17 @@ const HeroSection = () => {
             id="home-hero-heading"
             className="mb-5 text-4xl font-bold leading-[1.08] tracking-tight text-[#1A3840] sm:text-5xl md:mb-7 md:text-6xl lg:text-[4.2rem]"
           >
-            MERN Stack Development &amp;
+            Building the Future with
             <br />
             <span className="text-[#2D6E7A]">
-              Technical SEO Agency
+              Artificial Intelligence
             </span>
             <br />
-            <span className="text-[#1A3840]/90">in Delhi NCR</span>
+            <span className="text-[#1A3840]/90">&amp; Intelligent Software</span>
           </h1>
 
           <p className="mb-9 max-w-2xl border-l-2 border-[#2D6E7A]/40 pl-4 text-base leading-relaxed text-[#5A7A82] md:mb-11 md:text-lg lg:text-xl">
-            Kraviona builds MERN stack products, Next.js websites, backend
-            systems, and technical SEO foundations for brands that need speed,
-            search visibility, and clean execution.
+            Kraviona is an AI-first technology company helping businesses build intelligent software, develop AI-powered solutions and automate complex workflows through advanced technology and innovation.
           </p>
 
           <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
@@ -75,7 +73,7 @@ const HeroSection = () => {
               rel="noopener noreferrer"
               className="group relative inline-flex w-full items-center justify-center gap-2.5 rounded-[6px] bg-[#C85A3C] hover:bg-[#B04D31] px-7 py-4 text-sm font-semibold text-white shadow-brand-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2D6E7A]/40 sm:w-auto md:px-9 md:py-4.5 md:text-base"
             >
-              Book a Free Strategy Call
+              Start Your AI Project
               <svg
                 className="h-4 w-4 transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -96,7 +94,7 @@ const HeroSection = () => {
               href="/services"
               className="inline-flex w-full items-center justify-center rounded-[6px] border-[1.5px] border-[#2D6E7A] bg-transparent hover:bg-[#EAF3F5] px-7 py-4 text-sm font-semibold text-[#2D6E7A] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2D6E7A]/40 sm:w-auto md:px-9 md:py-4.5 md:text-base"
             >
-              See What We Build
+              Explore Our Solutions
             </Link>
           </div>
         </div>
@@ -151,9 +149,9 @@ const HeroSection = () => {
                 d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
               />
             </svg>
-            <p className="mb-1 text-3xl font-black md:text-4xl">Full-Stack</p>
+            <p className="mb-1 text-3xl font-black md:text-4xl">AI &amp; SaaS</p>
             <p className="text-[10px] font-semibold uppercase tracking-widest text-white/80 md:text-xs">
-              Product Builds
+              Intelligent Software
             </p>
           </div>
 
@@ -172,9 +170,9 @@ const HeroSection = () => {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-            <p className="mb-1 text-3xl font-black md:text-4xl">SEO</p>
+            <p className="mb-1 text-3xl font-black md:text-4xl">Automation</p>
             <p className="text-[10px] font-semibold uppercase tracking-widest text-[#5A7A82] md:text-xs">
-              Technical Growth
+              Workflow &amp; Growth
             </p>
           </div>
         </div>

@@ -40,9 +40,9 @@ const servicesPageSchema = {
   "@type": "CollectionPage",
   "@id": "https://www.kraviona.com/services#webpage",
   url: "https://www.kraviona.com/services",
-  name: "MERN Stack Development & Technical SEO Services | Kraviona",
+  name: "AI Solutions, Custom Software & Technology Services | Kraviona",
   description:
-    "Explore Kraviona's full suite of web development, technical SEO, AI automation, digital marketing, e-commerce, marketplace seller, and brand services.",
+    "Explore Kraviona's complete suite of AI & automation solutions, IT & technology services, SaaS products, e-commerce solutions, and digital marketing services.",
   isPartOf: { "@id": "https://www.kraviona.com/#website" },
 };
 
@@ -52,20 +52,20 @@ const servicesBreadcrumbSchema = breadcrumbSchema([
 ]);
 
 export const metadata = {
-  title: { absolute: "Web Development & Technical SEO Services in Delhi NCR | Kraviona" },
+  title: { absolute: "AI Solutions, Custom Software & Technology Services | Kraviona" },
   description:
-    "Explore Kraviona services for MERN stack development, Next.js websites, technical SEO, AI automation, UI/UX design, performance, APIs, and SaaS.",
-  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
-  creator: "Kraviona Tech Solutions",
+    "Explore Kraviona's AI-first technology services: AI agents, workflow automation, custom software development, SaaS engineering, e-commerce, and technical SEO.",
+  authors: [{ name: "Kraviona", url: "https://www.kraviona.com" }],
+  creator: "Kraviona",
   alternates: {
     canonical: "https://www.kraviona.com/services",
   },
   openGraph: {
-    title: "Web Development & Technical SEO Services in Delhi NCR | Kraviona",
+    title: "AI Solutions, Custom Software & Technology Services | Kraviona",
     description:
-      "Explore Kraviona's web development, AI automation, digital marketing, marketplace seller, and technical SEO services.",
+      "Explore Kraviona's AI-first technology services: AI agents, intelligent automation, custom software, SaaS products, and technical SEO.",
     url: "https://www.kraviona.com/services",
-    siteName: "Kraviona Tech Solutions",
+    siteName: "Kraviona",
     type: "website",
     locale: "en_IN",
     images: [
@@ -73,7 +73,7 @@ export const metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kraviona Tech Solutions – IT Services",
+        alt: "Kraviona – AI Solutions & Technology Services",
         type: "image/jpeg",
       },
     ],
@@ -82,9 +82,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Web Development & Technical SEO Services in Delhi NCR | Kraviona",
+    title: "AI Solutions, Custom Software & Technology Services | Kraviona",
     description:
-      "Custom MERN stack apps, technical SEO, AI automation, marketing, and seller services. Built to scale.",
+      "Custom AI agents, intelligent automation, SaaS products, and enterprise software engineering.",
     images: ["/og-image.jpg"],
   },
   robots: defaultRobots,

@@ -50,24 +50,23 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "Kraviona Tech Solutions — Web Dev & SEO Agency Delhi NCR",
-    template: "%s | Kraviona Tech Solutions",
+    default: "Kraviona — AI-First Technology & Digital Solutions Company",
+    template: "%s | Kraviona",
   },
 
   description:
-    "Kraviona is a Delhi NCR agency for Next.js, MERN stack web development, backend APIs, and technical SEO services built for speed and search visibility.",
-
+    "Kraviona is an AI-first technology company building intelligent software, AI agents, SaaS products, and automated digital solutions that help businesses scale.",
 
   authors: [
     {
-      name: "Kraviona Tech Solutions",
+      name: "Kraviona",
       url: SITE_URL,
     },
   ],
 
-  creator: SITE_NAME,
+  creator: "Kraviona",
 
-  publisher: SITE_NAME,
+  publisher: "Kraviona",
 
   robots: defaultRobots,
 
@@ -78,12 +77,12 @@ export const metadata = {
 
     url: SITE_URL,
 
-    title: "Kraviona Tech Solutions | Web Dev & SEO Agency Delhi NCR",
+    title: "Kraviona — AI-First Technology & Digital Solutions Company",
 
     description:
-      "Top MERN Stack, Next.js and Technical SEO agency in Delhi NCR. Building fast, scalable websites that rank on Google.",
+      "Building Intelligent Businesses Through AI, Technology & Automation. Kraviona builds intelligent software, AI agents, SaaS products, and automated digital systems.",
 
-    siteName: SITE_NAME,
+    siteName: "Kraviona",
 
     images: [
       {
@@ -102,10 +101,10 @@ export const metadata = {
 
     creator: SITE_TWITTER,
 
-    title: "Kraviona Tech Solutions | Web Dev & SEO Delhi NCR",
+    title: "Kraviona — AI-First Technology & Digital Solutions Company",
 
     description:
-      "Expert Next.js development and Technical SEO for growth-focused businesses in Delhi NCR.",
+      "Building Intelligent Businesses Through AI, Technology & Automation. Custom AI agents, intelligent software, and enterprise automation.",
 
     images: [DEFAULT_OG_IMAGE],
   },
@@ -146,7 +145,7 @@ export const metadata = {
   },
 
   category: "technology",
-  classification: "Web Development & SEO Services",
+  classification: "AI-First Technology & Digital Solutions",
 };
 
 export default function RootLayout({ children }) {

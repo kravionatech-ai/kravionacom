@@ -28,15 +28,13 @@ const AboutBanner = () => {
           <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tighter leading-[1.1] mb-8">
             We build{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8622A] to-[#F28C5E]">
-              digital systems
+              intelligent systems
             </span>{" "}
-            that stay useful.
+            that power growth.
           </h1>
 
           <p className="text-lg md:text-xl text-brand-muted leading-relaxed max-w-2xl mx-auto font-medium">
-            Kraviona is a founder-led technology team for businesses that need
-            fast websites, reliable web apps, clean backend systems, and
-            technical SEO that is planned from the first sprint.
+            Kraviona is an AI-first technology company helping businesses build intelligent software, develop AI-powered solutions, and automate complex workflows with verifiable engineering standards.
           </p>
         </motion.div>
       </div>

@@ -37,7 +37,7 @@ const ContactBanner = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <h1 className="text-5xl md:text-6xl font-extrabold text-dark mb-4 tracking-tight">
-            Start a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8622A] to-[#F28C5E]">Project</span>
+            Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8622A] to-[#F28C5E]">AI &amp; Tech Project</span>
           </h1>
 
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm md:text-base font-medium text-brand-muted mb-8">

@@ -7,19 +7,19 @@ import Image from "next/image";
 
 const features = [
   {
-    title: "Clear Development Process",
+    title: "AI-Native & Systems Engineering",
     description:
-      "You get practical milestones, direct communication, and enough structure to know what is happening at each stage.",
+      "Every application is architected with modern AI integrations, clean APIs, resilient databases, and automated workflows from day one.",
   },
   {
-    title: "Scalable MERN Architecture",
+    title: "Practical Business Impact",
     description:
-      "Applications are planned with clean APIs, maintainable code, and database decisions that do not trap you later.",
+      "We prioritize operational efficiency, lead conversion, automated customer support, and measurable business growth over vanity buzzwords.",
   },
   {
-    title: "SEO Built Into the Work",
+    title: "Founder-Led Direct Delivery",
     description:
-      "Technical SEO, performance, metadata, and structure are handled during the build, not patched in as an afterthought.",
+      "You work directly with senior engineers and strategists with transparent milestones, rapid execution, and production-grade reliability.",
   },
 ];
 
@@ -168,17 +168,14 @@ const WhyChooseUs = () => {
               </div>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A3840] tracking-tight mb-6 leading-[1.15]">
-                We Build Systems That{" "}
+                We Build Technology That{" "}
                 <span className="text-[#2D6E7A]">
-                  Keep Working
+                  Works Smarter
                 </span>
               </h2>
 
               <p className="text-lg md:text-xl text-[#5A7A82] mb-10 leading-relaxed">
-                Kraviona is built for businesses that want more than a pretty
-                launch. We combine product thinking, clean engineering, and
-                technical SEO so your website or application has a stronger
-                foundation from day one.
+                Kraviona is built for forward-looking businesses. We combine artificial intelligence, custom software engineering, and search intelligence so your digital operations run smarter, faster, and more profitably.
               </p>
             </motion.div>
 

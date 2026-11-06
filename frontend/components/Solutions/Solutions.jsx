@@ -143,7 +143,7 @@ export default function Solutions() {
               variants={fadeUp}
               className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-8"
             >
-              Technology That Solves <br className="hidden md:block" />
+              Intelligent Technology That Solves <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8622A] via-[#F28C5E] to-[#E8622A] animate-gradient-x">
                 Real Business Problems.
               </span>
@@ -153,9 +153,7 @@ export default function Solutions() {
               variants={fadeUp}
               className="text-xl text-gray-300 leading-relaxed mb-10 max-w-2xl mx-auto font-light"
             >
-              We don&apos;t believe in one-size-fits-all. We engineer custom
-              digital solutions designed specifically around your
-              industry&apos;s unique challenges, workflows, and growth targets.
+              From custom AI agents and workflow automation to high-scale SaaS and industry platforms, we engineer intelligent solutions designed around your operational goals.
             </motion.p>
           </motion.div>
         </div>

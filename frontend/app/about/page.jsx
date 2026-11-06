@@ -12,9 +12,9 @@ const aboutPageSchema = {
   "@type": "AboutPage",
   "@id": "https://www.kraviona.com/about#webpage",
   url: "https://www.kraviona.com/about",
-  name: "About Kraviona – Engineering Digital Ecosystems",
+  name: "About Kraviona – AI-First Technology & Digital Solutions Company",
   description:
-    "Learn about Kraviona, the founder-led team building MERN stack products, Next.js websites, backend systems, and technical SEO foundations.",
+    "Learn about Kraviona, an AI-first technology company building intelligent software, autonomous AI agents, SaaS products, and automated digital systems.",
   isPartOf: { "@id": "https://www.kraviona.com/#website" },
   breadcrumb: {
     "@type": "BreadcrumbList",
@@ -39,19 +39,19 @@ export const dynamic = "force-static";
 
 export const metadata = {
   title: {
-    absolute: "About Kraviona | Founder-Led Web Engineering Team",
+    absolute: "About Kraviona | AI-First Technology & Software Company",
   },
   description:
-    "Meet Kraviona Tech Solutions, a Delhi NCR team building fast websites, scalable MERN web apps, backend APIs, and technical SEO systems for growing brands.",
-  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
-  creator: "Kraviona Tech Solutions",
+    "Meet Kraviona, an AI-first technology company helping businesses build intelligent software, develop AI-powered solutions, and automate complex workflows.",
+  authors: [{ name: "Kraviona", url: "https://www.kraviona.com" }],
+  creator: "Kraviona",
   alternates: { canonical: "https://www.kraviona.com/about" },
   openGraph: {
-    title: "About Kraviona | Founder-Led Web Development Team",
+    title: "About Kraviona | AI-First Technology & Software Company",
     description:
-      "Meet the team behind Kraviona's MERN stack development, Next.js websites, backend systems, and technical SEO work.",
+      "Building Intelligent Businesses Through AI, Technology & Automation. Meet the engineering team behind Kraviona.",
     url: "https://www.kraviona.com/about",
-    siteName: "Kraviona Tech Solutions",
+    siteName: "Kraviona",
     type: "website",
     locale: "en_IN",
     images: [
@@ -59,7 +59,7 @@ export const metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "About Kraviona Tech Solutions",
+        alt: "About Kraviona – AI-First Technology & Digital Solutions",
         type: "image/jpeg",
       },
     ],
@@ -68,9 +68,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "About Kraviona | Founder-Led Web Development Team",
+    title: "About Kraviona | AI-First Technology & Software Company",
     description:
-      "Meet the team behind Kraviona's development and technical SEO work.",
+      "Building Intelligent Businesses Through AI, Technology & Automation.",
     images: ["/og-image.jpg"],
   },
   robots: defaultRobots,

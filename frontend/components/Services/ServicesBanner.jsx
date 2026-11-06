@@ -39,7 +39,7 @@ const ServicesBanner = () => {
         >
           {/* Main Page Title */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-dark mb-4 tracking-tight">
-            Web Development &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8622A] to-[#F28C5E]">Technical SEO Services</span> in Delhi NCR
+            AI-First Technology, Software &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8622A] to-[#F28C5E]">Digital Solutions</span>
           </h1>
 
           {/* Breadcrumbs (Home » Services) */}

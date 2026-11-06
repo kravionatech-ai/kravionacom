@@ -20,74 +20,79 @@ import { API_URL } from "@/utils/api";
 const FALLBACK_SERVICES = [
   {
     _id: "1",
-    title: "MERN Stack Development",
+    title: "AI Agent & Automation Solutions",
     description:
-      "Full-stack applications built with MongoDB, Express.js, React.js, and Node.js for teams that need speed, clarity, and room to scale.",
+      "Autonomous cognitive agents, custom LLM pipelines, workflow automation, and RAG knowledge assistants engineered for enterprise efficiency.",
     features: [
-      "React.js Frontend",
-      "Node.js API",
-      "MongoDB Database",
-      "REST & GraphQL",
-    ],
-    slug: "mern-stack-development",
-  },
-  {
-    _id: "2",
-    title: "Technical SEO",
-    description:
-      "Technical SEO audits and fixes for Core Web Vitals, structured data, crawlability, canonical tags, indexing, and AI-search readiness.",
-    features: [
-      "Core Web Vitals",
-      "Schema Markup",
-      "Crawl Optimisation",
-      "Site Speed",
-    ],
-    slug: "technical-seo",
-  },
-  {
-    _id: "3",
-    title: "Web Performance Optimization",
-    description:
-      "Page-speed improvements, image optimisation, code splitting, lazy loading, and deployment cleanup for faster user experiences.",
-    features: [
-      "Lighthouse 90+ Score",
-      "Image Optimisation",
-      "Code Splitting",
-      "CDN Setup",
-    ],
-    slug: "web-app-development",
-  },
-  {
-    _id: "4",
-    title: "AI Automation",
-    description:
-      "LLM integrations, workflow automation, chatbots, and internal tools that remove repetitive work from your day-to-day operations.",
-    features: [
-      "LLM Integration",
-      "Workflow Automation",
-      "AI Chatbots",
-      "Data Pipelines",
+      "Autonomous Agents",
+      "RAG Knowledge Bases",
+      "Workflow Pipelines",
+      "Enterprise Automation",
     ],
     slug: "ai-automation",
   },
   {
-    _id: "5",
-    title: "Backend Architecture",
+    _id: "2",
+    title: "AI-Ready Web & Custom Software",
     description:
-      "Node.js APIs, authentication, integrations, database structure, real-time features, and deployment support for reliable product foundations.",
-    features: ["Microservices", "JWT Auth", "WebSockets", "Cloud Deploy"],
-    slug: "nodejs-development",
+      "Full-stack web applications and custom software built with Next.js, React.js, Node.js, and Python with AI readiness engineered from day one.",
+    features: [
+      "Next.js & React",
+      "Node.js & Python",
+      "Microservices APIs",
+      "Scalable Databases",
+    ],
+    slug: "mern-stack-development",
+  },
+  {
+    _id: "3",
+    title: "SaaS & Intelligent Software Products",
+    description:
+      "Full-lifecycle cloud SaaS platforms, AI MVP engineering, multi-tenant architectures, and scalable subscription systems.",
+    features: [
+      "SaaS MVP Build",
+      "Multi-Tenancy",
+      "Stripe Billing",
+      "Cloud Architecture",
+    ],
+    slug: "saas-development",
+  },
+  {
+    _id: "4",
+    title: "AI Chatbot & Conversational AI",
+    description:
+      "Context-aware AI chatbots and customer support assistants integrated with company documentation and real-time CRM data.",
+    features: [
+      "Contextual LLMs",
+      "Brand Persona",
+      "CRM Integration",
+      "Omnichannel Deploy",
+    ],
+    slug: "ai-chatbot-development",
+  },
+  {
+    _id: "5",
+    title: "Technical SEO, AEO & GEO Growth",
+    description:
+      "Advanced search optimization for Google, Perplexity, and ChatGPT search with structured data, Core Web Vitals, and semantic authority.",
+    features: [
+      "AEO & GEO Ready",
+      "Schema Graphs",
+      "Core Web Vitals",
+      "Authority Clusters",
+    ],
+    slug: "technical-seo",
   },
   {
     _id: "6",
-    title: "API Development",
+    title: "Enterprise API & System Integration",
     description:
-      "Documented REST and GraphQL APIs with versioning, rate limiting, caching, webhook support, and handover-ready documentation.",
+      "Secure RESTful & GraphQL APIs, cognitive AI model endpoints, webhook architectures, and seamless third-party ERP integrations.",
     features: [
       "REST & GraphQL",
-      "Rate Limiting",
-      "API Caching",
-      "OpenAPI Docs",
+      "AI Endpoints",
+      "Secure Auth",
+      "Production SLAs",
     ],
     slug: "api-development",
   },
@@ -183,16 +188,14 @@ const FeaturedServices = () => {
             >
               Services Built Around{" "}
               <span className="text-[#2D6E7A]">
-                Real Outcomes
+                AI &amp; Intelligent Engineering
               </span>
             </h2>
           </div>
 
           <div className="md:border-l-2 border-[#2D6E7A]/40 md:pl-6 max-w-xs">
             <p className="text-[#5A7A82] text-sm md:text-base leading-relaxed">
-              We focus on the parts that make a digital product useful:
-              performance, structure, maintainability, search visibility, and a
-              clear path to launch.
+              We engineer intelligent digital systems: autonomous AI agents, workflow automation, AI-ready web applications, SaaS platforms, and search-ready foundations.
             </p>
           </div>
         </div>

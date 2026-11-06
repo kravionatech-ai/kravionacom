@@ -6,46 +6,44 @@ import { Plus, Minus, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
-    question: "What is MERN Stack development and why should I choose it?",
+    question: "What does it mean that Kraviona is an AI-first technology company?",
     answer:
-      "MERN Stack development uses MongoDB, Express.js, React.js, and Node.js — a full JavaScript ecosystem for building fast, scalable web applications. It enables rapid development, cost-efficiency (one language across frontend & backend), and is ideal for startups to enterprise businesses. At Kraviona, we specialise in delivering production-grade MERN applications with 99.9% uptime and performance-first architecture.",
+      "Kraviona is an AI-first technology company that combines artificial intelligence, intelligent automation, and custom software engineering. We help businesses build intelligent software, deploy autonomous AI agents, automate manual workflows, and scale modern web applications.",
   },
   {
-    question: "How does Kraviona approach Technical SEO for websites?",
+    question: "What AI and automation solutions does Kraviona develop?",
     answer:
-      "Our Technical SEO process covers Core Web Vitals optimisation, structured data (Schema.org markup), XML sitemaps, robots.txt configuration, canonical tags, Open Graph & Twitter Card meta, site speed improvements, mobile responsiveness, and crawlability audits. We identify and eliminate every technical barrier preventing your site from ranking.",
+      "We develop custom AI agents, enterprise chatbots, workflow automation pipelines (using LangChain, LlamaIndex, n8n), RAG-based knowledge retrieval systems, intelligent document processing, and predictive business intelligence tools.",
   },
   {
-    question: "How long does it take to build a custom web application?",
+    question: "Can Kraviona integrate AI into our existing web applications or CRM?",
     answer:
-      "A typical custom web application takes 4–12 weeks depending on complexity. Simple landing pages are delivered in 1–2 weeks. Full-stack MERN applications with custom admin panels, APIs, and third-party integrations typically take 6–10 weeks. We follow Agile sprints so you see working deliverables every week.",
+      "Yes. We specialize in enterprise AI integration. We embed LLM capabilities, vector search, automated data pipelines, and intelligent assistant interfaces directly into existing codebases and cloud infrastructure.",
   },
   {
-    question: "Do you provide SEO services along with web development?",
+    question: "What is Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO)?",
     answer:
-      "Yes. Kraviona is uniquely positioned as both a web development company and a Technical SEO company. Every website we build is SEO-optimised from day one — including semantic HTML structure, proper heading hierarchy, performance optimisation, structured data markup, and keyword-targeted meta content.",
+      "AEO and GEO optimize your digital brand to appear as cited answers and authoritative recommendations inside AI search engines such as Perplexity, ChatGPT, Google Gemini, and Claude, backed by technical SEO and structured Schema graphs.",
   },
   {
-    question:
-      "What makes Kraviona different from other web development agencies?",
+    question: "Can you build AI-powered SaaS MVPs for startups?",
     answer:
-      "Unlike generic agencies, Kraviona focuses exclusively on performance-first, SEO-ready web solutions. We combine MERN Stack engineering excellence with data-driven marketing strategy, transparent communication, Agile delivery, post-launch support, and measurable ROI-focused outcomes.",
+      "Yes. We build full-lifecycle SaaS MVPs in 4 to 8 weeks, complete with secure authentication, multi-tenancy, Stripe billing, LLM model integration, and scalable database architecture.",
   },
   {
-    question: "Can you help improve my existing website's performance and SEO?",
+    question: "How do you protect business data privacy when implementing AI solutions?",
     answer:
-      "Absolutely. Our comprehensive website audit covers page speed (Core Web Vitals), SEO health (on-page, technical, and off-page), UX/mobile usability, conversion rate optimisation, and security. After the audit, we provide a prioritised action plan and implement fixes.",
+      "We implement private enterprise AI models and secure vector databases with strict access boundaries, ensuring your proprietary customer data is never leaked or used to train public foundation models.",
   },
   {
-    question:
-      "Do you offer React.js and Node.js development services separately?",
+    question: "How does Kraviona's founder-led engineering approach benefit clients?",
     answer:
-      "Yes. We offer dedicated React.js frontend development (dynamic SPAs and dashboards) and standalone Node.js/Express.js backend development (RESTful APIs, microservices, real-time WebSockets). We can integrate with your existing stack or build a completely new backend infrastructure.",
+      "Clients work directly with lead engineers without junior layers or account manager telephone games. You get transparent communication, production-grade code, weekly milestone demos, and reliable post-launch support.",
   },
   {
-    question: "What is your pricing model for web development projects?",
+    question: "What is your pricing model for AI and software projects?",
     answer:
-      "We offer flexible pricing: fixed-price for well-defined projects, time & material for evolving requirements, and monthly retainers for ongoing development & SEO support. Every project starts with a free 30-minute consultation to understand your goals and provide an accurate quote.",
+      "We offer flexible pricing: fixed-price for scoped milestones, dedicated sprint retainers for evolving AI & SaaS products, and enterprise SLAs. Every project starts with a free 30-minute discovery call to map technical feasibility and provide an accurate scope.",
   },
 ];
 

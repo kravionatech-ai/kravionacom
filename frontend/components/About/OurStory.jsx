@@ -31,21 +31,14 @@ const OurStory = () => {
 
             <div className="space-y-6 text-gray-500 leading-relaxed text-lg">
               <p>
-                Kraviona was built around a simple problem we kept seeing:
-                businesses were paying for websites that looked fine on launch
-                day but were hard to maintain, slow to rank, and disconnected
-                from how the business actually worked.
+                Kraviona was founded to bridge the gap between emerging artificial intelligence and practical enterprise execution. Too many businesses either view AI as an abstract buzzword or struggle to implement it within their existing software infrastructure.
               </p>
               <p>
-                Our work closes that gap. We combine clear UI, MERN stack and
-                Next.js development, practical backend architecture, AI-aware
-                workflows, and technical SEO so every build has a stronger
-                foundation after it goes live.
+                Our engineering team bridges that gap. We build custom cognitive AI agents, intelligent workflow automations, AI-ready web platforms, and Generative Engine Optimization strategies that create measurable productivity gains, reduce operational costs, and accelerate business growth.
               </p>
               <div className="border-l-4 border-[#E8622A] pl-6 py-2 mt-8">
                 <p className="text-[#1A2E33] font-bold text-xl">
-                  &ldquo;Good development should make the business easier to
-                  run, easier to find, and easier to grow.&rdquo;
+                  &ldquo;Building Intelligent Businesses Through AI, Technology &amp; Automation.&rdquo;
                 </p>
               </div>
             </div>

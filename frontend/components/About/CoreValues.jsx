@@ -5,16 +5,16 @@ import { motion } from "framer-motion";
 
 const values = [
   {
-    title: "Quality That Holds Up",
-    desc: "We care about clean structure, maintainable code, responsive UI, and the small details that make a site easier to run after launch.",
+    title: "AI-First & Resilient Quality",
+    desc: "We engineer systems with clean structure, maintainable code, robust AI integrations, and strict data privacy that hold up over years of scale.",
   },
   {
-    title: "Clear Communication",
-    desc: "You know what we are building, what we need from you, and what is coming next. No fog, no jargon walls, no surprise scope.",
+    title: "Transparent & Direct Delivery",
+    desc: "You collaborate directly with senior engineers. Clear milestones, weekly demos, no telephone games, and no unexpected scope creeps.",
   },
   {
-    title: "Modern, Practical Thinking",
-    desc: "We keep learning across AI, Next.js, SEO, automation, and cloud tools, then apply what actually helps the project.",
+    title: "Intelligent Business Impact",
+    desc: "We don't build tech for tech's sake. Every AI agent, software platform, or search strategy is tied directly to efficiency and measurable revenue.",
   },
 ];
 

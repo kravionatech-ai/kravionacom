@@ -107,12 +107,11 @@ const ContactFormDetails = () => {
               </span>
             </div>
             <h2 className="mb-8 text-4xl font-bold leading-[1.15] text-primary md:text-5xl">
-              Let&apos;s make the next <br />
-              build clearer.
+              Let&apos;s build your intelligent <br />
+              software &amp; AI systems.
             </h2>
             <p className="text-gray-500 mb-12 text-lg max-w-md leading-relaxed">
-              Share your website, app, SEO, or automation requirement. We will
-              review the details and reply with the most practical next step.
+              Share your AI project, custom software, workflow automation, or technical growth requirements. Our engineering team will review the details and propose the most practical architecture.
             </p>
 
             <div className="space-y-8">
@@ -187,7 +186,7 @@ const ContactFormDetails = () => {
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                placeholder="e.g. Next.js website or SEO audit"
+                placeholder="e.g. AI Agent, Custom Software, or Workflow Automation"
               />
 
               <div>

@@ -13,9 +13,9 @@ const contactPageSchema = {
   "@type": "ContactPage",
   "@id": "https://www.kraviona.com/contact#webpage",
   url: "https://www.kraviona.com/contact",
-  name: "Contact Kraviona - Start Your Web Development Project",
+  name: "Contact Kraviona - Start Your AI & Technology Project",
   description:
-    "Contact Kraviona for MERN stack development, Next.js websites, backend APIs, technical SEO, AI automation, and web performance work.",
+    "Contact Kraviona for custom AI solutions, intelligent automation, custom software development, SaaS products, and technical SEO.",
   isPartOf: { "@id": "https://www.kraviona.com/#website" },
   breadcrumb: {
     "@type": "BreadcrumbList",
@@ -40,19 +40,19 @@ export const dynamic = "force-static";
 
 export const metadata = {
   title: {
-    absolute: "Contact Kraviona | Free Web & SEO Consultation",
+    absolute: "Contact Kraviona | Free AI & Technology Consultation",
   },
   description:
-    "Book a free technical consultation with Kraviona for MERN stack development, Next.js websites, technical SEO, AI automation, and custom software projects.",
-  authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
-  creator: "Kraviona Tech Solutions",
+    "Book a free technical consultation with Kraviona for AI agents, workflow automation, custom software, SaaS development, and digital solutions.",
+  authors: [{ name: "Kraviona", url: "https://www.kraviona.com" }],
+  creator: "Kraviona",
   alternates: { canonical: "https://www.kraviona.com/contact" },
   openGraph: {
-    title: "Contact Kraviona - Start Your Web Development Project",
+    title: "Contact Kraviona - Start Your AI & Technology Project",
     description:
-      "Talk to Kraviona about MERN stack development, Next.js websites, backend APIs, technical SEO, and custom software work.",
+      "Talk directly to Kraviona's engineering team about AI agents, custom software, SaaS products, and workflow automation.",
     url: "https://www.kraviona.com/contact",
-    siteName: "Kraviona Tech Solutions",
+    siteName: "Kraviona",
     type: "website",
     locale: "en_IN",
     images: [
@@ -60,7 +60,7 @@ export const metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Contact Kraviona Tech Solutions",
+        alt: "Contact Kraviona – AI-First Technology & Digital Solutions",
         type: "image/jpeg",
       },
     ],
@@ -69,9 +69,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Contact Kraviona - Start Your Web Development Project",
+    title: "Contact Kraviona - Start Your AI & Technology Project",
     description:
-      "Talk to Kraviona about web development, backend APIs, technical SEO, and custom software work.",
+      "Talk to Kraviona about AI agents, custom software, SaaS platforms, and enterprise automation.",
     images: ["/og-image.jpg"],
   },
   robots: defaultRobots,

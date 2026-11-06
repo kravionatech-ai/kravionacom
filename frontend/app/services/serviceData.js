@@ -16,19 +16,20 @@ export const SERVICE_EXPERT = {
   responseTime: "Usually replies within 1 business day",
   consultation: "Free 30-minute discovery call",
   image: "/amar.jpeg",
-  bio: "Full-stack developer and founder of Kraviona Tech Solutions, focused on MERN stack engineering, technical SEO, marketplace growth, and performance-first digital systems.",
+  bio: "Full-stack engineer and founder of Kraviona, focused on AI-first systems engineering, custom software development, SaaS architectures, and Generative Engine Optimization.",
   credentials: [
-    "Founder-led technical discovery",
-    "MERN stack and Next.js delivery experience",
-    "Technical SEO and Core Web Vitals implementation",
-    "Marketplace seller growth and automation support",
+    "Founder-led technical discovery & AI systems architecture",
+    "Full-stack MERN, Next.js, and Python delivery experience",
+    "Technical SEO, AEO, and Generative Engine Optimization (GEO)",
+    "Workflow automation and custom AI agent engineering",
   ],
   knowsAbout: [
-    "MERN stack development",
-    "Technical SEO",
-    "Marketplace account growth",
-    "Digital marketing automation",
-    "SaaS architecture",
+    "AI agent development",
+    "Intelligent workflow automation",
+    "Custom software development",
+    "MERN & Next.js architecture",
+    "Technical SEO & AEO",
+    "SaaS product engineering",
   ],
 };
 
@@ -3377,16 +3378,16 @@ export const SERVICE_LINKS = Object.entries(SERVICE_PAGES).map(
 
 export const SERVICE_CATEGORY_HUBS = {
   "web-development": {
-    categoryLabel: "Web Development",
+    categoryLabel: "IT & Technology Services",
     slug: "web-development",
-    h1: "Web Development Services — Fast, SEO-Ready Websites & Apps",
-    metaTitle: "Web Development Services in Delhi NCR | Kraviona",
+    h1: "IT & Technology Services — AI-Ready Web & Custom Software Development",
+    metaTitle: "IT & Technology Services | AI-Ready Software | Kraviona",
     metaDescription:
-      "Kraviona builds high-performance websites and web apps using Next.js, React, Node.js, and MERN stack — SEO-ready, mobile-first, and built for long-term scale.",
+      "Kraviona engineers AI-ready web applications, custom software, mobile apps, enterprise systems, and scalable APIs for ambitious businesses.",
     intro: [
-      "Every Kraviona web project starts with one question: what does the business actually need the product to do? Whether that's acquiring leads, running a user portal, powering a marketplace, or replacing a legacy interface, the technical decisions follow from the goal — not the other way around.",
-      "Our web development stack centres on Next.js, React, Node.js, and MongoDB. These aren't fashionable choices — they're practical ones. They give us server-side rendering for SEO, fast client navigation for usability, a clean API layer for integrations, and a scalable database that grows with the product without requiring schema migrations every quarter.",
-      "Every project ships with responsive layouts, Core Web Vitals–compliant performance, semantic HTML for accessibility and search, and clear handover documentation so your team isn't dependent on us forever. Post-launch support is available, but the goal is always to deliver something your team can confidently own.",
+      "Every Kraviona engineering project starts with one core objective: what does the business need the technology to achieve? Whether that is scaling a customer portal, developing custom enterprise software, building an AI-ready web application, or replacing a legacy monolith, the technical decisions follow from business value.",
+      "Our core technology stack spans Next.js, React, Node.js, Python, and scalable databases. We build production-grade web systems, RESTful microservices, and modular software architectures planned for high performance, maintainability, and seamless future AI integrations.",
+      "Every project ships with responsive layouts, Core Web Vitals–compliant performance, structured semantic schema for search, and clear handover documentation so your internal team can operate with full confidence.",
     ],
     serviceKeys: [
       "mern-stack-development",
@@ -3397,74 +3398,55 @@ export const SERVICE_CATEGORY_HUBS = {
       "ui-ux-design",
     ],
   },
-  "backend-architecture": {
-    categoryLabel: "Backend & Architecture",
-    slug: "backend-architecture",
-    h1: "Backend Development & Architecture Services — APIs, Databases & Scalable Systems",
-    metaTitle: "Backend Development & Architecture Services | Kraviona",
+  "performance-ai": {
+    categoryLabel: "AI & Automation Solutions",
+    slug: "performance-ai",
+    h1: "AI & Automation Solutions — Autonomous Agents, Chatbots & Workflows",
+    metaTitle: "AI & Automation Solutions | Cognitive Agents & RAG | Kraviona",
     metaDescription:
-      "Custom backend systems, REST and GraphQL APIs, database architecture, and SaaS platforms built for reliability, security, and clean maintainability.",
+      "Autonomous AI agents, conversational chatbots, RAG assistants, generative AI, document processing, and enterprise process automation.",
     intro: [
-      "A good frontend experience lives or dies by the backend behind it. Kraviona's backend work covers the complete server-side stack — RESTful and GraphQL APIs, authentication and authorisation flows, database schema design, third-party integrations, and the deployment and monitoring configuration that keeps everything stable in production.",
-      "We design for maintainability. That means clear folder structure, consistent naming conventions, typed interfaces where the language supports them, documented endpoints, and error handling that produces useful logs rather than silent failures. A system that's easy to understand six months later is worth more than one that's elegant today and impenetrable next quarter.",
-      "Whether you're building a new SaaS product from scratch, scaling an API that's showing strain under load, or migrating a legacy monolith toward a more modular architecture, Kraviona can handle the discovery, planning, and implementation — and hand it over with enough documentation that your internal team can take it further.",
+      "Artificial intelligence is not just a feature — it is the new backbone of competitive business operations. Kraviona builds practical, enterprise-grade AI solutions that remove manual bottlenecks, synthesize knowledge, and automate complex workflows.",
+      "Our AI solutions span autonomous cognitive agents with multi-step reasoning, context-aware AI chatbots trained on your internal documentation, RAG (Retrieval-Augmented Generation) knowledge systems, intelligent document processing (OCR & extraction), and custom LLM workflows orchestrated with LangChain and n8n.",
+      "Every AI system is designed with strict data privacy boundaries, ensuring proprietary business and customer data remains isolated and secure while delivering measurable operational ROI.",
     ],
     serviceKeys: [
+      "ai-automation",
+      "ai-chatbot-development",
+      "technical-seo",
+      "web-performance-optimization",
+    ],
+  },
+  "backend-architecture": {
+    categoryLabel: "SaaS & Software Products",
+    slug: "backend-architecture",
+    h1: "SaaS & Software Products — Cloud Platforms, MVPs & Multi-Tenant Systems",
+    metaTitle: "SaaS & Software Product Engineering | Kraviona",
+    metaDescription:
+      "Custom SaaS product development, AI SaaS MVPs, cloud-based software, multi-tenant architectures, and subscription platforms.",
+    intro: [
+      "Building a software product requires more than writing code — it demands multi-tenant data isolation, resilient subscription billing, API rate limiting, and architectures that scale gracefully under load.",
+      "Kraviona engineers full-lifecycle cloud SaaS products and rapid MVPs. From user authentication and role-based access control (RBAC) to Stripe billing workflows and automated data pipelines, we build software products ready for commercial traction.",
+      "Whether you are launching a new B2B AI SaaS product or scaling an existing software platform, we deliver clean, documented code and infrastructure designed for high SLA and continuous delivery.",
+    ],
+    serviceKeys: [
+      "saas-development",
       "backend-development",
       "api-development",
       "database-architecture",
-      "saas-development",
-    ],
-  },
-  "performance-ai": {
-    categoryLabel: "Performance & AI",
-    slug: "performance-ai",
-    h1: "Performance Optimisation & AI Services — Speed, SEO & Intelligent Automation",
-    metaTitle: "Web Performance & AI Automation Services | Kraviona",
-    metaDescription:
-      "Technical SEO, Core Web Vitals optimisation, LLM integrations, and AI workflow automation for businesses that want measurable speed and search improvements.",
-    intro: [
-      "Site speed and search visibility are not separate disciplines. A page that loads in four seconds on mobile loses both users and rankings simultaneously. Kraviona's performance work addresses both at once: Core Web Vitals improvements (Largest Contentful Paint, Cumulative Layout Shift, Interaction to Next Paint), image and asset optimisation, bundle analysis and code-splitting, caching strategy, and the technical SEO fixes — canonical tags, structured data, crawl architecture, indexation — that turn speed improvements into ranking improvements.",
-      "The AI side of this category covers a different kind of efficiency: reducing the manual, repetitive work that keeps teams from doing higher-value things. We build custom LLM integrations, AI chat assistants trained on your product content, document automation pipelines, and internal tools that slot into the workflows you already have instead of demanding a full process change.",
-      "Every project in this category comes with before-and-after measurement. Lighthouse scores, Google Search Console impressions, crawl coverage, automation time savings — we document the starting point and the result so you can see exactly what changed and decide what to improve next.",
-    ],
-    serviceKeys: [
-      "technical-seo",
-      "web-performance-optimization",
-      "ai-automation",
-      "ai-chatbot-development",
-    ],
-  },
-  "branding-marketing": {
-    categoryLabel: "Branding & Marketing",
-    slug: "branding-marketing",
-    h1: "Branding & Digital Marketing Services — Positioning, Campaigns & Measurable Growth",
-    metaTitle: "Branding & Digital Marketing Services | Kraviona",
-    metaDescription:
-      "Brand identity, digital marketing strategy, social media, email campaigns, and conversion-focused funnels that turn traffic into qualified leads and revenue.",
-    intro: [
-      "A brand is not a logo — it's the consistent impression a business leaves across every touchpoint. Kraviona's branding and marketing work starts with understanding what makes a business worth choosing over its competitors, then builds the visual identity, messaging, and channel strategy that communicates that clearly and consistently.",
-      "On the marketing side, our focus is on systems rather than one-off campaigns. A well-built email nurture sequence keeps working after setup. A properly structured Google Ads account improves with every cycle. An SEO content plan compounds over months. We prefer to build marketing infrastructure that gets more efficient over time rather than delivering campaigns that require full rebuilds for every promotion.",
-      "Reporting is built into every engagement. We track the metrics that actually connect to business outcomes — leads generated, cost per acquisition, email open and click rates, organic traffic growth, conversion events — not vanity numbers that look good in a presentation but don't connect to revenue.",
-    ],
-    serviceKeys: [
-      "digital-marketing",
-      "social-media-marketing",
-      "email-marketing",
-      "brand-identity",
     ],
   },
   "marketplace-seller": {
-    categoryLabel: "Marketplace & Seller",
+    categoryLabel: "E-commerce Solutions",
     slug: "marketplace-seller",
-    h1: "Marketplace & Seller Services — Account Management, Cataloging & Seller Growth",
-    metaTitle: "Marketplace Seller Services & Growth | Kraviona",
+    h1: "E-commerce Solutions — AI Recommendations, Storefronts & Automation",
+    metaTitle: "AI-Powered E-commerce Solutions & Store Optimization | Kraviona",
     metaDescription:
-      "End-to-end marketplace support for sellers: account management, cataloging, advertising, accounting, and practical seller training for sustainable growth.",
+      "Intelligent e-commerce storefronts, AI product recommendation engines, marketplace integration, payment systems, and store optimization.",
     intro: [
-      "Selling on a marketplace platform — Amazon, Flipkart, Meesho, or any other — involves a level of operational complexity that most sellers underestimate until they're inside it. Catalog errors surface months after listing. Account health metrics shift without warning. Advertising spend goes up while return on ad spend quietly drops. Kraviona's marketplace services are built to catch and fix these problems before they compound.",
-      "Our work spans the full seller operation: initial account setup and health checks, product catalog creation and optimisation (titles, bullet points, images, A+ content, variations), advertising campaign structure and bid management, order and inventory process reviews, and the bookkeeping and reconciliation that gives sellers a clear picture of actual profitability after fees and returns.",
-      "We also run practical training sessions for seller teams and operations staff — not generic workshops, but focused walkthroughs of the specific platform, catalog, and reporting tools your team uses daily. The goal is always to build capability inside your operation, not to create a dependency on external management.",
+      "Modern e-commerce requires intelligence at every touchpoint — from automated inventory synchronization to personalized product recommendations and fast, frictionless checkouts.",
+      "Kraviona develops high-converting e-commerce storefronts, automated order workflows, multi-channel marketplace integrations, and AI-powered recommendation systems that increase average order value and customer retention.",
+      "We also support seller operations with catalog optimization, marketplace advertising management, and profit-reconciliation systems that ensure sustainable unit economics.",
     ],
     serviceKeys: [
       "ecommerce-development-marketing",
@@ -3473,6 +3455,26 @@ export const SERVICE_CATEGORY_HUBS = {
       "accounting",
       "advertising",
       "seller-training",
+    ],
+  },
+  "branding-marketing": {
+    categoryLabel: "Digital Marketing Services",
+    slug: "branding-marketing",
+    h1: "Digital Marketing Services — Technical SEO, AEO, GEO & Growth",
+    metaTitle: "Digital Marketing, Technical SEO, AEO & GEO | Kraviona",
+    metaDescription:
+      "AI-assisted SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), technical SEO, and data-driven performance marketing.",
+    intro: [
+      "The search landscape has evolved beyond traditional keywords into AI answer engines like Perplexity, ChatGPT, and Google Gemini. Kraviona's digital growth strategy combines technical SEO with modern Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO).",
+      "We implement deep Schema.org structured data, semantic content clusters, Core Web Vitals speed optimization, and authoritative entity mapping that position your brand as a primary citation source in AI and search rankings.",
+      "Our performance marketing campaigns focus on measurable metrics: qualified inbound pipeline, customer acquisition cost (CAC), conversion rates, and sustainable organic compound growth.",
+    ],
+    serviceKeys: [
+      "technical-seo",
+      "digital-marketing",
+      "social-media-marketing",
+      "email-marketing",
+      "brand-identity",
     ],
   },
 };

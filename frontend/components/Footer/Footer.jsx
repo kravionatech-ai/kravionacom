@@ -102,22 +102,20 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#D4A550]">
-                Build with Kraviona
+                AI-First Technology &amp; Digital Solutions
               </p>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-                Need a faster website, stronger SEO, or cleaner backend?
+                Building Intelligent Businesses Through AI, Technology &amp; Automation
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75">
-                Talk directly with a founder-led team for MERN stack products,
-                Next.js websites, Node.js APIs, technical SEO, AI automation,
-                and practical launch support.
+                Kraviona helps forward-thinking businesses build intelligent software, develop custom AI-powered solutions, and automate complex workflows with verifiable performance.
               </p>
             </div>
             <Link
               href="/contact"
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[6px] bg-[#C85A3C] hover:bg-[#B04D31] px-6 py-3.5 text-sm font-semibold text-white shadow-brand-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
-              Start a Project
+              Start Your AI Project
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
@@ -134,7 +132,7 @@ export default function Footer() {
             >
               <Image
                 src="/full-logo-light.webp"
-                alt="Kraviona – vision innovative development"
+                alt="Kraviona – AI-First Technology & Digital Solutions"
                 width={190}
                 height={65}
                 sizes="190px"
@@ -142,12 +140,10 @@ export default function Footer() {
               />
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-white/75">
-              Founder-led web development, backend engineering, technical SEO,
-              AI automation, and digital growth support for businesses that need
-              practical execution.
+              AI-First Technology &amp; Digital Solutions company engineering intelligent software, autonomous AI workflows, SaaS platforms, and search-ready digital foundations.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
-              {["MERN", "Next.js", "SEO", "AI"].map((item) => (
+              {["AI & Automation", "Custom Software", "SaaS Engineering", "AEO / GEO"].map((item) => (
                 <span
                   key={item}
                   className="rounded-[20px] border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-medium text-white/75"
@@ -242,7 +238,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-5">
           <p className="text-center text-white/50 text-[12px]">
-            © {new Date().getFullYear()} Kraviona Tech Solutions. All Rights
+            © {new Date().getFullYear()} Kraviona — AI-First Technology &amp; Digital Solutions. All Rights
             Reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4">

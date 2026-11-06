@@ -173,12 +173,11 @@ const TechStack = () => {
           >
             Powered By{" "}
             <span className="text-[#2D6E7A]">
-              Modern Tech
+              Advanced AI &amp; Modern Engineering
             </span>
           </motion.h2>
           <p className="text-[#5A7A82] text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-            Production-grade tools and frameworks we use to ship fast,
-            SEO-ready, and scalable digital products.
+            Production-grade frameworks, AI libraries, and cloud infrastructure we use to build intelligent, fast, and scalable digital systems.
           </p>
         </div>
 

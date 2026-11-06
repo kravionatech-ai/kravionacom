@@ -31,7 +31,7 @@ import {
 // ── Data ──────────────────────────────────────────────────────────────────
 const SERVICE_CATEGORIES = [
   {
-    label: "Web Development",
+    label: "IT & Technology",
     color: "text-primary",
     hubHref: "/services/web-development",
     services: [
@@ -80,12 +80,55 @@ const SERVICE_CATEGORIES = [
     ],
   },
   {
-    label: "Backend & Architecture",
+    label: "AI & Automation",
+    color: "text-primary-light",
+    hubHref: "/services/performance-ai",
+    services: [
+      {
+        name: "AI Automation",
+        path: "/services/ai-automation",
+        desc: "LLM integration & cognitive workflows",
+        Icon: Bot,
+      },
+      {
+        name: "AI Chatbot Development",
+        path: "/services/ai-chatbot-development",
+        desc: "Custom AI assistants & conversational agents",
+        Icon: MessageSquare,
+      },
+      {
+        name: "RAG Knowledge Systems",
+        path: "/services/ai-automation",
+        desc: "Semantic retrieval over private documents",
+        Icon: Database,
+      },
+      {
+        name: "Process Automation",
+        path: "/services/ai-automation",
+        desc: "End-to-end intelligent operational pipelines",
+        Icon: ServerCog,
+      },
+    ],
+  },
+  {
+    label: "SaaS & Products",
     color: "text-primary-hover",
     hubHref: "/services/backend-architecture",
     services: [
       {
-        name: "Backend Development",
+        name: "SaaS Development",
+        path: "/services/saas-development",
+        desc: "Scalable cloud-based SaaS products",
+        Icon: Cloud,
+      },
+      {
+        name: "SaaS MVP Development",
+        path: "/services/saas-development",
+        desc: "Rapid 4-to-8 week MVP builds",
+        Icon: Code2,
+      },
+      {
+        name: "Backend Architecture",
         path: "/services/backend-development",
         desc: "Robust & secure server-side logic",
         Icon: ServerCog,
@@ -102,78 +145,10 @@ const SERVICE_CATEGORIES = [
         desc: "Optimised database structures",
         Icon: Database,
       },
-      {
-        name: "SaaS Development",
-        path: "/services/saas-development",
-        desc: "Scalable cloud-based SaaS products",
-        Icon: Cloud,
-      },
     ],
   },
   {
-    label: "Performance & AI",
-    color: "text-primary-light",
-    hubHref: "/services/performance-ai",
-    services: [
-      {
-        name: "Technical SEO",
-        path: "/services/technical-seo",
-        desc: "Core Web Vitals & crawlability",
-        Icon: SearchCheck,
-      },
-      {
-        name: "Web Performance Opt.",
-        path: "/services/web-performance-optimization",
-        desc: "Lighthouse 90+ & speed optimisation",
-        Icon: BarChart3,
-      },
-      {
-        name: "AI Automation",
-        path: "/services/ai-automation",
-        desc: "LLM integration & workflows",
-        Icon: Bot,
-      },
-      {
-        name: "AI Chatbot Development",
-        path: "/services/ai-chatbot-development",
-        desc: "Custom AI assistants & agents",
-        Icon: MessageSquare,
-      },
-    ],
-  },
-  {
-    label: "Branding & Marketing",
-    color: "text-accent-dark",
-    hubHref: "/services/branding-marketing",
-    services: [
-      {
-        name: "Digital Marketing",
-        path: "/services/digital-marketing",
-        desc: "SEO, PPC & performance campaigns",
-        Icon: Target,
-      },
-      {
-        name: "Social Media Marketing",
-        path: "/services/social-media-marketing",
-        desc: "Content strategy & paid social",
-        Icon: UsersRound,
-      },
-      {
-        name: "Email Marketing",
-        path: "/services/email-marketing",
-        desc: "Lifecycle campaigns & automation",
-        Icon: MessageSquare,
-      },
-      {
-        name: "Brand Identity & Design",
-        path: "/services/brand-identity",
-        desc: "Logos, design systems & brand kits",
-        Icon: BriefcaseBusiness,
-      },
-    ],
-  },
-  {
-    label: "Marketplace & Seller",
+    label: "E-Commerce",
     color: "text-accent-dark",
     hubHref: "/services/marketplace-seller",
     services: [
@@ -182,6 +157,12 @@ const SERVICE_CATEGORIES = [
         path: "/services/ecommerce-development-marketing",
         desc: "Storefronts built to sell",
         Icon: ShoppingCart,
+      },
+      {
+        name: "AI Product Recommendations",
+        path: "/services/ecommerce-development-marketing",
+        desc: "Personalization & automated upselling",
+        Icon: Bot,
       },
       {
         name: "Account Management",
@@ -212,6 +193,55 @@ const SERVICE_CATEGORIES = [
         path: "/services/seller-training",
         desc: "Hands-on marketplace onboarding",
         Icon: UsersRound,
+      },
+    ],
+  },
+  {
+    label: "Digital Marketing",
+    color: "text-accent-dark",
+    hubHref: "/services/branding-marketing",
+    services: [
+      {
+        name: "Technical SEO",
+        path: "/services/technical-seo",
+        desc: "Core Web Vitals & crawlability",
+        Icon: SearchCheck,
+      },
+      {
+        name: "AEO & GEO Optimization",
+        path: "/services/technical-seo",
+        desc: "Perplexity & ChatGPT AI search readiness",
+        Icon: SearchCheck,
+      },
+      {
+        name: "Web Performance Opt.",
+        path: "/services/web-performance-optimization",
+        desc: "Lighthouse 90+ & speed optimisation",
+        Icon: BarChart3,
+      },
+      {
+        name: "Digital Marketing",
+        path: "/services/digital-marketing",
+        desc: "SEO, PPC & performance campaigns",
+        Icon: Target,
+      },
+      {
+        name: "Social Media Marketing",
+        path: "/services/social-media-marketing",
+        desc: "Content strategy & audience growth",
+        Icon: UsersRound,
+      },
+      {
+        name: "Email Marketing",
+        path: "/services/email-marketing",
+        desc: "Lifecycle campaigns & automation",
+        Icon: MessageSquare,
+      },
+      {
+        name: "Brand Identity & Design",
+        path: "/services/brand-identity",
+        desc: "Logos, design systems & brand kits",
+        Icon: BriefcaseBusiness,
       },
     ],
   },
@@ -565,7 +595,7 @@ export default function Header() {
                               <Grid3X3 size={15} strokeWidth={2.2} />
                             </span>
                             <span className="text-[13px] font-bold text-[#1A3840]">
-                              Capabilities &amp; Engineering Pillars
+                              AI &amp; Technology Engineering Pillars
                             </span>
                             <span className="rounded-full bg-[#EAF3F5] border border-[#2D6E7A]/20 px-2 py-0.5 text-[10px] font-bold text-[#2D6E7A]">
                               {TOTAL_SERVICES} services
@@ -647,7 +677,7 @@ export default function Header() {
                           <div className="flex items-center gap-2.5">
                             <span className="h-2 w-2 rounded-full bg-[#2D6E7A] animate-pulse" />
                             <p className="text-[11.5px] text-[#5A7A82]">
-                              Founder-led engineering &amp; technical SEO planned from day one.
+                              Founder-led AI systems engineering, technical SEO, and practical delivery.
                             </p>
                           </div>
                           <div className="flex items-center gap-3">

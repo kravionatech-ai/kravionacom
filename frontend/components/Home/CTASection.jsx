@@ -53,20 +53,19 @@ const CTASection = () => {
             id="cta-heading"
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-[1.12]"
           >
-            Ready to Build Something <br className="hidden md:block" />
+            Ready to Build with <br className="hidden md:block" />
             <span className="text-[#D4A550]">
-              Faster and Cleaner?
+              Artificial Intelligence &amp; Software?
             </span>
           </h2>
 
           {/* Subtext */}
           <p className="text-base md:text-xl text-white/80 mb-5 max-w-2xl mx-auto leading-relaxed">
-            Let&apos;s plan the next version of your website, app, backend, or
-            SEO foundation with a clear scope and practical delivery path.
+            Let&apos;s plan your custom AI solution, intelligent software, workflow automation, or technical growth foundation with clear milestones and measurable ROI.
           </p>
 
           <p className="text-[#D4A550] text-sm mb-10 font-medium">
-            Book directly in our calendar. No back-and-forth, no delay.
+            Book directly in our calendar. Talk directly with senior engineers.
           </p>
 
           {/* CTA Buttons */}
@@ -75,10 +74,10 @@ const CTASection = () => {
               href="/contact"
               id="cta-primary-btn"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-[#C85A3C] hover:bg-[#B04D31] text-white rounded-[6px] font-semibold text-base transition-all duration-200 shadow-brand-md group hover:-translate-y-0.5"
-              aria-label="Book a free SEO audit and consultation"
+              aria-label="Book a free AI & technology strategy consultation"
             >
               <Calendar className="w-5 h-5" aria-hidden="true" />
-              Book Free Strategy Call
+              Start Your AI Project
               <ArrowRight
                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
                 aria-hidden="true"
@@ -88,9 +87,9 @@ const CTASection = () => {
             <Link
               href="/services"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 bg-transparent text-white border-[1.5px] border-[#2D6E7A] hover:bg-[#2D6E7A] rounded-[6px] font-semibold text-base shadow-sm transition-all duration-200"
-              aria-label="Get a free SEO audit for your website"
+              aria-label="Explore our complete solutions catalog"
             >
-              Request SEO Audit
+              Explore Our Solutions
             </Link>
           </div>
 
