@@ -213,7 +213,7 @@ export const SERVICE_PAGES = {
     "category": "Web Development",
     "description": "Enterprise-grade MongoDB, Express.js, React.js, and Node.js web applications engineered for sub-second speeds, AI-ready data layers, and modular cloud scale.",
     "seo": {
-      "metaTitle": "MERN Stack Development Services | AI-Ready Web Apps | Kraviona",
+      "metaTitle": "MERN Stack Development Company | React & Node.js | Kraviona",
       "metaDescription": "Hire expert MERN stack engineers for AI-ready web applications, React frontends, scalable Node.js microservices, and MongoDB vector architectures.",
       "keywords": [
         "MERN Stack Development",
@@ -1080,7 +1080,7 @@ export const SERVICE_PAGES = {
     "category": "Performance & AI",
     "description": "Core Web Vitals remediation, Schema.org entity graphs, Answer Engine Optimization (AEO), and Generative Engine Optimization (GEO) for ChatGPT and Google AI Overviews.",
     "seo": {
-      "metaTitle": "Technical SEO, AEO & Generative Engine Optimization | Kraviona",
+      "metaTitle": "Technical SEO, AEO & GEO Optimization Services | Kraviona",
       "metaDescription": "Dominate search and AI answer engines with Kraviona. Technical SEO audits, Core Web Vitals, Schema.org graphs, AEO and GEO for ChatGPT, Perplexity, and Google AI.",
       "keywords": [
         "Technical SEO Services",
@@ -2260,7 +2260,7 @@ export const SERVICE_PAGES = {
     "category": "Marketplace & Seller",
     "description": "Multi-marketplace fee reconciliation, automated payment tracking, SKU-level gross margin analysis, GST compliance, and financial clarity for online sellers.",
     "seo": {
-      "metaTitle": "E-Commerce Seller Payout Reconciliation & Bookkeeping | Kraviona",
+      "metaTitle": "E-Commerce Settlement Reconciliation & Bookkeeping | Kraviona",
       "metaDescription": "Gain complete financial clarity on marketplace sales. Payout reconciliation, return loss tracking, fee audits, and GST compliance for online sellers.",
       "keywords": [
         "Marketplace Settlement Reconciliation",
@@ -2903,9 +2903,9 @@ export const SERVICE_CATEGORY_HUBS = {
     categoryLabel: "IT & Technology Services",
     slug: "web-development",
     h1: "IT & Technology Services — AI-Ready Web & Custom Software Development",
-    metaTitle: "IT & Technology Services | AI-Ready Software | Kraviona",
+    metaTitle: "IT & Technology Services | Custom Software & Web Apps | Kraviona",
     metaDescription:
-      "Kraviona engineers AI-ready web applications, custom software, mobile apps, enterprise systems, and scalable APIs for ambitious businesses.",
+      "Kraviona engineers custom software, scalable web applications, enterprise platforms, and secure APIs planned for high performance and AI readiness.",
     intro: [
       "Every Kraviona engineering project starts with one core objective: what does the business need the technology to achieve? Whether that is scaling a customer portal, developing custom enterprise software, building an AI-ready web application, or replacing a legacy monolith, the technical decisions follow from business value.",
       "Our core technology stack spans Next.js, React, Node.js, Python, and scalable databases. We build production-grade web systems, RESTful microservices, and modular software architectures planned for high performance, maintainability, and modular, future-ready AI integrations.",
@@ -2926,7 +2926,7 @@ export const SERVICE_CATEGORY_HUBS = {
     h1: "AI & Automation Solutions — Autonomous Agents, Chatbots & Workflows",
     metaTitle: "AI & Automation Solutions | Cognitive Agents & RAG | Kraviona",
     metaDescription:
-      "Autonomous AI agents, conversational chatbots, RAG assistants, generative AI, document processing, and enterprise process automation.",
+      "Deploy autonomous AI agents, conversational chatbots, enterprise RAG knowledge bases, and intelligent process automations built for measurable ROI.",
     intro: [
       "Artificial intelligence is not just a feature — it is the new backbone of competitive business operations. Kraviona builds practical, enterprise-grade AI solutions that remove manual bottlenecks, synthesize knowledge, and automate complex workflows.",
       "Our AI solutions span autonomous cognitive agents with multi-step reasoning, context-aware AI chatbots trained on your internal documentation, RAG (Retrieval-Augmented Generation) knowledge systems, intelligent document processing (OCR & extraction), and custom LLM workflows orchestrated with LangChain and n8n.",
@@ -2943,9 +2943,9 @@ export const SERVICE_CATEGORY_HUBS = {
     categoryLabel: "SaaS & Software Products",
     slug: "backend-architecture",
     h1: "SaaS & Software Products — Cloud Platforms, MVPs & Multi-Tenant Systems",
-    metaTitle: "SaaS & Software Product Engineering | Kraviona",
+    metaTitle: "SaaS & Software Products | Cloud Systems & MVPs | Kraviona",
     metaDescription:
-      "Custom SaaS product development, AI SaaS MVPs, cloud-based software, multi-tenant architectures, and subscription platforms.",
+      "Build and scale cloud SaaS products, rapid AI MVPs, multi-tenant databases, and subscription architectures engineered for high availability and growth.",
     intro: [
       "Building a software product requires more than writing code — it demands multi-tenant data isolation, resilient subscription billing, API rate limiting, and architectures that scale gracefully under load.",
       "Kraviona engineers full-lifecycle cloud SaaS products and rapid MVPs. From user authentication and role-based access control (RBAC) to Stripe billing workflows and automated data pipelines, we build software products ready for commercial traction.",
@@ -2962,9 +2962,9 @@ export const SERVICE_CATEGORY_HUBS = {
     categoryLabel: "E-commerce Solutions",
     slug: "marketplace-seller",
     h1: "E-commerce Solutions — AI Recommendations, Storefronts & Automation",
-    metaTitle: "AI-Powered E-commerce Solutions & Store Optimization | Kraviona",
+    metaTitle: "E-commerce Solutions | AI Storefronts & Operations | Kraviona",
     metaDescription:
-      "Intelligent e-commerce storefronts, AI product recommendation engines, marketplace integration, payment systems, and store optimization.",
+      "Build high-converting e-commerce storefronts, automated order workflows, Amazon and Flipkart seller operations, and AI product cataloging systems.",
     intro: [
       "Modern e-commerce requires intelligence at every touchpoint — from automated inventory synchronization to personalized product recommendations and fast, frictionless checkouts.",
       "Kraviona develops high-converting e-commerce storefronts, automated order workflows, multi-channel marketplace integrations, and AI-powered recommendation systems that increase average order value and customer retention.",
@@ -2983,9 +2983,9 @@ export const SERVICE_CATEGORY_HUBS = {
     categoryLabel: "Digital Marketing Services",
     slug: "branding-marketing",
     h1: "Digital Marketing Services — Technical SEO, AEO, GEO & Growth",
-    metaTitle: "Digital Marketing, Technical SEO, AEO & GEO | Kraviona",
+    metaTitle: "Digital Marketing Services | Technical SEO, AEO & GEO | Kraviona",
     metaDescription:
-      "AI-assisted SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), technical SEO, and data-driven performance marketing.",
+      "Accelerate organic customer acquisition with technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and brand systems.",
     intro: [
       "The search landscape has evolved beyond traditional keywords into AI answer engines like Perplexity, ChatGPT, and Google Gemini. Kraviona's digital growth strategy combines technical SEO with modern Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO).",
       "We implement deep Schema.org structured data, semantic content clusters, Core Web Vitals speed optimization, and authoritative entity mapping that position your brand as a primary citation source in AI and search rankings.",

@@ -11,7 +11,7 @@ export const rootGraphSchema = {
       url: "https://www.kraviona.com",
       logo: "https://www.kraviona.com/full-logo.webp",
       description:
-        "Kraviona Tech Solutions is a Delhi NCR web development and technical SEO agency building MERN stack products, Next.js websites, and backend APIs for businesses across India.",
+        "Kraviona is an AI-first technology and digital solutions company engineering intelligent software, autonomous AI agents, SaaS products, and automated digital systems for ambitious businesses globally.",
       telephone: "+91 96085 53167",
       email: "hello@kraviona.com",
       address: {
@@ -60,7 +60,7 @@ export const organizationSchema = {
   },
   image: "https://www.kraviona.com/opengraph-image",
   description:
-    "Kraviona Tech Solutions is a Delhi NCR web development and technical SEO agency building MERN stack products, Next.js websites, and backend APIs for businesses across India.",
+    "Kraviona is an AI-first technology and digital solutions company engineering intelligent software, autonomous AI agents, SaaS products, and automated digital systems for ambitious businesses globally.",
   foundingDate: "2022",
   numberOfEmployees: {
     "@type": "QuantitativeValue",
@@ -102,12 +102,16 @@ export const organizationSchema = {
     "https://x.com/KravionaTech",
   ],
   knowsAbout: [
-    "Web Development",
-    "Technical SEO",
-    "MERN Stack",
-    "Next.js",
-    "React.js",
-    "UI/UX Design",
+    "Artificial Intelligence",
+    "AI Agent Development",
+    "Intelligent Workflow Automation",
+    "Custom Software Development",
+    "SaaS Product Engineering",
+    "Retrieval-Augmented Generation (RAG)",
+    "Next.js & React Architecture",
+    "Technical SEO & Generative Engine Optimization (GEO)",
+    "Node.js & Python Systems",
+    "Database & Vector Storage Architecture",
   ],
 };
 
@@ -167,7 +171,7 @@ export const websiteSchema = {
   "@id": "https://www.kraviona.com/#website",
   url: "https://www.kraviona.com",
   name: "Kraviona Tech Solutions",
-  description: "MERN Stack, Next.js and Technical SEO Company India",
+  description: "AI-First Technology & Digital Solutions Company — Custom Software, Autonomous AI Agents, SaaS MVPs, and Technical SEO.",
   inLanguage: "en-IN",
   publisher: {
     "@id": "https://www.kraviona.com/#org",
@@ -179,13 +183,20 @@ export const personSchema = {
   "@type": "Person",
   "@id": "https://www.kraviona.com/about#founder",
   name: "Amar Kumar",
-  jobTitle: "Founder & Lead Developer",
+  jobTitle: "Founder & Lead Systems Engineer",
   worksFor: {
     "@id": "https://www.kraviona.com/#org",
   },
-  url: "https://www.kraviona.com/about",
+  url: "https://www.kraviona.com/authors/amar-kumar",
   sameAs: [
     "https://www.linkedin.com/in/amarkumar96085/",
+  ],
+  knowsAbout: [
+    "AI Systems Architecture",
+    "Autonomous AI Agents",
+    "Next.js & React Engineering",
+    "Generative Engine Optimization (GEO)",
+    "Full-Stack Software Development",
   ],
 };
 

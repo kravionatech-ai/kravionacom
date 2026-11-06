@@ -1,0 +1,71 @@
+# Kraviona
+
+> AI-First Technology & Digital Solutions Company. "Intelligence Meets Innovation."
+
+Kraviona is an AI-first technology company engineering custom software, autonomous AI agents, SaaS products, e-commerce systems, and performance marketing architectures for ambitious businesses worldwide.
+
+- Website: https://www.kraviona.com
+- Contact: contact@kraviona.com | +91 96085 53167
+- Location: East Delhi, Delhi 110092, India
+- Founder & Lead Engineer: Amar Kumar (https://www.kraviona.com/authors/amar-kumar)
+
+## Core Business Verticals (In Order of Priority)
+
+### 01. IT & Technology Services
+Custom software engineering, AI-ready web applications, microservices, and enterprise systems built with Next.js, React, Node.js, and Python.
+- Web Application Development: https://www.kraviona.com/services/web-app-development
+- MERN Stack Development: https://www.kraviona.com/services/mern-stack-development
+- Full-Stack Software Engineering: https://www.kraviona.com/services/full-stack-development
+- React.js Development: https://www.kraviona.com/services/react-development
+- Node.js Backend Engineering: https://www.kraviona.com/services/nodejs-development
+- Next.js AI-Native Development: https://www.kraviona.com/services/nextjs-development
+- UI/UX Design & Design Systems: https://www.kraviona.com/services/ui-ux-design
+- Category Overview: https://www.kraviona.com/services/web-development
+
+### 02. AI & Automation Solutions (Strategic Focus)
+Autonomous cognitive agents, enterprise AI chatbots, Retrieval-Augmented Generation (RAG) knowledge systems, intelligent document processing, and business process automation.
+- AI Agent Development & Automation: https://www.kraviona.com/services/ai-automation
+- Custom AI Chatbots & RAG Assistants: https://www.kraviona.com/services/ai-chatbot-development
+- Web Performance & Speed Optimization: https://www.kraviona.com/services/web-performance-optimization
+- Category Overview: https://www.kraviona.com/services/performance-ai
+
+### 03. SaaS & Software Products
+End-to-end cloud SaaS engineering, AI SaaS MVPs, multi-tenant database architectures, and subscription platforms.
+- SaaS Product Engineering: https://www.kraviona.com/services/saas-development
+- Backend & Cloud Architecture: https://www.kraviona.com/services/backend-development
+- API Development & System Integration: https://www.kraviona.com/services/api-development
+- Database Architecture & Vector Stores: https://www.kraviona.com/services/database-architecture
+- Category Overview: https://www.kraviona.com/services/backend-architecture
+
+### 04. E-commerce Solutions
+AI-powered e-commerce storefronts, automated marketplace operations, product cataloging, fee reconciliation, and PPC advertising.
+- AI E-Commerce Storefront Development: https://www.kraviona.com/services/ecommerce-development-marketing
+- Marketplace Account Management: https://www.kraviona.com/services/account-management
+- AI Product Cataloging: https://www.kraviona.com/services/cataloging
+- Marketplace Financial Reconciliation: https://www.kraviona.com/services/accounting
+- Amazon PPC & Marketplace Advertising: https://www.kraviona.com/services/advertising
+- E-Commerce Operations Training: https://www.kraviona.com/services/seller-training
+- Category Overview: https://www.kraviona.com/services/marketplace-seller
+
+### 05. Digital Marketing Services
+Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), performance advertising, and technical brand identity.
+- Technical SEO, AEO & GEO Services: https://www.kraviona.com/services/technical-seo
+- Digital Marketing & AI Growth: https://www.kraviona.com/services/digital-marketing
+- B2B Social Media Marketing: https://www.kraviona.com/services/social-media-marketing
+- Email Marketing & Lifecycle Automation: https://www.kraviona.com/services/email-marketing
+- Brand Identity & Technical Design: https://www.kraviona.com/services/brand-identity
+- Category Overview: https://www.kraviona.com/services/branding-marketing
+
+## Key Company Pages
+- Enterprise Solutions: https://www.kraviona.com/solutions
+- Pricing & Models: https://www.kraviona.com/pricing
+- Case Studies: https://www.kraviona.com/case-studies
+- Engineering Insights Blog: https://www.kraviona.com/blog
+- Industry News: https://www.kraviona.com/news
+- Leadership & Team: https://www.kraviona.com/team
+- About Us: https://www.kraviona.com/about
+- Contact & Discovery: https://www.kraviona.com/contact
+
+## Technical Architecture & Standards
+- Primary Stack: Next.js (App Router, Server Components), React, Node.js, Express, Python (FastAPI), MongoDB, PostgreSQL, Redis, Pinecone.
+- SEO & AEO: Strict Schema.org linked graph, semantic HTML5, Core Web Vitals < 1.8s LCP, direct answer formatting for Perplexity and ChatGPT Search.
