@@ -23,7 +23,7 @@ const authorSchema = {
   image: "https://www.kraviona.com/amar.jpeg",
   sameAs: ["https://www.linkedin.com/in/amarkumar96085/"],
   description:
-    "Amar Kumar is the Founder and Lead Technical Architect at Kraviona Tech Solutions. With over 5 years of engineering leadership, he specializes in high-concurrency MERN stack applications, Next.js App Router performance, and technical SEO architecture for high-growth businesses.",
+    "Amar Kumar is the Founder and Lead Technical Architect at Kraviona. He specializes in AI-first systems engineering, autonomous agent architectures, Next.js App Router performance, and Generative Engine Optimization (GEO) for high-growth businesses.",
 };
 
 const authorBreadcrumbSchema = {
@@ -38,17 +38,17 @@ const authorBreadcrumbSchema = {
 
 export const metadata = {
   title: {
-    absolute: "Amar Kumar – Founder & Lead Technical Architect | Kraviona",
+    absolute: "Amar Kumar – Founder & Lead AI Systems Architect | Kraviona",
   },
   description:
-    "Read technical articles, architectural guides, and insights by Amar Kumar, Founder and Lead Technical Architect at Kraviona Tech Solutions.",
+    "Read technical articles, AI architectural blueprints, and engineering insights by Amar Kumar, Founder and Lead Technical Architect at Kraviona.",
   alternates: {
     canonical: canonicalUrl("/authors/amar-kumar"),
   },
   openGraph: {
-    title: "Amar Kumar – Founder & Lead Technical Architect | Kraviona",
+    title: "Amar Kumar – Founder & Lead AI Systems Architect | Kraviona",
     description:
-      "Engineering insights, MERN stack blueprints, and Technical SEO strategies by Amar Kumar, founder of Kraviona Tech Solutions.",
+      "AI engineering insights, software blueprints, and Generative Engine Optimization strategies by Amar Kumar, founder of Kraviona.",
     url: canonicalUrl("/authors/amar-kumar"),
     type: "profile",
     images: [
@@ -56,15 +56,15 @@ export const metadata = {
         url: "https://www.kraviona.com/amar.jpeg",
         width: 800,
         height: 800,
-        alt: "Amar Kumar — Founder & Lead Technical Architect at Kraviona Tech Solutions",
+        alt: "Amar Kumar — Founder & Lead Technical Architect at Kraviona",
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Amar Kumar – Founder & Lead Technical Architect | Kraviona",
+    title: "Amar Kumar – Founder & Lead AI Systems Architect | Kraviona",
     description:
-      "Engineering insights, MERN stack blueprints, and Technical SEO strategies by Amar Kumar.",
+      "AI engineering insights, software blueprints, and Generative Engine Optimization strategies by Amar Kumar.",
     images: ["https://www.kraviona.com/amar.jpeg"],
   },
   robots: defaultRobots,
@@ -127,7 +127,7 @@ export default async function AmarKumarAuthorPage() {
 
                 {/* 100-150 word Bio */}
                 <p className="text-sm sm:text-base leading-relaxed text-[#5A7A82] mb-6">
-                  Amar Kumar is the Founder and Lead Technical Architect at Kraviona Tech Solutions, headquartered in Delhi NCR. With more than five years of production software engineering experience, Amar leads the design and implementation of high-performance MERN stack applications, search-native Next.js architectures, scalable Node.js microservices, and technical SEO foundations for startups, funded ventures, and established enterprises. His technical focus centers on eliminating crawl budget waste, architecting sub-second page delivery passing Core Web Vitals, and implementing autonomous AI automation workflows that solve concrete business operational bottlenecks.
+                  Amar Kumar is the Founder and Lead Technical Architect at Kraviona, headquartered in Delhi NCR. With more than five years of production software engineering experience, Amar leads the engineering of AI-first systems, autonomous agents, Next.js App Router platforms, scalable cloud backends, and Generative Engine Optimization (GEO) for ambitious startups and enterprises. His technical focus centers on eliminating operational bottlenecks with AI workflows, building sub-second web applications that pass Core Web Vitals, and architecting resilient software foundations designed for commercial scale.
                 </p>
 
                 {/* Credentials & Stats */}
@@ -176,11 +176,11 @@ export default async function AmarKumarAuthorPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             <div className="rounded-2xl border border-[#E8E4DE] bg-white p-6 shadow-2xs">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2D6E7A]/10 text-[#2D6E7A] mb-4">
-                <Layers size={20} />
+                <Code2 size={20} />
               </div>
-              <h3 className="font-bold text-base text-[#1A3840] mb-2">MERN &amp; Next.js Systems</h3>
+              <h3 className="font-bold text-base text-[#1A3840] mb-2">AI Systems &amp; Agents</h3>
               <p className="text-xs text-[#5A7A82] leading-relaxed">
-                Full-stack JavaScript/TypeScript engineering, App Router architecture, MongoDB sharding, and high-concurrency Node.js REST and GraphQL APIs.
+                Autonomous cognitive agents, LangChain/n8n pipelines, RAG knowledge systems, and vector database embeddings (Pinecone, pgvector).
               </p>
             </div>
 
@@ -188,19 +188,19 @@ export default async function AmarKumarAuthorPage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#C85A3C]/10 text-[#C85A3C] mb-4">
                 <Search size={20} />
               </div>
-              <h3 className="font-bold text-base text-[#1A3840] mb-2">Technical SEO Architecture</h3>
+              <h3 className="font-bold text-base text-[#1A3840] mb-2">Technical SEO, AEO &amp; GEO</h3>
               <p className="text-xs text-[#5A7A82] leading-relaxed">
-                Server log audits, crawl budget optimization, Core Web Vitals remediation, rich JSON-LD schema graphs, and search-friendly site architectures.
+                Generative Engine Optimization for ChatGPT and Perplexity, Schema.org entity graphs, Core Web Vitals remediation, and crawl architectures.
               </p>
             </div>
 
             <div className="rounded-2xl border border-[#E8E4DE] bg-white p-6 shadow-2xs">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2D6E7A]/10 text-[#2D6E7A] mb-4">
-                <Code2 size={20} />
+                <Layers size={20} />
               </div>
-              <h3 className="font-bold text-base text-[#1A3840] mb-2">AI Workflow Engineering</h3>
+              <h3 className="font-bold text-base text-[#1A3840] mb-2">AI-Ready Web &amp; Next.js</h3>
               <p className="text-xs text-[#5A7A82] leading-relaxed">
-                Integrating LLM models, n8n automated pipelines, semantic vector search, and custom customer engagement agents into existing business workflows.
+                Full-stack JavaScript/TypeScript engineering, React Server Components, streaming AI responses, and high-concurrency Node.js microservices.
               </p>
             </div>
           </div>

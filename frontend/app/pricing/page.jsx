@@ -7,27 +7,27 @@ export const dynamic = "force-static";
 
 export const metadata = {
   title: {
-    absolute: "Pricing for Web Development & SEO Plans | Kraviona",
+    absolute: "Pricing | Transparent AI, Software & SEO Plans | Kraviona",
   },
   description:
-    "Compare transparent Kraviona pricing for MERN stack development, technical SEO, AI automation, and digital growth packages from starter to enterprise.",
+    "Compare transparent Kraviona pricing for AI-ready software, custom web applications, SaaS MVPs, autonomous AI automation, and technical SEO / GEO packages.",
   keywords: [
     "Kraviona Pricing",
+    "AI Software Pricing",
     "Web Development Cost India",
     "MERN Stack Development Price",
-    "IT Solutions Packages",
-    "Affordable Web Development",
-    "Custom Software Pricing",
+    "AI SaaS MVP Cost",
+    "AI Automation Pricing",
+    "Technical SEO GEO Packages",
     "Next.js Development Cost",
-    "Website Development Packages India",
   ],
   authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical: "https://www.kraviona.com/pricing" },
   openGraph: {
-    title: "Pricing | Transparent Plans & Packages | Kraviona",
+    title: "Pricing | Transparent AI, Software & SEO Plans | Kraviona",
     description:
-      "Transparent pricing for MERN Stack development, Technical SEO, and digital marketing services.",
+      "Transparent pricing for AI-ready software, custom platforms, intelligent automation, and technical SEO services.",
     url: "https://www.kraviona.com/pricing",
     siteName: "Kraviona Tech Solutions",
     type: "website",
@@ -45,9 +45,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Pricing | Transparent Plans & Packages | Kraviona",
+    title: "Pricing | Transparent AI, Software & SEO Plans | Kraviona",
     description:
-      "Transparent pricing for MERN Stack development, Technical SEO, and digital marketing services.",
+      "Transparent pricing for AI-ready software, custom platforms, intelligent automation, and technical SEO services.",
     images: ["/og-image.jpg"],
   },
   robots: defaultRobots,
@@ -56,18 +56,18 @@ export const metadata = {
 const pricingTiers = [
   {
     name: "Starter",
-    tagline: "For small businesses & MVPs",
+    tagline: "For startups & AI-ready MVPs",
     priceFrom: "₹25,000",
     priceSuffix: "onwards",
     timeline: "2-3 weeks",
     features: [
-      "Up to 5-page website or simple web app",
-      "React.js / Next.js frontend",
-      "Basic Node.js backend / API",
-      "MongoDB setup",
-      "Mobile responsive design",
-      "Basic on-page SEO setup",
-      "1 round of revisions",
+      "AI-ready web application or MVP",
+      "Next.js / React modern frontend",
+      "Node.js API & database setup",
+      "Clean modular architecture",
+      "Mobile-responsive design",
+      "Technical SEO & schema foundation",
+      "Core Web Vitals optimization",
       "14 days post-launch support",
     ],
     cta: "Get a Quote",
@@ -76,20 +76,18 @@ const pricingTiers = [
   },
   {
     name: "Growth",
-    tagline: "For scaling businesses",
+    tagline: "For scaling businesses & AI systems",
     priceFrom: "₹75,000",
     priceSuffix: "onwards",
     timeline: "4-8 weeks",
     features: [
-      "Full MERN Stack application",
-      "Custom admin dashboard",
-      "REST API + authentication",
-      "Cloudinary image management",
-      "Redis caching",
-      "Technical SEO audit + fixes",
-      "Core Web Vitals optimisation",
-      "GTM + Analytics setup",
-      "3 rounds of revisions",
+      "Full MERN / Next.js software platform",
+      "Custom admin dashboard & telemetry",
+      "RESTful / GraphQL APIs + authentication",
+      "AI agent / LLM integration ready",
+      "Redis caching & database indexing",
+      "Technical SEO & GEO setup",
+      "Core Web Vitals sub-second tuning",
       "30 days post-launch support",
     ],
     cta: "Start a Project",
@@ -98,22 +96,19 @@ const pricingTiers = [
   },
   {
     name: "Enterprise",
-    tagline: "For large-scale platforms",
+    tagline: "For complex platforms & AI SaaS",
     priceFrom: "Custom",
     priceSuffix: "pricing",
     timeline: "8-16 weeks",
     features: [
-      "Complex platform / SaaS development",
-      "Microservices architecture",
-      "Multi-vendor marketplace support",
-      "AI/LLM integration",
-      "Performance & security audit",
-      "Full Technical SEO strategy",
-      "Dedicated project manager",
-      "Weekly demo & reporting",
-      "Unlimited revisions during dev",
-      "60 days post-launch support",
-      "SLA-backed delivery",
+      "Multi-tenant SaaS & enterprise architecture",
+      "Autonomous AI workflows & RAG assistants",
+      "Cloud microservices & rate-limited gateways",
+      "Deep database partitioning & vector search",
+      "Comprehensive security & penetration audit",
+      "Full Technical SEO & Generative Engine Strategy",
+      "Dedicated technical architect & weekly demos",
+      "60 days post-launch support & SLA",
     ],
     cta: "Talk to Founder",
     ctaLink: "/contact",
@@ -123,29 +118,34 @@ const pricingTiers = [
 
 const seoPricing = [
   {
-    service: "Technical SEO Audit",
+    service: "Technical SEO & AEO Audit",
     price: "₹8,000 - ₹15,000",
     delivery: "5-7 days",
   },
   {
-    service: "Monthly SEO Retainer",
-    price: "₹12,000 - ₹25,000 / month",
+    service: "Monthly SEO & GEO Retainer",
+    price: "₹15,000 - ₹35,000 / month",
     delivery: "Ongoing",
   },
   {
-    service: "Core Web Vitals Fix",
+    service: "Core Web Vitals & Latency Fix",
     price: "₹10,000 - ₹20,000",
     delivery: "1-2 weeks",
   },
   {
-    service: "Schema Markup Implementation",
-    price: "₹5,000 - ₹8,000",
+    service: "Schema.org Knowledge Graph Setup",
+    price: "₹6,000 - ₹10,000",
     delivery: "2-3 days",
   },
   {
-    service: "GEO / AI SEO Setup",
-    price: "₹6,000 - ₹12,000",
-    delivery: "3-5 days",
+    service: "Generative Engine Optimization (GEO)",
+    price: "₹12,000 - ₹25,000",
+    delivery: "1-2 weeks",
+  },
+  {
+    service: "AI Chatbot & RAG Assistant Setup",
+    price: "₹20,000 - ₹45,000",
+    delivery: "1-3 weeks",
   },
 ];
 
@@ -248,11 +248,11 @@ const Pricing = () => {
             Transparent Pricing
           </span>
           <h1 className="mt-3 text-4xl md:text-6xl font-extrabold text-primary tracking-tight leading-tight">
-            Plans for serious web growth
+            Plans for serious AI & software growth
           </h1>
           <p className="mt-5 text-gray-500 text-lg leading-relaxed">
-            Choose a starting package for MERN Stack development, Technical SEO,
-            and growth work. Final scope is confirmed after discovery.
+            Choose a starting package for AI-ready software, custom platforms,
+            intelligent automation, and technical SEO / GEO. Final scope is confirmed after discovery.
           </p>
         </div>
 
@@ -335,10 +335,10 @@ const Pricing = () => {
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
               <span className="text-accent-dark font-bold tracking-[0.24em] text-[10px] uppercase">
-                SEO Add-ons
+                AI & Optimization Add-ons
               </span>
               <h2 className="mt-2 text-2xl font-black text-primary">
-                Focused optimisation packages
+                Specialized AI, SEO & optimization packages
               </h2>
             </div>
             <Link

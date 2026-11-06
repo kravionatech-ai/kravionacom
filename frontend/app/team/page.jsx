@@ -29,9 +29,9 @@ const fallbackMembers = [
     slug: "amar-kumar",
     designation: "Founder & Lead Engineer",
     department: "Engineering",
-    bio: "Amar leads Kraviona's technical direction across MERN stack builds, Next.js websites, backend systems, and technical SEO foundations.",
+    bio: "Amar leads Kraviona's engineering direction across AI-first systems, autonomous agents, modern software architectures, Next.js platforms, and Generative Engine Optimization (GEO).",
     avatar: "/amar.jpeg",
-    skills: ["MERN Stack", "Next.js", "Node.js", "Technical SEO"],
+    skills: ["AI Systems Architecture", "Next.js & React", "Node.js & Python", "AEO & Technical SEO"],
     socialLinks: [
       {
         name: "LinkedIn",
@@ -44,21 +44,21 @@ const fallbackMembers = [
 
 const pillars = [
   {
-    title: "Product Engineering",
+    title: "AI & Systems Engineering",
     description:
-      "We plan, design, and ship web products with clean architecture and maintainable code.",
+      "We architect and ship AI-powered software, autonomous agent workflows, and clean modular codebases.",
     icon: Code2,
   },
   {
-    title: "Technical SEO",
+    title: "AEO, GEO & Technical SEO",
     description:
-      "Every build is shaped for crawlability, performance, structured data, and long-term search growth.",
+      "Every build is shaped for AI answer engine citations, Core Web Vitals, structured schema, and sustainable compound growth.",
     icon: Search,
   },
   {
-    title: "Reliable Delivery",
+    title: "Founder-Led Delivery",
     description:
-      "Clients get direct communication, practical timelines, and careful release support after launch.",
+      "Direct technical discovery, transparent communication, practical milestones, and reliable post-launch engineering.",
     icon: ShieldCheck,
   },
 ];
@@ -74,18 +74,18 @@ const allowedImageHosts = [
 ];
 
 export const metadata = buildMetadata({
-  title: "Kraviona Team | MERN Stack & Technical SEO Experts",
+  title: "Kraviona Team | AI Systems & Software Engineering Experts",
   description:
-    "Meet the Kraviona team building fast MERN stack applications, Next.js websites, backend APIs, and technical SEO systems for growing businesses.",
+    "Meet the Kraviona team building AI-ready software, Next.js platforms, cloud backends, and Generative Engine Optimization for ambitious businesses.",
   path: "/team",
   image: DEFAULT_OG_IMAGE,
   imageAlt: "Kraviona team and founder",
   keywords: [
     "Kraviona team",
     "Kraviona Tech Solutions team",
-    "MERN stack developers India",
+    "AI software engineering India",
     "Next.js development team",
-    "technical SEO experts India",
+    "technical SEO & GEO experts",
   ],
 });
 

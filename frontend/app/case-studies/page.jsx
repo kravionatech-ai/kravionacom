@@ -9,17 +9,17 @@ export const revalidate = 300;
 
 export const metadata = {
   title: {
-    absolute: "Case Studies & Engineering Results | Kraviona",
+    absolute: "Case Studies & AI Engineering Results | Kraviona",
   },
   description:
-    "Explore Kraviona case studies showing how MERN stack development, Next.js architecture, technical SEO, and automation deliver measurable business results.",
+    "Explore Kraviona case studies showing how AI-ready software, Next.js architecture, intelligent automation, and technical SEO / GEO deliver measurable business results.",
   authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical: "https://www.kraviona.com/case-studies" },
   openGraph: {
-    title: "Case Studies & Engineering Results | Kraviona",
+    title: "Case Studies & AI Engineering Results | Kraviona",
     description:
-      "Discover how Kraviona delivered measurable business results. Read case studies on MERN Stack development, Technical SEO, and digital transformation.",
+      "Discover how Kraviona delivers measurable business results. Read case studies on AI-ready software, Next.js architecture, intelligent automation, and technical SEO.",
     url: "https://www.kraviona.com/case-studies",
     siteName: "Kraviona Tech Solutions",
     type: "website",
@@ -38,9 +38,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Case Studies & Engineering Results | Kraviona",
+    title: "Case Studies & AI Engineering Results | Kraviona",
     description:
-      "Real case studies showcasing measurable results from Kraviona projects.",
+      "Real case studies showcasing measurable results from Kraviona's AI and software engineering projects.",
     images: [DEFAULT_OG_IMAGE],
   },
   robots: defaultRobots,
@@ -78,10 +78,10 @@ export default async function CaseStudiesPage() {
       />
       <JsonLd
         data={webPageSchema({
-          name: "Case Studies & Client Results | Kraviona",
+          name: "Case Studies & AI Engineering Results | Kraviona",
           url: "https://www.kraviona.com/case-studies",
           description:
-            "Explore Kraviona case studies showing how MERN stack development, technical SEO, and automation deliver measurable business results.",
+            "Explore Kraviona case studies showing how AI-ready software, intelligent automation, and technical SEO deliver measurable business results.",
         })}
       />
       <GalleryPage initialProjects={projects} />

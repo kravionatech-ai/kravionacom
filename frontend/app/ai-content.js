@@ -18,19 +18,19 @@ const staticPages = [
     title: "Home",
     url: canonicalUrl("/"),
     description:
-      "Overview of Kraviona Tech Solutions, web development, technical SEO, and digital engineering services.",
+      "Kraviona — AI-First Technology & Digital Solutions Company. Custom AI software, autonomous agents, SaaS platforms, and enterprise digital solutions.",
   },
   {
     title: "Services",
     url: canonicalUrl("/services"),
     description:
-      "Public service index for development, SEO, AI automation, design, and digital marketing offerings.",
+      "Public service directory across Kraviona's 5 pillars: IT & Technology Services, AI & Automation Solutions, SaaS & Software Products, E-commerce Solutions, and Digital Marketing Services.",
   },
   {
     title: "Blog",
     url: canonicalUrl("/blog"),
     description:
-      "Published public articles about MERN stack development, AI automation, SEO, and performance.",
+      "Published technical articles on AI agents, Next.js architecture, Generative Engine Optimization (GEO), and modern software engineering.",
   },
   {
     title: "News",
@@ -42,42 +42,42 @@ const staticPages = [
     title: "Case Studies",
     url: canonicalUrl("/case-studies"),
     description:
-      "Public project and implementation examples from Kraviona.",
+      "Documented client results, AI systems implementations, and software engineering case studies from Kraviona.",
   },
   {
     title: "About",
     url: canonicalUrl("/about"),
-    description: "Public company and expertise information.",
+    description: "About Kraviona: AI-first technology company, leadership, engineering philosophy, and values.",
   },
   {
     title: "Contact",
     url: canonicalUrl("/contact"),
-    description: "Public contact page for project and service inquiries.",
+    description: "Connect with Kraviona's engineering team for AI software, workflow automation, SaaS development, or technical SEO projects.",
   },
   {
     title: "Pricing",
     url: canonicalUrl("/pricing"),
-    description: "Public pricing and service package information.",
+    description: "Transparent investment models for AI-ready software, custom platforms, SaaS MVPs, and technical SEO / GEO retainers.",
   },
   {
     title: "Portfolio",
     url: canonicalUrl("/gallery"),
-    description: "Public portfolio and gallery page.",
+    description: "Curated portfolio showcase of AI-powered applications, custom software platforms, and digital solutions.",
   },
   {
     title: "Blog Categories",
     url: canonicalUrl("/category"),
-    description: "Public blog category index.",
+    description: "Public blog category index covering AI systems, software architecture, and search intelligence.",
   },
   {
     title: "Privacy Policy",
     url: canonicalUrl("/privacy-policy"),
-    description: "Public privacy policy.",
+    description: "Public privacy policy and enterprise data protection standards.",
   },
   {
     title: "Terms",
     url: canonicalUrl("/terms"),
-    description: "Public terms and conditions.",
+    description: "Public terms of service and commercial engagement conditions.",
   },
 ];
 

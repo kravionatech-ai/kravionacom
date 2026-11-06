@@ -11,9 +11,9 @@ const blogPageSchema = {
   "@type": "Blog",
   "@id": "https://www.kraviona.com/blog#blog",
   url: "https://www.kraviona.com/blog",
-  name: "Kraviona Blog – Web Development & Digital Insights",
+  name: "Kraviona Blog — AI, Web Engineering & Digital Insights",
   description:
-    "Read our latest insights, trends, and expert advice on web development, UI/UX design, AI solutions, and digital marketing to stay ahead in the tech world.",
+    "Read our latest technical insights on artificial intelligence, autonomous agents, Next.js architecture, Generative Engine Optimization (GEO), and modern software engineering.",
   publisher: {
     "@type": "Organization",
     name: "Kraviona Tech Solutions",
@@ -68,17 +68,17 @@ async function getInitialPosts() {
 
 export const metadata = {
   title: {
-    absolute: "Web Engineering & Technical SEO Blog | Kraviona",
+    absolute: "AI Engineering, Software & Technical SEO Blog | Kraviona",
   },
   description:
-    "Explore Kraviona's blog for expert insights on MERN Stack development, Technical SEO, Core Web Vitals, Node.js, React.js, and modern web performance.",
+    "Explore Kraviona's blog for expert engineering insights on AI solutions, autonomous agents, Next.js App Router, Technical SEO, AEO/GEO, and cloud backends.",
   authors: [{ name: "Amar Kumar", url: "https://www.kraviona.com/authors/amar-kumar" }],
   creator: SITE_NAME,
   alternates: { canonical: canonicalUrl("/blog") },
   openGraph: {
-    title: "Tech Blog | MERN Stack, SEO & Web Development Insights | Kraviona",
+    title: "AI Engineering & Modern Software Insights | Kraviona Blog",
     description:
-      "Expert insights on MERN stack development, Technical SEO, React.js, Node.js, and modern web performance strategies from Kraviona\'s engineering team.",
+      "Expert insights on AI agents, Next.js App Router architecture, Technical SEO, AEO/GEO, and modern cloud engineering from Kraviona's technical team.",
     url: canonicalUrl("/blog"),
     siteName: SITE_NAME,
     type: "website",
@@ -88,7 +88,7 @@ export const metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kraviona Tech Blog – Web Dev & SEO Insights",
+        alt: "Kraviona Tech Blog – AI & Software Engineering Insights",
         type: "image/jpeg",
       },
     ],
@@ -97,9 +97,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Tech Blog | MERN Stack, SEO & Web Development Insights | Kraviona",
+    title: "AI Engineering & Modern Software Insights | Kraviona Blog",
     description:
-      "Expert insights on MERN stack, Technical SEO, React.js, and modern web performance.",
+      "Expert insights on AI agents, Next.js architecture, Technical SEO, and modern cloud performance.",
     images: ["/og-image.jpg"],
   },
   robots: defaultRobots,

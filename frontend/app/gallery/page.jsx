@@ -9,30 +9,30 @@ import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { API_URL } from "@/utils/api";
 
 const canonical = "https://www.kraviona.com/gallery";
-const title = "Project Portfolio & Work Gallery | Kraviona";
+const title = "AI Engineering & Software Portfolio | Kraviona";
 const description =
-  "Explore Kraviona projects, portfolio samples, and digital product work covering MERN stack development, performance, UX, security, and scalable web apps.";
+  "Explore Kraviona projects, portfolio showcases, and engineering work covering AI-ready software, Next.js applications, intelligent automation, and scalable digital platforms.";
 
 export const metadata = {
   title: { absolute: title },
   description,
   keywords: [
     "Kraviona Portfolio",
+    "AI Software Engineering Portfolio",
     "Web Development Portfolio India",
-    "Web Design Gallery",
+    "Next.js App Portfolio",
     "Project Showcase",
-    "MERN Stack Portfolio",
+    "AI Automation Showcase",
     "Custom Software Projects",
-    "Kraviona Work Samples",
-    "Digital Product Design Examples",
+    "Digital Product Engineering",
   ],
   authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical },
   openGraph: {
-    title: "Gallery & Portfolio | Kraviona",
+    title: "AI Engineering & Software Portfolio | Kraviona",
     description:
-      "Browse our portfolio of successful web development and IT projects — built for scale, performance, and real-world results.",
+      "Browse our portfolio of AI-ready software, Next.js platforms, and intelligent automation systems — built for scale, performance, and measurable impact.",
     url: canonical,
     siteName: "Kraviona Tech Solutions",
     type: "website",
@@ -51,9 +51,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Gallery & Portfolio | Kraviona",
+    title: "AI Engineering & Software Portfolio | Kraviona",
     description:
-      "Browse our portfolio of successful web development and IT projects.",
+      "Browse our portfolio of AI-ready software, Next.js platforms, and intelligent automation systems.",
     images: [DEFAULT_OG_IMAGE],
   },
   robots: defaultRobots,

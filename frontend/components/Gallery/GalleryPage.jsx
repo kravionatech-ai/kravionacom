@@ -79,13 +79,13 @@ const GalleryPage = ({ initialProjects = [] }) => {
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-[#e8622a]/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.2em] text-[#e8622a] mb-5">
-            <Sparkles className="w-3.5 h-3.5" /> Curated Engineering Portfolio
+            <Sparkles className="w-3.5 h-3.5" /> Curated AI &amp; Software Portfolio
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.15]">
-            Portfolio &amp; <span className="text-[#e8622a]">Client Projects</span>
+            Engineering &amp; <span className="text-[#e8622a]">Software Portfolio</span>
           </h1>
           <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
-            Explore our curated showcase of mission-critical web applications, high-performance community platforms, custom software, and technical SEO success stories.
+            Explore our curated showcase of AI-powered web applications, custom software platforms, intelligent automation workflows, and technical SEO / GEO success stories.
           </p>
 
           {/* Search & Filter Bar */}

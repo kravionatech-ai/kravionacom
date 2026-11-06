@@ -18,15 +18,16 @@ import {
 } from "./careerData.js";
 
 export const metadata = buildMetadata({
-  title: "Careers at Kraviona | Engineering & SEO Jobs",
+  title: "Careers at Kraviona | AI & Software Engineering Jobs",
   description:
-    "Explore open roles at Kraviona Tech Solutions across engineering, design, SEO, marketing, and operations. Join a practical, ambitious technology team.",
+    "Explore open roles at Kraviona across AI systems engineering, Next.js architecture, software development, and technical SEO. Join an AI-first technology team.",
   path: "/careers",
   keywords: [
     "Kraviona careers",
+    "AI engineer jobs India",
     "technology jobs India",
     "MERN stack developer jobs",
-    "Next.js jobs",
+    "Next.js developer jobs",
     "SEO careers India",
   ],
 });
@@ -82,15 +83,14 @@ export default async function CareersPage({ searchParams }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(216,94,61,0.25),transparent_35rem)]" />
         <div className="relative mx-auto max-w-7xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-accent-hover">
-            <Sparkles className="h-4 w-4" /> Build your next chapter
+            <Sparkles className="h-4 w-4" /> Build your next chapter in AI &amp; engineering
           </span>
           <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">
-            Do meaningful work with a team that values ownership.
+            Do meaningful work with an AI-first engineering team.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-primary-light sm:text-lg">
-            Join Kraviona to build fast products, solve practical business
-            problems, and grow through direct responsibility—not layers of
-            process.
+            Join Kraviona to engineer intelligent software, build autonomous AI systems,
+            and grow through direct technical ownership—not layers of bureaucracy.
           </p>
           <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
             {[
