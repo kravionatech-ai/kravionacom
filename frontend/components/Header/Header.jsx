@@ -48,9 +48,15 @@ const SERVICE_CATEGORIES = [
         Icon: Code2,
       },
       {
+        name: "Next.js Development",
+        path: "/services/nextjs-development",
+        desc: "High-performance App Router & SSR web apps",
+        Icon: Code2,
+      },
+      {
         name: "React.js Development",
         path: "/services/react-development",
-        desc: "High-performance SPAs & Next.js apps",
+        desc: "Dynamic React frontends & interactive portals",
         Icon: Code2,
       },
       {

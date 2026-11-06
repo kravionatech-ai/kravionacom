@@ -5,6 +5,10 @@ const TRUSTED_CRAWLERS = [
   "adsbot-google",
   "bingbot",
   "bingpreview",
+  "gptbot",
+  "claudebot",
+  "perplexitybot",
+  "google-extended",
 ];
 
 const TRUSTED_LINK_PREVIEWS = [
@@ -21,17 +25,12 @@ const TRUSTED_LINK_PREVIEWS = [
 const BLOCKED_AUTOMATION = [
   "ahrefsbot",
   "amazonbot",
-  "anthropic-ai",
-  "applebot-extended",
   "archive.org_bot",
   "bytespider",
-  "ccbot",
-  "claudebot",
   "cohere-ai",
   "dataforseobot",
   "diffbot",
   "dotbot",
-  "gptbot",
   "imagesiftbot",
   "magpie-crawler",
   "mj12bot",
@@ -86,6 +85,8 @@ const PUBLIC_INFRASTRUCTURE_PATHS = [
   "/icon.png",
   "/amar.jpeg",
   "/site.webmanifest",
+  "/llms.txt",
+  "/ai.txt",
 ];
 
 const STATIC_ASSET_REGEX =

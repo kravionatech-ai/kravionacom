@@ -126,7 +126,7 @@ function getAuthorProfile(blog) {
       profile.linkedin ||
       socialUrl("linkedin") ||
       "https://www.linkedin.com/in/amarkumar96085/",
-    email: account.email || author.email || "kravionatech@gmail.com",
+    email: account.email || author.email || "hello@kraviona.com",
   };
 }
 
@@ -189,11 +189,16 @@ export async function generateMetadata({ params }) {
     post.category?.slug || (post.contentType === "news" ? "news" : "blog");
   const postCanonical = canonicalUrl(`/${canonicalCategory}/${post.slug || slug}`);
 
-  const seoTitle =
-    post.metaTitle ||
-    (post.contentType === "news"
-      ? `${post.title} | Kraviona Tech News`
-      : `${post.title} | Kraviona Insights`);
+  let seoTitle = post.metaTitle;
+  if (!seoTitle) {
+    if (slug === "mern-stack-development-company-delhi") {
+      seoTitle = "MERN Stack Development Company in Delhi | Kraviona";
+    } else {
+      const brand = post.contentType === "news" ? "Kraviona News" : "Kraviona";
+      const full = `${post.title} | ${brand}`;
+      seoTitle = full.length <= 60 ? full : (post.title.length <= 58 ? post.title : `${post.title.substring(0, 57).trim()}…`);
+    }
+  }
 
   const description =
     post.metaDescription ||
@@ -216,7 +221,7 @@ export async function generateMetadata({ params }) {
       type: "article",
       publishedTime: post.publishedAt || post.createdAt,
       modifiedTime: post.updatedAt || post.publishedAt || post.createdAt,
-      authors: ["https://www.kraviona.com/about"],
+      authors: ["https://www.kraviona.com/authors/amar-kumar"],
       section: post.category?.name || (post.contentType === "news" ? "News" : "Tech"),
       tags: post.tags || [],
       images: [
@@ -505,10 +510,13 @@ export default async function PostDetailPage({ params }) {
       },
       author: {
         "@type": "Person",
-        name: authorProfile.name,
-        url: authorProfile.linkedin || "https://www.kraviona.com/about",
-        jobTitle: authorProfile.role,
+        "@id": "https://www.kraviona.com/authors/amar-kumar#person",
+        name: "Amar Kumar",
+        url: "https://www.kraviona.com/authors/amar-kumar",
+        sameAs: ["https://www.linkedin.com/in/amarkumar96085/"],
+        jobTitle: authorProfile.role || "Founder & Lead Technical Architect",
       },
+      publisher: { "@id": "https://www.kraviona.com/#org" },
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": postCanonical,
@@ -1044,10 +1052,13 @@ export default async function PostDetailPage({ params }) {
     },
     author: {
       "@type": "Person",
-      name: authorProfile.name,
-      url: authorProfile.linkedin || "https://www.kraviona.com/about",
-      jobTitle: authorProfile.role,
+      "@id": "https://www.kraviona.com/authors/amar-kumar#person",
+      name: "Amar Kumar",
+      url: "https://www.kraviona.com/authors/amar-kumar",
+      sameAs: ["https://www.linkedin.com/in/amarkumar96085/"],
+      jobTitle: authorProfile.role || "Founder & Lead Technical Architect",
     },
+    publisher: { "@id": "https://www.kraviona.com/#org" },
   };
 
   const blogBreadcrumbs = {
@@ -1144,9 +1155,15 @@ export default async function PostDetailPage({ params }) {
               <SocialShareButtons url={postCanonical} title={post.title} dark={true} />
             </div>
 
-            <h1 className="text-3xl font-black tracking-tight sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.14] mb-6 max-w-5xl">
+            <h1 className="text-3xl font-black tracking-tight sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.14] mb-3 max-w-5xl">
               {post.title}
             </h1>
+
+            <div className="flex flex-wrap items-center gap-2 text-xs text-white/75 mb-6 font-medium">
+              <span>Published: {publishedDate}</span>
+              <span className="text-white/40">•</span>
+              <span>Last reviewed: {updatedDate || publishedDate} by <Link href="/authors/amar-kumar" className="text-[#FF8E5C] hover:underline font-bold">Amar Kumar</Link></span>
+            </div>
 
             <p className="text-base sm:text-lg lg:text-xl text-white/85 leading-relaxed max-w-3xl mb-8">
               {bannerExcerpt}
@@ -1155,7 +1172,7 @@ export default async function PostDetailPage({ params }) {
             {/* Author info bar */}
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-6 max-w-5xl">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex-shrink-0 relative border-2 border-[#E8622A]/60">
+                <Link href="/authors/amar-kumar" className="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex-shrink-0 relative border-2 border-[#E8622A]/60 block hover:opacity-90 transition-opacity">
                   {authorProfile.avatar ? (
                     <Image
                       src={authorProfile.avatar}
@@ -1168,10 +1185,10 @@ export default async function PostDetailPage({ params }) {
                       {authorProfile.name.charAt(0)}
                     </div>
                   )}
-                </div>
+                </Link>
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="text-sm sm:text-base font-bold text-white">{authorProfile.name}</p>
+                    <Link href="/authors/amar-kumar" className="text-sm sm:text-base font-bold text-white hover:text-[#FF8E5C] transition-colors">{authorProfile.name}</Link>
                     <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-bold">
                       <ShieldCheck size={11} />
                       Lead Engineer

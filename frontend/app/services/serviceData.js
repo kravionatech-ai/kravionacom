@@ -307,6 +307,21 @@ export const SERVICE_PAGES = {
     ],
     faqs: [
       {
+        question: "How much does MERN stack development cost in India?",
+        answer:
+          "MERN stack projects in India typically range from ₹ 2–8 lakh for a standard web application, up to ₹ 15–25 lakh for complex SaaS platforms. Cost depends on feature scope, number of integrations, design complexity, and delivery timeline.",
+      },
+      {
+        question: "How long does it take to build a MERN stack application?",
+        answer:
+          "A basic MERN app takes 4–8 weeks. A full-featured SaaS platform typically takes 12–20 weeks. The process follows: (1) Discovery & scoping, (2) UI design, (3) Backend API development, (4) Frontend integration, (5) QA & testing, (6) Deployment.",
+      },
+      {
+        question: "MERN stack or Next.js — which should I choose for my project?",
+        answer:
+          "Choose MERN for real-time, API-heavy apps (dashboards, social platforms). Choose Next.js when SEO, static pages, or server rendering are priorities. Many projects combine both — a Next.js frontend with a Node/Express backend.",
+      },
+      {
         question: "Why choose MERN stack for our web application?",
         answer:
           "The MERN stack uses JavaScript and TypeScript across both frontend and backend, enabling unified code sharing, faster iteration cycles, lower hosting overhead, and massive developer community support.",
@@ -320,11 +335,6 @@ export const SERVICE_PAGES = {
         question: "How does Kraviona ensure MongoDB scalability under load?",
         answer:
           "We implement targeted compound indexing, connection pooling, sharding strategies, schema validation, and Redis caching layers to prevent database bottlenecks.",
-      },
-      {
-        question: "Do you build SEO-friendly MERN stack applications?",
-        answer:
-          "Yes. By integrating Next.js for server-side rendering (SSR) and static generation (SSG), your MERN application remains fully crawlable and indexable by search engines.",
       },
       {
         question: "What post-launch support is included?",
@@ -1314,6 +1324,21 @@ export const SERVICE_PAGES = {
     ],
     faqs: [
       {
+        question: "What does a technical SEO audit include?",
+        answer:
+          "A technical SEO audit covers crawlability, indexation, URL structure, canonical tags, sitemap and robots.txt, Core Web Vitals, mobile performance, schema markup, internal linking, and duplicate content. It results in a prioritised issue list with recommended fixes.",
+      },
+      {
+        question: "How long does technical SEO take to show results?",
+        answer:
+          "Initial improvements (fixing crawl errors, 301 redirects, sitemap) are reflected in Google Search Console within 2–4 weeks. Ranking improvements from content and architecture changes typically appear in 3–6 months.",
+      },
+      {
+        question: "Do Core Web Vitals affect Google rankings?",
+        answer:
+          "Yes. Google uses Core Web Vitals (LCP, INP, CLS) as a ranking signal in its Page Experience update. Sites with poor mobile LCP (>2.5 s) or high CLS (>0.1) may rank below competitors with better scores on the same query.",
+      },
+      {
         question: "What is the difference between technical SEO and regular SEO?",
         answer:
           "Regular SEO focuses primarily on keyword research, copywriting, and backlinks. Technical SEO ensures search engine crawlers can efficiently discover, render, understand, and index every page without server errors or duplicate signals.",
@@ -1563,6 +1588,16 @@ export const SERVICE_PAGES = {
       "PostgreSQL",
     ],
     faqs: [
+      {
+        question: "What is AI workflow automation and what can it replace?",
+        answer:
+          "AI workflow automation uses LLMs, document intelligence, and tools like n8n or Make to automate repetitive business tasks — customer support routing, document extraction, invoice processing, lead qualification, and reporting. It replaces manual copy-pasting, data re-entry, and human-only support queues.",
+      },
+      {
+        question: "How much does custom AI automation cost in India?",
+        answer:
+          "Custom AI workflow automation typically ranges from ₹ 50,000 to ₹ 3 lakh for standalone workflow automations, and ₹ 2–6 lakh for end-to-end custom agent pipelines or intelligent knowledge-base chatbots. Ongoing maintenance and token costs depend on usage volume.",
+      },
       {
         question: "How can AI automation actually help our business?",
         answer:

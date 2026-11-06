@@ -43,15 +43,6 @@ export const metadata = {
   },
   description:
     "Meet Kraviona Tech Solutions, a Delhi NCR team building fast websites, scalable MERN web apps, backend APIs, and technical SEO systems for growing brands.",
-  keywords: [
-    "About Kraviona",
-    "Kraviona Team",
-    "IT Company India",
-    "Web Development Company About",
-    "MERN Stack Company India",
-    "Kraviona Mission & Vision",
-    "Tech Company Delhi",
-  ],
   authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical: "https://www.kraviona.com/about" },

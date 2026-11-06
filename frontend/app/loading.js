@@ -30,7 +30,7 @@ export default function RouteLoading() {
           ))}
         </div>
       </div>
-      <span className="sr-only">Loading Kraviona page…</span>
+      
     </div>
   );
 }

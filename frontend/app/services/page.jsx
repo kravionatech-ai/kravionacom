@@ -52,31 +52,16 @@ const servicesBreadcrumbSchema = breadcrumbSchema([
 ]);
 
 export const metadata = {
-  title: { absolute: "Web Development & Technical SEO Services | Kraviona" },
+  title: { absolute: "Web Development & Technical SEO Services in Delhi NCR | Kraviona" },
   description:
     "Explore Kraviona services for MERN stack development, Next.js websites, technical SEO, AI automation, UI/UX design, performance, APIs, and SaaS.",
-  keywords: [
-    "Web Development Services India",
-    "MERN Stack Development Company",
-    "Technical SEO Services India",
-    "React.js Development Services",
-    "Node.js Backend Development",
-    "UI UX Design Services India",
-    "Custom Software Development",
-    "Digital Marketing Company India",
-    "Web App Development Company",
-    "IT Solutions Company Delhi",
-    "Full Stack Development Services",
-    "SEO Company India",
-    "Kraviona Services",
-  ],
   authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: {
     canonical: "https://www.kraviona.com/services",
   },
   openGraph: {
-    title: "MERN Stack Development & Technical SEO Services | Kraviona",
+    title: "Web Development & Technical SEO Services in Delhi NCR | Kraviona",
     description:
       "Explore Kraviona's web development, AI automation, digital marketing, marketplace seller, and technical SEO services.",
     url: "https://www.kraviona.com/services",
@@ -97,7 +82,7 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "MERN Stack Development & Technical SEO Services | Kraviona",
+    title: "Web Development & Technical SEO Services in Delhi NCR | Kraviona",
     description:
       "Custom MERN stack apps, technical SEO, AI automation, marketing, and seller services. Built to scale.",
     images: ["/og-image.jpg"],

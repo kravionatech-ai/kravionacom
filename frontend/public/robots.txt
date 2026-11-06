@@ -6,13 +6,49 @@ Disallow: /dashboard/
 Disallow: /studio
 Disallow: /login
 Disallow: /register
-Disallow: /auth
+Disallow: /auth/
 Disallow: /private/
-Disallow: /*?*utm_source=
-Disallow: /*?*utm_medium=
-Disallow: /*?*ref=
-Disallow: /notify-Notify_1
-Disallow: /notify-Samsung_new
+Disallow: /*?utm_
+Disallow: /*?ref=
+
+User-agent: Googlebot
+Allow: /
+Allow: /_next/static/
+Allow: /_next/image/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /studio
+Disallow: /login
+Disallow: /register
+Disallow: /auth/
+Disallow: /private/
+Disallow: /*?utm_
+Disallow: /*?ref=
+
+User-agent: Bingbot
+Allow: /
+Allow: /_next/static/
+Allow: /_next/image/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /studio
+Disallow: /login
+Disallow: /register
+Disallow: /auth/
+Disallow: /private/
+Disallow: /*?utm_
+Disallow: /*?ref=
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
 
 User-agent: AhrefsBot
 Disallow: /
@@ -28,13 +64,5 @@ Disallow: /
 
 User-agent: BLEXBot
 Disallow: /
-
-User-agent: Googlebot
-Allow: /
-Allow: /_next/static/
-Allow: /_next/image/
-
-User-agent: Bingbot
-Allow: /
 
 Sitemap: https://www.kraviona.com/sitemap.xml

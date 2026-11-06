@@ -1,10 +1,55 @@
 // Central schema definitions for Kraviona.com
 import { CONTACT_FAQS } from "./contactFaqs";
 
+export const rootGraphSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.kraviona.com/#org",
+      name: "Kraviona Tech Solutions",
+      url: "https://www.kraviona.com",
+      logo: "https://www.kraviona.com/full-logo.webp",
+      description:
+        "Kraviona Tech Solutions is a Delhi NCR web development and technical SEO agency building MERN stack products, Next.js websites, and backend APIs for businesses across India.",
+      telephone: "+91 96085 53167",
+      email: "hello@kraviona.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "East Delhi",
+        addressLocality: "Delhi",
+        addressRegion: "Delhi",
+        postalCode: "110092",
+        addressCountry: "IN",
+      },
+      founder: { "@id": "https://www.kraviona.com/authors/amar-kumar#person" },
+      sameAs: [
+        "https://www.linkedin.com/company/kravionai",
+        "https://www.facebook.com/profile.php?id=61570716181916",
+        "https://x.com/KravionaTech",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.kraviona.com/#website",
+      url: "https://www.kraviona.com",
+      name: "Kraviona Tech Solutions",
+      publisher: { "@id": "https://www.kraviona.com/#org" },
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.kraviona.com/authors/amar-kumar#person",
+      name: "Amar Kumar",
+      url: "https://www.kraviona.com/authors/amar-kumar",
+      sameAs: ["https://www.linkedin.com/in/amarkumar96085/"],
+    },
+  ],
+};
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://www.kraviona.com/#organization",
+  "@id": "https://www.kraviona.com/#org",
   name: "Kraviona Tech Solutions",
   url: "https://www.kraviona.com",
   logo: {
@@ -50,10 +95,11 @@ export const organizationSchema = {
       },
     },
   ],
-  email: "kravionatech@gmail.com",
+  email: "hello@kraviona.com",
   sameAs: [
     "https://www.linkedin.com/company/kravionai",
     "https://www.facebook.com/profile.php?id=61570716181916",
+    "https://x.com/KravionaTech",
   ],
   knowsAbout: [
     "Web Development",
@@ -73,9 +119,9 @@ export const localBusinessSchema = {
   image: "https://www.kraviona.com/opengraph-image",
   url: "https://www.kraviona.com",
   telephone: "+91-96085-53167",
-  email: "kravionatech@gmail.com",
+  email: "hello@kraviona.com",
   priceRange: "₹₹",
-  parentOrganization: { "@id": "https://www.kraviona.com/#organization" },
+  parentOrganization: { "@id": "https://www.kraviona.com/#org" },
   address: {
     "@type": "PostalAddress",
     streetAddress: "East Delhi",
@@ -124,7 +170,7 @@ export const websiteSchema = {
   description: "MERN Stack, Next.js and Technical SEO Company India",
   inLanguage: "en-IN",
   publisher: {
-    "@id": "https://www.kraviona.com/#organization",
+    "@id": "https://www.kraviona.com/#org",
   },
 };
 
@@ -135,7 +181,7 @@ export const personSchema = {
   name: "Amar Kumar",
   jobTitle: "Founder & Lead Developer",
   worksFor: {
-    "@id": "https://www.kraviona.com/#organization",
+    "@id": "https://www.kraviona.com/#org",
   },
   url: "https://www.kraviona.com/about",
   sameAs: [
@@ -171,7 +217,7 @@ export function serviceSchema(params: {
     description: params.description,
     url: params.url,
     provider: {
-      "@id": "https://www.kraviona.com/#organization",
+      "@id": "https://www.kraviona.com/#org",
     },
     serviceType: params.serviceType || params.name,
     areaServed: [
@@ -269,7 +315,7 @@ export function webPageSchema(params: {
     name: params.name,
     description: params.description,
     isPartOf: { "@id": "https://www.kraviona.com/#website" },
-    about: { "@id": "https://www.kraviona.com/#organization" },
+    about: { "@id": "https://www.kraviona.com/#org" },
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: "https://www.kraviona.com/og-image.jpg",

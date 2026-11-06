@@ -51,15 +51,15 @@ const HeroSection = () => {
 
           <h1
             id="home-hero-heading"
-            className="mb-5 text-4xl font-bold leading-[1.08] tracking-tight text-[#1A3840] sm:text-5xl md:mb-7 md:text-6xl lg:text-[4.5rem]"
+            className="mb-5 text-4xl font-bold leading-[1.08] tracking-tight text-[#1A3840] sm:text-5xl md:mb-7 md:text-6xl lg:text-[4.2rem]"
           >
-            Fast Websites &amp; Web Apps
+            MERN Stack Development &amp;
             <br />
             <span className="text-[#2D6E7A]">
-              Built to Rank
+              Technical SEO Agency
             </span>
             <br />
-            <span className="text-[#1A3840]/90">and Convert</span>
+            <span className="text-[#1A3840]/90">in Delhi NCR</span>
           </h1>
 
           <p className="mb-9 max-w-2xl border-l-2 border-[#2D6E7A]/40 pl-4 text-base leading-relaxed text-[#5A7A82] md:mb-11 md:text-lg lg:text-xl">

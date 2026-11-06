@@ -664,6 +664,32 @@ export default async function ServicesDetails({ params }) {
               <p className="mb-8 max-w-3xl text-gray-600 leading-relaxed">
                 {service.intro}
               </p>
+
+              {service.slug === "mern-stack-development" && (
+                <div className="mb-8 rounded-2xl border border-[#2D6E7A]/20 bg-[#EAF3F5]/60 p-5 text-sm text-[#1A3840] leading-relaxed">
+                  <p className="font-bold mb-2 text-[#2D6E7A]">Explore Connected Engineering &amp; Architecture:</p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                    <li>
+                      • <Link href="/services/nextjs-development" className="text-[#2D6E7A] font-semibold underline hover:text-[#C85A3C]">Next.js development services</Link> for SSR &amp; SEO
+                    </li>
+                    <li>
+                      • <Link href="/services/react-development" className="text-[#2D6E7A] font-semibold underline hover:text-[#C85A3C]">React.js development</Link> for interactive frontends
+                    </li>
+                    <li>
+                      • <Link href="/services/nodejs-development" className="text-[#2D6E7A] font-semibold underline hover:text-[#C85A3C]">Node.js backend development</Link> for resilient REST APIs
+                    </li>
+                    <li>
+                      • <Link href="/mern-stack/next-js-vs-react-differences" className="text-[#2D6E7A] font-semibold underline hover:text-[#C85A3C]">MERN vs Next.js comparison</Link> architectural guide
+                    </li>
+                    <li>
+                      • In-depth guide on <Link href="/mern-stack/what-is-mern-stack-2026" className="text-[#2D6E7A] font-semibold underline hover:text-[#C85A3C]">what is MERN stack</Link> in 2026
+                    </li>
+                    <li>
+                      • Real client proof: <Link href="/case-studies/alokworld-community-directory" className="text-[#2D6E7A] font-semibold underline hover:text-[#C85A3C]">Alokworld Community Directory Case Study</Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {service.outcomes.map((outcome, index) => (
                   <div

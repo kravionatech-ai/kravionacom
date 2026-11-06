@@ -44,16 +44,6 @@ export const metadata = {
   },
   description:
     "Book a free technical consultation with Kraviona for MERN stack development, Next.js websites, technical SEO, AI automation, and custom software projects.",
-  keywords: [
-    "Contact Kraviona",
-    "Hire Web Developers India",
-    "IT Consulting Contact",
-    "Get a Quote Web Development",
-    "MERN Stack Company Contact",
-    "Web Development Inquiry",
-    "Kraviona Contact Details",
-    "Hire Next.js Developer",
-  ],
   authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical: "https://www.kraviona.com/contact" },

@@ -9,25 +9,15 @@ export const revalidate = 300;
 
 export const metadata = {
   title: {
-    absolute: "Case Studies & Client Engineering Results | Kraviona",
+    absolute: "Case Studies & Engineering Results | Kraviona",
   },
   description:
     "Explore Kraviona case studies showing how MERN stack development, Next.js architecture, technical SEO, and automation deliver measurable business results.",
-  keywords: [
-    "Case Studies",
-    "Web Development Case Studies",
-    "MERN Stack Success Stories",
-    "SEO Results",
-    "Web Development Projects",
-    "Enterprise Solutions",
-    "Digital Transformation Cases",
-    "Client Success Stories",
-  ],
   authors: [{ name: "Kraviona Tech", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical: "https://www.kraviona.com/case-studies" },
   openGraph: {
-    title: "Case Studies – Real-World Results | Kraviona",
+    title: "Case Studies & Engineering Results | Kraviona",
     description:
       "Discover how Kraviona delivered measurable business results. Read case studies on MERN Stack development, Technical SEO, and digital transformation.",
     url: "https://www.kraviona.com/case-studies",
@@ -48,7 +38,7 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Case Studies – Real-World Results | Kraviona",
+    title: "Case Studies & Engineering Results | Kraviona",
     description:
       "Real case studies showcasing measurable results from Kraviona projects.",
     images: [DEFAULT_OG_IMAGE],

@@ -5,14 +5,14 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["600", "700", "800"],
   variable: "--font-heading",
-  display: "optional",
+  display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-body",
-  display: "optional",
+  display: "swap",
 });
 
 import { Suspense } from "react";
@@ -24,11 +24,7 @@ import { JsonLd } from "@/components/JsonLd";
 import ThirdPartyScripts from "@/components/ThirdPartyScripts";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import KravionaAIAssistant from "@/components/AIAssistant/KravionaAIAssistant";
-import {
-  localBusinessSchema,
-  organizationSchema,
-  websiteSchema,
-} from "@/lib/schema";
+import { rootGraphSchema } from "@/lib/schema";
 
 import {
   SITE_URL,
@@ -61,15 +57,6 @@ export const metadata = {
   description:
     "Kraviona is a Delhi NCR agency for Next.js, MERN stack web development, backend APIs, and technical SEO services built for speed and search visibility.",
 
-  keywords: [
-    "web development Delhi NCR",
-    "Next.js development India",
-    "technical SEO agency",
-    "MERN stack developer",
-    "React.js company Delhi",
-    "SEO services Noida",
-    "Kraviona",
-  ],
 
   authors: [
     {
@@ -187,7 +174,7 @@ export default function RootLayout({ children }) {
         <Script
           id="google-adsense"
           async
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2639855770462648"
           crossOrigin="anonymous"
         />
@@ -203,9 +190,7 @@ export default function RootLayout({ children }) {
         >
           Skip to main content
         </a>
-        <JsonLd
-          data={[organizationSchema, localBusinessSchema, websiteSchema]}
-        />
+        <JsonLd data={rootGraphSchema} />
 
         {/* Google Tag Manager (noscript) */}
         <noscript>

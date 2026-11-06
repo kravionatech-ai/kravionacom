@@ -9,6 +9,12 @@ const EXCLUDED_SLUGS = [
   "bGF0ZXN0LW",
   "ai-news-august-2026",
   "what-is-mern-stack-the-complete-2026-guide-for-developers",
+  "what-is-mern-stack-the-complete-2026-guide-for-developer",
+  "complete-guide-for-developers",
+  "complete-guide-for-developer",
+  "why-choosing-a-top-mern-stack-development-company-in-india-changes-the-game",
+  "best-ai-automation-company-in-delhi-how-businesses-are-growing-smarter-in-2025",
+  "best-ai-automation-company-in-delhi-ncr-india-in-2025",
 ];
 
 const POSTS_FETCH_LIMIT = 100;
@@ -86,19 +92,14 @@ const getBlogChangeFrequency = (lastModified) => {
     : "monthly";
 };
 
-const createRoute = ({ path, changeFrequency, priority, lastModified }) => {
-  const route = {
+const DEFAULT_STATIC_LASTMOD = "2026-10-01T00:00:00.000Z";
+
+const createRoute = ({ path, lastModified }) => {
+  const validLastModified = getValidIsoDate(lastModified) || DEFAULT_STATIC_LASTMOD;
+  return {
     url: canonicalUrl(path),
-    changeFrequency,
-    priority,
+    lastModified: validLastModified,
   };
-
-  const validLastModified = getValidIsoDate(lastModified);
-  if (validLastModified) {
-    route.lastModified = validLastModified;
-  }
-
-  return route;
 };
 
 const buildServiceRoutes = (services) => services.map((service) =>
@@ -290,21 +291,14 @@ function mergeRoutes(routes) {
     }
 
     routeMap.set(route.url, {
-      ...existing,
-      priority: Math.max(existing.priority || 0, route.priority || 0),
-      changeFrequency:
-        frequencyRank[route.changeFrequency] >
-        frequencyRank[existing.changeFrequency]
-          ? route.changeFrequency
-          : existing.changeFrequency,
+      url: route.url,
       lastModified: getNewestIsoDate(existing.lastModified, route.lastModified),
     });
   });
 
-  return Array.from(routeMap.values()).sort((a, b) => {
-    if (b.priority !== a.priority) return b.priority - a.priority;
-    return a.url.localeCompare(b.url);
-  });
+  return Array.from(routeMap.values()).sort((a, b) =>
+    a.url.localeCompare(b.url)
+  );
 }
 
 export default async function sitemap() {

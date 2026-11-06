@@ -19,7 +19,7 @@ const blogPageSchema = {
     name: "Kraviona Tech Solutions",
     logo: { "@type": "ImageObject", url: "https://www.kraviona.com/full-logo.webp" },
   },
-  isPartOf: { "@id": "https://www.kraviona.com/#website" },
+  isPartOf: { "@id": "https://www.kraviona.com/#org" },
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -72,20 +72,7 @@ export const metadata = {
   },
   description:
     "Explore Kraviona's blog for expert insights on MERN Stack development, Technical SEO, Core Web Vitals, Node.js, React.js, and modern web performance.",
-  keywords: [
-    "Kraviona Blog",
-    "MERN Stack Blog",
-    "Web Development Insights",
-    "Technical SEO Blog",
-    "UI UX Design Trends",
-    "Node.js Tutorials",
-    "React.js Articles",
-    "Next.js Development",
-    "Core Web Vitals Guide",
-    "Digital Marketing Tips",
-    "Tech Industry News",
-  ],
-  authors: [{ name: "Kraviona Team", url: "https://www.kraviona.com" }],
+  authors: [{ name: "Amar Kumar", url: "https://www.kraviona.com/authors/amar-kumar" }],
   creator: SITE_NAME,
   alternates: { canonical: canonicalUrl("/blog") },
   openGraph: {

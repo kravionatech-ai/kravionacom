@@ -268,7 +268,7 @@ export async function getAiPublicContent() {
       url: SITE_URL,
       description:
         "Kraviona Tech Solutions builds MERN stack applications, Next.js websites, technical SEO systems, AI automation workflows, and performance-focused digital products.",
-      contactEmail: "kravionatech@gmail.com",
+      contactEmail: "hello@kraviona.com",
       publicPhone: "+91 96085 53167",
     },
     staticPages,

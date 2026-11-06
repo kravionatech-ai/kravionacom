@@ -208,23 +208,6 @@ export const metadata = {
   },
   description:
     "Next.js and MERN stack web development plus technical SEO services for ambitious businesses in Delhi NCR. Built for sub-second speeds and top Google rankings.",
-  keywords: [
-    "Kraviona",
-    "Kraviona Tech Solutions",
-    "MERN Stack Development Company",
-    "MERN Stack Development India",
-    "Technical SEO Company India",
-    "Web Development Company Delhi",
-    "React.js Development Company",
-    "Node.js Development Services",
-    "Next.js Development Company",
-    "Full Stack Web Development",
-    "Custom Web Application Development",
-    "SEO Company India",
-    "IT Solutions Delhi India",
-    "Web App Development Company",
-    "UI UX Design Services",
-  ],
   authors: [{ name: "Kraviona Tech", url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
@@ -338,7 +321,7 @@ const Home = async () => {
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
-                  { value: "50+", label: "Projects Delivered" },
+                  { value: "20+", label: "Projects Delivered" },
                   { value: "5+", label: "Years of Experience" },
                   { value: "30d", label: "Launch Support Window" },
                   { value: "SEO", label: "Built Into Delivery" },
@@ -434,8 +417,13 @@ const Home = async () => {
                   href: "/services/technical-seo",
                 },
                 {
-                  title: "React.js & Next.js Development",
-                  desc: "Fast React.js and Next.js interfaces for marketing sites, dashboards, portals, and SEO-sensitive web experiences.",
+                  title: "Next.js Development",
+                  desc: "Server-side rendering, App Router architecture, sub-second page loads, and SEO-first web foundations.",
+                  href: "/services/nextjs-development",
+                },
+                {
+                  title: "React.js Development",
+                  desc: "Component-driven frontend web applications, interactive portals, responsive dashboards, and fast SPAs.",
                   href: "/services/react-development",
                 },
                 {
@@ -446,7 +434,7 @@ const Home = async () => {
                 {
                   title: "UI/UX Design & Web Design",
                   desc: "Mobile-first interfaces with clear content, strong navigation, and conversion-focused pages that make the next step obvious.",
-                  href: "/services",
+                  href: "/services/ui-ux-design",
                 },
               ].map((service, i) => (
                 <Link
