@@ -40,6 +40,17 @@ import {
   testSendEmail,
   handleResendWebhook,
 } from "../controllers/email/email.controller.js";
+import {
+  createEvent,
+  deleteEvent,
+  getAdminEventById,
+  getAdminEvents,
+  getPublicActiveEvent,
+  recordEventClick,
+  recordEventView,
+  toggleEventStatus,
+  updateEvent,
+} from "../controllers/events/event.controller.js";
 
 const Router = express.Router();
 
@@ -194,3 +205,14 @@ Router.get('/chatbot/health', getChatbotHealth);
 Router.post('/chatbot/sync', verifyToken, syncChatbotIndex);
 Router.get('/admin/chatbot/logs', verifyToken, getAdminChatLogs);
 Router.delete('/admin/chatbot/logs/:id', verifyToken, deleteAdminChatLog);
+
+// ─── Site Events & Promotional Popups / Offers ─────────────────────────────
+Router.get('/events/active', getPublicActiveEvent);
+Router.post('/events/:id/view', recordEventView);
+Router.post('/events/:id/click', recordEventClick);
+Router.get('/admin/events', verifyToken, getAdminEvents);
+Router.get('/admin/events/:id', verifyToken, getAdminEventById);
+Router.post('/admin/events', verifyToken, createEvent);
+Router.patch('/admin/events/:id', verifyToken, updateEvent);
+Router.delete('/admin/events/:id', verifyToken, deleteEvent);
+Router.patch('/admin/events/:id/toggle', verifyToken, toggleEventStatus);

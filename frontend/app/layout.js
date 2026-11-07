@@ -24,6 +24,7 @@ import { JsonLd } from "@/components/JsonLd";
 import ThirdPartyScripts from "@/components/ThirdPartyScripts";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import KravionaAIAssistant from "@/components/AIAssistant/KravionaAIAssistant";
+import SiteEventPopup from "@/components/Events/SiteEventPopup";
 import { rootGraphSchema } from "@/lib/schema";
 
 import {
@@ -210,6 +211,7 @@ export default function RootLayout({ children }) {
 
         <Footer />
 
+        <SiteEventPopup />
         <WhatsAppFloat />
         <KravionaAIAssistant />
         <ThirdPartyScripts />
