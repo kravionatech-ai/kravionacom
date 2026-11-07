@@ -13,8 +13,14 @@ const EXCLUDED_SLUGS = [
   "complete-guide-for-developers",
   "complete-guide-for-developer",
   "why-choosing-a-top-mern-stack-development-company-in-india-changes-the-game",
+  "mern-stack-development-company-delhi",
+  "mern-stack-development-company-in-india",
+  "mern-stack-development-company-india",
+  "technical-seo-agency-delhi",
   "best-ai-automation-company-in-delhi-how-businesses-are-growing-smarter-in-2025",
   "best-ai-automation-company-in-delhi-ncr-india-in-2025",
+  "reactjs-development-company-india",
+  "website-development-company-in-delhi",
 ];
 
 const POSTS_FETCH_LIMIT = 100;

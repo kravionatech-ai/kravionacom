@@ -190,13 +190,43 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/next-gen-web-development/website-development-company-in-delhi",
+        destination: "/services/web-app-development",
+        permanent: true,
+      },
+
+      {
+        source: "/technical-seo/technical-seo-agency-delhi",
+        destination: "/services/technical-seo",
+        permanent: true,
+      },
+
+      {
+        source: "/mern-stack/reactjs-development-company-india",
+        destination: "/services/react-development",
+        permanent: true,
+      },
+
+      {
+        source: "/mern-stack/mern-stack-development-company-in-india",
+        destination: "/services/mern-stack-development",
+        permanent: true,
+      },
+
+      {
+        source: "/mern-stack/mern-stack-development-company-delhi",
+        destination: "/services/mern-stack-development",
+        permanent: true,
+      },
+
+      {
         source: "/blog/10-benefits-of-artificial-intelligence-essay",
         destination: "/ai-and-automation/10-benefits-of-artificial-intelligence-essay",
         permanent: true,
       },
       {
         source: "/blog/mern-stack-development-company-delhi",
-        destination: "/mern-stack/mern-stack-development-company-delhi",
+        destination: "/services/mern-stack-development",
         permanent: true,
       },
       {
@@ -216,17 +246,17 @@ const nextConfig = {
       },
       {
         source: "/web-performance/mern-stack-development-company-in-india",
-        destination: "/mern-stack/mern-stack-development-company-in-india",
+        destination: "/services/mern-stack-development",
         permanent: true,
       },
       {
         source: "/next-gen-web-development/why-choosing-a-top-mern-stack-development-company-in-india-changes-the-game",
-        destination: "/mern-stack/mern-stack-development-company-in-india",
+        destination: "/services/mern-stack-development",
         permanent: true,
       },
       {
         source: "/mern-stack/mern-stack-development-company-india",
-        destination: "/mern-stack/mern-stack-development-company-in-india",
+        destination: "/services/mern-stack-development",
         permanent: true,
       },
       {
@@ -276,12 +306,12 @@ const nextConfig = {
       },
       {
         source: "/ai-and-automation/best-ai-automation-company-in-delhi-how-businesses-are-growing-smarter-in-2025",
-        destination: "/ai-and-automation/ai-automation-agency-india",
+        destination: "/services/ai-automation",
         permanent: true,
       },
       {
         source: "/ai-and-automation/best-ai-automation-company-in-delhi-ncr-india-in-2025",
-        destination: "/ai-and-automation/ai-automation-agency-india",
+        destination: "/services/ai-automation",
         permanent: true,
       },
       {
@@ -561,7 +591,7 @@ const nextConfig = {
       },
       {
         source: "/blog/reactjs-development-company-india",
-        destination: "/mern-stack/reactjs-development-company-india",
+        destination: "/services/react-development",
         permanent: true,
       },
       {
@@ -586,7 +616,7 @@ const nextConfig = {
       },
       {
         source: "/blog/technical-seo-agency-delhi",
-        destination: "/technical-seo/technical-seo-agency-delhi",
+        destination: "/services/technical-seo",
         permanent: true,
       },
       {
@@ -631,12 +661,12 @@ const nextConfig = {
       },
       {
         source: "/blog/best-ai-automation-company-in-delhi-how-businesses-are-growing-smarter-in-2025",
-        destination: "/ai-and-automation/ai-automation-agency-india",
+        destination: "/services/ai-automation",
         permanent: true,
       },
       {
         source: "/blog/ai-automation-agency-india",
-        destination: "/ai-and-automation/ai-automation-agency-india",
+        destination: "/services/ai-automation",
         permanent: true,
       },
       {
@@ -651,7 +681,7 @@ const nextConfig = {
       },
       {
         source: "/blog/mern-stack-development-company-in-india",
-        destination: "/mern-stack/mern-stack-development-company-in-india",
+        destination: "/services/mern-stack-development",
         permanent: true,
       },
       {
@@ -666,7 +696,7 @@ const nextConfig = {
       },
       {
         source: "/blog/why-choosing-a-top-mern-stack-development-company-in-india-changes-the-game",
-        destination: "/mern-stack/mern-stack-development-company-in-india",
+        destination: "/services/mern-stack-development",
         permanent: true,
       },
       {
@@ -676,7 +706,7 @@ const nextConfig = {
       },
       {
         source: "/blog/website-development-company-in-delhi",
-        destination: "/next-gen-web-development/website-development-company-in-delhi",
+        destination: "/services/web-app-development",
         permanent: true,
       },
       {
