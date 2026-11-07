@@ -155,7 +155,7 @@ export default function NewsListingLayout({ initialPosts = [], initialPagination
   const gridPosts = !isFiltered && posts.length > 0 ? posts.slice(1) : posts;
 
   return (
-    <div className="min-h-screen bg-[#F5F7F6] text-[#172426]">
+    <div className="min-h-screen bg-[#F5F7F6] text-[#172426] overflow-x-hidden">
       {/* ── 1. NEWS HERO SECTION ────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#102629] via-[#143338] to-[#173F43] pt-24 pb-16 sm:pb-20 border-b border-[#173F43]">
         {/* Subtle background glow */}
@@ -179,7 +179,7 @@ export default function NewsListingLayout({ initialPosts = [], initialPagination
           </div>
 
           {/* Main Title */}
-          <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] max-w-4xl">
+          <h1 className="font-[family-name:var(--font-heading)] text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] max-w-4xl break-words">
             Latest Technology & AI Insights
           </h1>
 
@@ -211,7 +211,7 @@ export default function NewsListingLayout({ initialPosts = [], initialPagination
 
       {/* ── 2. STICKY SEARCH & CATEGORY FILTER BAR ───────────────────────────── */}
       <section className="bg-white border-b border-[#E3E9E7] sticky top-[64px] z-30 shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 w-full min-w-0">
           {/* Search Box */}
           <div className="relative w-full md:w-80">
             <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#697A7B] pointer-events-none" />
@@ -234,7 +234,7 @@ export default function NewsListingLayout({ initialPosts = [], initialPagination
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 md:mx-0 md:px-0">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 w-full md:w-auto min-w-0">
             <span className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-[#697A7B] mr-1 shrink-0">
               <Filter size={13} />
               Filter by:

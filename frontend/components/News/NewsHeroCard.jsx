@@ -21,10 +21,10 @@ export default function NewsHeroCard({ post }) {
   return (
     <Link
       href={postHref}
-      className="group relative flex flex-col lg:flex-row overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-[#E3E9E7] shadow-sm hover:shadow-xl hover:border-[#00CBA9]/40 transition-all duration-500"
+      className="group relative flex flex-col lg:flex-row overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-[#E3E9E7] shadow-sm hover:shadow-xl hover:border-[#00CBA9]/40 transition-all duration-500 w-full max-w-full min-w-0"
     >
       {/* Content Side (55% width on desktop, stacked below on mobile) */}
-      <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10 lg:w-[55%] z-10 order-2 lg:order-1">
+      <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10 w-full lg:w-[55%] min-w-0 z-10 order-2 lg:order-1">
         <div>
           {/* Eyebrow & Category Badges */}
           <div className="flex items-center gap-2.5 flex-wrap mb-4">
@@ -74,7 +74,7 @@ export default function NewsHeroCard({ post }) {
       </div>
 
       {/* Editorial Image Side (45% width on desktop, stacked top on mobile) */}
-      <div className="relative w-full lg:w-[45%] min-h-[240px] sm:min-h-[300px] lg:min-h-[380px] bg-[#102629] overflow-hidden order-1 lg:order-2">
+      <div className="relative w-full lg:w-[45%] min-h-[200px] sm:min-h-[280px] lg:min-h-[380px] bg-[#102629] overflow-hidden order-1 lg:order-2 shrink-0">
         {imageUrl ? (
           <Image
             src={imageUrl}
