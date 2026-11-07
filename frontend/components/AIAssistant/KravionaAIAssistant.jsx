@@ -18,7 +18,7 @@ const INITIAL_WELCOME = {
   sender: "bot",
   text: `Hello! 👋 I'm Kraviona's AI Assistant.
 
-I can guide you through our **Web Development** and **Technical SEO** services, explain technical concepts on hover or text selection, summarize pages, or answer questions about your digital project. How can I assist you today?`,
+I can guide you through our **IT & Technology Services**, **Autonomous AI Agents**, **SaaS Products**, **E-commerce Solutions**, and **Technical SEO / GEO** capabilities, explain page concepts, or answer questions about your next software build. How can I assist you today?`,
   sources: [],
   timestamp: "Just now",
 };
