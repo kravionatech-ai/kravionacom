@@ -545,25 +545,25 @@ export default async function PostDetailPage({ params }) {
         <JsonLd data={breadcrumbSchema} />
         <ReadingProgress />
 
-        <article className="min-h-screen bg-[#FEFCF9] text-[#1A3840] selection:bg-[#2D6E7A] selection:text-white">
+        <article className="min-h-screen bg-[#F5F7F6] text-[#172426] selection:bg-[#102629] selection:text-white">
           {/* Top Editorial Nav Bar */}
-          <div className="border-b border-[#E8E4DE] bg-white/95 backdrop-blur-md sticky top-0 z-30 shadow-2xs">
+          <div className="border-b border-[#E3E9E7] bg-white/95 backdrop-blur-md sticky top-0 z-30 shadow-2xs">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Link
                   href="/news"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#5A7A82] hover:text-[#2D6E7A] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#697A7B] hover:text-[#173F43] transition-colors"
                 >
                   <ArrowLeft size={14} />
                   <span>Tech Newsroom</span>
                 </Link>
                 <span className="text-[#E8E4DE]">|</span>
-                <span className="inline-flex items-center gap-1.5 bg-[#FFF2ED] text-[#C85A3C] border border-[#C85A3C]/25 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#C85A3C] animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 bg-[#FFF2ED] text-[#F15A35] border border-[#F15A35]/25 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#F15A35] animate-pulse" />
                   Live Dispatch
                 </span>
                 <span className="hidden sm:inline text-[#E8E4DE]">•</span>
-                <span className="hidden sm:inline text-xs font-semibold text-[#5A7A82]">
+                <span className="hidden sm:inline text-xs font-semibold text-[#697A7B]">
                   {post.category?.name || "Technology"}
                 </span>
               </div>
@@ -585,25 +585,25 @@ export default async function PostDetailPage({ params }) {
                 <div className="flex flex-wrap items-center gap-2.5 mb-4">
                   <Link
                     href={`/news?category=${canonicalCategory}`}
-                    className="inline-flex items-center gap-1.5 bg-[#2D6E7A] text-white text-xs font-black uppercase tracking-wider px-3 py-1 rounded-md shadow-2xs hover:bg-[#245862] transition-colors"
+                    className="inline-flex items-center gap-1.5 bg-[#102629] text-white text-xs font-black uppercase tracking-wider px-3 py-1 rounded-md shadow-2xs hover:bg-[#245862] transition-colors"
                   >
                     <Tag size={11} />
                     {post.category?.name || "Tech News"}
                   </Link>
                   <span className="text-[#E8E4DE] text-xs">•</span>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-[#5A7A82] font-medium">
-                    <CalendarDays size={13} className="text-[#2D6E7A]" />
+                  <span className="inline-flex items-center gap-1.5 text-xs text-[#697A7B] font-medium">
+                    <CalendarDays size={13} className="text-[#173F43]" />
                     {publishedDate}
                   </span>
                   <span className="text-[#E8E4DE] text-xs">•</span>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-[#5A7A82] font-medium">
-                    <Clock size={13} className="text-[#2D6E7A]" />
+                  <span className="inline-flex items-center gap-1.5 text-xs text-[#697A7B] font-medium">
+                    <Clock size={13} className="text-[#173F43]" />
                     {readingTime}
                   </span>
                   {updatedDate && (
                     <>
                       <span className="text-[#E8E4DE] text-xs">•</span>
-                      <span className="inline-flex items-center gap-1 text-[11px] bg-[#EAF3F5] text-[#2D6E7A] px-2 py-0.5 rounded font-medium">
+                      <span className="inline-flex items-center gap-1 text-[11px] bg-[#EAF3F5] text-[#173F43] px-2 py-0.5 rounded font-medium">
                         Updated: {updatedDate}
                       </span>
                     </>
@@ -611,7 +611,7 @@ export default async function PostDetailPage({ params }) {
                 </div>
 
                 {/* Main News Headline (H1) */}
-                <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.18] text-[#1A3840] mb-5">
+                <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.18] text-[#102629] mb-5">
                   {post.title}
                 </h1>
 
@@ -623,7 +623,7 @@ export default async function PostDetailPage({ params }) {
                 )}
 
                 {/* Author Byline Row */}
-                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-b border-[#E8E4DE] py-3.5 mb-8">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-b border-[#E3E9E7] py-3.5 mb-8">
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-full overflow-hidden bg-gray-100 flex-shrink-0 relative border-2 border-[#2D6E7A]/30">
                       {authorProfile.avatar ? (
@@ -634,19 +634,19 @@ export default async function PostDetailPage({ params }) {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[#5A7A82] text-sm font-bold">
+                        <div className="w-full h-full flex items-center justify-center text-[#697A7B] text-sm font-bold">
                           {authorProfile.name.charAt(0)}
                         </div>
                       )}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-[#1A3840]">{authorProfile.name}</span>
-                        <span className="text-[10px] bg-[#2D6E7A]/10 text-[#2D6E7A] px-2 py-0.2 rounded-full font-bold">
+                        <span className="text-sm font-bold text-[#102629]">{authorProfile.name}</span>
+                        <span className="text-[10px] bg-[#102629]/10 text-[#173F43] px-2 py-0.2 rounded-full font-bold">
                           Senior Tech Desk
                         </span>
                       </div>
-                      <p className="text-xs text-[#5A7A82]">{authorProfile.role}</p>
+                      <p className="text-xs text-[#697A7B]">{authorProfile.role}</p>
                     </div>
                   </div>
 
@@ -655,7 +655,7 @@ export default async function PostDetailPage({ params }) {
                       href={authorProfile.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full bg-white border border-[#E8E4DE] px-3.5 py-1 text-xs text-[#1A3840] font-semibold hover:border-[#2D6E7A] hover:bg-[#EAF3F5] transition-colors"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white border border-[#E3E9E7] px-3.5 py-1 text-xs text-[#102629] font-semibold hover:border-[#2D6E7A] hover:bg-[#EAF3F5] transition-colors"
                     >
                       <Linkedin size={13} className="text-[#0077b5]" />
                       <span>Author Profile</span>
@@ -666,7 +666,7 @@ export default async function PostDetailPage({ params }) {
                 {/* Featured Hero Media */}
                 {featuredImageUrl && (
                   <div className="mb-8">
-                    <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden shadow-xs border border-[#E8E4DE] bg-gray-100">
+                    <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden shadow-xs border border-[#E3E9E7] bg-gray-100">
                       <Image
                         src={featuredImageUrl}
                         alt={featuredImageAlt || post.title}
@@ -676,7 +676,7 @@ export default async function PostDetailPage({ params }) {
                         className="object-cover"
                       />
                     </div>
-                    <div className="flex items-center justify-between text-xs text-[#5A7A82] italic mt-2 px-1">
+                    <div className="flex items-center justify-between text-xs text-[#697A7B] italic mt-2 px-1">
                       <span>{featuredImageAlt || post.title}</span>
                       <span className="text-[11px] text-gray-400 not-italic">Photo: Kraviona Tech Wire</span>
                     </div>
@@ -687,15 +687,15 @@ export default async function PostDetailPage({ params }) {
                 {Array.isArray(post.keyTakeaways) && post.keyTakeaways.length > 0 && (
                   <div className="rounded-2xl border border-[#2D6E7A]/20 bg-[#EAF3F5]/40 p-6 sm:p-7 mb-10 shadow-2xs">
                     <div className="flex items-center gap-2 mb-3.5">
-                      <Zap size={16} className="text-[#C85A3C] fill-[#C85A3C]" />
-                      <h3 className="text-xs font-black uppercase tracking-widest text-[#1A3840]">
+                      <Zap size={16} className="text-[#F15A35] fill-[#C85A3C]" />
+                      <h3 className="text-xs font-black uppercase tracking-widest text-[#102629]">
                         The Big Picture • Key Facts
                       </h3>
                     </div>
                     <ul className="space-y-2.5">
                       {post.keyTakeaways.map((point, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-[#1A3840] font-medium leading-relaxed">
-                          <CheckCircle2 size={17} className="text-[#2D6E7A] shrink-0 mt-0.5" />
+                        <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-[#102629] font-medium leading-relaxed">
+                          <CheckCircle2 size={17} className="text-[#173F43] shrink-0 mt-0.5" />
                           <span>{point}</span>
                         </li>
                       ))}
@@ -707,30 +707,30 @@ export default async function PostDetailPage({ params }) {
                 <div
                   className="
                     news-content prose prose-slate prose-lg max-w-none text-[#2C3E50] text-[17px] sm:text-[18px] leading-[1.8] space-y-6
-                    prose-headings:font-[family-name:var(--font-heading)] prose-headings:font-extrabold prose-headings:text-[#1A3840] prose-headings:tracking-tight
-                    prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-[#E8E4DE] prose-h2:pb-3 prose-h2:text-2xl sm:prose-h2:text-3xl
-                    prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:text-[#1A3840]
-                    prose-p:text-[#2C3E50] prose-p:leading-[1.8]
-                    prose-a:text-[#2D6E7A] prose-a:font-semibold hover:prose-a:text-[#C85A3C] prose-a:underline decoration-[#2D6E7A]/40 hover:decoration-[#C85A3C]
-                    prose-strong:text-[#1A3840] prose-strong:font-bold
-                    prose-code:text-[#C85A3C] prose-code:bg-[#FFF2ED] prose-code:border prose-code:border-[#C85A3C]/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
-                    prose-pre:overflow-x-auto prose-pre:rounded-2xl prose-pre:bg-[#1A3840] prose-pre:p-6 prose-pre:text-slate-100 prose-pre:border prose-pre:border-[#2D6E7A]/30
-                    prose-blockquote:rounded-r-2xl prose-blockquote:border-l-4 prose-blockquote:border-[#2D6E7A] prose-blockquote:bg-[#EAF3F5]/40 prose-blockquote:py-4 prose-blockquote:pl-6 prose-blockquote:pr-6 prose-blockquote:text-[#1A3840] prose-blockquote:italic
-                    prose-img:rounded-2xl prose-img:border prose-img:border-[#E8E4DE] prose-img:shadow-sm
+                    prose-headings:font-[family-name:var(--font-heading)] prose-headings:font-extrabold prose-headings:text-[#102629] prose-headings:tracking-tight
+                    prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-[#E3E9E7] prose-h2:pb-3 prose-h2:text-2xl sm:prose-h2:text-3xl
+                    prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:text-[#102629]
+                    prose-p:text-[#172426] prose-p:leading-[1.8]
+                    prose-a:text-[#173F43] prose-a:font-semibold hover:prose-a:text-[#F15A35] prose-a:underline decoration-[#00CBA9]/50 hover:decoration-[#F15A35]
+                    prose-strong:text-[#102629] prose-strong:font-bold
+                    prose-code:text-[#F15A35] prose-code:bg-white prose-code:border prose-code:border-[#E3E9E7] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                    prose-pre:overflow-x-auto prose-pre:rounded-2xl prose-pre:bg-[#102629] prose-pre:p-6 prose-pre:text-slate-100 prose-pre:border prose-pre:border-white/10
+                    prose-blockquote:rounded-r-2xl prose-blockquote:border-l-4 prose-blockquote:border-[#00CBA9] prose-blockquote:bg-white prose-blockquote:border-y prose-blockquote:border-r prose-blockquote:border-[#E3E9E7] prose-blockquote:py-4 prose-blockquote:pl-6 prose-blockquote:pr-6 prose-blockquote:text-[#172426] prose-blockquote:italic
+                    prose-img:rounded-2xl prose-img:border prose-img:border-[#E3E9E7] prose-img:shadow-sm
                   "
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
 
                 {/* Article Tags */}
                 {articleTags.length > 0 && (
-                  <div className="mt-12 pt-6 border-t border-[#E8E4DE] flex flex-wrap gap-2 items-center">
-                    <span className="text-xs text-[#5A7A82] font-bold uppercase tracking-wider mr-2">
+                  <div className="mt-12 pt-6 border-t border-[#E3E9E7] flex flex-wrap gap-2 items-center">
+                    <span className="text-xs text-[#697A7B] font-bold uppercase tracking-wider mr-2">
                       Topic Tags:
                     </span>
                     {articleTags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-semibold bg-white border border-[#E8E4DE] text-[#2C3E50] px-3.5 py-1 rounded-full hover:border-[#2D6E7A] hover:text-[#2D6E7A] transition-colors"
+                        className="text-xs font-semibold bg-white border border-[#E3E9E7] text-[#2C3E50] px-3.5 py-1 rounded-full hover:border-[#2D6E7A] hover:text-[#173F43] transition-colors"
                       >
                         #{tag}
                       </span>
@@ -742,28 +742,28 @@ export default async function PostDetailPage({ params }) {
                 <div className="my-12 rounded-2xl border border-[#2D6E7A]/20 bg-gradient-to-r from-[#EAF3F5] via-[#FEFCF9] to-[#F7F5F1] p-6 sm:p-7 shadow-2xs">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
                     <div className="space-y-1.5">
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-[#C85A3C] bg-[#C85A3C]/10 border border-[#C85A3C]/20 px-2.5 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-[#F15A35] bg-[#F15A35]/10 border border-[#F15A35]/20 px-2.5 py-0.5 rounded-full">
                         <Sparkles size={11} />
                         Kraviona Engineering & Advisory
                       </span>
-                      <h3 className="text-lg font-extrabold text-[#1A3840]">
+                      <h3 className="text-lg font-extrabold text-[#102629]">
                         Implementing Next-Gen Web Architecture or Custom AI?
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#5A7A82] max-w-lg leading-relaxed">
+                      <p className="text-xs sm:text-sm text-[#697A7B] max-w-lg leading-relaxed">
                         Kraviona engineers high-performance Next.js systems, fixes crawl budget & technical SEO at scale, and automates workflows with custom AI agents.
                       </p>
                     </div>
                     <div className="flex flex-wrap sm:flex-col gap-2 shrink-0 w-full sm:w-auto">
                       <Link
                         href="/services"
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#2D6E7A] px-4 py-2.5 text-xs font-bold text-white shadow-2xs hover:bg-[#245862] transition-colors"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#102629] px-4 py-2.5 text-xs font-bold text-white shadow-2xs hover:bg-[#245862] transition-colors"
                       >
                         <span>Explore Services</span>
                         <ArrowRight size={13} />
                       </Link>
                       <Link
                         href="/contact"
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-[#E8E4DE] px-4 py-2 text-xs font-bold text-[#1A3840] hover:bg-[#F7F5F1] transition-colors"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-[#E3E9E7] px-4 py-2 text-xs font-bold text-[#102629] hover:bg-[#F5F7F6] transition-colors"
                       >
                         <span>Book Tech Roadmap</span>
                       </Link>
@@ -772,43 +772,43 @@ export default async function PostDetailPage({ params }) {
                 </div>
 
                 {/* Verified Standards Card */}
-                <div className="rounded-2xl border border-[#E8E4DE] bg-[#F7F5F1] p-5 my-8 flex items-start gap-3.5 text-xs text-[#5A7A82]">
-                  <ShieldCheck size={20} className="text-[#2D6E7A] shrink-0 mt-0.5" />
+                <div className="rounded-2xl border border-[#E3E9E7] bg-[#F5F7F6] p-5 my-8 flex items-start gap-3.5 text-xs text-[#697A7B]">
+                  <ShieldCheck size={20} className="text-[#173F43] shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-bold text-[#1A3840] uppercase tracking-wider text-[11px] mb-0.5">
+                    <p className="font-bold text-[#102629] uppercase tracking-wider text-[11px] mb-0.5">
                       Editorial Integrity & Verification Standards
                     </p>
-                    <p className="leading-relaxed text-[#5A7A82]">
+                    <p className="leading-relaxed text-[#697A7B]">
                       Dispatches on Kraviona Tech News undergo multi-tier editorial and engineering review to ensure factual correctness, technical accuracy, and source integrity.
                     </p>
                   </div>
                 </div>
 
                 {/* Author Bio Box */}
-                <div className="rounded-2xl border border-[#E8E4DE] bg-[#FEFCF9] p-6 sm:p-7 my-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-2xs">
+                <div className="rounded-2xl border border-[#E3E9E7] bg-white p-6 sm:p-7 my-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-2xs">
                   <div className="relative h-16 w-16 rounded-full overflow-hidden shrink-0 border-2 border-[#2D6E7A]/30">
                     {authorProfile.avatar ? (
                       <Image src={authorProfile.avatar} alt={authorProfile.name} fill className="object-cover" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-[#2D6E7A] text-white font-bold text-lg">
+                      <div className="w-full h-full flex items-center justify-center bg-[#102629] text-white font-bold text-lg">
                         {authorProfile.name.charAt(0)}
                       </div>
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="text-base font-bold text-[#1A3840]">{authorProfile.name}</h4>
-                      <span className="text-[10px] font-bold bg-[#2D6E7A]/10 text-[#2D6E7A] px-2 py-0.5 rounded-full">
+                      <h4 className="text-base font-bold text-[#102629]">{authorProfile.name}</h4>
+                      <span className="text-[10px] font-bold bg-[#102629]/10 text-[#173F43] px-2 py-0.5 rounded-full">
                         Author & Technical Architect
                       </span>
                     </div>
-                    <p className="text-xs text-[#5A7A82] leading-relaxed mb-3">{authorProfile.bio}</p>
+                    <p className="text-xs text-[#697A7B] leading-relaxed mb-3">{authorProfile.bio}</p>
                     {authorProfile.linkedin && (
                       <a
                         href={authorProfile.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#2D6E7A] hover:underline"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#173F43] hover:underline"
                       >
                         <Linkedin size={13} />
                         <span>Connect with {authorProfile.name} on LinkedIn</span>
@@ -818,15 +818,15 @@ export default async function PostDetailPage({ params }) {
                 </div>
 
                 {/* Social Share Bar */}
-                <div className="p-4 rounded-xl bg-white border border-[#E8E4DE] flex flex-wrap items-center justify-between gap-4">
-                  <span className="text-xs font-bold text-[#1A3840]">
+                <div className="p-4 rounded-xl bg-white border border-[#E3E9E7] flex flex-wrap items-center justify-between gap-4">
+                  <span className="text-xs font-bold text-[#102629]">
                     Share this tech dispatch with your network:
                   </span>
                   <SocialShareButtons url={postCanonical} title={post.title} dark={false} />
                 </div>
 
                 {/* Reader Response / Engagement */}
-                <div className="mt-10 pt-8 border-t border-[#E8E4DE]">
+                <div className="mt-10 pt-8 border-t border-[#E3E9E7]">
                   <BlogEngagement blog={post} />
                 </div>
               </main>
@@ -840,19 +840,19 @@ export default async function PostDetailPage({ params }) {
 
             {/* ── Below Article: Related Tech Dispatches ── */}
             {relatedPosts.length > 0 && (
-              <section className="mt-16 pt-12 border-t border-[#E8E4DE]">
+              <section className="mt-16 pt-12 border-t border-[#E3E9E7]">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <p className="text-xs font-black uppercase tracking-widest text-[#C85A3C]">
+                    <p className="text-xs font-black uppercase tracking-widest text-[#F15A35]">
                       Keep Reading • Kraviona Tech Wire
                     </p>
-                    <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-extrabold text-[#1A3840] mt-1">
+                    <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-extrabold text-[#102629] mt-1">
                       Related Tech Dispatches
                     </h2>
                   </div>
                   <Link
                     href="/news"
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#2D6E7A] hover:text-[#C85A3C] transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#173F43] hover:text-[#F15A35] transition-colors"
                   >
                     <span>View all news</span>
                     <ArrowRight size={13} />
@@ -868,22 +868,22 @@ export default async function PostDetailPage({ params }) {
             )}
 
             {/* ── Kraviona Engineering Solutions Spotlight (Tasteful 3-card grid) ── */}
-            <section className="mt-16 rounded-3xl border border-[#E8E4DE] bg-gradient-to-b from-[#F7F5F1] to-[#FEFCF9] p-8 sm:p-10">
+            <section className="mt-16 rounded-3xl border border-[#E3E9E7] bg-gradient-to-b from-[#F7F5F1] to-[#FEFCF9] p-8 sm:p-10">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#C85A3C] bg-[#C85A3C]/10 border border-[#C85A3C]/20 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[#F15A35] bg-[#F15A35]/10 border border-[#F15A35]/20 px-2.5 py-0.5 rounded-full">
                     Kraviona Tech Solutions
                   </span>
-                  <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-extrabold text-[#1A3840] mt-2">
+                  <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-extrabold text-[#102629] mt-2">
                     Enterprise Engineering & Growth Services
                   </h2>
-                  <p className="text-xs sm:text-sm text-[#5A7A82] mt-1 max-w-xl">
+                  <p className="text-xs sm:text-sm text-[#697A7B] mt-1 max-w-xl">
                     We design, build, and optimize high-velocity software, search platforms, and autonomous AI agents.
                   </p>
                 </div>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2D6E7A] hover:text-[#C85A3C] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#173F43] hover:text-[#F15A35] transition-colors"
                 >
                   <span>Explore all services</span>
                   <ArrowRight size={13} />
@@ -893,62 +893,62 @@ export default async function PostDetailPage({ params }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <Link
                   href="/services/mern-stack-development"
-                  className="group rounded-2xl bg-white border border-[#E8E4DE] p-5 shadow-2xs hover:border-[#2D6E7A]/60 hover:shadow-xs transition-all"
+                  className="group rounded-2xl bg-white border border-[#E3E9E7] p-5 shadow-2xs hover:border-[#2D6E7A]/60 hover:shadow-xs transition-all"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2D6E7A]/10 text-[#2D6E7A] mb-4 group-hover:bg-[#2D6E7A] group-hover:text-white transition-colors">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#102629]/10 text-[#173F43] mb-4 group-hover:bg-[#102629] group-hover:text-white transition-colors">
                     <Sparkles size={18} />
                   </div>
-                  <h3 className="font-bold text-base text-[#1A3840] group-hover:text-[#2D6E7A] transition-colors">
+                  <h3 className="font-bold text-base text-[#102629] group-hover:text-[#173F43] transition-colors">
                     MERN & Next.js Systems
                   </h3>
-                  <p className="text-xs text-[#5A7A82] mt-1.5 leading-relaxed">
+                  <p className="text-xs text-[#697A7B] mt-1.5 leading-relaxed">
                     Scalable full-stack web applications with Next.js App Router, Node.js APIs, and high-concurrency databases.
                   </p>
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#2D6E7A] mt-4">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#173F43] mt-4">
                     Learn more →
                   </span>
                 </Link>
 
                 <Link
                   href="/services/technical-seo"
-                  className="group rounded-2xl bg-white border border-[#E8E4DE] p-5 shadow-2xs hover:border-[#2D6E7A]/60 hover:shadow-xs transition-all"
+                  className="group rounded-2xl bg-white border border-[#E3E9E7] p-5 shadow-2xs hover:border-[#2D6E7A]/60 hover:shadow-xs transition-all"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#C85A3C]/10 text-[#C85A3C] mb-4 group-hover:bg-[#C85A3C] group-hover:text-white transition-colors">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F15A35]/10 text-[#F15A35] mb-4 group-hover:bg-[#F15A35] group-hover:text-white transition-colors">
                     <Tag size={18} />
                   </div>
-                  <h3 className="font-bold text-base text-[#1A3840] group-hover:text-[#C85A3C] transition-colors">
+                  <h3 className="font-bold text-base text-[#102629] group-hover:text-[#F15A35] transition-colors">
                     Technical SEO & Speed
                   </h3>
-                  <p className="text-xs text-[#5A7A82] mt-1.5 leading-relaxed">
+                  <p className="text-xs text-[#697A7B] mt-1.5 leading-relaxed">
                     Core Web Vitals optimization, crawl budget audits, rich schema markup, and guaranteed indexation fixes.
                   </p>
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#C85A3C] mt-4">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#F15A35] mt-4">
                     Learn more →
                   </span>
                 </Link>
 
                 <Link
                   href="/services/ai-automation"
-                  className="group rounded-2xl bg-white border border-[#E8E4DE] p-5 shadow-2xs hover:border-[#2D6E7A]/60 hover:shadow-xs transition-all"
+                  className="group rounded-2xl bg-white border border-[#E3E9E7] p-5 shadow-2xs hover:border-[#2D6E7A]/60 hover:shadow-xs transition-all"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2D6E7A]/10 text-[#2D6E7A] mb-4 group-hover:bg-[#2D6E7A] group-hover:text-white transition-colors">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#102629]/10 text-[#173F43] mb-4 group-hover:bg-[#102629] group-hover:text-white transition-colors">
                     <Zap size={18} />
                   </div>
-                  <h3 className="font-bold text-base text-[#1A3840] group-hover:text-[#2D6E7A] transition-colors">
+                  <h3 className="font-bold text-base text-[#102629] group-hover:text-[#173F43] transition-colors">
                     AI Agents & Automation
                   </h3>
-                  <p className="text-xs text-[#5A7A82] mt-1.5 leading-relaxed">
+                  <p className="text-xs text-[#697A7B] mt-1.5 leading-relaxed">
                     Custom LLM integrations, document intelligence, automated CRM pipelines, and intelligent chatbots.
                   </p>
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#2D6E7A] mt-4">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#173F43] mt-4">
                     Learn more →
                   </span>
                 </Link>
               </div>
 
               {/* Consultation Strip */}
-              <div className="mt-8 pt-6 border-t border-[#E8E4DE] flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-xs text-[#5A7A82]">
+              <div className="mt-8 pt-6 border-t border-[#E3E9E7] flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-xs text-[#697A7B]">
                   Need a custom technical roadmap? Speak directly with our lead architects.
                 </p>
                 <a

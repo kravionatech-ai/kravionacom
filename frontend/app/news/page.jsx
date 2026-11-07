@@ -7,27 +7,27 @@ import NewsListingLayout from "@/components/News/NewsListingLayout";
 export const revalidate = 3600;
 
 const canonical = canonicalUrl("/news");
-const title = "Tech News & Industry Updates | Kraviona";
+const title = "Latest Technology & AI Insights | Kraviona News";
 const description =
-  "Latest breaking tech news, AI updates, web development stories, and digital industry insights from Kraviona — your source for what matters in tech.";
+  "Authoritative reporting, architectural deep-dives, and market intelligence across artificial intelligence, autonomous agents, modern full-stack web systems, and digital growth.";
 
 export const metadata = {
   title: { absolute: title },
   description,
   keywords: [
-    "Tech News",
-    "AI News",
+    "Latest Technology & AI Insights",
+    "Kraviona News",
+    "AI News 2026",
+    "Autonomous AI Agents",
     "Web Development News",
-    "Digital Marketing News",
-    "Kraviona Tech News",
-    "Breaking Tech Stories",
-    "Technology Updates 2026",
+    "Full-Stack Engineering Updates",
+    "Enterprise Tech News India",
   ],
   authors: [{ name: "Kraviona Tech Solutions", url: "https://www.kraviona.com" }],
   creator: "Kraviona Tech Solutions",
   alternates: { canonical },
   openGraph: {
-    title: "Tech News & Industry Updates | Kraviona",
+    title,
     description,
     url: canonical,
     siteName: "Kraviona Tech Solutions",
@@ -38,7 +38,7 @@ export const metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kraviona Tech News",
+        alt: "Kraviona News - Latest Technology & AI Insights",
         type: "image/jpeg",
       },
     ],
@@ -47,7 +47,7 @@ export const metadata = {
     card: "summary_large_image",
     site: "@KravionaTech",
     creator: "@KravionaTech",
-    title: "Tech News & Industry Updates | Kraviona",
+    title,
     description,
     images: ["/og-image.jpg"],
   },
