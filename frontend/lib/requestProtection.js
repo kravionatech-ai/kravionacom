@@ -70,8 +70,9 @@ const BLOCKED_AUTOMATION = [
 ];
 
 const GENERIC_BOT_SIGNATURE = /(?:bot|crawler|spider|scraper|slurp)/i;
-const ALLOWED_METHODS = new Set(["GET", "HEAD", "OPTIONS"]);
+const ALLOWED_METHODS = new Set(["GET", "HEAD", "OPTIONS", "POST"]);
 const PUBLIC_INFRASTRUCTURE_PATHS = [
+  "/api/",
   "/_next/",
   "/_vercel/",
   "/favicon.ico",
