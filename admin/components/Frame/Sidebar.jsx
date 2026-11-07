@@ -17,6 +17,7 @@ import {
   Settings,
   Tag,
   BriefcaseBusiness,
+  Globe2,
   Bot,
   CalendarDays,
   History,
@@ -27,6 +28,7 @@ import {
 
 const primaryNavigation = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/pages", label: "Website Pages", icon: Globe2 },
   { href: "/planner", label: "Content Planner", icon: CalendarDays },
   { href: "/blog", label: "All Posts", icon: FileText },
   { href: "/blog/new", label: "Create Post", icon: PlusCircle },

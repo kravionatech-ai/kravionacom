@@ -53,6 +53,10 @@ const config = {
   APP_BASE_URL: process.env.APP_BASE_URL || "https://www.kraviona.com",
   ADMIN_BASE_URL: process.env.ADMIN_BASE_URL || "https://admin.kraviona.com",
   INBOUND_EMAIL_DOMAIN: process.env.INBOUND_EMAIL_DOMAIN || "kraviona.com",
+
+  // Live Synchronization & Next.js On-Demand Revalidation
+  FRONTEND_REVALIDATE_URL: process.env.FRONTEND_REVALIDATE_URL,
+  REVALIDATION_SECRET: process.env.REVALIDATION_SECRET || "kraviona_live_sync_secure_token_2026",
 };
 
 export default config;

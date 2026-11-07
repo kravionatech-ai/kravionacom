@@ -52,7 +52,7 @@ async function getInitialPosts() {
   try {
     const url = `${API_URL}/public/posts?contentType=blog&page=1&limit=12`;
     const response = await fetch(url, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 3600, tags: ["posts"] },
       headers: { Accept: "application/json" },
     });
 

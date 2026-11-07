@@ -19,6 +19,7 @@ import { getPublicProjects, getPublicServices } from "../controllers/public-cata
 import { createProject, deleteProject, getProjects, getPublicProject, updateProject } from "../controllers/portfolio/portfolio.controller.js";
 import { getLoginHistory } from "../controllers/login-history/login-history.controller.js";
 import { createService, deleteService, getPublicServiceBySlug, getServices, seedServices, updateService } from "../controllers/services/services.controller.js";
+import { createPage, deletePage, getAdminPageByIdOrSlug, getAdminPages, getAllPublicPages, getPublicPageBySlug, seedInitialPages, updatePage } from "../controllers/pages/pages.controller.js";
 import { getPublicKey, subscribeToBlogPush, unsubscribeFromBlogPush } from "../controllers/notifications/blog-push.controller.js";
 import { createCareer, deleteCareer, getAdminCareers, getPublicCareerBySlug, getPublicCareers, updateCareer } from "../controllers/careers/careers.controller.js";
 import { getCodeInjection, getSetting, updateSetting } from "../controllers/settings/siteSettings.controller.js";
@@ -76,6 +77,16 @@ Router.post('/admin/services', verifyToken, createService);
 Router.post('/admin/services/seed', verifyToken, seedServices);
 Router.patch('/admin/services/:id', verifyToken, updateService);
 Router.delete('/admin/services/:id', verifyToken, deleteService);
+
+// Dynamic Website Pages CMS
+Router.get('/pages', getAllPublicPages);
+Router.get('/pages/:slug', getPublicPageBySlug);
+Router.get('/admin/pages', verifyToken, getAdminPages);
+Router.get('/admin/pages/:id', verifyToken, getAdminPageByIdOrSlug);
+Router.post('/admin/pages', verifyToken, createPage);
+Router.post('/admin/pages/seed', verifyToken, seedInitialPages);
+Router.patch('/admin/pages/:id', verifyToken, updatePage);
+Router.delete('/admin/pages/:id', verifyToken, deletePage);
 Router.get('/projects', getPublicProjects);
 Router.get('/projects/:slug', getPublicProject);
 Router.get('/admin/projects', verifyToken, getProjects);

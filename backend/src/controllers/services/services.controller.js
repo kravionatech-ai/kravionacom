@@ -4,6 +4,7 @@ import { recordActivity } from "../../utils/activityLogger.js";
 import { publicServices } from "../../data/publicCatalog.js";
 import { seedServicesData } from "../../data/seedServicesData.js";
 import { mergeNestedFields, parseBoolean } from "../../utils/requestValues.js";
+import { revalidateFrontend } from "../../utils/revalidateFrontend.js";
 
 const canManageServices = (user) => ["super_admin", "admin", "editor"].includes(user?.role);
 const canManageAllServices = (user) => ["super_admin", "admin"].includes(user?.role);
@@ -52,7 +53,17 @@ const normalize = (body) => ({
     metaTitle: cleanText(body.seo?.metaTitle),
     metaDescription: cleanText(body.seo?.metaDescription),
     keywords: getList(body.seo?.keywords),
+    primaryKeyword: cleanText(body.seo?.primaryKeyword),
+    secondaryKeywords: getList(body.seo?.secondaryKeywords),
+    searchIntent: cleanText(body.seo?.searchIntent) || "Commercial / Transactional",
+    h1: cleanText(body.seo?.h1),
+    canonicalUrl: safeLink(body.seo?.canonicalUrl),
+    robotsMeta: cleanText(body.seo?.robotsMeta) || "index, follow",
+    ogTitle: cleanText(body.seo?.ogTitle),
+    ogDescription: cleanText(body.seo?.ogDescription),
     ogImage: safeLink(body.seo?.ogImage),
+    twitterCard: cleanText(body.seo?.twitterCard) || "summary_large_image",
+    customSchema: cleanText(body.seo?.customSchema),
     noIndex: parseBoolean(body.seo?.noIndex, false),
   },
   expert: {
@@ -75,6 +86,8 @@ const normalize = (body) => ({
     expertise: getList(body.expert?.expertise),
     credentials: getList(body.expert?.credentials),
   },
+  status: cleanText(body.status) === "draft" ? "draft" : "published",
+  relatedServices: getList(body.relatedServices),
   isFeatured: parseBoolean(body.isFeatured, false),
   isActive: parseBoolean(body.isActive, true),
   order: Number(body.order) || 0,
@@ -82,7 +95,7 @@ const normalize = (body) => ({
 
 export const getPublicServices = async (_req, res) => {
   try {
-    const services = await Service.find({ isActive: true }).sort({ order: 1, createdAt: -1 }).lean();
+    const services = await Service.find({ isActive: true, status: { $ne: "draft" } }).sort({ order: 1, createdAt: -1 }).lean();
     const data = services.length ? services : publicServices.map((service, index) => ({ _id: `default-${index + 1}`, ...service }));
     return res.status(200).json({ success: true, count: data.length, data });
   } catch (error) {
@@ -93,8 +106,8 @@ export const getPublicServices = async (_req, res) => {
 export const getPublicServiceBySlug = async (req, res) => {
   try {
     const slug = slugify(cleanText(req.params.slug), { lower: true, strict: true });
-    const service = await Service.findOne({ slug, isActive: true }).lean();
-    if (!service) return res.status(404).json({ success: false, message: "Service not found" });
+    const service = await Service.findOne({ slug, isActive: true, status: { $ne: "draft" } }).lean();
+    if (!service) return res.status(404).json({ success: false, message: "Service not found or unpublished" });
     return res.status(200).json({ success: true, data: service });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message || "Unable to fetch service" });
@@ -108,6 +121,8 @@ export const getServices = async (req, res) => {
   const filter = { ...scope };
   if (indexability === "noindex") filter["seo.noIndex"] = true;
   if (indexability === "indexed") filter["seo.noIndex"] = { $ne: true };
+  if (req.query.status) filter.status = req.query.status;
+
   const [data, noIndex, indexed] = await Promise.all([
     Service.find(filter).sort({ order: 1, createdAt: -1 }).lean(),
     Service.countDocuments({ ...scope, "seo.noIndex": true }),
@@ -122,8 +137,15 @@ export const createService = async (req, res) => {
     const data = normalize(req.body);
     if (!data.title || !data.description) return res.status(400).json({ success: false, message: "Title and description are required" });
     const service = await Service.create({ ...data, createdBy: req.user.id });
-    await recordActivity(req, { userID: req.user.id, module: "service", action: "created", resourceId: service._id, resourceName: service.title, after: { title: service.title, isActive: service.isActive } });
-    return res.status(201).json({ success: true, message: "Service created", data: service });
+    await recordActivity(req, { userID: req.user.id, module: "service", action: "created", resourceId: service._id, resourceName: service.title, after: { title: service.title, isActive: service.isActive, status: service.status } });
+
+    // Live Data Synchronization: Revalidate Next.js cache
+    await revalidateFrontend({
+      paths: ["/services", `/services/${service.slug}`],
+      tags: ["services", `service-${service.slug}`],
+    });
+
+    return res.status(201).json({ success: true, message: "Service created and synced live", data: service });
   } catch (error) {
     return res.status(error.code === 11000 ? 409 : 500).json({ success: false, message: error.code === 11000 ? "A service with this slug already exists" : error.message });
   }
@@ -134,12 +156,45 @@ export const updateService = async (req, res) => {
     if (!canManageServices(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
     const service = await Service.findOne(canManageAllServices(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id });
     if (!service) return res.status(404).json({ success: false, message: "No data found." });
-    const before = { title: service.title, slug: service.slug, isActive: service.isActive };
+    
+    const before = { title: service.title, slug: service.slug, isActive: service.isActive, status: service.status };
     const merged = mergeNestedFields(service.toObject(), req.body, ["hero", "cta", "seo", "expert"]);
-    Object.assign(service, normalize(merged));
+    const normalizedData = normalize(merged);
+    
+    // Add revision entry
+    if (!service.revisions) service.revisions = [];
+    service.revisions.push({
+      timestamp: new Date(),
+      updatedBy: req.user.id,
+      note: req.body.revisionNote || "Updated via Admin CMS",
+      snapshotTitle: before.title,
+    });
+
+    Object.assign(service, normalizedData);
     await service.save();
-    await recordActivity(req, { userID: req.user.id, module: "service", action: "updated", resourceId: service._id, resourceName: service.title, before, after: { title: service.title, slug: service.slug, isActive: service.isActive } });
-    return res.status(200).json({ success: true, message: "Service updated", data: service });
+
+    await recordActivity(req, {
+      userID: req.user.id,
+      module: "service",
+      action: "updated",
+      resourceId: service._id,
+      resourceName: service.title,
+      before,
+      after: { title: service.title, slug: service.slug, isActive: service.isActive, status: service.status },
+    });
+
+    // Live Data Synchronization: Revalidate affected Next.js routes
+    const pathsToRevalidate = ["/services", `/services/${service.slug}`];
+    if (before.slug && before.slug !== service.slug) {
+      pathsToRevalidate.push(`/services/${before.slug}`);
+    }
+
+    await revalidateFrontend({
+      paths: pathsToRevalidate,
+      tags: ["services", `service-${service.slug}`],
+    });
+
+    return res.status(200).json({ success: true, message: "Service updated and synced live", data: service });
   } catch (error) {
     return res.status(error.code === 11000 ? 409 : 500).json({ success: false, message: error.code === 11000 ? "A service with this slug already exists" : error.message });
   }
@@ -149,8 +204,16 @@ export const deleteService = async (req, res) => {
   if (!canManageServices(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
   const service = await Service.findOneAndDelete(canManageAllServices(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id });
   if (!service) return res.status(404).json({ success: false, message: "No data found." });
+
   await recordActivity(req, { userID: req.user.id, module: "service", action: "deleted", resourceId: service._id, resourceName: service.title, before: { title: service.title, slug: service.slug } });
-  return res.status(200).json({ success: true, message: "Service deleted" });
+
+  // Revalidate frontend
+  await revalidateFrontend({
+    paths: ["/services", `/services/${service.slug}`],
+    tags: ["services", `service-${service.slug}`],
+  });
+
+  return res.status(200).json({ success: true, message: "Service deleted and cache purged" });
 };
 
 export const seedServices = async (req, res) => {
@@ -166,7 +229,7 @@ export const seedServices = async (req, res) => {
       const existing = await Service.findOne({ slug: item.slug });
       await Service.findOneAndUpdate(
         { slug: item.slug },
-        { $set: { ...item, createdBy: req.user.id } },
+        { $set: { ...item, status: "published", createdBy: req.user.id } },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
       if (existing) updated++;
@@ -181,10 +244,16 @@ export const seedServices = async (req, res) => {
       after: { inserted, updated, total: seedServicesData.length },
     });
 
+    // Revalidate all services
+    await revalidateFrontend({
+      paths: ["/services", ...seedServicesData.map((s) => `/services/${s.slug}`)],
+      tags: ["services", ...seedServicesData.map((s) => `service-${s.slug}`)],
+    });
+
     const total = await Service.countDocuments();
     return res.status(200).json({
       success: true,
-      message: `Successfully seeded all services. ${inserted} created, ${updated} updated.`,
+      message: `Successfully seeded all services and synced live. ${inserted} created, ${updated} updated.`,
       stats: { inserted, updated, total },
     });
   } catch (error) {

@@ -135,7 +135,7 @@ function getAuthorProfile(blog) {
 async function getPost(slug) {
   try {
     const response = await fetch(`${API_URL}/post/${slug}`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 3600, tags: ["posts", `post-${slug}`] },
       headers: { Accept: "application/json" },
     });
 
@@ -154,7 +154,7 @@ async function getRecommendedPosts(contentType = "blog") {
   try {
     const url = `${API_URL}/public/posts?contentType=${contentType}&page=1&limit=8`;
     const response = await fetch(url, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 3600, tags: ["posts"] },
       headers: { Accept: "application/json" },
     });
 

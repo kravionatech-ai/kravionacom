@@ -171,7 +171,10 @@ const getService = async (slug) => {
   try {
     const response = await fetch(
       `${API_URL}/services/${encodeURIComponent(cleanSlug)}`,
-      { next: { revalidate: 3600 }, headers: { Accept: "application/json" } },
+      {
+        next: { revalidate: 3600, tags: ["services", `service-${cleanSlug}`] },
+        headers: { Accept: "application/json" },
+      },
     );
     if (response.ok) {
       const json = await response.json();
@@ -240,7 +243,7 @@ const getService = async (slug) => {
 const getServiceLinks = async () => {
   try {
     const response = await fetch(`${API_URL}/services`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 3600, tags: ["services"] },
       headers: { Accept: "application/json" },
     });
     if (response.ok) {

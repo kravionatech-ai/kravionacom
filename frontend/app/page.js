@@ -1,5 +1,6 @@
 import DeferredHomeSections from "@/components/Home/DeferredHomeSections";
 import { API_URL } from "@/utils/api";
+import { getDynamicPage } from "@/lib/pagesApi";
 import HeroSection from "@/components/Home/HeroSection";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
@@ -201,51 +202,56 @@ const testimonials = [
 ];
 
 // ─── Homepage Metadata ────────────────────────────────────────────────────────
-export const metadata = {
-  title: {
-    absolute:
-      "Kraviona — AI-First Technology & Digital Solutions Company",
-  },
-  description:
-    "Building Intelligent Businesses Through AI, Technology & Automation. Kraviona develops custom AI agents, intelligent software, SaaS products, and enterprise automation.",
-  authors: [{ name: "Kraviona", url: SITE_URL }],
-  creator: "Kraviona",
-  publisher: "Kraviona",
-  alternates: { canonical: SITE_URL },
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: SITE_URL,
-    title: "Kraviona — AI-First Technology & Digital Solutions Company",
-    description:
-      "Building Intelligent Businesses Through AI, Technology & Automation. Custom AI agents, intelligent software development, SaaS products, and enterprise automation.",
-    siteName: "Kraviona",
-    images: [
-      {
-        url: DEFAULT_OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Kraviona — AI-First Technology & Digital Solutions Company",
-        type: "image/png",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: SITE_TWITTER,
-    creator: SITE_TWITTER,
-    title: "Kraviona — AI-First Technology & Digital Solutions Company",
-    description:
-      "Building Intelligent Businesses Through AI, Technology & Automation. Custom AI agents, intelligent software, and enterprise automation.",
-    images: [DEFAULT_OG_IMAGE],
-  },
-  robots: defaultRobots,
-};
+export async function generateMetadata() {
+  const dynamicPage = await getDynamicPage("home");
+  const seo = dynamicPage?.seo || {};
+
+  const title = seo.metaTitle || "Kraviona — AI-First Technology & Digital Solutions Company";
+  const description =
+    seo.metaDescription ||
+    "Building Intelligent Businesses Through AI, Technology & Automation. Kraviona develops custom AI agents, intelligent software, SaaS products, and enterprise automation.";
+  const canonical = seo.canonicalUrl || SITE_URL;
+  const ogImage = seo.ogImage || DEFAULT_OG_IMAGE;
+
+  return {
+    title: { absolute: title },
+    description,
+    authors: [{ name: "Kraviona", url: SITE_URL }],
+    creator: "Kraviona",
+    publisher: "Kraviona",
+    alternates: { canonical },
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      url: canonical,
+      title: seo.ogTitle || title,
+      description: seo.ogDescription || description,
+      siteName: "Kraviona",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: "Kraviona — AI-First Technology & Digital Solutions Company",
+        },
+      ],
+    },
+    twitter: {
+      card: seo.twitterCard || "summary_large_image",
+      site: SITE_TWITTER,
+      creator: SITE_TWITTER,
+      title: seo.twitterTitle || title,
+      description: seo.twitterDescription || description,
+      images: [ogImage],
+    },
+    robots: seo.noIndex ? { index: false, follow: false } : defaultRobots,
+  };
+}
 
 async function getLatestPosts() {
   try {
     const response = await fetch(`${API_URL}/public/posts?page=1&limit=3`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 3600, tags: ["posts"] },
       headers: { Accept: "application/json" },
     });
     if (!response.ok) return [];
@@ -258,7 +264,10 @@ async function getLatestPosts() {
 }
 
 const Home = async () => {
-  const latestPosts = await getLatestPosts();
+  const [latestPosts, dynamicPage] = await Promise.all([
+    getLatestPosts(),
+    getDynamicPage("home"),
+  ]);
   const latestPostsSchema = latestPosts.length
     ? {
         "@context": "https://schema.org",

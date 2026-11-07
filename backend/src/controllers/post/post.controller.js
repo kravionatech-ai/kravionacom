@@ -6,6 +6,7 @@ import { recordActivity } from "../../utils/activityLogger.js";
 import { notifyBlogSubscribers } from "../../services/blog-push.service.js";
 import { parseBoolean } from "../../utils/requestValues.js";
 import { invalidateChatbotIndex } from "../../services/chatbot/chatbot.service.js";
+import { revalidateFrontend } from "../../utils/revalidateFrontend.js";
 
 // ==========================================
 // CONSTANTS
@@ -413,6 +414,17 @@ export const createPost = async (req, res) => {
     });
 
     await post.save();
+
+    // Live Data Synchronization: Instant Next.js revalidation
+    try {
+      const catSlug = matchedCategory?.slug || "blog";
+      await revalidateFrontend({
+        paths: ["/blog", `/${catSlug}/${post.slug}`, `/blog/${post.slug}`, "/"],
+        tags: ["posts", `post-${post.slug}`],
+      });
+    } catch (err) {
+      console.warn("[REVALIDATE_POST_CREATE_WARN]", err?.message);
+    }
 
     await recordActivity(req, {
       userID: user.id,
@@ -951,9 +963,24 @@ export const updatePost = async (req, res) => {
       invalidateChatbotIndex();
     }
 
+    // Live Data Synchronization: Instant Next.js revalidation
+    try {
+      const catSlug = post.category?.slug || "blog";
+      const pathsToReval = ["/blog", `/${catSlug}/${post.slug}`, `/blog/${post.slug}`, "/"];
+      if (before?.slug && before.slug !== post.slug) {
+        pathsToReval.push(`/${catSlug}/${before.slug}`, `/blog/${before.slug}`);
+      }
+      await revalidateFrontend({
+        paths: pathsToReval,
+        tags: ["posts", `post-${post.slug}`],
+      });
+    } catch (err) {
+      console.warn("[REVALIDATE_POST_UPDATE_WARN]", err?.message);
+    }
+
     return res.status(200).json({
       success: true,
-      message: "Post updated successfully",
+      message: "Post updated successfully and synced live",
       data: post,
     });
   } catch (error) {

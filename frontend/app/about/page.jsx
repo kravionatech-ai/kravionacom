@@ -5,78 +5,88 @@ import TeamSection from "@/components/About/TeamSection";
 import BlogCTA from "@/components/Blog/BlogCTA";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
-import { defaultRobots } from "@/app/seoConfig.js";
+import { defaultRobots, canonicalUrl } from "@/app/seoConfig.js";
+import { getDynamicPage } from "@/lib/pagesApi";
 
-const aboutPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "@id": "https://www.kraviona.com/about#webpage",
-  url: "https://www.kraviona.com/about",
-  name: "About Kraviona – AI-First Technology & Digital Solutions Company",
-  description:
-    "Learn about Kraviona, an AI-first technology company building intelligent software, autonomous AI agents, SaaS products, and automated digital systems.",
-  isPartOf: { "@id": "https://www.kraviona.com/#website" },
-  breadcrumb: {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.kraviona.com",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "About Us",
-        item: "https://www.kraviona.com/about",
-      },
-    ],
-  },
-};
+export const revalidate = 3600;
 
-export const dynamic = "force-static";
+export async function generateMetadata() {
+  const dynamicPage = await getDynamicPage("about");
+  const seo = dynamicPage?.seo || {};
 
-export const metadata = {
-  title: {
-    absolute: "About Kraviona | AI-First Technology & Software Company",
-  },
-  description:
-    "Meet Kraviona, an AI-first technology company helping businesses build intelligent software, develop AI-powered solutions, and automate complex workflows.",
-  authors: [{ name: "Kraviona", url: "https://www.kraviona.com" }],
-  creator: "Kraviona",
-  alternates: { canonical: "https://www.kraviona.com/about" },
-  openGraph: {
-    title: "About Kraviona | AI-First Technology & Software Company",
+  const title = seo.metaTitle || "About Kraviona | AI-First Technology & Software Company";
+  const description =
+    seo.metaDescription ||
+    "Meet Kraviona, an AI-first technology company helping businesses build intelligent software, develop AI-powered solutions, and automate complex workflows.";
+  const canonical = seo.canonicalUrl || canonicalUrl("/about");
+  const ogImage = seo.ogImage || "/og-image.jpg";
+
+  return {
+    title: { absolute: title },
+    description,
+    authors: [{ name: "Kraviona", url: "https://www.kraviona.com" }],
+    creator: "Kraviona",
+    alternates: { canonical },
+    openGraph: {
+      title: seo.ogTitle || title,
+      description: seo.ogDescription || description,
+      url: canonical,
+      siteName: "Kraviona",
+      type: "website",
+      locale: "en_IN",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: "About Kraviona – AI-First Technology & Digital Solutions",
+        },
+      ],
+    },
+    twitter: {
+      card: seo.twitterCard || "summary_large_image",
+      site: "@KravionaTech",
+      creator: "@KravionaTech",
+      title: seo.twitterTitle || title,
+      description: seo.twitterDescription || description,
+      images: [ogImage],
+    },
+    robots: seo.noIndex ? { index: false, follow: false } : defaultRobots,
+  };
+}
+
+export default async function AboutPage() {
+  const dynamicPage = await getDynamicPage("about");
+
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": dynamicPage?.seo?.schemaType || "AboutPage",
+    "@id": "https://www.kraviona.com/about#webpage",
+    url: dynamicPage?.seo?.canonicalUrl || "https://www.kraviona.com/about",
+    name: dynamicPage?.seo?.metaTitle || "About Kraviona – AI-First Technology & Digital Solutions Company",
     description:
-      "Building Intelligent Businesses Through AI, Technology & Automation. Meet the engineering team behind Kraviona.",
-    url: "https://www.kraviona.com/about",
-    siteName: "Kraviona",
-    type: "website",
-    locale: "en_IN",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "About Kraviona – AI-First Technology & Digital Solutions",
-        type: "image/jpeg",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@KravionaTech",
-    creator: "@KravionaTech",
-    title: "About Kraviona | AI-First Technology & Software Company",
-    description:
-      "Building Intelligent Businesses Through AI, Technology & Automation.",
-    images: ["/og-image.jpg"],
-  },
-  robots: defaultRobots,
-};
+      dynamicPage?.seo?.metaDescription ||
+      "Learn about Kraviona, an AI-first technology company building intelligent software, autonomous AI agents, SaaS products, and automated digital systems.",
+    isPartOf: { "@id": "https://www.kraviona.com/#website" },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.kraviona.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "About Us",
+          item: "https://www.kraviona.com/about",
+        },
+      ],
+    },
+  };
 
-const AboutPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <JsonLd
@@ -88,13 +98,11 @@ const AboutPage = () => {
           ]),
         ]}
       />
-      <AboutBanner />
-      <OurStory />
+      <AboutBanner dynamicHero={dynamicPage?.hero} />
+      <OurStory dynamicSections={dynamicPage?.sections} />
       <CoreValues />
       <TeamSection />
       <BlogCTA />
     </div>
   );
-};
-
-export default AboutPage;
+}
