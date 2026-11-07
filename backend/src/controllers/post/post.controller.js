@@ -157,6 +157,7 @@ const normalizePublishingFields = ({ status, scheduledAt, currentPost }) => {
 
 const publishDueScheduledPosts = async () => {
   const now = new Date();
+  let publishedAny = false;
   // Atomically claim one scheduled post at a time so parallel public requests
   // cannot publish (and notify for) the same article twice.
   for (let processed = 0; processed < 100; processed += 1) {
@@ -170,7 +171,15 @@ const publishDueScheduledPosts = async () => {
     );
 
     if (!post) break;
+    publishedAny = true;
     await notifyBlogSubscribers(post).catch(() => null);
+  }
+
+  if (publishedAny) {
+    await revalidateFrontend({
+      paths: ["/sitemap.xml", "/sitemap", "/blog", "/news", "/"],
+      tags: ["posts", "sitemap"],
+    }).catch(() => null);
   }
 };
 
@@ -419,8 +428,17 @@ export const createPost = async (req, res) => {
     try {
       const catSlug = matchedCategory?.slug || "blog";
       await revalidateFrontend({
-        paths: ["/blog", `/${catSlug}/${post.slug}`, `/blog/${post.slug}`, "/"],
-        tags: ["posts", `post-${post.slug}`],
+        paths: [
+          "/sitemap.xml",
+          "/sitemap",
+          "/blog",
+          "/news",
+          `/${catSlug}/${post.slug}`,
+          `/blog/${post.slug}`,
+          `/category/${catSlug}`,
+          "/",
+        ],
+        tags: ["posts", "sitemap", `post-${post.slug}`],
       });
     } catch (err) {
       console.warn("[REVALIDATE_POST_CREATE_WARN]", err?.message);
@@ -464,7 +482,7 @@ export const publicPosts = async (req, res) => {
     res.set("Cache-Control", "no-store, max-age=0, must-revalidate");
 
     const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-    const limit = Math.min(24, Math.max(1, parseInt(req.query.limit, 10) || 12));
+    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit, 10) || 12));
     const skip = (page - 1) * limit;
     const filter = publicPostFilter();
     const category = req.query.category
@@ -540,7 +558,7 @@ export const publicPosts = async (req, res) => {
       PostModel.find(filter)
         // Keep public cards focused on visible site fields.
         .select(
-          "title slug excerpt author userID category categoryID views featuredImage contentSourceType commentCount tags primaryTopicCluster readingTimeMinutes publishedAt createdAt updatedAt"
+          "title slug excerpt author userID category categoryID views featuredImage contentSourceType commentCount tags primaryTopicCluster readingTimeMinutes publishedAt createdAt updatedAt contentType isNoIndex"
         )
         .populate({ path: "userID", select: publicAuthorAccountFields })
         // FIX: there was no sort at all before — results came back in
@@ -728,6 +746,26 @@ export const deletePost = async (req, res) => {
       { _id: post.categoryID, postCount: { $gt: 0 } },
       { $inc: { postCount: -1 } },
     );
+
+    // Live Data Synchronization: Instant Next.js revalidation
+    try {
+      const catSlug = post.category?.slug || "blog";
+      await revalidateFrontend({
+        paths: [
+          "/sitemap.xml",
+          "/sitemap",
+          "/blog",
+          "/news",
+          `/${catSlug}/${post.slug}`,
+          `/blog/${post.slug}`,
+          `/category/${catSlug}`,
+          "/",
+        ],
+        tags: ["posts", "sitemap", `post-${post.slug}`],
+      });
+    } catch (err) {
+      console.warn("[REVALIDATE_POST_DELETE_WARN]", err?.message);
+    }
 
     return res.status(200).json({ success: true, message: "Post deleted successfully." });
   } catch (error) {
@@ -966,13 +1004,22 @@ export const updatePost = async (req, res) => {
     // Live Data Synchronization: Instant Next.js revalidation
     try {
       const catSlug = post.category?.slug || "blog";
-      const pathsToReval = ["/blog", `/${catSlug}/${post.slug}`, `/blog/${post.slug}`, "/"];
+      const pathsToReval = [
+        "/sitemap.xml",
+        "/sitemap",
+        "/blog",
+        "/news",
+        `/${catSlug}/${post.slug}`,
+        `/blog/${post.slug}`,
+        `/category/${catSlug}`,
+        "/",
+      ];
       if (before?.slug && before.slug !== post.slug) {
         pathsToReval.push(`/${catSlug}/${before.slug}`, `/blog/${before.slug}`);
       }
       await revalidateFrontend({
         paths: pathsToReval,
-        tags: ["posts", `post-${post.slug}`],
+        tags: ["posts", "sitemap", `post-${post.slug}`],
       });
     } catch (err) {
       console.warn("[REVALIDATE_POST_UPDATE_WARN]", err?.message);

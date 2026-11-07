@@ -135,7 +135,7 @@ const getNewestIsoDate = (...values) => {
 async function fetchJson(path) {
   const response = await fetch(`${API_URL}${path}`, {
     headers: { Accept: "application/json" },
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
 
   return response.ok ? response.json() : {};

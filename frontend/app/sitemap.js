@@ -2,7 +2,8 @@ import { API_URL } from "@/utils/api";
 import { canonicalUrl } from "./seoConfig.js";
 import { SERVICE_LINKS } from "./services/serviceData.js";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const baseUrl = "https://www.kraviona.com";
 const EXCLUDED_SLUGS = [
@@ -24,7 +25,7 @@ const EXCLUDED_SLUGS = [
 ];
 
 const POSTS_FETCH_LIMIT = 100;
-const MAX_POST_PAGES = 20;
+const MAX_POST_PAGES = 50;
 const RECENT_POST_UPDATE_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
 
 const frequencyRank = {
@@ -100,12 +101,15 @@ const getBlogChangeFrequency = (lastModified) => {
 
 const DEFAULT_STATIC_LASTMOD = "2026-10-01T00:00:00.000Z";
 
-const createRoute = ({ path, lastModified }) => {
+const createRoute = ({ path, lastModified, changeFrequency, priority }) => {
   const validLastModified = getValidIsoDate(lastModified) || DEFAULT_STATIC_LASTMOD;
-  return {
+  const route = {
     url: canonicalUrl(path),
     lastModified: validLastModified,
   };
+  if (changeFrequency) route.changeFrequency = changeFrequency;
+  if (priority !== undefined) route.priority = priority;
+  return route;
 };
 
 const buildServiceRoutes = (services) => services.map((service) =>
@@ -122,7 +126,7 @@ const staticRoutes = canonicalStaticRoutes.map(createRoute);
 async function fetchJson(path) {
   const response = await fetch(`${API_URL}${path}`, {
     headers: { Accept: "application/json" },
-    next: { revalidate },
+    cache: "no-store",
   });
 
   return response.ok ? response.json() : {};
@@ -297,6 +301,8 @@ function mergeRoutes(routes) {
     }
 
     routeMap.set(route.url, {
+      ...existing,
+      ...route,
       url: route.url,
       lastModified: getNewestIsoDate(existing.lastModified, route.lastModified),
     });
@@ -308,14 +314,15 @@ function mergeRoutes(routes) {
 }
 
 export default async function sitemap() {
-  const [blogPosts, newsPosts, allPosts, categories, services, careers] = await Promise.all([
-    getPublishedPosts("blog"),
-    getPublishedPosts("news"),
-    getPublishedPosts(),   // no filter — used for categories (backward compat)
+  const [allPosts, categories, services, careers] = await Promise.all([
+    getPublishedPosts(),
     getPublishedCategories(),
     getPublishedServices(),
     getPublishedCareers(),
   ]);
+
+  const blogPosts = allPosts.filter((post) => post.contentType !== "news");
+  const newsPosts = allPosts.filter((post) => post.contentType === "news");
 
   return mergeRoutes([
     ...staticRoutes,
