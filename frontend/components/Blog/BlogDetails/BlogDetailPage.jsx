@@ -92,6 +92,7 @@ const BlogDetailPage = ({ blog }) => {
 
   const authorName = blog.userID?.name || blog.author?.name || "Amar Kumar";
   const authorRole = blog.author?.jobTitle || blog.author?.role || "Founder & Lead Engineer";
+  const authorAvatar = blog.userID?.avatar || blog.author?.avatar || null;
   const contentHtml = normalizeContentImages(blog.content || "");
   const publishedDate = formatDate(blog.publishedAt || blog.createdAt);
   const quickAnswer = stripHtml(blog.quickAnswer || "");
@@ -273,9 +274,9 @@ const BlogDetailPage = ({ blog }) => {
       <div className="mt-14 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden bg-[#2A4A52] text-white flex items-center justify-center font-black text-2xl shadow-md border-2 border-[#E8622A]/40">
-            {blog.author?.avatar ? (
+            {authorAvatar ? (
               <Image
-                src={blog.author.avatar}
+                src={authorAvatar}
                 alt={authorName}
                 fill
                 className="object-cover"
