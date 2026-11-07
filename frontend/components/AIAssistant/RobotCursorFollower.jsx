@@ -52,10 +52,16 @@ export default function RobotCursorFollower({
 
   // Mount & initialize starting position inside viewport
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches;
+      if (isMobile) {
+        return; // Don't activate cursor follower on touch/mobile
+      }
+    }
     setMounted(true);
     if (typeof window !== "undefined") {
-      const initialX = Math.max(80, window.innerWidth - 130);
-      const initialY = Math.max(80, window.innerHeight - 150);
+      const initialX = Math.max(80, window.innerWidth - 180);
+      const initialY = Math.max(80, window.innerHeight - 200);
       targetPosRef.current = { x: initialX, y: initialY };
       currentPosRef.current = { x: initialX, y: initialY };
       prevPosRef.current = { x: initialX, y: initialY };
@@ -198,6 +204,15 @@ export default function RobotCursorFollower({
         }
       }
 
+      // Bottom-Right Corner Clearance: Keep away from fixed AssistantLauncher & WhatsApp button
+      if (typeof window !== "undefined") {
+        const cornerX = window.innerWidth - 220;
+        const cornerY = window.innerHeight - 150;
+        if (renderX > cornerX && renderY > cornerY) {
+          renderY = cornerY - 12;
+        }
+      }
+
       if (followerRef.current) {
         followerRef.current.style.transform = `translate3d(${renderX}px, ${renderY}px, 0px)`;
       }
@@ -223,7 +238,7 @@ export default function RobotCursorFollower({
   return (
     <div
       ref={followerRef}
-      className="fixed top-0 left-0 z-[45] pointer-events-none select-none will-change-transform"
+      className="hidden md:block fixed top-0 left-0 z-40 pointer-events-none select-none will-change-transform"
       style={{
         transform: "translate3d(calc(100vw - 120px), calc(100vh - 140px), 0px)",
       }}

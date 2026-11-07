@@ -55,7 +55,7 @@ export default function AssistantLauncher({ isOpen = false, onToggle = () => {} 
       tabIndex={0}
       aria-expanded={isOpen}
       aria-label={isOpen ? "Close Kraviona AI Assistant" : "Open Kraviona AI Assistant"}
-      className="group fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-3.5 py-2.5 rounded-full bg-gradient-to-r from-[#1A3840] via-[#16434d] to-[#0f5960] text-white shadow-[0_8px_24px_rgba(26,56,64,0.45)] border border-[#00F2FE]/40 cursor-pointer select-none transition-all duration-300 hover:scale-105 hover:border-[#00F2FE]/80 hover:shadow-[0_10px_28px_rgba(0,242,254,0.35)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#00F2FE] focus:ring-offset-2 animate-in fade-in slide-in-from-bottom-3"
+      className="group fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-2.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-full bg-gradient-to-r from-[#1A3840] via-[#16434d] to-[#0f5960] text-white shadow-[0_8px_24px_rgba(26,56,64,0.45)] border border-[#00F2FE]/40 cursor-pointer select-none transition-all duration-300 hover:scale-105 hover:border-[#00F2FE]/80 hover:shadow-[0_10px_28px_rgba(0,242,254,0.35)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#00F2FE] focus:ring-offset-2 animate-in fade-in slide-in-from-bottom-3"
     >
       {/* Mini Kraviona Robot Mascot Icon */}
       <div className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-black/30 border border-white/20 shadow-inner overflow-hidden">

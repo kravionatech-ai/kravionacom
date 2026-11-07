@@ -171,21 +171,35 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
           {/* Brand & Direct Contact (Col 1: 4 columns on desktop) */}
           <div className="sm:col-span-2 lg:col-span-4 pr-0 lg:pr-6">
-            <Link
-              href="/"
-              aria-label="Kraviona homepage"
-              className="mb-5 inline-flex items-center"
-            >
-              <Image
-                src="/full-logo-light.webp"
-                alt="Kraviona – AI-First Technology & Digital Solutions Company"
-                width={190}
-                height={60}
-                sizes="190px"
-                className="h-10 w-auto object-contain"
-              />
-            </Link>
-            <p className="text-sm leading-relaxed text-white/75">
+            {/* Kraviona Logo */}
+            <div className="mb-4">
+              <Link
+                href="/"
+                aria-label="Kraviona – Vision Innovative Development"
+                className="group inline-flex items-center rounded-2xl border border-white/20 bg-white px-4 py-2.5 shadow-md transition-all duration-200 hover:bg-white/95 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00CBA9]"
+              >
+                <Image
+                  src="/full-logo.webp"
+                  alt="Kraviona – Vision Innovative Development"
+                  width={190}
+                  height={65}
+                  priority
+                  sizes="(max-width: 640px) 160px, 190px"
+                  className="h-9 sm:h-10 md:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                />
+              </Link>
+            </div>
+
+            {/* Brand Tagline */}
+            <div className="mb-3.5 flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00CBA9]"></span>
+              <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#00CBA9]">
+                Vision Innovative Development
+              </span>
+            </div>
+
+            {/* Company Description */}
+            <p className="text-sm leading-relaxed text-white/80 max-w-sm">
               AI-First Technology &amp; Digital Solutions company engineering intelligent software, autonomous AI workflows, SaaS platforms, and search-ready digital foundations.
             </p>
 
@@ -193,9 +207,9 @@ export default function Footer() {
             <div className="mt-6 space-y-2.5">
               <a
                 href={`mailto:${SOCIAL_LINKS.email}`}
-                className="group flex items-center gap-3 text-sm text-white/80 transition-colors hover:text-[#D4A550]"
+                className="group flex items-center gap-3 text-sm text-white/80 transition-colors hover:text-[#00CBA9]"
               >
-                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-white/[0.04] text-[#D4A550] transition-colors group-hover:border-[#D4A550]/40">
+                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-white/[0.04] text-[#00CBA9] transition-colors group-hover:border-[#00CBA9]/40 group-hover:bg-[#00CBA9]/10">
                   <Mail className="h-3.5 w-3.5" />
                 </span>
                 <span className="font-medium">{SOCIAL_LINKS.email}</span>
@@ -203,16 +217,16 @@ export default function Footer() {
 
               <a
                 href={`tel:${SOCIAL_LINKS.phone}`}
-                className="group flex items-center gap-3 text-sm text-white/80 transition-colors hover:text-[#D4A550]"
+                className="group flex items-center gap-3 text-sm text-white/80 transition-colors hover:text-[#00CBA9]"
               >
-                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-white/[0.04] text-[#D4A550] transition-colors group-hover:border-[#D4A550]/40">
+                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-white/[0.04] text-[#00CBA9] transition-colors group-hover:border-[#00CBA9]/40 group-hover:bg-[#00CBA9]/10">
                   <Phone className="h-3.5 w-3.5" />
                 </span>
                 <span className="font-medium">+91 96085 53167</span>
               </a>
 
               <div className="flex items-center gap-3 text-sm text-white/70">
-                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-white/[0.04] text-[#D4A550]">
+                <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-white/[0.04] text-[#00CBA9]">
                   <MapPin className="h-3.5 w-3.5" />
                 </span>
                 <span>East Delhi, Delhi 110092, India</span>
@@ -382,8 +396,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar — Unified, Clean, Zero Duplication */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-6">
+        {/* Bottom Bar — Unified, Clean, Zero Duplication with clearance for floating controls */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-6 pb-24 sm:pb-20 lg:pb-10">
           <div className="text-center md:text-left">
             <p className="text-[12px] text-white/60">
               © {new Date().getFullYear()} Kraviona Tech Solutions. All rights reserved.

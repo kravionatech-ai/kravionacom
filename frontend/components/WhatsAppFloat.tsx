@@ -10,7 +10,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Kraviona on WhatsApp"
-      className="group fixed bottom-[76px] sm:bottom-[80px] right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#1EBE5D] via-[#22C55E] to-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.45)] border border-white/20 transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_28px_rgba(37,211,102,0.65)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
+      className="group fixed bottom-[68px] sm:bottom-[80px] right-4 sm:right-6 z-40 flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#1EBE5D] via-[#22C55E] to-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.45)] border border-white/20 transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_28px_rgba(37,211,102,0.65)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2"
     >
       {/* Official Solid WhatsApp Silhouette SVG */}
       <svg
