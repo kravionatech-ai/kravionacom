@@ -16,12 +16,12 @@ const STATIC_KRAVIONA_KNOWLEDGE = [
   {
     id: "static-about",
     type: "page",
-    title: "About Kraviona Tech Solutions",
+    title: "About Kraviona — AI-First Technology & Software Company",
     category: "Company",
     url: "/about",
     description:
-      "Kraviona Tech Solutions is a premier digital engineering and technical SEO agency based in Delhi NCR (Noida, India). We engineer high-performance MERN stack applications, modern Next.js websites, technical SEO architectures, AI automation solutions, and scalable cloud-ready backend platforms.",
-    keywords: ["about kraviona", "company info", "what is kraviona", "who are you", "kraviona tech solutions", "location", "noida", "delhi ncr", "kraviona kya hai", "founder", "agency"],
+      "Kraviona is an AI-first technology and software company building intelligent software, autonomous AI agents, SaaS platforms, and automated digital solutions that help modern businesses scale. Tagline: 'Intelligence Meets Innovation'. Headquarters: East Delhi, Delhi NCR, India.",
+    keywords: ["about kraviona", "company info", "what is kraviona", "who are you", "ai company", "software company", "location", "delhi", "delhi ncr", "kraviona kya hai", "founder", "amar kumar"],
   },
   {
     id: "static-contact",
@@ -30,78 +30,88 @@ const STATIC_KRAVIONA_KNOWLEDGE = [
     category: "Contact",
     url: "/contact",
     description:
-      "You can connect with Kraviona Tech Solutions directly. Official Email: kravionatech@gmail.com, Official Phone: +91 96085 53167. Location: Noida, Delhi NCR, India. WhatsApp support is also available via +91 96085 53167.",
+      "Connect with Kraviona's engineering team directly. Official Email: hello@kraviona.com, Official Phone / WhatsApp: +91 96085 53167. Location: East Delhi, Delhi 110092, India. Online Discovery Call: https://www.kraviona.com/contact.",
     keywords: ["contact", "email", "phone number", "call", "address", "reach out", "support", "office location", "whatsapp", "number", "sampark", "phone"],
   },
   {
     id: "static-services-overview",
     type: "page",
-    title: "Kraviona Services Overview",
+    title: "Kraviona 5 Core Business Verticals",
     category: "Services",
     url: "/services",
     description:
-      "Kraviona provides 5 core engineering services: 1. Full-Stack Web Development (Next.js, React, Node.js, Express, MongoDB), 2. Advanced Technical SEO & Core Web Vitals Optimization (90+ speed scores), 3. Custom AI Automations & Workflows, 4. UI/UX Design & Prototyping, 5. Custom API Development & Cloud Systems.",
-    keywords: ["services", "what do you offer", "web development", "seo", "ai automation", "mern stack", "hire developers", "kya karte ho", "features", "offerings"],
+      "Kraviona operates across 5 core business verticals: 01. IT & Technology Services (Custom software, Next.js/React web apps, Node.js/Python microservices, APIs, Cloud), 02. AI & Automation Solutions (Autonomous cognitive AI agents, LLM reasoning workflows, RAG knowledge bases, AI chatbots), 03. SaaS & Software Products (Cloud SaaS platforms, rapid AI MVPs, multi-tenant databases), 04. E-commerce Solutions (AI storefronts, marketplace account handling, automated cataloging), 05. Digital Marketing Services (Technical SEO, AEO, Generative Engine Optimization - GEO, Core Web Vitals speed).",
+    keywords: ["services", "what do you offer", "it services", "ai solutions", "saas", "ecommerce", "seo", "hire developers", "kya karte ho", "features", "offerings"],
   },
   {
-    id: "static-web-dev",
+    id: "static-it-services",
     type: "service",
-    title: "Full-Stack Web Development",
+    title: "IT & Technology Services",
     category: "Services",
     url: "/services",
     description:
-      "We build modern, ultra-fast web applications using Next.js 14/15, React, Node.js, Express, MongoDB, and Tailwind CSS. Every project features responsive design, sub-second page loads, and enterprise-grade code quality.",
-    keywords: ["web development", "nextjs", "next.js", "react", "mern", "website", "frontend", "backend", "full stack", "web dev", "website banwana"],
-  },
-  {
-    id: "static-technical-seo",
-    type: "service",
-    title: "Technical SEO & Speed Optimization",
-    category: "Services",
-    url: "/services",
-    description:
-      "Our Technical SEO practice guarantees 90+ mobile Core Web Vitals scores, structured schema markup, crawl budget optimization, and site architecture enhancements designed for high organic Google rankings.",
-    keywords: ["seo", "technical seo", "ranking", "google ranking", "core web vitals", "speed", "traffic", "organic search", "speed optimization"],
+      "Custom software engineering, high-performance Next.js App Router and React web applications, scalable Node.js/Python microservices, secure RESTful/GraphQL APIs, enterprise cloud platforms, and modern UI/UX design systems.",
+    keywords: ["web development", "custom software", "nextjs", "react", "mern", "api development", "cloud", "software engineering", "enterprise software"],
   },
   {
     id: "static-ai-automation",
     type: "service",
-    title: "AI Workflows & Automations",
+    title: "AI & Automation Solutions (Flagship Focus)",
+    category: "Services",
+    url: "/solutions",
+    description:
+      "Strategic flagship AI development: Autonomous cognitive AI agents, multi-step LLM reasoning pipelines, custom context-aware AI chatbots, enterprise Retrieval-Augmented Generation (RAG) knowledge systems, intelligent document processing (IDP/OCR), and business process automation.",
+    keywords: ["ai", "ai agents", "automation", "workflows", "llm", "chatbots", "rag", "retrieval augmented generation", "machine learning", "generative ai"],
+  },
+  {
+    id: "static-saas-products",
+    type: "service",
+    title: "SaaS & Software Products",
     category: "Services",
     url: "/services",
     description:
-      "We design custom business AI automations, intelligent chat assistants, automated web scraping workflows, and LLM API integrations that streamline business operations.",
-    keywords: ["ai", "automation", "workflows", "llm", "chatbots", "ai integration", "agents", "machine learning"],
+      "Full-lifecycle cloud SaaS engineering, rapid AI SaaS MVPs built for fast market entry, multi-tenant database isolation, subscription billing (Stripe), and role-based access control (RBAC).",
+    keywords: ["saas", "software product", "mvp", "ai mvp", "cloud software", "multi tenant", "stripe billing", "saas development"],
+  },
+  {
+    id: "static-ecommerce",
+    type: "service",
+    title: "E-commerce Solutions",
+    category: "Services",
+    url: "/services",
+    description:
+      "AI-powered online storefronts, headless Next.js and Shopify e-commerce, automated order fulfillment workflows, Amazon and Flipkart seller account management, flat file cataloging, and payment reconciliation.",
+    keywords: ["ecommerce", "shopify", "online store", "amazon seller", "flipkart seller", "marketplace", "headless commerce", "cataloging"],
+  },
+  {
+    id: "static-seo-marketing",
+    type: "service",
+    title: "Digital Marketing & Technical SEO",
+    category: "Services",
+    url: "/services",
+    description:
+      "Advanced Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), sub-second page loads (< 1.8s LCP, 90+ mobile Core Web Vitals), Schema.org graph markup, and B2B growth marketing.",
+    keywords: ["seo", "technical seo", "aeo", "geo", "ranking", "google ranking", "core web vitals", "speed", "traffic", "organic search"],
   },
   {
     id: "static-pricing",
     type: "page",
-    title: "Pricing & Service Packages",
+    title: "Transparent Pricing & Engagement Models",
     category: "Pricing",
-    url: "/contact",
+    url: "/pricing",
     description:
-      "Kraviona offers flexible project-based quotes for custom development and monthly retainers for Technical SEO and site maintenance. Transparent pricing with no hidden charges. Contact us at kravionatech@gmail.com or +91 96085 53167 for a free custom estimate.",
+      "Kraviona offers transparent milestone-based project billing, dedicated engineering sprints, and monthly retainers for Technical SEO and AI systems maintenance. Contact hello@kraviona.com or +91 96085 53167 for a free custom technical estimate.",
     keywords: ["pricing", "cost", "rates", "packages", "hire", "charges", "how much", "kitna kharcha", "kitna lagega", "budget", "price", "rate", "fees"],
   },
   {
     id: "static-case-studies",
     type: "page",
-    title: "Case Studies & Portfolio",
+    title: "Case Studies & Engineering Results",
     category: "Portfolio",
     url: "/case-studies",
     description:
-      "Explore real-world client implementations, architectural transformations, SEO scale-ups, and modern web application builds engineered by Kraviona Tech Solutions.",
+      "Explore real-world client implementations, architectural transformations, autonomous AI agent pipelines, and SEO scale-ups engineered by Kraviona.",
     keywords: ["portfolio", "case studies", "projects", "work", "past work", "clients", "samples", "examples", "previous work", "kya banaya"],
-  },
-  {
-    id: "static-careers",
-    type: "page",
-    title: "Careers at Kraviona",
-    category: "Careers",
-    url: "/careers",
-    description:
-      "Join the Kraviona engineering and digital growth team. Check out our open roles in frontend, backend, SEO, and AI engineering on our Careers page.",
-    keywords: ["careers", "jobs", "hiring", "openings", "join team", "work with us", "internship", "apply", "job"],
   },
   {
     id: "static-location",
@@ -110,8 +120,8 @@ const STATIC_KRAVIONA_KNOWLEDGE = [
     category: "Company",
     url: "/contact",
     description:
-      "Kraviona Tech Solutions is headquartered in Delhi NCR (Noida, Uttar Pradesh, India). We deliver remote web engineering and SEO services across India and internationally.",
-    keywords: ["location", "address", "where are you", "office", "noida", "delhi ncr", "kahan ho", "headquarters", "city"],
+      "Kraviona is headquartered in East Delhi, Delhi NCR, India (PIN 110092). We collaborate with businesses across India and internationally through remote workflows and dedicated project delivery.",
+    keywords: ["location", "address", "where are you", "office", "delhi", "east delhi", "delhi ncr", "kahan ho", "headquarters", "city"],
   },
 ];
 
@@ -448,15 +458,19 @@ const queryLocalModel = async (userQuery, contextSnippets, languageMode) => {
     )
     .join("\n\n---\n\n");
 
-  const systemInstruction = `You are the official Kraviona Tech Solutions public website AI assistant.
-Your goal is to help visitors by answering questions ONLY using the verified public website context below.
+  const systemInstruction = `You are the official Kraviona AI Assistant (https://www.kraviona.com), representing an AI-First Technology & Digital Solutions Company ("Intelligence Meets Innovation").
+Your goal is to help visitors understand Kraviona's 5 core business verticals:
+01. IT & Technology Services: Custom software, Next.js App Router, React, Node.js, Python, enterprise APIs, and cloud architectures.
+02. AI & Automation Solutions (Strategic Flagship Focus): Autonomous cognitive AI agents, multi-step LLM reasoning pipelines, custom AI chatbots, enterprise RAG knowledge systems, intelligent document processing (IDP/OCR), and business process automation.
+03. SaaS & Software Products: Full-lifecycle cloud SaaS platforms, rapid AI MVPs, multi-tenant database isolation, and Stripe billing.
+04. E-commerce Solutions: AI-powered storefronts, headless Next.js e-commerce, Amazon & Flipkart marketplace management, automated cataloging.
+05. Digital Marketing Services: Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), Core Web Vitals speed optimization (< 1.8s LCP), and B2B growth marketing.
 
 STRICT RULES:
-1. Never invent facts. Answer directly and concisely based ONLY on the provided context.
-2. If the answer is NOT present in the provided context, respond EXACTLY with:
-   "Is information ke baare mein mujhe website par koi verified public content nahi mila."
+1. Never invent facts. Answer directly and concisely based on Kraviona's verified capabilities.
+2. If the answer is NOT present, invite them to connect with our engineering team at hello@kraviona.com, +91 96085 53167, or via /contact.
 3. Respond in the same language as the user (${languageMode === "hinglish" ? "Hinglish / Hindi" : "English"}).
-4. Always provide the exact clickable markdown link for the related page from the context (e.g. [Page Title](${contextSnippets[0]?.url || "/services"})).
+4. Always provide exact clickable markdown links (e.g. [Services](/services), [AI Solutions](/solutions), [Contact](/contact)).
 5. Never talk about admin credentials, private configs, or internal server details.`;
 
   const controller = new AbortController();
@@ -510,8 +524,8 @@ const matchDirectIntent = (query, hinglish) => {
   if (/\b(thank(s|\s+you)?|dhanyawad|shukriya|bye|goodbye|alvida|ok|okay|theek\s+hai|thik\s+hai)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? "Aapka swagat hai! 🙏 Agar aapko aur koi jaankari chahiye ho ya naya project discuss karna ho, Kraviona hamesha madad ke liye tayyar hai. Shubh din!"
-        : "You're very welcome! If you need any more information or want to discuss a project, Kraviona is always here to help. Have a wonderful day! 😊",
+        ? "Aapka swagat hai! 🙏 Agar aapko koi aur technical jaankari chahiye ya apna AI/Software project discuss karna ho, Kraviona hamesha madad ke liye tayyar hai. Shubh din!"
+        : "You're very welcome! If you need any more technical information or want to explore an AI or software project, Kraviona is always here to assist. Have a wonderful day! 😊",
       sources: [
         { title: "Contact Us", url: "/contact", category: "Contact", type: "page" },
       ],
@@ -519,37 +533,55 @@ const matchDirectIntent = (query, hinglish) => {
     };
   }
 
-  // 2. Greetings & Who are you
+  // 2. Page Explanation / Summarize Page / Explain This Page
+  if (
+    /\b(explain (this |the )?page|summarize (this |the )?page|technical offerings and services|offerings and services presented|page offerings|explain page)\b/i.test(q)
+  ) {
+    return {
+      reply: hinglish
+        ? `**Kraviona** ek AI-first technology company hai jo modern businesses ke liye intelligent digital systems build karti hai ("Intelligence Meets Innovation").\n\nHumari 5 core business verticals yeh hain:\n\n• **01. IT & Technology Services**: Custom software engineering, high-performance Next.js App Router & React web apps, Node.js/Python microservices, scalable APIs, aur UI/UX design systems.\n• **02. AI & Automation Solutions** *(Flagship Focus)*: Autonomous cognitive AI agents, multi-step LLM workflows, custom AI chatbots, enterprise RAG systems, aur intelligent document processing.\n• **03. SaaS & Software Products**: Cloud-native SaaS product engineering, rapid AI MVPs, multi-tenant databases, Stripe subscription billing, aur role-based access control (RBAC).\n• **04. E-commerce Solutions**: AI-powered storefronts (Next.js, Headless Shopify), automated order workflows, Amazon/Flipkart marketplace operations, flat file cataloging, aur payout reconciliation.\n• **05. Digital Marketing Services**: Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), Core Web Vitals speed optimization, aur data-driven B2B growth.\n\nAap explore kar sakte hain: [Services Directory](/services) ya discuss karein apna project: [Contact Page](/contact).`
+        : `Kraviona is an **AI-First Technology & Digital Solutions Company** ("Intelligence Meets Innovation") delivering enterprise-grade engineering across 5 core business verticals:\n\n• **01. IT & Technology Services**: Custom software engineering, high-velocity Next.js App Router & React web applications, scalable Node.js/Python backends, enterprise APIs, and UI/UX design systems.\n• **02. AI & Automation Solutions** *(Strategic Focus)*: Autonomous cognitive AI agents, custom AI chatbots, enterprise RAG (Retrieval-Augmented Generation) assistants, intelligent document processing, and business process automation.\n• **03. SaaS & Software Products**: Full-lifecycle cloud SaaS platforms, rapid AI MVPs, multi-tenant database architectures, subscription billing, and role-based access control (RBAC).\n• **04. E-commerce Solutions**: AI-powered online storefronts, headless Next.js e-commerce, Amazon & Flipkart marketplace management, product cataloging, and automated payout reconciliation.\n• **05. Digital Marketing Services**: Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), Core Web Vitals speed optimization (< 1.8s LCP), and B2B growth marketing.\n\nExplore our complete offerings on the [Services Directory](/services) or schedule a discovery call on our [Contact Page](/contact).`,
+      sources: [
+        { title: "About Us", url: "/about", category: "Company", type: "page" },
+        { title: "Services Directory", url: "/services", category: "Services", type: "page" },
+        { title: "AI Solutions", url: "/solutions", category: "AI Solutions", type: "page" },
+      ],
+      type: "page_explanation",
+    };
+  }
+
+  // 3. Greetings & Who are you
   if (
     /\b(hi|hello|hey|namaste|greetings|good\s+(morning|afternoon|evening|day)|who are you|what can you do|help|madad|kaise ho|kya haal hai|aap kaun ho)\b/i.test(q)
   ) {
     return {
       reply: hinglish
-        ? `Namaste! 👋 Main Kraviona ka AI Assistant hoon.\n\nMain aapki in topics par madad kar sakta hoon:\n• **Web Development**: Next.js 14/15, React, Node.js & MERN stack web apps\n• **Technical SEO**: Core Web Vitals (90+ speed), Schema & Google search ranking\n• **AI Automations**: Custom business workflows & intelligent integrations\n• **Pricing & Consultation**: Free customized proposal & timeline\n\nAapko kis baare mein jaankari chahiye?`
-        : `Hello! 👋 I'm Kraviona's AI Assistant.\n\nI can assist you with:\n• **Web Engineering**: High-performance Next.js 14/15 & MERN stack applications\n• **Technical SEO**: Core Web Vitals (90+ score), speed architecture & search visibility\n• **AI Workflows**: Custom automation systems & intelligent API integrations\n• **Portfolio & Estimates**: Client case studies, estimates, and consultations\n\nHow can I help you today?`,
+        ? `Namaste! 👋 Main Kraviona ka AI Assistant hoon.\n\nKraviona ek **AI-First Technology & Digital Solutions Company** hai. Main aapki in 5 core verticals par madad kar sakta hoon:\n\n• **01. IT & Technology Services**: Custom software, Next.js, React, Node.js & scalable web apps\n• **02. AI & Automation Solutions**: Autonomous AI agents, custom chatbots, RAG systems & workflow automation\n• **03. SaaS & Software Products**: Cloud SaaS development, rapid AI MVPs & multi-tenant architectures\n• **04. E-commerce Solutions**: AI storefronts, marketplace account handling & automated cataloging\n• **05. Digital Marketing Services**: Technical SEO, AEO, Generative Engine Optimization (GEO) & growth\n\nAap kis solution ke baare mein jaan-na chahte hain?`
+        : `Hello! 👋 I'm Kraviona's AI Assistant.\n\nKraviona is an **AI-First Technology & Digital Solutions Company** ("Intelligence Meets Innovation"). I can assist you across our 5 core business verticals:\n\n• **01. IT & Technology Services**: Custom software, high-performance Next.js & React web applications, and scalable backend APIs\n• **02. AI & Automation Solutions** *(Core Focus)*: Autonomous cognitive AI agents, enterprise RAG knowledge bases, and intelligent process automation\n• **03. SaaS & Software Products**: Full-lifecycle cloud SaaS platforms, rapid AI MVPs, and multi-tenant architectures\n• **04. E-commerce Solutions**: AI-powered storefronts, marketplace seller operations, and automated cataloging\n• **05. Digital Marketing Services**: Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and performance growth\n\nHow can I help you today?`,
       sources: [
-        { title: "Services", url: "/services", category: "Services", type: "page" },
+        { title: "Services Directory", url: "/services", category: "Services", type: "page" },
+        { title: "AI Solutions", url: "/solutions", category: "AI Solutions", type: "page" },
         { title: "Case Studies", url: "/case-studies", category: "Portfolio", type: "page" },
-        { title: "Contact", url: "/contact", category: "Contact", type: "page" },
       ],
       type: "greeting",
     };
   }
 
-  // 3. Services Overview / Kya karte ho / What do you do
+  // 4. Services Overview / Kya karte ho / What do you do
   if (/\b(service|services|kya karte ho|kya karta hai|what do you do|what does kraviona do|what do you offer|what services|offerings|solutions|capabilities|features)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Kraviona Tech Solutions ye core digital engineering services provide karta hai:\n\n• **Full-Stack Web Development**: Next.js 14/15, React, Node.js & MERN stack web applications\n• **Technical SEO**: Core Web Vitals (90+ mobile speed), Schema markup & search visibility\n• **AI Automations & Workflows**: Custom AI agents, LLM integrations & workflow automation\n• **UI/UX Design**: Modern, responsive Figma designs & conversion-focused interfaces\n• **Custom APIs & Cloud**: Scalable backend architectures & database engineering\n\nFull details ke liye explore karein: [Kraviona Services](/services)`
-        : `Kraviona Tech Solutions delivers 5 core digital engineering services:\n\n• **Full-Stack Web Development**: High-performance Next.js 14/15, React, Node.js & MERN stack apps\n• **Technical SEO**: Core Web Vitals speed optimization (90+ mobile), structured schema & search rankings\n• **AI Automations & Workflows**: Tailored business automation, custom agents & LLM integrations\n• **UI/UX Design**: High-converting, modern design systems & responsive interfaces\n• **API & Cloud Architecture**: Scalable microservices, REST/GraphQL APIs & database systems\n\nExplore all solutions on our [Services Page](/services).`,
+        ? `Kraviona 5 core business verticals mein enterprise-grade services provide karta hai:\n\n• **01. IT & Technology Services**: Custom software engineering, high-speed Next.js & React web apps, Node.js/Python APIs, aur UI/UX systems.\n• **02. AI & Automation Solutions** *(Core Focus)*: Autonomous cognitive AI agents, custom chatbots, enterprise RAG knowledge bases, aur workflow automation.\n• **03. SaaS & Software Products**: B2B AI SaaS product engineering, rapid MVPs, multi-tenant cloud architectures, aur subscription billing.\n• **04. E-commerce Solutions**: AI-powered web stores, marketplace account management (Amazon, Flipkart), product cataloging, aur settlement reconciliation.\n• **05. Digital Marketing Services**: Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), aur data-driven growth.\n\nPoore details ke liye visit karein: [Kraviona Services Directory](/services)`
+        : `Kraviona delivers enterprise-grade engineering across 5 core business verticals:\n\n• **01. IT & Technology Services**: Custom software engineering, high-performance Next.js & React web applications, scalable backends, and UI/UX design systems.\n• **02. AI & Automation Solutions** *(Flagship Focus)*: Autonomous cognitive AI agents, custom AI chatbots, enterprise RAG assistants, and intelligent process automation.\n• **03. SaaS & Software Products**: Full-lifecycle cloud SaaS platforms, rapid AI MVPs, multi-tenant databases, and subscription billing.\n• **04. E-commerce Solutions**: AI-powered web storefronts, marketplace seller management (Amazon, Flipkart), cataloging, and payout reconciliation.\n• **05. Digital Marketing Services**: Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and performance marketing.\n\nExplore all offerings on our [Services Directory](/services).`,
       sources: [
-        { title: "Services", url: "/services", category: "Services", type: "page" },
+        { title: "Services Directory", url: "/services", category: "Services", type: "page" },
+        { title: "AI Solutions", url: "/solutions", category: "AI Solutions", type: "page" },
       ],
       type: "intent-services",
     };
   }
 
-  // 4. New Project / Website Banwani Hai / Hire
+  // 5. New Project / Website Banwani Hai / Hire
   if (
     /\b(banwani|banwana|banana|banaye|banao)\b/i.test(q) ||
     (/\b(website|web\s*site|web\s*app|app|software|project)\b/i.test(q) && /\b(build|make|create|develop|need|want|chahiye|start|new)\b/i.test(q)) ||
@@ -557,22 +589,22 @@ const matchDirectIntent = (query, hinglish) => {
   ) {
     return {
       reply: hinglish
-        ? `Kraviona Tech Solutions aapki requirement ke mutabik high-speed, custom website aur web apps engineer karta hai!\n\nAap humari engineering team se direct connect kar sakte hain:\n• **WhatsApp / Call**: [+91 96085 53167](tel:+919608553167)\n• **Official Email**: [kravionatech@gmail.com](mailto:kravionatech@gmail.com)\n• **Contact Page**: [Requirement Form Bharein](/contact)\n\nHumari team 24 hours ke andar customized quote aur timeline ke saath aapse connect karegi.`
-        : `We would love to engineer your project! Kraviona specializes in modern, high-speed Next.js websites and scalable MERN stack web apps.\n\nConnect directly with our engineering team:\n• **Email**: [kravionatech@gmail.com](mailto:kravionatech@gmail.com)\n• **Phone / WhatsApp**: [+91 96085 53167](tel:+919608553167)\n• **Online Inquiry**: [Fill Out Our Contact Form](/contact)\n\nOur team will review your specifications and get back to you within 24 hours with a custom proposal.`,
+        ? `Kraviona aapki requirements ke mutabiq custom software, AI agents, SaaS MVPs aur high-speed web apps engineer karta hai!\n\nAap humari engineering team se direct connect kar sakte hain:\n• **WhatsApp / Call**: [+91 96085 53167](tel:+919608553167)\n• **Official Email**: [hello@kraviona.com](mailto:hello@kraviona.com)\n• **Online Discovery Call**: [Contact Page Par Requirement Share Karein](/contact)\n\nHumari team 24 hours ke andar customized scope aur transparent timeline ke saath connect karegi.`
+        : `We would love to engineer your project! Kraviona specializes in custom software, autonomous AI agents, SaaS MVPs, and modern Next.js web applications.\n\nConnect directly with our engineering team:\n• **Email**: [hello@kraviona.com](mailto:hello@kraviona.com)\n• **Phone / WhatsApp**: [+91 96085 53167](tel:+919608553167)\n• **Discovery Call**: [Book a Project Consultation on our Contact Page](/contact)\n\nOur team will review your specifications and reply within 1 business day with a customized technical proposal.`,
       sources: [
         { title: "Contact Kraviona", url: "/contact", category: "Contact", type: "page" },
-        { title: "Services", url: "/services", category: "Services", type: "page" },
+        { title: "Transparent Pricing", url: "/pricing", category: "Pricing", type: "page" },
       ],
       type: "intent-project",
     };
   }
 
-  // 5. Contact / Phone / Email / WhatsApp
+  // 6. Contact / Phone / Email / WhatsApp
   if (/\b(contact|phone|number|email|call|whatsapp|reach|sampark|touch)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Aap Kraviona Tech Solutions se in channels ke through direct connect kar sakte hain:\n\n• **Official Email**: [kravionatech@gmail.com](mailto:kravionatech@gmail.com)\n• **Phone / WhatsApp**: [+91 96085 53167](tel:+919608553167)\n• **Headquarters**: Noida, Delhi NCR, India\n• **Online Form**: [Contact Page Par Jaayein](/contact)\n\nHum har query ka javab 24 hours ke andar dete hain.`
-        : `You can reach Kraviona Tech Solutions directly through:\n\n• **Email**: [kravionatech@gmail.com](mailto:kravionatech@gmail.com)\n• **Phone / WhatsApp**: [+91 96085 53167](tel:+919608553167)\n• **Headquarters**: Noida, Delhi NCR, India\n• **Online Form**: [Contact Us](/contact)\n\nOur engineering team typically responds within 24 hours.`,
+        ? `Aap Kraviona ki engineering team se in channels ke through direct connect kar sakte hain:\n\n• **Official Email**: [hello@kraviona.com](mailto:hello@kraviona.com)\n• **Phone / WhatsApp**: [+91 96085 53167](tel:+919608553167)\n• **Headquarters**: East Delhi, Delhi NCR, India (PIN 110092)\n• **Online Form**: [Contact Page Par Jaayein](/contact)\n\nHum har enquiry ka response 24 hours ke andar provide karte hain.`
+        : `You can reach Kraviona's engineering team directly through:\n\n• **Email**: [hello@kraviona.com](mailto:hello@kraviona.com)\n• **Phone / WhatsApp**: [+91 96085 53167](tel:+919608553167)\n• **Headquarters**: East Delhi, Delhi NCR, India (PIN 110092)\n• **Online Form**: [Contact Us](/contact)\n\nOur engineering team typically responds within 24 hours.`,
       sources: [
         { title: "Contact Us", url: "/contact", category: "Contact", type: "page" },
       ],
@@ -580,12 +612,12 @@ const matchDirectIntent = (query, hinglish) => {
     };
   }
 
-  // 6. Location / Office / Address
-  if (/\b(location|address|where|kahan|office|noida|delhi|headquarters)\b/i.test(q)) {
+  // 7. Location / Office / Address
+  if (/\b(location|address|where|kahan|office|delhi|headquarters)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Kraviona Tech Solutions ka primary office **Delhi NCR (Noida, Uttar Pradesh, India)** mein sthit hai.\n\nHum poore India aur international clients ke saath remotely aur project-based collaborate karte hain.\n\nConnect karne ke liye: [Contact Us](/contact) ya email karein [kravionatech@gmail.com](mailto:kravionatech@gmail.com).`
-        : `Kraviona Tech Solutions is headquartered in **Delhi NCR (Noida, Uttar Pradesh, India)**.\n\nWe engineer web solutions and handle technical SEO for clients across India and globally through modern remote workflows.\n\nGet in touch at [kravionatech@gmail.com](mailto:kravionatech@gmail.com) or visit our [Contact Page](/contact).`,
+        ? `Kraviona ka primary headquarters **East Delhi, Delhi NCR, India (PIN 110092)** mein sthit hai.\n\nHum poore India aur international clients ke saath modern remote workflows aur project-based delivery model se collaborate karte hain.\n\nConnect karne ke liye: [Contact Us](/contact) ya email karein [hello@kraviona.com](mailto:hello@kraviona.com).`
+        : `Kraviona is headquartered in **East Delhi, Delhi NCR, India (PIN 110092)**.\n\nWe engineer software and deliver AI solutions for clients across India and globally through modern remote engineering workflows.\n\nGet in touch at [hello@kraviona.com](mailto:hello@kraviona.com) or visit our [Contact Page](/contact).`,
       sources: [
         { title: "Contact Us", url: "/contact", category: "Contact", type: "page" },
       ],
@@ -593,65 +625,92 @@ const matchDirectIntent = (query, hinglish) => {
     };
   }
 
-  // 7. Pricing / Cost / Rates / Packages
+  // 8. Pricing / Cost / Rates / Packages
   if (/\b(price|pricing|cost|charge|charges|rate|rates|fee|fees|kitna kharcha|kitna lagega|budget|paisa|package|packages)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Kraviona transparent aur competitive pricing offer karta hai:\n\n• **Project-Based**: Fixed pricing for new website development, web apps, ya complete redesign\n• **Monthly Retainer**: Technical SEO, site performance monitoring, aur ongoing updates\n• **Custom AI Solutions**: Workflow complexity aur API needs ke mutabik\n\nApne project ka free customized quote lene ke liye humare [Contact Page](/contact) par details share karein ya [+91 96085 53167](tel:+919608553167) par sampark karein.`
-        : `Kraviona offers clear, value-driven pricing:\n\n• **Project-Based**: Fixed quotes for new web builds, Next.js migrations, or custom web apps\n• **Monthly Retainers**: For ongoing Technical SEO audits, site speed optimization, and search rankings\n• **Custom AI Solutions**: Tailored to scope, agents, and API integrations\n\nFor a free tailored quotation, submit your project details on our [Contact Page](/contact) or email [kravionatech@gmail.com](mailto:kravionatech@gmail.com).`,
+        ? `Kraviona transparent aur value-driven pricing models offer karta hai:\n\n• **Project-Based Milestones**: Fixed transparent scope for custom software, SaaS MVPs, aur web applications\n• **Monthly Retainers**: Dedicated Technical SEO, continuous performance monitoring, aur ongoing engineering support\n• **AI Agent & Workflow Sprints**: Tailored to model tokens, agent architecture, aur API complexity\n\nApne project ka transparent technical estimate paane ke liye [Pricing Page](/pricing) visit karein ya connect karein: [Contact Page](/contact).`
+        : `Kraviona offers transparent, milestone-driven pricing:\n\n• **Fixed Milestone Sprints**: Predictable budgets for custom software development, rapid SaaS MVPs, and Next.js applications\n• **Monthly Retainers**: Ongoing Technical SEO architectures, speed maintenance, and system monitoring\n• **Custom AI Solutions**: Scoped by agent complexity, knowledge base RAG index size, and workflow integrations\n\nExplore our plans on the [Pricing Page](/pricing) or request a custom proposal on our [Contact Page](/contact).`,
       sources: [
-        { title: "Contact for Quote", url: "/contact", category: "Pricing", type: "page" },
-        { title: "Services", url: "/services", category: "Services", type: "page" },
+        { title: "Transparent Pricing", url: "/pricing", category: "Pricing", type: "page" },
+        { title: "Contact for Quote", url: "/contact", category: "Contact", type: "page" },
       ],
       type: "intent-pricing",
     };
   }
 
-  // 8. Web Development / Next.js / React / MERN
-  if (/\b(web dev|web development|nextjs|next\.js|react|mern|frontend|backend|node|full stack)\b/i.test(q)) {
+  // 9. IT & Technology Services / Web Development
+  if (/\b(web dev|web development|nextjs|next\.js|react|mern|frontend|backend|node|full stack|software dev|custom software)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Hum modern Next.js 14/15, React, Node.js, Express aur MongoDB (MERN stack) par high-performance web applications develop karte hain.\n\nHar application sub-second page loads, SEO-friendly architecture, aur sleek responsive design ke saath aati hai.\n\nExplore karein: [Services](/services) ya discuss karein apna project: [Contact Page](/contact).`
-        : `Kraviona specializes in modern web engineering using Next.js 14/15, React.js, Node.js, Express, and MongoDB. We build ultra-fast, accessible, and scalable platforms with enterprise-grade quality.\n\nExplore our web development services on our [Services Page](/services).`,
+        ? `Hum enterprise-grade custom software aur ultra-fast web applications engineer karte hain using Next.js App Router, React, Node.js, Python, aur cloud microservices.\n\nHar build clean architecture, sub-second latency, aur responsive UI/UX ke saath aati hai.\n\nExplore karein: [IT Services](/services) ya discuss karein: [Contact Page](/contact).`
+        : `Kraviona delivers enterprise-grade IT & Technology Services using Next.js App Router, React, Node.js, Python, and cloud microservices. We build scalable software, mission-critical APIs, and high-performance web applications.\n\nExplore our technology capabilities on our [Services Page](/services).`,
       sources: [
-        { title: "Web Development Services", url: "/services", category: "Services", type: "page" },
+        { title: "IT Services", url: "/services", category: "Services", type: "page" },
       ],
       type: "intent-webdev",
     };
   }
 
-  // 9. Technical SEO / Ranking / Speed
-  if (/\b(seo|technical seo|ranking|google ranking|core web vitals|page speed|traffic|organic)\b/i.test(q)) {
+  // 10. AI & Automation / AI Agents / Chatbots / RAG
+  if (/\b(ai|artificial intelligence|automations?|workflows?|llms?|chatbots?|agents?|rag|machine learning)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Kraviona Technical SEO aur site speed optimization mein specialize karta hai:\n\n• **Core Web Vitals**: Mobile aur Desktop par 90+ speed score guarantee\n• **Schema & Structured Data**: Rich snippets aur Google search indexing optimize karna\n• **Crawl & Indexing Audits**: Broken links, redirects, aur site architecture fix karna\n\nAur jaankari ke liye visit karein: [Services](/services).`
-        : `Kraviona's Technical SEO practice focuses on data-driven search growth:\n\n• **Core Web Vitals**: 90+ mobile & desktop speed scores guaranteed\n• **Structured Schema**: Rich snippets and comprehensive Schema.org markup\n• **Crawl Architecture**: Optimizing crawl budgets, internal links, and indexation\n\nLearn more on our [Services Page](/services).`,
+        ? `AI Solutions Kraviona ka strategic flagship vertical hai! Hum deliver karte hain:\n\n• **Autonomous AI Agents**: Multi-step reasoning aur automated task execution\n• **Enterprise RAG Knowledge Systems**: Aapke documents aur CRM par trained private chatbots\n• **Intelligent Document Processing (IDP)**: Automated OCR aur structured data extraction\n• **Workflow Automations**: Repetitive operational bottlenecks ko eliminate karna\n\nExplore karein: [AI Solutions](/solutions) ya schedule karein demo: [Contact](/contact).`
+        : `AI & Automation is Kraviona's strategic flagship focus! We engineer:\n\n• **Autonomous Cognitive AI Agents**: Multi-step reasoning pipelines that execute complex operations independently\n• **Context-Aware AI Chatbots**: RAG-powered customer and internal knowledge assistants with strict guardrails\n• **Intelligent Document Processing**: Automated OCR, document parsing, and validation\n• **Business Workflow Automation**: Connecting ERPs, CRMs, and APIs with AI-driven decision systems\n\nLearn more on our [AI Solutions Page](/solutions).`,
       sources: [
-        { title: "SEO Services", url: "/services", category: "Services", type: "page" },
-      ],
-      type: "intent-seo",
-    };
-  }
-
-  // 10. AI Automation / Workflows
-  if (/\b(ai|artificial intelligence|automations?|workflows?|llms?|chatbots?|agents?|machine learning)\b/i.test(q)) {
-    return {
-      reply: hinglish
-        ? `Hum custom AI workflows, intelligent chat assistants, scrapers aur LLM API integrations design karte hain jo aapke business operations ko scale aur automate karte hain.\n\nExplore karein: [Services](/services) ya reach out karein: [Contact](/contact).`
-        : `We engineer bespoke AI automation systems, intelligent customer chat assistants, workflow pipelines, and custom LLM integrations that streamline repetitive business tasks.\n\nLearn more on our [Services Page](/services).`,
-      sources: [
-        { title: "AI Services", url: "/services", category: "Services", type: "page" },
+        { title: "AI Solutions", url: "/solutions", category: "AI Solutions", type: "page" },
+        { title: "Services", url: "/services", category: "Services", type: "page" },
       ],
       type: "intent-ai",
     };
   }
 
-  // 11. Portfolio / Case Studies / Projects
+  // 11. SaaS & Software Products
+  if (/\b(saas|software products?|mvp|ai mvp|multi tenant|stripe)\b/i.test(q)) {
+    return {
+      reply: hinglish
+        ? `Kraviona full-lifecycle cloud SaaS platforms aur rapid AI MVPs develop karta hai with multi-tenant database isolation, Stripe subscription billing, aur RBAC security.\n\nApna product launch karein: [Services](/services) ya [Contact Us](/contact).`
+        : `Kraviona engineers full-lifecycle cloud SaaS products and rapid AI MVPs engineered for fast time-to-market. Complete with multi-tenant data isolation, Stripe subscription engines, and enterprise security.\n\nExplore our SaaS capabilities on our [Services Page](/services).`,
+      sources: [
+        { title: "SaaS Products", url: "/services", category: "Services", type: "page" },
+      ],
+      type: "intent-saas",
+    };
+  }
+
+  // 12. E-commerce Solutions
+  if (/\b(ecommerce|e-commerce|shopify|amazon|flipkart|storefront|marketplace|seller)\b/i.test(q)) {
+    return {
+      reply: hinglish
+        ? `Hum AI-powered high-conversion storefronts (Next.js, Headless Shopify) engineer karte hain aur Amazon/Flipkart marketplace seller operations, cataloging aur payout reconciliation automate karte hain.\n\nExplore karein: [Services](/services).`
+        : `We engineer high-converting AI-powered online storefronts (Next.js, Headless Shopify) and deliver end-to-end Amazon/Flipkart marketplace seller management, cataloging, and fee reconciliation.\n\nExplore our e-commerce solutions on our [Services Page](/services).`,
+      sources: [
+        { title: "E-commerce Solutions", url: "/services", category: "Services", type: "page" },
+      ],
+      type: "intent-ecommerce",
+    };
+  }
+
+  // 13. Digital Marketing & Technical SEO
+  if (/\b(seo|technical seo|aeo|geo|ranking|google ranking|core web vitals|page speed|traffic|organic)\b/i.test(q)) {
+    return {
+      reply: hinglish
+        ? `Kraviona data-driven Technical SEO, Answer Engine Optimization (AEO), aur Generative Engine Optimization (GEO) provide karta hai:\n\n• **Core Web Vitals**: < 1.8s LCP aur 90+ mobile speed guarantee\n• **Schema Graph**: Comprehensive JSON-LD structured data Google rich snippets ke liye\n• **AEO & GEO**: Search Generative Experience (SGE) aur AI search engines ke liye citations optimize karna\n\nExplore karein: [Services](/services).`
+        : `Kraviona's Technical SEO & Growth practice focuses on high-precision search visibility:\n\n• **Core Web Vitals Optimization**: Guaranteed 90+ mobile & desktop speed scores (< 1.8s LCP)\n• **Answer Engine (AEO) & Generative Optimization (GEO)**: Optimizing for ChatGPT, Perplexity, and Google AI Overviews\n• **Structured Schema.org Architecture**: Enterprise JSON-LD graph indexing\n\nLearn more on our [Services Page](/services).`,
+      sources: [
+        { title: "Digital Marketing & SEO", url: "/services", category: "Services", type: "page" },
+      ],
+      type: "intent-seo",
+    };
+  }
+
+  // 14. Portfolio / Case Studies / Projects
   if (/\b(portfolio|case studies|case study|projects|past work|clients|samples|kya banaya)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Aap Kraviona ke real-world client projects, architectural transformations aur SEO growth case studies dekh sakte hain:\n\n• [Case Studies Page Par Jaayein](/case-studies)\n\nKisi specific project ya live demo ke baare mein baat karne ke liye connect karein: [Contact Us](/contact).`
-        : `Explore real-world client implementations, architectural transformations, and SEO scale-ups engineered by Kraviona Tech Solutions:\n\n• [Explore All Case Studies](/case-studies)\n\nInterested in building something similar? Connect with us on our [Contact Page](/contact).`,
+        ? `Aap Kraviona ke real-world AI implementations, SaaS platforms aur engineering transformation case studies dekh sakte hain:\n\n• [Case Studies Page Par Jaayein](/case-studies)\n\nKisi specific live demonstration ke baare mein baat karne ke liye: [Contact Us](/contact).`
+        : `Explore real-world client implementations, architectural transformations, autonomous AI pipelines, and scale-ups engineered by Kraviona:\n\n• [Explore All Case Studies](/case-studies)\n\nInterested in building something similar? Connect with us on our [Contact Page](/contact).`,
       sources: [
         { title: "Case Studies", url: "/case-studies", category: "Portfolio", type: "page" },
       ],
@@ -659,28 +718,15 @@ const matchDirectIntent = (query, hinglish) => {
     };
   }
 
-  // 12. Careers / Jobs / Hiring
-  if (/\b(career|careers|job|jobs|hiring|internship|openings?|apply|work with us)\b/i.test(q)) {
+  // 15. About / Company / Founder
+  if (/\b(about|kraviona|company|who are you|founder|amar kumar|agency)\b/i.test(q)) {
     return {
       reply: hinglish
-        ? `Kraviona engineering, SEO aur AI talents ko hire karta rehta hai!\n\nOpen roles dekhne aur direct apply karne ke liye visit karein:\n• [Kraviona Careers Page](/careers)\n\nAap apna resume [kravionatech@gmail.com](mailto:kravionatech@gmail.com) par bhi email kar sakte hain.`
-        : `We are always looking for passionate engineers and digital specialists in frontend, backend, SEO, and AI engineering.\n\nExplore our open roles and apply at:\n• [Careers at Kraviona](/careers)\n\nYou can also share your resume directly at [kravionatech@gmail.com](mailto:kravionatech@gmail.com).`,
-      sources: [
-        { title: "Careers", url: "/careers", category: "Careers", type: "page" },
-      ],
-      type: "intent-careers",
-    };
-  }
-
-  // 13. About / Company / Founder
-  if (/\b(about|kraviona|company|who are you|founder|agency)\b/i.test(q)) {
-    return {
-      reply: hinglish
-        ? `**Kraviona Tech Solutions** ek premier digital engineering aur technical SEO agency hai jo Delhi NCR (Noida, India) mein based hai. Hum high-performance Next.js web applications, MERN stack software, aur data-driven SEO architectures deliver karte hain.\n\nAur jaankari ke liye visit karein: [About Kraviona](/about).`
-        : `**Kraviona Tech Solutions** is a premier digital engineering and technical SEO agency based in Delhi NCR (Noida, India). We engineer high-performance web applications, scalable backend APIs, and modern search growth architectures.\n\nLearn more on our [About Page](/about).`,
+        ? `**Kraviona** ek AI-First Technology & Digital Solutions Company hai ("Intelligence Meets Innovation") jo East Delhi, Delhi NCR, India mein based hai. Founder & Lead Systems Engineer: **Amar Kumar**.\n\nHum modern enterprises ke liye autonomous AI agents, SaaS products, custom software, aur data-driven SEO architectures deliver karte hain.\n\nAur jaankari ke liye visit karein: [About Kraviona](/about).`
+        : `**Kraviona** is an AI-First Technology & Digital Solutions Company ("Intelligence Meets Innovation") headquartered in East Delhi, Delhi NCR, India. Founder & Lead Systems Engineer: **Amar Kumar**.\n\nWe engineer autonomous AI agents, intelligent SaaS platforms, custom enterprise software, and Technical SEO architectures.\n\nLearn more on our [About Page](/about).`,
       sources: [
         { title: "About Us", url: "/about", category: "Company", type: "page" },
-        { title: "Services", url: "/services", category: "Services", type: "page" },
+        { title: "Services Directory", url: "/services", category: "Services", type: "page" },
       ],
       type: "intent-about",
     };
@@ -697,7 +743,7 @@ const synthesizeLocalResponse = (query, relevantDocs, hinglish) => {
   if (!relevantDocs || relevantDocs.length === 0) {
     return {
       reply: hinglish
-        ? `Is topic ke baare mein website par specific public content nahi mila.\n\nLekin main Kraviona ki **Web Development**, **Technical SEO**, **Pricing**, ya **Contact** details ke baare mein aapki poori madad kar sakta hoon.\n\nAap humari team se direct sampark kar sakte hain: [Contact Page](/contact) ya WhatsApp [+91 96085 53167](tel:+919608553167).`
+        ? `Is topic ke baare mein website par specific public content nahi mila.\n\nLekin main Kraviona ke 5 core business verticals: **IT & Technology Services**, **AI & Automation Solutions**, **SaaS Products**, **E-commerce Solutions**, ya **Digital Marketing & SEO** ke baare mein aapki poori madad kar sakta hoon.\n\nAap humari team se direct sampark kar sakte hain: [Contact Page](/contact) ya WhatsApp [+91 96085 53167](tel:+919608553167).`
         : `I couldn't find a specific page on our website regarding that question.\n\nHowever, I can help you with details on:\n• Our Next.js & MERN web development services ([View Services](/services))\n• Technical SEO and site speed optimization\n• Project pricing and past client results ([Case Studies](/case-studies))\n• Reaching our engineering team directly ([Contact Us](/contact))\n\nFeel free to ask about any of the above!`,
       sources: [],
       type: "unmatched",
