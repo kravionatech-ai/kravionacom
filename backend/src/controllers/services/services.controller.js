@@ -2,10 +2,11 @@ import slugify from "slugify";
 import { Service } from "../../models/services/service.model.js";
 import { recordActivity } from "../../utils/activityLogger.js";
 import { publicServices } from "../../data/publicCatalog.js";
+import { seedServicesData } from "../../data/seedServicesData.js";
 import { mergeNestedFields, parseBoolean } from "../../utils/requestValues.js";
 
 const canManageServices = (user) => ["super_admin", "admin", "editor"].includes(user?.role);
-const canManageAllServices = (user) => user?.role === "super_admin";
+const canManageAllServices = (user) => ["super_admin", "admin"].includes(user?.role);
 const cleanText = (value) => String(value || "").trim();
 const getList = (items) => Array.isArray(items) ? items.map(cleanText).filter(Boolean) : [];
 const getContentItems = (items) => Array.isArray(items)
@@ -19,6 +20,7 @@ const safeLink = (value, fallback = "") => {
   if (!link) return fallback;
   return /^(https?:\/\/|mailto:|tel:|\/)/i.test(link) ? link : fallback;
 };
+
 const normalize = (body) => ({
   title: cleanText(body.title),
   slug: slugify(cleanText(body.slug || body.title), { lower: true, strict: true }),
@@ -149,4 +151,43 @@ export const deleteService = async (req, res) => {
   if (!service) return res.status(404).json({ success: false, message: "No data found." });
   await recordActivity(req, { userID: req.user.id, module: "service", action: "deleted", resourceId: service._id, resourceName: service.title, before: { title: service.title, slug: service.slug } });
   return res.status(200).json({ success: true, message: "Service deleted" });
+};
+
+export const seedServices = async (req, res) => {
+  try {
+    if (!canManageServices(req.user)) {
+      return res.status(403).json({ success: false, message: "Forbidden" });
+    }
+
+    let inserted = 0;
+    let updated = 0;
+
+    for (const item of seedServicesData) {
+      const existing = await Service.findOne({ slug: item.slug });
+      await Service.findOneAndUpdate(
+        { slug: item.slug },
+        { $set: { ...item, createdBy: req.user.id } },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+      );
+      if (existing) updated++;
+      else inserted++;
+    }
+
+    await recordActivity(req, {
+      userID: req.user.id,
+      module: "service",
+      action: "seeded",
+      resourceName: "All 25 Services Seed",
+      after: { inserted, updated, total: seedServicesData.length },
+    });
+
+    const total = await Service.countDocuments();
+    return res.status(200).json({
+      success: true,
+      message: `Successfully seeded all services. ${inserted} created, ${updated} updated.`,
+      stats: { inserted, updated, total },
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Unable to seed services" });
+  }
 };

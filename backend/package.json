@@ -7,7 +7,8 @@
     "test": "node --test",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "push:keys": "node scripts/generate-vapid-keys.js"
+    "push:keys": "node scripts/generate-vapid-keys.js",
+    "seed:services": "node scripts/seed-all-services.mjs"
   },
   "keywords": [],
   "author": "",

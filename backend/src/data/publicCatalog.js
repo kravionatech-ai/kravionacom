@@ -1,77 +1,34 @@
-export const publicServices = [
-  {
-    title: "MERN Stack Development",
-    description:
-      "MongoDB, Express.js, React.js, and Node.js applications built for speed, clean architecture, and long-term scale.",
-    features: ["React.js Frontend", "Node.js API", "MongoDB Database", "REST & GraphQL"],
-    slug: "mern-stack-development",
-    category: "Web Development",
-  },
-  {
-    title: "Full-Stack Development",
-    description:
-      "End-to-end frontend, backend, database, and deployment work for business-critical web products.",
-    features: ["Frontend", "Backend", "Database", "Deployment"],
-    slug: "full-stack-development",
-    category: "Web Development",
-  },
-  {
-    title: "React.js Development",
-    description:
-      "Interactive React and Next.js interfaces with reusable components, clean state management, and fast page experiences.",
-    features: ["React.js", "Next.js", "Reusable UI", "Responsive Layouts"],
-    slug: "react-development",
-    category: "Web Development",
-  },
-  {
-    title: "Node.js Development",
-    description:
-      "Scalable Node.js backends, Express APIs, real-time systems, and production-grade server infrastructure.",
-    features: ["REST APIs", "Authentication", "Integrations", "Cloud Deploy"],
-    slug: "nodejs-development",
-    category: "Backend & Architecture",
-  },
-  {
-    title: "Technical SEO",
-    description:
-      "Core Web Vitals, crawlability, structured data, indexing, and technical fixes that make websites easier to rank.",
-    features: ["Core Web Vitals", "Schema Markup", "Crawlability", "Indexing"],
-    slug: "technical-seo",
-    category: "Performance & AI",
-  },
-  {
-    title: "AI Automation",
-    description:
-      "LLM-powered workflows, AI assistants, document automation, and internal tools that reduce repetitive work.",
-    features: ["LLM Integration", "Workflow Automation", "AI Assistants", "Smart Routing"],
-    slug: "ai-automation",
-    category: "Performance & AI",
-  },
-];
+/**
+ * publicCatalog.js
+ * Default public catalog for fallback when database is initializing or unavailable.
+ */
+import { seedServicesData } from "./seedServicesData.js";
+
+export const publicServices = seedServicesData;
 
 export const publicProjects = [
   {
-    title: "MERN Product Platform",
-    category: "Web Application",
+    title: "Enterprise AI Knowledge Assistant",
+    category: "AI & Automation Solutions",
     image: "/images/office/case-study-product.webp",
-    imageAlt: "Kraviona MERN product platform case study",
+    imageAlt: "Kraviona Enterprise AI Knowledge Assistant Case Study",
     description:
-      "A scalable product foundation with frontend, backend, admin workflows, and clean deployment handover.",
+      "A high-security RAG assistant indexing thousands of enterprise documents with sub-second retrieval, strict tenant access control, and automated CRM routing.",
   },
   {
-    title: "EdTech Learning Experience",
-    category: "Education Technology",
+    title: "Autonomous Multi-Tenant SaaS Platform",
+    category: "SaaS & Software Products",
     image: "/images/office/case-study-edtech.webp",
-    imageAlt: "Kraviona EdTech web application case study",
+    imageAlt: "Kraviona Multi-Tenant Cloud SaaS Platform Case Study",
     description:
-      "A responsive learning experience focused on performance, content clarity, and simple learner journeys.",
+      "A cloud-native SaaS product architecture featuring automated tenant provisioning, Stripe billing webhooks, role-based access control, and high-concurrency microservices.",
   },
   {
-    title: "Commerce Growth System",
-    category: "E-Commerce",
+    title: "AI-Powered E-Commerce Recommendation Engine",
+    category: "E-commerce Solutions",
     image: "/images/office/case-study-commerce.webp",
-    imageAlt: "Kraviona commerce growth case study",
+    imageAlt: "Kraviona AI-Powered E-Commerce Platform Case Study",
     description:
-      "A commerce-ready digital system with improved product presentation, tracking, and conversion flow.",
+      "A headless Next.js storefront integrated with real-time vector recommendation algorithms, marketplace catalog synchronization, and automated payout reconciliation.",
   },
 ];

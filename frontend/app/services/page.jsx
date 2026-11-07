@@ -20,14 +20,14 @@ async function getServicePages() {
     if (response.ok) {
       const json = await response.json();
       if (json?.data?.length) {
-        const dynamicLinks = json.data.map((service) => ({
-          name: service.title || service.name,
-          href: `/services/${service.slug}`,
-          category: service.category,
-        }));
-        const byHref = new Map(SERVICE_LINKS.map((item) => [item.href, item]));
-        dynamicLinks.forEach((item) => byHref.set(item.href, item));
-        return Array.from(byHref.values());
+        const activeServices = json.data
+          .filter((service) => service.isActive !== false)
+          .map((service) => ({
+            name: service.title || service.name,
+            href: `/services/${service.slug}`,
+            category: service.category,
+          }));
+        if (activeServices.length) return activeServices;
       }
     }
   } catch {}

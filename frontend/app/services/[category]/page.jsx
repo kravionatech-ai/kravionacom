@@ -178,40 +178,56 @@ const getService = async (slug) => {
       if (json?.data) {
         const legacy = SERVICE_PAGES[cleanSlug] || {};
         const apiData = json.data;
+        if (apiData.isActive === false) return null; // Controlled from admin: hidden if deactivated
         return normalizeService(
           {
             ...legacy,
             ...apiData,
-            name: legacy.name || apiData.title || apiData.name,
-            category: legacy.category || apiData.category,
-            description: legacy.description || apiData.description || apiData.shortDesc,
-            intro: legacy.intro || apiData.intro || apiData.longDesc,
+            name: apiData.title || apiData.name || legacy.name,
+            category: apiData.category || legacy.category,
+            description: apiData.description || legacy.description || apiData.shortDesc,
+            intro: apiData.intro || legacy.intro || apiData.longDesc,
             hero: {
               ...legacy.hero,
               ...(apiData.hero?.title ? apiData.hero : {}),
             },
             seo: {
               ...legacy.seo,
-              ...(apiData.seo?.metaDescription ? apiData.seo : {}),
+              ...(apiData.seo?.metaTitle || apiData.seo?.metaDescription ? apiData.seo : {}),
             },
-            outcomes: legacy.outcomes?.length
-              ? legacy.outcomes
-              : (apiData.outcomes?.length ? apiData.outcomes : legacy.outcomes),
-            deliverables: legacy.deliverables?.length
-              ? legacy.deliverables
-              : apiData.deliverables,
-            idealFor: legacy.idealFor?.length
-              ? legacy.idealFor
-              : apiData.idealFor,
-            process: legacy.process?.length
-              ? legacy.process
-              : apiData.process,
-            techStack: legacy.techStack?.length
-              ? legacy.techStack
-              : apiData.techStack,
-            faqs: legacy.faqs?.length
-              ? legacy.faqs
-              : apiData.faqs,
+            outcomes: apiData.outcomes?.length
+              ? apiData.outcomes
+              : (legacy.outcomes?.length ? legacy.outcomes : []),
+            deliverables: apiData.deliverables?.length
+              ? apiData.deliverables
+              : (legacy.deliverables?.length ? legacy.deliverables : []),
+            idealFor: apiData.idealFor?.length
+              ? apiData.idealFor
+              : (legacy.idealFor?.length ? legacy.idealFor : []),
+            process: apiData.process?.length
+              ? apiData.process
+              : (legacy.process?.length ? legacy.process : []),
+            techStack: apiData.techStack?.length
+              ? apiData.techStack
+              : (legacy.techStack?.length ? legacy.techStack : []),
+            faqs: apiData.faqs?.length
+              ? apiData.faqs
+              : (legacy.faqs?.length ? legacy.faqs : []),
+            trustPoints: apiData.trustPoints?.length
+              ? apiData.trustPoints
+              : (legacy.trustPoints?.length ? legacy.trustPoints : []),
+            successMetrics: apiData.successMetrics?.length
+              ? apiData.successMetrics
+              : (legacy.successMetrics?.length ? legacy.successMetrics : []),
+            cta: {
+              ...legacy.cta,
+              ...(apiData.cta?.title ? apiData.cta : {}),
+            },
+            expert: {
+              ...legacy.expert,
+              ...(apiData.expert?.name ? apiData.expert : {}),
+            },
+            isActive: apiData.isActive !== undefined ? apiData.isActive : true,
           },
           cleanSlug,
         );
@@ -372,13 +388,44 @@ export default async function ServicesDetails({ params }) {
   if (hub) {
     const pageUrl = canonicalUrl(`/services/${slug}`);
 
-    // Gather all child service cards for this hub
-    const childServices = hub.serviceKeys
-      .map((key) => ({
-        slug: key,
-        ...SERVICE_PAGES[key],
-      }))
-      .filter(Boolean);
+    // Gather all child service cards for this hub (dynamic from database with fallback)
+    let dynamicChildServices = [];
+    try {
+      const resp = await fetch(`${API_URL}/services`, {
+        next: { revalidate: 3600 },
+        headers: { Accept: "application/json" },
+      });
+      if (resp.ok) {
+        const json = await resp.json();
+        if (json?.data?.length) {
+          dynamicChildServices = json.data.filter((s) => {
+            if (s.isActive === false) return false;
+            const cat = String(s.category || "").toLowerCase();
+            return (
+              cat === hub.categoryLabel.toLowerCase() ||
+              cat === slug.toLowerCase() ||
+              hub.serviceKeys.includes(s.slug)
+            );
+          });
+        }
+      }
+    } catch {}
+
+    const childServices = dynamicChildServices.length
+      ? dynamicChildServices.map((s) => ({
+          slug: s.slug,
+          name: s.title || s.name,
+          category: s.category,
+          description: s.description || s.shortDesc,
+          features: s.features || [],
+          outcomes: s.outcomes || [],
+        }))
+      : hub.serviceKeys
+          .map((key) => ({
+            slug: key,
+            ...SERVICE_PAGES[key],
+          }))
+          .filter(Boolean);
 
     const hubBreadcrumbSchema = {
       "@context": "https://schema.org",

@@ -139,9 +139,10 @@ const FeaturedServices = () => {
           : Array.isArray(json)
             ? json
             : [];
-        setServices(
-          data.slice(0, 6).length > 0 ? data.slice(0, 6) : FALLBACK_SERVICES,
-        );
+        const active = data.filter((s) => s.isActive !== false);
+        const featured = active.filter((s) => s.isFeatured);
+        const displayList = featured.length >= 6 ? featured.slice(0, 6) : active.slice(0, 6);
+        setServices(displayList.length > 0 ? displayList : FALLBACK_SERVICES);
       } catch {
         setServices(FALLBACK_SERVICES);
       } finally {
