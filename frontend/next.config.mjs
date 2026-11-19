@@ -71,6 +71,7 @@ const nextConfig = {
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
       { protocol: "https", hostname: "api.kraviona.com", pathname: "/**" },
       { protocol: "https", hostname: "kraviona.com", pathname: "/**" },
+      { protocol: "https", hostname: "www.kraviona.com", pathname: "/**" },
       { protocol: "https", hostname: "cdn.jsdelivr.net", pathname: "/**" },
     ],
   },
