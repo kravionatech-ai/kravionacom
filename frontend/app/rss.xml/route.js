@@ -15,6 +15,15 @@ const validPubDate = (value) => {
   return Number.isNaN(date.getTime()) ? new Date().toUTCString() : date.toUTCString();
 };
 
+const getMimeType = (url = "") => {
+  const clean = String(url).split("?")[0].toLowerCase();
+  if (clean.endsWith(".png")) return "image/png";
+  if (clean.endsWith(".webp")) return "image/webp";
+  if (clean.endsWith(".gif")) return "image/gif";
+  if (clean.endsWith(".svg")) return "image/svg+xml";
+  return "image/jpeg";
+};
+
 export async function GET(request) {
   let typeFilter = null;
   let catFilter = null;
@@ -66,7 +75,7 @@ export async function GET(request) {
       const category = post.category?.name || post.category?.slug || "Technology";
       const imageUrl = getImageUrl(post);
       const enclosure = imageUrl
-        ? `<enclosure url="${escapeXml(absoluteImageUrl(imageUrl))}" type="image/jpeg" />`
+        ? `<enclosure url="${escapeXml(absoluteImageUrl(imageUrl))}" length="0" type="${getMimeType(imageUrl)}" />`
         : "";
 
       return `
