@@ -180,10 +180,29 @@ const nextConfig = {
         ],
       },
       {
-        source: "/:path(robots.txt|sitemap.xml|rss.xml|llms.txt|ai.txt)",
+        source: "/:path(robots.txt|sitemap.xml|sitemap_index.xml|rss.xml|llms.txt|ai.txt)",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, follow, noarchive" },
         ],
+      },
+      {
+        source: "/sitemap/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, follow, noarchive" },
+        ],
+      },
+    ];
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap_index.xml",
+        destination: "/sitemap.xml",
+      },
+      {
+        source: "/sitemap-:id.xml",
+        destination: "/sitemap/:id.xml",
       },
     ];
   },

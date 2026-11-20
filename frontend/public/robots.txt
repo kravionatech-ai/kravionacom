@@ -66,3 +66,9 @@ User-agent: BLEXBot
 Disallow: /
 
 Sitemap: https://www.kraviona.com/sitemap.xml
+Sitemap: https://www.kraviona.com/sitemap/pages.xml
+Sitemap: https://www.kraviona.com/sitemap/services.xml
+Sitemap: https://www.kraviona.com/sitemap/categories.xml
+Sitemap: https://www.kraviona.com/sitemap/careers.xml
+Sitemap: https://www.kraviona.com/sitemap/news.xml
+Sitemap: https://www.kraviona.com/sitemap/blog.xml

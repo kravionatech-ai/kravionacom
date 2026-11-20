@@ -83,7 +83,25 @@ async function mapWithConcurrency(items, worker) {
 async function main() {
   console.log(`Reading sitemap: ${sitemapUrl}`);
   const sitemap = await fetchText(sitemapUrl);
-  const urls = [...new Set(sitemapUrls(sitemap))];
+  let urls = [...new Set(sitemapUrls(sitemap))];
+
+  // If this is a sitemap index, crawl each child sitemap
+  if (urls.some((u) => u.endsWith(".xml"))) {
+    const childSitemaps = urls.filter((u) => u.endsWith(".xml"));
+    console.log(`Sitemap index detected with ${childSitemaps.length} sub-sitemaps.`);
+    const subUrlLists = await Promise.all(
+      childSitemaps.map(async (childUrl) => {
+        try {
+          const subXml = await fetchText(childUrl);
+          return sitemapUrls(subXml);
+        } catch (e) {
+          console.error(`Failed to read sub-sitemap: ${childUrl}`, e?.message);
+          return [];
+        }
+      })
+    );
+    urls = [...new Set([...urls.filter((u) => !u.endsWith(".xml")), ...subUrlLists.flat()])];
+  }
 
   if (!urls.length) {
     throw new Error("No <loc> URLs were found in the sitemap.");

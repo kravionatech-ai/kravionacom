@@ -64,6 +64,18 @@ export async function POST(request) {
       }
     }
 
+    // 3. Process Automatic Sitemap Invalidation
+    if (body.revalidateSitemap || body.revalidateAll || paths.some((p) => typeof p === "string" && (p.includes("/blog") || p.includes("/news") || p.includes("/category") || p.includes("/services")))) {
+      try {
+        revalidatePath("/sitemap.xml");
+        revalidatePath("/sitemap_index.xml");
+        revalidatePath("/sitemap/[id]");
+        revalidated.paths.push("/sitemap.xml");
+      } catch (err) {
+        console.error("[REVALIDATE_SITEMAP_ERROR]", err?.message);
+      }
+    }
+
     return NextResponse.json({
       success: true,
       message: "Cache revalidated successfully",

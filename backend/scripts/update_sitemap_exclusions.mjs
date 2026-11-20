@@ -1,6 +1,7 @@
 import fs from 'fs';
 
-const filePath = 'frontend/app/sitemap.js';
+const candidatePaths = ['frontend/lib/sitemapData.js', 'frontend/app/sitemap.js'];
+const filePath = candidatePaths.find(p => fs.existsSync(p)) || candidatePaths[0];
 let content = fs.readFileSync(filePath, 'utf8').replace(/\r\n/g, '\n');
 
 const excludedList = [
