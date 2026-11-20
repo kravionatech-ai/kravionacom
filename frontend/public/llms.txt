@@ -66,6 +66,10 @@ Technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization 
 - About Us: https://www.kraviona.com/about
 - Contact & Discovery: https://www.kraviona.com/contact
 
+## Feeds & Discovery
+- XML Sitemap Index: https://www.kraviona.com/sitemap.xml
+- RSS Feed: https://www.kraviona.com/rss.xml
+
 ## Technical Architecture & Standards
 - Primary Stack: Next.js (App Router, Server Components), React, Node.js, Express, Python (FastAPI), MongoDB, PostgreSQL, Redis, Pinecone.
 - SEO & AEO: Strict Schema.org linked graph, semantic HTML5, Core Web Vitals < 1.8s LCP, direct answer formatting for Perplexity and ChatGPT Search.

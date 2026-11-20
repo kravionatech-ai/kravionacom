@@ -72,3 +72,7 @@ Sitemap: https://www.kraviona.com/sitemap/categories.xml
 Sitemap: https://www.kraviona.com/sitemap/careers.xml
 Sitemap: https://www.kraviona.com/sitemap/news.xml
 Sitemap: https://www.kraviona.com/sitemap/blog.xml
+
+# Feeds & Syndication
+# RSS Feed: https://www.kraviona.com/rss.xml
+# Feed: https://www.kraviona.com/feed

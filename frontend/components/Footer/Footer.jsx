@@ -71,6 +71,7 @@ const LEGAL_LINKS = [
   { name: "Privacy Policy", path: "/privacy-policy" },
   { name: "Terms of Service", path: "/terms" },
   { name: "Sitemap", path: "/sitemap.xml" },
+  { name: "RSS Feed", path: "/rss.xml" },
   { name: "AI Index (llms.txt)", path: "/llms.txt" },
   { name: "Robots Directives", path: "/robots.txt" },
 ];

@@ -204,6 +204,26 @@ const nextConfig = {
         source: "/sitemap-:id.xml",
         destination: "/sitemap/:id.xml",
       },
+      {
+        source: "/feed",
+        destination: "/rss.xml",
+      },
+      {
+        source: "/feed.xml",
+        destination: "/rss.xml",
+      },
+      {
+        source: "/rss",
+        destination: "/rss.xml",
+      },
+      {
+        source: "/blog/rss.xml",
+        destination: "/rss.xml?type=blog",
+      },
+      {
+        source: "/news/rss.xml",
+        destination: "/rss.xml?type=news",
+      },
     ];
   },
 

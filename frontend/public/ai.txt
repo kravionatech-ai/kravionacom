@@ -39,6 +39,7 @@ Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /auth/
 
-# Context Endpoint
+# Context & Feeds
 Context: https://www.kraviona.com/llms.txt
 Sitemap: https://www.kraviona.com/sitemap.xml
+RSS: https://www.kraviona.com/rss.xml
