@@ -35,15 +35,19 @@ const isAllowedPushEndpoint = (endpoint) => {
 const getSubscriptionPayload = (body = {}) => body.subscription || body;
 
 export const getPublicKey = async (_req, res) => {
-  const publicKey = getBlogPushPublicKey();
-  if (!publicKey) {
-    return res.status(503).json({
-      success: false,
-      message: "Blog notifications are not configured yet.",
-    });
-  }
+  try {
+    const publicKey = getBlogPushPublicKey();
+    if (!publicKey) {
+      return res.status(503).json({
+        success: false,
+        message: "Blog notifications are not configured yet.",
+      });
+    }
 
-  return res.status(200).json({ success: true, data: { publicKey } });
+    return res.status(200).json({ success: true, data: { publicKey } });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Unable to retrieve public key." });
+  }
 };
 
 export const subscribeToBlogPush = async (req, res) => {

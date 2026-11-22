@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import { ArrowRight, LockKeyhole, ShieldCheck, UserRound } from "lucide-react";
+import CaptchaBox from "../../components/CaptchaBox";
 
 async function readJson(response) {
   const text = await response.text();
@@ -39,6 +40,8 @@ function persistAuthCookies(data) {
 export default function AuthPage() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const [captchaState, setCaptchaState] = useState({ token: "", answer: "" });
+  const [captchaRefreshTrigger, setCaptchaRefreshTrigger] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const baseurl = process.env.NEXT_PUBLIC_API_URL;
@@ -51,6 +54,15 @@ export default function AuthPage() {
         icon: "warning",
         title: "Missing details",
         text: "Please enter your email or username and password.",
+      });
+      return;
+    }
+
+    if (!captchaState.token || !captchaState.answer) {
+      Swal.fire({
+        icon: "warning",
+        title: "Security Verification Required",
+        text: "Please solve the security challenge (CAPTCHA) to verify you are human.",
       });
       return;
     }
@@ -73,11 +85,17 @@ export default function AuthPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ identifier: identifier.trim(), password }),
+        body: JSON.stringify({
+          identifier: identifier.trim(),
+          password,
+          captchaToken: captchaState.token,
+          captchaAnswer: captchaState.answer,
+        }),
       });
       const data = await readJson(res);
 
       if (!res.ok) {
+        setCaptchaRefreshTrigger((prev) => prev + 1);
         throw new Error(data.message || `Login failed with status: ${res.status}`);
       }
 
@@ -93,6 +111,7 @@ export default function AuthPage() {
 
       router.replace("/dashboard");
     } catch (error) {
+      setCaptchaRefreshTrigger((prev) => prev + 1);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -149,6 +168,14 @@ export default function AuthPage() {
                 Password
               </label>
               <div className="relative"><LockKeyhole size={17} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" /><input type="password" placeholder="Enter your password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" className="w-full rounded-xl border border-white/10 bg-[#20383e] py-3 pl-10 pr-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#f28c5e]/70 focus:ring-4 focus:ring-[#5c9baa]/20" /></div>
+            </div>
+
+            <div className="rounded-xl border border-white/10 bg-[#1e343a]/90 p-4 shadow-inner">
+              <CaptchaBox
+                onCaptchaChange={setCaptchaState}
+                refreshTrigger={captchaRefreshTrigger}
+                inputClassName="!bg-[#20383e] !text-white !border-white/10 focus:!border-[#f28c5e]/70"
+              />
             </div>
 
             <button

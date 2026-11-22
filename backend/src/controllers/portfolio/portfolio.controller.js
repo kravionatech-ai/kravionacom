@@ -35,8 +35,64 @@ const normalize = (body) => ({
 });
 
 export const getPublicProjects = async (_req, res) => { try { const data = await Project.find({ isActive: true }).sort({ order: 1, createdAt: -1 }).lean(); const fallback = publicProjects.map((project, index) => ({ _id: `default-project-${index + 1}`, ...project, slug: slugify(project.title, { lower: true, strict: true }), techStack: [], isFeatured: true })); return res.status(200).json({ success: true, count: data.length || fallback.length, data: data.length ? data : fallback }); } catch (error) { return res.status(500).json({ success: false, message: error.message }); } };
-export const getPublicProject = async (req, res) => { const data = await Project.findOne({ slug: req.params.slug, isActive: true }).lean(); if (data) return res.status(200).json({ success: true, data }); const fallback = publicProjects.find((project) => slugify(project.title, { lower: true, strict: true }) === req.params.slug); if (!fallback) return res.status(404).json({ success: false, message: "No data found." }); return res.status(200).json({ success: true, data: { ...fallback, slug: req.params.slug, techStack: [], results: [], overview: fallback.description } }); };
-export const getProjects = async (req, res) => { if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" }); const data = await Project.find(canManageAll(req.user) ? {} : { createdBy: req.user.id }).sort({ order: 1, createdAt: -1 }).lean(); return res.status(200).json({ success: true, message: data.length ? "Portfolio fetched" : "No data found.", data }); };
-export const createProject = async (req, res) => { try { if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" }); const value = normalize(req.body); if (!value.title || !value.description) return res.status(400).json({ success: false, message: "Title and description are required" }); const data = await Project.create({ ...value, createdBy: req.user.id }); await recordActivity(req, { userID: req.user.id, module: "portfolio", action: "created", resourceId: data._id, resourceName: data.title, after: { title: data.title, isActive: data.isActive } }); return res.status(201).json({ success: true, message: "Portfolio project created", data }); } catch (error) { return res.status(error.code === 11000 ? 409 : 500).json({ success: false, message: error.code === 11000 ? "A project with this slug already exists" : error.message }); } };
-export const updateProject = async (req, res) => { try { if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" }); const project = await Project.findOne(canManageAll(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id }); if (!project) return res.status(404).json({ success: false, message: "No data found." }); const before = { title: project.title, slug: project.slug, isActive: project.isActive }; Object.assign(project, normalize({ ...project.toObject(), ...req.body })); await project.save(); await recordActivity(req, { userID: req.user.id, module: "portfolio", action: "updated", resourceId: project._id, resourceName: project.title, before, after: { title: project.title, slug: project.slug, isActive: project.isActive } }); return res.status(200).json({ success: true, message: "Portfolio project updated", data: project }); } catch (error) { return res.status(error.code === 11000 ? 409 : 500).json({ success: false, message: error.code === 11000 ? "A project with this slug already exists" : error.message }); } };
-export const deleteProject = async (req, res) => { if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" }); const data = await Project.findOneAndDelete(canManageAll(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id }); if (!data) return res.status(404).json({ success: false, message: "No data found." }); await recordActivity(req, { userID: req.user.id, module: "portfolio", action: "deleted", resourceId: data._id, resourceName: data.title, before: { title: data.title, slug: data.slug } }); return res.status(200).json({ success: true, message: "Portfolio project deleted" }); };
+export const getPublicProject = async (req, res) => {
+  try {
+    const data = await Project.findOne({ slug: req.params.slug, isActive: true }).lean();
+    if (data) return res.status(200).json({ success: true, data });
+    const fallback = publicProjects.find((project) => slugify(project.title, { lower: true, strict: true }) === req.params.slug);
+    if (!fallback) return res.status(404).json({ success: false, message: "No data found." });
+    return res.status(200).json({ success: true, data: { ...fallback, slug: req.params.slug, techStack: [], results: [], overview: fallback.description } });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Failed to fetch project" });
+  }
+};
+
+export const getProjects = async (req, res) => {
+  try {
+    if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
+    const data = await Project.find(canManageAll(req.user) ? {} : { createdBy: req.user.id }).sort({ order: 1, createdAt: -1 }).lean();
+    return res.status(200).json({ success: true, message: data.length ? "Portfolio fetched" : "No data found.", data });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Failed to fetch portfolio projects" });
+  }
+};
+
+export const createProject = async (req, res) => {
+  try {
+    if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
+    const value = normalize(req.body);
+    if (!value.title || !value.description) return res.status(400).json({ success: false, message: "Title and description are required" });
+    const data = await Project.create({ ...value, createdBy: req.user.id });
+    await recordActivity(req, { userID: req.user.id, module: "portfolio", action: "created", resourceId: data._id, resourceName: data.title, after: { title: data.title, isActive: data.isActive } });
+    return res.status(201).json({ success: true, message: "Portfolio project created", data });
+  } catch (error) {
+    return res.status(error.code === 11000 ? 409 : 500).json({ success: false, message: error.code === 11000 ? "A project with this slug already exists" : error.message });
+  }
+};
+
+export const updateProject = async (req, res) => {
+  try {
+    if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
+    const project = await Project.findOne(canManageAll(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id });
+    if (!project) return res.status(404).json({ success: false, message: "No data found." });
+    const before = { title: project.title, slug: project.slug, isActive: project.isActive };
+    Object.assign(project, normalize({ ...project.toObject(), ...req.body }));
+    await project.save();
+    await recordActivity(req, { userID: req.user.id, module: "portfolio", action: "updated", resourceId: project._id, resourceName: project.title, before, after: { title: project.title, slug: project.slug, isActive: project.isActive } });
+    return res.status(200).json({ success: true, message: "Portfolio project updated", data: project });
+  } catch (error) {
+    return res.status(error.code === 11000 ? 409 : 500).json({ success: false, message: error.code === 11000 ? "A project with this slug already exists" : error.message });
+  }
+};
+
+export const deleteProject = async (req, res) => {
+  try {
+    if (!canManage(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
+    const data = await Project.findOneAndDelete(canManageAll(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id });
+    if (!data) return res.status(404).json({ success: false, message: "No data found." });
+    await recordActivity(req, { userID: req.user.id, module: "portfolio", action: "deleted", resourceId: data._id, resourceName: data.title, before: { title: data.title, slug: data.slug } });
+    return res.status(200).json({ success: true, message: "Portfolio project deleted" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Failed to delete project" });
+  }
+};

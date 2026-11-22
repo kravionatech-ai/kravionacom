@@ -16,6 +16,7 @@ import {
 import Frame from "@/components/Frame/Frame";
 import { apiRequest, formatDate } from "@/components/api";
 import { ContentLoader } from "@/components/AsyncState";
+import Swal from "sweetalert2";
 
 export default function RedirectsPage() {
   const [redirects, setRedirects] = useState([]);
@@ -141,8 +142,18 @@ export default function RedirectsPage() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to permanently delete this redirect?")) {
+  const handleDelete = async (id, sourcePath = "this redirect") => {
+    const confirmation = await Swal.fire({
+      icon: "warning",
+      title: "Delete redirect?",
+      text: `Are you sure you want to permanently delete redirect for "${sourcePath}"? This cannot be undone.`,
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete",
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+    });
+
+    if (!confirmation.isConfirmed) {
       return;
     }
 
@@ -152,8 +163,20 @@ export default function RedirectsPage() {
       setSuccess("Redirect deleted successfully.");
       setRedirects((prev) => prev.filter((item) => item._id !== id));
       setTimeout(() => setSuccess(""), 4000);
+      await Swal.fire({
+        icon: "success",
+        title: "Redirect Deleted",
+        text: "The URL redirect has been removed.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
     } catch (err) {
       setError(err.message || "Failed to delete redirect.");
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: err.message || "Failed to delete redirect.",
+      });
     } finally {
       setDeletingId(null);
     }
@@ -341,7 +364,7 @@ export default function RedirectsPage() {
                             </button>
                             <button
                               type="button"
-                              onClick={() => handleDelete(item._id)}
+                              onClick={() => handleDelete(item._id, item.fromPath || "this redirect")}
                               disabled={deletingId === item._id}
                               title="Delete"
                               className="rounded-lg border border-rose-200 bg-white p-2 text-rose-600 transition hover:bg-rose-50 disabled:opacity-50"

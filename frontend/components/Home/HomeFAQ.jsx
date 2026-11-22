@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, HelpCircle } from "lucide-react";
 
@@ -211,7 +212,7 @@ const HomeFAQ = () => {
             </p>
           </div>
           <div>
-            <a
+            <Link
               href="/contact"
               className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#C85A3C] hover:bg-[#B04D31] text-white font-semibold rounded-[6px] transition-all duration-200 shadow-brand-sm hover:-translate-y-0.5 text-sm"
             >
@@ -230,7 +231,7 @@ const HomeFAQ = () => {
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

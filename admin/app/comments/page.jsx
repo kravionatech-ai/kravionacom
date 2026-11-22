@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Pagination from "@/components/Pagination";
+import Swal from "sweetalert2";
 
 const STATUS_OPTIONS = ["all", "approved", "pending", "spam", "trash"];
 
@@ -120,15 +121,38 @@ export default function CommentsPage() {
   };
 
   const deleteComment = async (commentId) => {
-    if (!window.confirm("Delete this comment permanently?")) return;
+    const confirmation = await Swal.fire({
+      title: "Delete Comment?",
+      text: "Are you sure you want to permanently delete this comment? This cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Yes, Delete It",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirmation.isConfirmed) return;
 
     try {
       setBusyId(commentId);
       await apiRequest(`/comments/${commentId}`, { method: "DELETE" });
       setComments((prev) => prev.filter((comment) => comment._id !== commentId));
       fetchComments();
+      await Swal.fire({
+        icon: "success",
+        title: "Comment Deleted",
+        text: "The comment was permanently removed.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
     } catch (err) {
       setError(err.message || "Unable to delete comment");
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: err.message || "Unable to delete comment.",
+      });
     } finally {
       setBusyId("");
     }

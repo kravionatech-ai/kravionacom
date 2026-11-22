@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import StatusBadge from "./StatusBadge";
 import { apiRequest } from "@/components/api";
+import Swal from "sweetalert2";
 
 const INTENTS = [
   "Informational",
@@ -144,13 +145,36 @@ export default function KeywordTable({
   };
 
   // Delete keyword
-  const handleDeleteKeyword = async (id) => {
-    if (!confirm("Are you sure you want to delete this keyword?")) return;
+  const handleDeleteKeyword = async (id, keywordName = "this keyword") => {
+    const confirmation = await Swal.fire({
+      title: "Delete Keyword?",
+      text: `Are you sure you want to permanently delete "${keywordName}"? This action cannot be undone.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirmation.isConfirmed) return;
+
     try {
       await apiRequest(`/planner/keywords/${id}`, { method: "DELETE" });
+      await Swal.fire({
+        icon: "success",
+        title: "Deleted",
+        text: "The keyword has been deleted.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
       if (onRefresh) onRefresh();
     } catch (err) {
-      alert(err.message || "Failed to delete keyword");
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: err.message || "Failed to delete keyword.",
+      });
     }
   };
 
@@ -407,7 +431,7 @@ export default function KeywordTable({
                           {isSuperAdmin && (
                             <button
                               type="button"
-                              onClick={() => handleDeleteKeyword(kw._id)}
+                              onClick={() => handleDeleteKeyword(kw._id, kw.keyword || "this keyword")}
                               className="rounded p-1 text-slate-400 hover:text-rose-600 transition"
                               title="Delete keyword"
                             >

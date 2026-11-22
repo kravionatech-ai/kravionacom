@@ -51,14 +51,26 @@ import {
   toggleEventStatus,
   updateEvent,
 } from "../controllers/events/event.controller.js";
+import { generateCaptcha } from "../utils/captcha.js";
+import { requireCaptcha } from "../middleware/captcha.middleware.js";
 
 const Router = express.Router();
 
 export default Router;
 
+// ─── CAPTCHA Challenge Generator ───────────────────────────────────────────
+Router.get('/captcha', (_req, res) => {
+  try {
+    const captcha = generateCaptcha();
+    return res.status(200).json({ success: true, data: captcha });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Failed to generate CAPTCHA" });
+  }
+});
+
 // Auth Routing
 Router.post('/create-account', createAccount);
-Router.post('/login', loginAccountWithPassword);
+Router.post('/login', requireCaptcha, loginAccountWithPassword);
 Router.get('/me', verifyToken, getMe);
 Router.patch('/me', verifyToken, updateMyAccount);
 Router.post('/auth/logout', verifyToken, logoutUser);
@@ -156,15 +168,15 @@ Router.post('/newslatter', createNewsLatter);
 Router.get('/newslatter', verifyToken, getAllSubscribers);
 Router.delete('/newslatter/:id', verifyToken, deleteSubscriber);
 
-// messages (Protected by spam/rate limiter on POST)
-Router.post('/messages', formRateLimiter, createMessage);
+// messages (Protected by spam/rate limiter and CAPTCHA on POST)
+Router.post('/messages', formRateLimiter, requireCaptcha, createMessage);
 Router.get('/messages', verifyToken, getAllMessages);
 Router.get('/messages/:id', verifyToken, getMessageById);
 Router.patch('/messages/:id', verifyToken, updateMessage);
 Router.delete('/messages/:id', verifyToken, deleteMessage);
 
-// leads (Protected by spam/rate limiter on POST)
-Router.post('/leads', formRateLimiter, createLead);
+// leads (Protected by spam/rate limiter and CAPTCHA on POST)
+Router.post('/leads', formRateLimiter, requireCaptcha, createLead);
 Router.get('/leads', verifyToken, getAllLeads);
 Router.get('/leads/:id', verifyToken, getLeadById);
 Router.patch('/leads/:id', verifyToken, updateLead);

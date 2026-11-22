@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { API_URL } from "@/utils/api";
+import CaptchaBox from "@/components/Common/CaptchaBox";
 
 const createInitialForm = (initialSubject) => ({
   name: "",
@@ -34,6 +35,8 @@ const splitName = (name) => {
 
 const BlogContactForm = ({ initialSubject = "" }) => {
   const [form, setForm] = useState(() => createInitialForm(initialSubject));
+  const [captchaState, setCaptchaState] = useState({ token: "", answer: "" });
+  const [captchaRefreshTrigger, setCaptchaRefreshTrigger] = useState(0);
   const [status, setStatus] = useState({
     loading: false,
     success: null,
@@ -110,6 +113,21 @@ const BlogContactForm = ({ initialSubject = "" }) => {
       return;
     }
 
+    if (!captchaState.token || !captchaState.answer) {
+      setStatus({
+        loading: false,
+        success: null,
+        error: "Please solve the security challenge (CAPTCHA).",
+      });
+      Swal.fire({
+        icon: "warning",
+        title: "Verification Required",
+        text: "Please solve the math security challenge (CAPTCHA) before submitting.",
+        confirmButtonColor: "#E8622A",
+      });
+      return;
+    }
+
     setStatus({ loading: true, success: null, error: null });
 
     try {
@@ -127,6 +145,8 @@ const BlogContactForm = ({ initialSubject = "" }) => {
           phone: form.phone.trim(),
           message: form.message.trim(),
           subject: form.subject.trim() || "Service Inquiry",
+          captchaToken: captchaState.token,
+          captchaAnswer: captchaState.answer,
         }),
       });
 
@@ -149,18 +169,21 @@ const BlogContactForm = ({ initialSubject = "" }) => {
           confirmButtonColor: "#E8622A",
         });
         setForm(createInitialForm(initialSubject));
+        setCaptchaRefreshTrigger((prev) => prev + 1);
 
         // Clear success message after 5 seconds
         setTimeout(() => {
           setStatus((prev) => ({ ...prev, success: null }));
         }, 5000);
       } else {
+        setCaptchaRefreshTrigger((prev) => prev + 1);
         throw new Error(data.error || data.message || "Submission failed");
       }
     } catch (err) {
       if (process.env.NODE_ENV !== "production") {
         console.error("Contact form error:", err);
       }
+      setCaptchaRefreshTrigger((prev) => prev + 1);
       setStatus({
         loading: false,
         success: null,
@@ -273,6 +296,14 @@ const BlogContactForm = ({ initialSubject = "" }) => {
             placeholder="Your message..."
             rows="5"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E8622A] focus:border-transparent transition resize-none"
+          />
+        </div>
+
+        {/* Captcha */}
+        <div className="md:col-span-2">
+          <CaptchaBox
+            onCaptchaChange={setCaptchaState}
+            refreshTrigger={captchaRefreshTrigger}
           />
         </div>
 

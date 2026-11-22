@@ -115,20 +115,24 @@ export const getPublicServiceBySlug = async (req, res) => {
 };
 
 export const getServices = async (req, res) => {
-  if (!canManageServices(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
-  const scope = canManageAllServices(req.user) ? {} : { createdBy: req.user.id };
-  const indexability = cleanText(req.query.indexability).toLowerCase();
-  const filter = { ...scope };
-  if (indexability === "noindex") filter["seo.noIndex"] = true;
-  if (indexability === "indexed") filter["seo.noIndex"] = { $ne: true };
-  if (req.query.status) filter.status = req.query.status;
+  try {
+    if (!canManageServices(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
+    const scope = canManageAllServices(req.user) ? {} : { createdBy: req.user.id };
+    const indexability = cleanText(req.query.indexability).toLowerCase();
+    const filter = { ...scope };
+    if (indexability === "noindex") filter["seo.noIndex"] = true;
+    if (indexability === "indexed") filter["seo.noIndex"] = { $ne: true };
+    if (req.query.status) filter.status = req.query.status;
 
-  const [data, noIndex, indexed] = await Promise.all([
-    Service.find(filter).sort({ order: 1, createdAt: -1 }).lean(),
-    Service.countDocuments({ ...scope, "seo.noIndex": true }),
-    Service.countDocuments({ ...scope, "seo.noIndex": { $ne: true } }),
-  ]);
-  return res.status(200).json({ success: true, message: data.length ? "Services fetched" : "No data found.", data, indexabilityCounts: { noIndex, indexed } });
+    const [data, noIndex, indexed] = await Promise.all([
+      Service.find(filter).sort({ order: 1, createdAt: -1 }).lean(),
+      Service.countDocuments({ ...scope, "seo.noIndex": true }),
+      Service.countDocuments({ ...scope, "seo.noIndex": { $ne: true } }),
+    ]);
+    return res.status(200).json({ success: true, message: data.length ? "Services fetched" : "No data found.", data, indexabilityCounts: { noIndex, indexed } });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Failed to fetch services" });
+  }
 };
 
 export const createService = async (req, res) => {
@@ -201,19 +205,23 @@ export const updateService = async (req, res) => {
 };
 
 export const deleteService = async (req, res) => {
-  if (!canManageServices(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
-  const service = await Service.findOneAndDelete(canManageAllServices(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id });
-  if (!service) return res.status(404).json({ success: false, message: "No data found." });
+  try {
+    if (!canManageServices(req.user)) return res.status(403).json({ success: false, message: "Forbidden" });
+    const service = await Service.findOneAndDelete(canManageAllServices(req.user) ? { _id: req.params.id } : { _id: req.params.id, createdBy: req.user.id });
+    if (!service) return res.status(404).json({ success: false, message: "No data found." });
 
-  await recordActivity(req, { userID: req.user.id, module: "service", action: "deleted", resourceId: service._id, resourceName: service.title, before: { title: service.title, slug: service.slug } });
+    await recordActivity(req, { userID: req.user.id, module: "service", action: "deleted", resourceId: service._id, resourceName: service.title, before: { title: service.title, slug: service.slug } });
 
-  // Revalidate frontend
-  await revalidateFrontend({
-    paths: ["/services", `/services/${service.slug}`],
-    tags: ["services", `service-${service.slug}`],
-  });
+    // Revalidate frontend
+    await revalidateFrontend({
+      paths: ["/services", `/services/${service.slug}`],
+      tags: ["services", `service-${service.slug}`],
+    });
 
-  return res.status(200).json({ success: true, message: "Service deleted and cache purged" });
+    return res.status(200).json({ success: true, message: "Service deleted and cache purged" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Failed to delete service" });
+  }
 };
 
 export const seedServices = async (req, res) => {

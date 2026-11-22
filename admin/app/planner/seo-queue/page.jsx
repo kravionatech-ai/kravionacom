@@ -7,6 +7,7 @@ import PlannerNav from "@/components/planner/PlannerNav";
 import StatusBadge, { PriorityBadge } from "@/components/planner/StatusBadge";
 import ContentPlanForm from "@/components/planner/ContentPlanForm";
 import { apiRequest } from "@/components/api";
+import Swal from "sweetalert2";
 import {
   Wrench,
   Plus,
@@ -101,13 +102,36 @@ export default function SeoQueuePage() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this SEO task?")) return;
+  const handleDelete = async (id, taskTitle = "this SEO task") => {
+    const confirmation = await Swal.fire({
+      title: "Delete SEO Task?",
+      text: `Are you sure you want to delete "${taskTitle}"? This action cannot be undone.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirmation.isConfirmed) return;
+
     try {
       await apiRequest(`/planner/items/${id}`, { method: "DELETE" });
+      await Swal.fire({
+        icon: "success",
+        title: "Deleted",
+        text: "The task was deleted successfully.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
       fetchSeoItems();
     } catch (err) {
-      alert(err.message || "Failed to delete SEO task");
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: err.message || "Failed to delete SEO task.",
+      });
     }
   };
 
@@ -358,7 +382,7 @@ export default function SeoQueuePage() {
                           {isSuperAdmin && (
                             <button
                               type="button"
-                              onClick={() => handleDelete(item._id)}
+                              onClick={() => handleDelete(item._id, item.title || "this SEO task")}
                               className="rounded p-1 text-slate-400 hover:text-rose-600 transition"
                               title="Delete task"
                             >

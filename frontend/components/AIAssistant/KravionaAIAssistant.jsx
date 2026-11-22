@@ -8,7 +8,6 @@ import AssistantLauncher from "./AssistantLauncher";
 import AssistantTextExplainer from "./AssistantTextExplainer";
 import {
   extractPageContext,
-  getRouteAnnouncement,
 } from "./AssistantPageContext";
 import { attachFormObserver } from "./AssistantFormGuide";
 import { getFallbackChatResponse } from "@/components/Chatbot/fallbackKnowledge";
@@ -30,7 +29,7 @@ export default function KravionaAIAssistant() {
   const [expression, setExpression] = useState("idle");
   const [speechBubble, setSpeechBubble] = useState(null);
   const [overrideGaze, setOverrideGaze] = useState(null);
-  const [viseme, setViseme] = useState(0);
+  const [viseme] = useState(0);
   const [tooltipBounds, setTooltipBounds] = useState(null);
 
   // Chat conversation state
@@ -51,7 +50,8 @@ export default function KravionaAIAssistant() {
   }, []);
 
   useEffect(() => {
-    setMounted(true);
+    const t = setTimeout(() => setMounted(true), 20);
+    return () => clearTimeout(t);
   }, []);
 
   // Form field observer integration (Visual guidance only, zero audio)

@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { API_URL } from "@/utils/api";
+import CaptchaBox from "@/components/Common/CaptchaBox";
 
 const ContactFormDetails = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaState, setCaptchaState] = useState({ token: "", answer: "" });
+  const [captchaRefreshTrigger, setCaptchaRefreshTrigger] = useState(0);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,6 +25,17 @@ const ContactFormDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!captchaState.token || !captchaState.answer) {
+      Swal.fire({
+        icon: "warning",
+        title: "Security Verification Required",
+        text: "Please solve the math security challenge (CAPTCHA) before submitting.",
+        confirmButtonColor: "#B84A1A",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -38,6 +52,8 @@ const ContactFormDetails = () => {
           phone: formData.phone.trim(),
           subject: formData.subject.trim() || "Service Inquiry",
           message: formData.message.trim(),
+          captchaToken: captchaState.token,
+          captchaAnswer: captchaState.answer,
         }),
       });
 
@@ -60,7 +76,9 @@ const ContactFormDetails = () => {
           message: "",
           phone: "",
         });
+        setCaptchaRefreshTrigger((prev) => prev + 1);
       } else {
+        setCaptchaRefreshTrigger((prev) => prev + 1);
         throw new Error(
           responseData.error ||
             responseData.message ||
@@ -71,6 +89,7 @@ const ContactFormDetails = () => {
       if (process.env.NODE_ENV !== "production") {
         console.error("Contact form error:", error);
       }
+      setCaptchaRefreshTrigger((prev) => prev + 1);
       Swal.fire({
         icon: "error",
         title: "Message not sent",
@@ -207,6 +226,12 @@ const ContactFormDetails = () => {
                   required
                 ></textarea>
               </div>
+
+              <CaptchaBox
+                onCaptchaChange={setCaptchaState}
+                refreshTrigger={captchaRefreshTrigger}
+                className="mt-4"
+              />
 
               <button
                 type="submit"

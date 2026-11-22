@@ -15,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { API_URL } from "@/utils/api";
+import CaptchaBox from "@/components/Common/CaptchaBox";
 
 const SERVICE_OPTIONS = [
   "MERN Stack Development",
@@ -109,6 +110,8 @@ const LeadGenerationPopup = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState(() => createInitialForm(pathname));
+  const [captchaState, setCaptchaState] = useState({ token: "", answer: "" });
+  const [captchaRefreshTrigger, setCaptchaRefreshTrigger] = useState(0);
   const [status, setStatus] = useState({
     loading: false,
     success: "",
@@ -213,14 +216,29 @@ const LeadGenerationPopup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!captchaState.token || !captchaState.answer) {
+      Swal.fire({
+        icon: "warning",
+        title: "Verification Required",
+        text: "Please solve the security challenge (CAPTCHA) before sending.",
+        confirmButtonColor: "#E8622A",
+      });
+      return;
+    }
+
     setStatus({ loading: true, success: "", error: "" });
 
-    const leadPayload = createLeadPayload({
-      form,
-      serviceLabel,
-      pathname,
-      sourceUrl: window.location.href,
-    });
+    const leadPayload = {
+      ...createLeadPayload({
+        form,
+        serviceLabel,
+        pathname,
+        sourceUrl: window.location.href,
+      }),
+      captchaToken: captchaState.token,
+      captchaAnswer: captchaState.answer,
+    };
 
     try {
       const response = await fetch(`${API_URL}/leads`, {
@@ -244,6 +262,7 @@ const LeadGenerationPopup = () => {
         error: "",
       });
       setForm(createInitialForm(pathname));
+      setCaptchaRefreshTrigger((prev) => prev + 1);
 
       await Swal.fire({
         icon: "success",
@@ -255,6 +274,7 @@ const LeadGenerationPopup = () => {
       });
       setIsOpen(false);
     } catch (error) {
+      setCaptchaRefreshTrigger((prev) => prev + 1);
       setStatus({
         loading: false,
         success: "",
@@ -482,6 +502,11 @@ const LeadGenerationPopup = () => {
                 {status.success || status.error}
               </p>
             )}
+
+            <CaptchaBox
+              onCaptchaChange={setCaptchaState}
+              refreshTrigger={captchaRefreshTrigger}
+            />
 
             <button
               type="submit"

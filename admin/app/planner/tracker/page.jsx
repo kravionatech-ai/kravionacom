@@ -8,6 +8,7 @@ import TrackerTable from "@/components/planner/TrackerTable";
 import ContentPlanForm from "@/components/planner/ContentPlanForm";
 import { apiRequest } from "@/components/api";
 import { Plus } from "lucide-react";
+import Swal from "sweetalert2";
 
 export default function ContentTrackerPage() {
   const [items, setItems] = useState([]);
@@ -86,12 +87,35 @@ export default function ContentTrackerPage() {
   };
 
   const handleDeleteClick = async (itemId) => {
-    if (!confirm("Are you sure you want to delete this planned task?")) return;
+    const confirmation = await Swal.fire({
+      title: "Delete Planned Task?",
+      text: "Are you sure you want to delete this planned task? This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirmation.isConfirmed) return;
+
     try {
       await apiRequest(`/planner/items/${itemId}`, { method: "DELETE" });
+      await Swal.fire({
+        icon: "success",
+        title: "Deleted",
+        text: "The planned task has been deleted.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
       fetchItems();
     } catch (err) {
-      alert(err.message || "Failed to delete task");
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: err.message || "Failed to delete task.",
+      });
     }
   };
 

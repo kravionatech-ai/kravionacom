@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const StatusBadge = ({ status }) => {
   const styles = {
@@ -148,13 +149,32 @@ const BlogPage = () => {
     }
   }, [categoryFilter, contentTypeFilter, indexability, page, search, status]);
 
-  const handleDeletePost = async (id) => {
-    if (!window.confirm("Delete this post? This action cannot be undone.")) return;
+  const handleDeletePost = async (id, postTitle = "this post") => {
+    const confirmation = await Swal.fire({
+      title: "Delete Post?",
+      text: `Are you sure you want to permanently delete "${postTitle}"? This action cannot be undone.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Yes, Delete It",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!confirmation.isConfirmed) return;
 
     try {
       setDeletingId(id);
-      const data = await apiRequest(`/post/${id}`, {
+      await apiRequest(`/post/${id}`, {
         method: "DELETE",
+      });
+
+      await Swal.fire({
+        icon: "success",
+        title: "Post Deleted",
+        text: "The post was successfully removed.",
+        timer: 1500,
+        showConfirmButton: false,
       });
 
       if (posts.length === 1 && page > 1) {
@@ -164,6 +184,11 @@ const BlogPage = () => {
       }
     } catch (error) {
       setError(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: error.message || "Failed to delete post from the server.",
+      });
     } finally {
       setDeletingId(null);
     }
@@ -500,7 +525,7 @@ const BlogPage = () => {
                         {/* Delete */}
                         <button
                           type="button"
-                          onClick={() => handleDeletePost(post._id)}
+                          onClick={() => handleDeletePost(post._id, post.title || "this post")}
                           disabled={deletingId === post._id}
                           title="Delete post"
                           className="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"

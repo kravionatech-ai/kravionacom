@@ -12,7 +12,6 @@ import {
   Minimize2,
   CheckCircle2,
   BookOpen,
-  FileText,
   Briefcase,
   RotateCcw,
   PlusCircle,
@@ -120,20 +119,24 @@ export default function AssistantChatPanel({
 
   useEffect(() => {
     if (isOpen) {
-      if (messages.length === 1 && messages[0].id === "welcome-msg") {
-        startWelcomeTyping();
-      } else {
-        setWelcomeCharCount(fullWelcomeText.length);
-        setIsTypingWelcome(false);
-      }
-      setTimeout(() => textareaRef.current?.focus(), 200);
-      scrollToBottom();
+      const timer = setTimeout(() => {
+        if (messages.length === 1 && messages[0].id === "welcome-msg") {
+          startWelcomeTyping();
+        } else {
+          setWelcomeCharCount(fullWelcomeText.length);
+          setIsTypingWelcome(false);
+        }
+        textareaRef.current?.focus();
+        scrollToBottom();
+      }, 50);
+
+      return () => clearTimeout(timer);
     } else {
       if (welcomeTypingTimerRef.current) {
         clearInterval(welcomeTypingTimerRef.current);
       }
     }
-  }, [isOpen, messages.length, fullWelcomeText.length, startWelcomeTyping, scrollToBottom]);
+  }, [isOpen, messages, fullWelcomeText.length, startWelcomeTyping, scrollToBottom]);
 
   useEffect(() => {
     if (isOpen) {

@@ -161,7 +161,20 @@ export default function CategoriesPage() {
   }, [page, search, statusFilter]);
 
 
-const deleteCategory = async (id) => {
+const deleteCategory = async (id, categoryName = "this category") => {
+  const confirmation = await Swal.fire({
+    title: "Delete Category?",
+    text: `Are you sure you want to permanently delete "${categoryName}"? This action cannot be undone.`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#dc2626",
+    cancelButtonColor: "#64748b",
+    confirmButtonText: "Yes, Delete It",
+    cancelButtonText: "Cancel",
+  });
+
+  if (!confirmation.isConfirmed) return;
+
   try {
     setLoading(true);
     const response = await fetch(
@@ -398,7 +411,7 @@ const deleteCategory = async (id) => {
                             }} className="h-4 w-4" />
                           </button>
                           <button onClick={()=>{
-                            deleteCategory(category._id)
+                            deleteCategory(category._id, category.title || category.name || "this category")
                           }} className="rounded-md p-1.5 transition-colors hover:bg-red-50 hover:text-red-600">
                             <Trash2 className="h-4 w-4" />
                           </button>

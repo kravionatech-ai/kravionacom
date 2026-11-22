@@ -19,6 +19,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Pagination from "@/components/Pagination";
 import AvatarPicker from "@/components/AvatarPicker";
 import DepartmentSelect from "@/components/DepartmentSelect";
+import Swal from "sweetalert2";
 
 const STATUS_OPTIONS = ["all", "active", "inactive"];
 
@@ -450,15 +451,38 @@ export default function TeamPage() {
   };
 
   const deleteMember = async (member) => {
-    if (!window.confirm(`Delete ${member.name}?`)) return;
+    const confirmation = await Swal.fire({
+      icon: "warning",
+      title: "Delete team member?",
+      text: `Are you sure you want to permanently delete "${member.name}"? This action cannot be undone.`,
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete",
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+    });
+
+    if (!confirmation.isConfirmed) return;
 
     try {
       setError("");
       await apiRequest(`/team/${member._id}`, { method: "DELETE" });
       setMembers((current) => current.filter((item) => item._id !== member._id));
       fetchMembers();
+      await Swal.fire({
+        icon: "success",
+        title: "Team Member Deleted",
+        text: `${member.name} has been removed.`,
+        timer: 1500,
+        showConfirmButton: false,
+      });
     } catch (err) {
-      setError(err.message || "Unable to delete team member");
+      const message = err.message || "Unable to delete team member";
+      setError(message);
+      Swal.fire({
+        icon: "error",
+        title: "Delete Failed",
+        text: message,
+      });
     }
   };
 

@@ -26,7 +26,52 @@ CRITICAL INSTRUCTIONS:
 6. Brevity: Keep conversational answers concise, structured (bullet points where appropriate), and easy to read.`;
 
 async function processAssistantQuery(query, pageContext = {}) {
+  const geminiKey = process.env.GEMINI_API_KEY;
   const openaiKey = process.env.OPENAI_API_KEY;
+
+  // 1. Try Gemini API if key is available
+  if (geminiKey) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            system_instruction: {
+              parts: [{ text: `${KRAVIONA_SYSTEM_PROMPT}\n\nPage Context: ${JSON.stringify(pageContext)}` }],
+            },
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: query }],
+              },
+            ],
+            generationConfig: {
+              maxOutputTokens: 500,
+              temperature: 0.5,
+            },
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+        if (reply) {
+          return {
+            reply,
+            sources: [{ title: "Kraviona.com", url: pageContext?.url || "/services" }],
+            engine: "gemini",
+          };
+        }
+      }
+    } catch (err) {
+      console.warn("Gemini API call failed, attempting fallback:", err.message);
+    }
+  }
+
+  // 2. Try OpenAI API if key is available
   if (openaiKey) {
     try {
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -62,8 +107,8 @@ async function processAssistantQuery(query, pageContext = {}) {
     }
   }
 
-  // Fallback to Kraviona verified knowledge engine
-  const fallback = getFallbackChatResponse(query);
+  // 3. Fallback to Kraviona high-precision verified knowledge engine
+  const fallback = getFallbackChatResponse(query, pageContext);
   return {
     reply: fallback.reply,
     sources: fallback.sources || [],
