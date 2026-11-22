@@ -117,12 +117,12 @@ const BlogContactForm = ({ initialSubject = "" }) => {
       setStatus({
         loading: false,
         success: null,
-        error: "Please solve the security challenge (CAPTCHA).",
+        error: "Please enter the security code (CAPTCHA).",
       });
       Swal.fire({
         icon: "warning",
         title: "Verification Required",
-        text: "Please solve the math security challenge (CAPTCHA) before submitting.",
+        text: "Please enter the 6-character anti-bot security code (CAPTCHA) before submitting.",
         confirmButtonColor: "#E8622A",
       });
       return;

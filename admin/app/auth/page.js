@@ -62,7 +62,7 @@ export default function AuthPage() {
       Swal.fire({
         icon: "warning",
         title: "Security Verification Required",
-        text: "Please solve the security challenge (CAPTCHA) to verify you are human.",
+        text: "Please enter the 6-character anti-bot security code (CAPTCHA) to verify you are human.",
       });
       return;
     }

@@ -221,7 +221,7 @@ const LeadGenerationPopup = () => {
       Swal.fire({
         icon: "warning",
         title: "Verification Required",
-        text: "Please solve the security challenge (CAPTCHA) before sending.",
+        text: "Please enter the 6-character anti-bot security code (CAPTCHA) before sending.",
         confirmButtonColor: "#E8622A",
       });
       return;

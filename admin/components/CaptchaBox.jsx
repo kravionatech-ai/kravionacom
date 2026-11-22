@@ -75,7 +75,7 @@ export default function CaptchaBox({
 
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
         {/* Captcha Image / SVG Display */}
-        <div className="relative flex items-center justify-center min-w-[170px] h-[48px] rounded-xl bg-slate-50 border border-slate-200 overflow-hidden shadow-inner">
+        <div className="relative flex items-center justify-center min-w-[196px] h-[52px] rounded-xl bg-slate-50 border border-slate-300 overflow-hidden shadow-inner">
           {loading ? (
             <div className="flex items-center gap-2 text-xs text-slate-400">
               <RotateCw className="w-4 h-4 animate-spin text-[#0f5960]" />
@@ -97,7 +97,7 @@ export default function CaptchaBox({
             />
           ) : (
             <span className="text-xs font-mono font-bold text-slate-800">
-              {captchaData?.question || "Solve equation"}
+              {captchaData?.question || "Security Challenge"}
             </span>
           )}
         </div>
@@ -106,17 +106,22 @@ export default function CaptchaBox({
         <div className="flex-1">
           <input
             type="text"
-            inputMode="numeric"
+            inputMode="text"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck="false"
+            autoComplete="off"
             value={userAnswer}
             onChange={handleInputChange}
-            placeholder="Enter answer"
+            placeholder="Enter 6-character code"
             required
-            className={`w-full rounded-xl border border-slate-200 bg-white px-4 py-3 font-semibold text-slate-800 outline-none transition-all placeholder:text-slate-400 placeholder:font-normal focus:border-[#0f5960] focus:ring-2 focus:ring-[#0f5960]/20 ${inputClassName}`}
+            maxLength={10}
+            className={`w-full rounded-xl border border-slate-200 bg-white px-4 py-3 font-mono font-bold tracking-widest text-slate-800 outline-none transition-all placeholder:text-slate-400 placeholder:font-sans placeholder:tracking-normal placeholder:font-normal focus:border-[#0f5960] focus:ring-2 focus:ring-[#0f5960]/20 ${inputClassName}`}
           />
         </div>
       </div>
       <p className="text-[11px] text-slate-400">
-        Solve the math puzzle above to verify your admin sign-in.
+        Type the 6 distorted anti-bot characters shown above (case-insensitive).
       </p>
     </div>
   );

@@ -30,7 +30,7 @@ const ContactFormDetails = () => {
       Swal.fire({
         icon: "warning",
         title: "Security Verification Required",
-        text: "Please solve the math security challenge (CAPTCHA) before submitting.",
+        text: "Please enter the 6-character anti-bot security code (CAPTCHA) before submitting.",
         confirmButtonColor: "#B84A1A",
       });
       return;
