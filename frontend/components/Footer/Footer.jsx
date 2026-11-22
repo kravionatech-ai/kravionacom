@@ -418,6 +418,17 @@ export default function Footer() {
                 {item.name}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new Event("open_cookie_preferences"));
+                }
+              }}
+              className="text-white/60 transition-colors hover:text-[#D4A550] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 cursor-pointer"
+            >
+              Cookie Preferences
+            </button>
           </div>
 
           <div className="inline-flex items-center gap-1.5 text-[11px] font-medium text-emerald-400/90">

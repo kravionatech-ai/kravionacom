@@ -19,6 +19,7 @@ import { Suspense } from "react";
 import Script from "next/script";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import CookieConsentBanner from "@/components/Cookies/CookieConsentBanner";
 import GAPageTracker from "@/components/GAPageTracker";
 import { JsonLd } from "@/components/JsonLd";
 import ThirdPartyScripts from "@/components/ThirdPartyScripts";
@@ -211,6 +212,7 @@ export default function RootLayout({ children }) {
 
         <Footer />
 
+        <CookieConsentBanner />
         <SiteEventPopup />
         <WhatsAppFloat />
         <KravionaAIAssistant />
