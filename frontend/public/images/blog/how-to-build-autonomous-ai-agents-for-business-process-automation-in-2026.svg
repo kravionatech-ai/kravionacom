@@ -1,0 +1,82 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="50%" stop-color="#0b132b" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.75" stroke-opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Layer -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+
+  <!-- Abstract Tech Geometry & Neural Nodes -->
+  <g stroke="#0ea5e9" stroke-opacity="0.3" stroke-width="1.5">
+    <line x1="750" y1="120" x2="900" y2="240" />
+    <line x1="900" y1="240" x2="1050" y2="180" />
+    <line x1="900" y1="240" x2="920" y2="400" />
+    <line x1="920" y1="400" x2="1100" y2="480" />
+    <line x1="750" y1="120" x2="680" y2="280" />
+    <line x1="680" y1="280" x2="920" y2="400" />
+  </g>
+
+  <g fill="#06b6d4">
+    <circle cx="750" cy="120" r="6" />
+    <circle cx="900" cy="240" r="8" fill="#38bdf8" />
+    <circle cx="1050" cy="180" r="5" />
+    <circle cx="920" cy="400" r="7" fill="#818cf8" />
+    <circle cx="1100" cy="480" r="6" />
+    <circle cx="680" cy="280" r="5" />
+  </g>
+
+  <!-- Brand Identity Eyebrow -->
+  <rect x="90" y="80" width="220" height="34" rx="6" fill="#0f172a" stroke="#1e293b" />
+  <text x="105" y="103" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">AI WORKFLOW AUTOMATION</text>
+
+  <!-- Article Headline -->
+  <text x="90" y="180" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800">
+    <tspan x="90" dy="0">How to Build Autonomous AI Agents f...</tspan>
+  </text>
+
+  <!-- Accent Divider -->
+  <rect x="90" y="230" width="140" height="4" rx="2" fill="url(#accent)" />
+
+  <!-- Subtitle / Focus Concept -->
+  <text x="90" y="280" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500">
+    Generative Engine Optimization (GEO) &amp; Technical AI Search Architecture
+  </text>
+
+  <!-- Key Badges -->
+  <g transform="translate(90, 340)">
+    <rect x="0" y="0" width="160" height="40" rx="8" fill="#020617" stroke="#334155" />
+    <text x="16" y="25" fill="#e2e8f0" font-family="sans-serif" font-size="14" font-weight="600">AEO / GEO READY</text>
+    
+    <rect x="180" y="0" width="160" height="40" rx="8" fill="#020617" stroke="#334155" />
+    <text x="196" y="25" fill="#e2e8f0" font-family="sans-serif" font-size="14" font-weight="600">STRUCTURED DATA</text>
+
+    <rect x="360" y="0" width="160" height="40" rx="8" fill="#020617" stroke="#334155" />
+    <text x="376" y="25" fill="#e2e8f0" font-family="sans-serif" font-size="14" font-weight="600">NEXT.js + SCHEMA</text>
+  </g>
+
+  <!-- Footer Branding -->
+  <line x1="90" y1="520" x2="1110" y2="520" stroke="#1e293b" stroke-width="1" />
+  
+  <text x="90" y="560" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700">Kraviona Tech Solutions</text>
+  <text x="90" y="585" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Building technology. Creating possibilities.</text>
+
+  <text x="1110" y="560" text-anchor="end" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">https://www.kraviona.com</text>
+</svg>

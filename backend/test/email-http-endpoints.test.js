@@ -1,3 +1,4 @@
+process.env.NODE_ENV = "test";
 import test from "node:test";
 import assert from "node:assert/strict";
 import app from "../src/apps/app.js";
@@ -17,7 +18,7 @@ test("POST /api/v1/messages returns 400 when required fields are missing", async
 
   const res = await fetch(`${baseUrl}/messages`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-test-bypass-captcha": "true" },
     body: JSON.stringify({
       firstName: "",
       email: "test@example.com",
@@ -36,7 +37,7 @@ test("POST /api/v1/messages returns 400 when email format is invalid", async (t)
 
   const res = await fetch(`${baseUrl}/messages`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-test-bypass-captcha": "true" },
     body: JSON.stringify({
       firstName: "Amar",
       email: "invalid-email-address",
@@ -55,7 +56,7 @@ test("POST /api/v1/messages honeypot trap silently consumes bot submission", asy
 
   const res = await fetch(`${baseUrl}/messages`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-test-bypass-captcha": "true" },
     body: JSON.stringify({
       firstName: "SpamBot",
       email: "spambot@spammer.org",

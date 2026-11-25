@@ -5,6 +5,10 @@ import { verifyCaptcha } from "../utils/captcha.js";
  * form submissions or login requests to proceed.
  */
 export const requireCaptcha = (req, res, next) => {
+  if (process.env.NODE_ENV === "test" && req.headers["x-test-bypass-captcha"] === "true") {
+    return next();
+  }
+
   const token = req.body?.captchaToken || req.headers["x-captcha-token"];
   const answer = req.body?.captchaAnswer || req.headers["x-captcha-answer"];
 
